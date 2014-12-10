@@ -1,25 +1,23 @@
 # Semantic-ui-ember
 
-This README outlines the details of collaborating on this Ember addon.
+We are porting our internal Ember Semantic-UI components to an Ember CLI addon project. The code was original built for [http://www.crowdox.com](CrowdOx). We should have a beta of Semantic-UI-Ember available by end of 2014. 
 
-## Installation
+# Project Philosophy 
 
-* `git clone` this repository
-* `npm install`
-* `bower install`
+We feel that the Semantic-UI-Ember project should be an extension of Semantic-UI and not a complete rewrite. With that in mind, we will only be creating components to extend Semantic-UI modules, but all other uses of Semantic-UI in your project should be plain HTML. 
 
-## Running
+A simple example of this is the Accordion module. The component that wraps the Semantic-UI JavaScript is an Ember component, but inside the component should follow Semantic-UI's usage. 
 
-* `ember server`
-* Visit your app at http://localhost:4200.
+```
+{{#ui-accordion}}
+  <div class="title">
+    Semantic UI
+  </div>
+  <div class="content">
+    Accordion Component
+  </div>
+{{/ui-accordion}}
+```
 
-## Running Tests
+We want to ensure that Semantic-UI documentation is the source, and any components built in this project is just an extension of the base framework.
 
-* `ember test`
-* `ember test --server`
-
-## Building
-
-* `ember build`
-
-For more information on using ember-cli, visit [http://www.ember-cli.com/](http://www.ember-cli.com/).
