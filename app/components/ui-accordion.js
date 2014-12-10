@@ -1,2 +1,2 @@
-import Accordion from './ui-accordion';
+import Accordion from 'semantic-ui-ember/components/ui-accordion';
 export default Accordion;
