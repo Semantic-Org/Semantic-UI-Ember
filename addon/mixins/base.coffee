@@ -1,5 +1,5 @@
 `import Ember from 'ember'`
-`import Semantic from 'semantic-ui-ember/semantic'`
+`import Semantic from '../semantic'`
 
 Semantic.BaseMixin = Ember.Mixin.create
 

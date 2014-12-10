@@ -1,5 +1,5 @@
 `import Ember from 'ember'`
-`import Base from 'semantic-ui-ember/mixins/base'`
+`import Base from '../mixins/base'`
 
 Accordion = Ember.Component.extend Base,
   module: 'accordion'
