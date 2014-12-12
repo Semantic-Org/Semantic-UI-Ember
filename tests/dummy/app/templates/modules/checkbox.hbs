@@ -3,8 +3,23 @@
   <div class="sub header">A standard checkbox</div>
 </h4>
 
-<pre>
-  \{{ui-checkbox label="Make my profile visible" checked=checked}}
-</pre>
-
 {{ui-checkbox label="Make my profile visible" checked=checked}}
+
+<h4 class="ui header">
+  Radio Box
+  <div class="sub header">A checkbox can be formatted as a radio element. This means it is an exclusive option.</div>
+</h4>
+
+<div class="ui form">
+  <div class="grouped inline fields">
+    <div class="field">
+      {{ui-radio name="fruit" label="Once a week" checked=fruit}}
+    </div>
+    <div class="field">
+      {{ui-radio name="fruit" label="2-3 times a week" checked=fruit}}
+    </div>
+    <div class="field">
+      {{ui-radio name="fruit" label="Once a day" checked=fruit}}
+    </div>
+  </div>
+</div>

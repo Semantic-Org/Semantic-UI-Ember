@@ -1,7 +1,7 @@
 import Ember from 'ember';
 import CheckboxMixin from '../mixins/checkbox-mixin';
 
-var CheckboxComponent = Ember.Component.extend(CheckboxMixin, {
+export default Ember.Component.extend(CheckboxMixin, {
   type: 'checkbox',
   checked: false,
 
@@ -13,5 +13,3 @@ var CheckboxComponent = Ember.Component.extend(CheckboxMixin, {
     });
   }
 });
-
-export default CheckboxComponent;
