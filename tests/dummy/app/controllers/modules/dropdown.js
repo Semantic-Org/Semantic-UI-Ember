@@ -5,5 +5,11 @@ export default Ember.Controller.extend({
     'Clothing',
     'Home',
     'Bedroom'
+  ],
+
+  gender: null,
+  genders: [
+    { id: 1, text: 'Male' },
+    { id: 0, text: 'Female' }
   ]
 });

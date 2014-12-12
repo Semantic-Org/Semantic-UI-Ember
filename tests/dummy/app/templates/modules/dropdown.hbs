@@ -4,3 +4,17 @@
 </h4>
 
 {{ui-dropdown content=categories prompt="Shop"}}
+
+<hr>
+
+<h4 class="ui header">
+  Selection
+  <div class="sub header">A dropdown can be used to select between choices in a form</div>
+</h4>
+
+{{ui-dropdown class="selection"
+  content=genders
+  value=gender
+  prompt="Gender"
+  optionLabelPath="content.text"
+  optionValuePath="content.id"}}
