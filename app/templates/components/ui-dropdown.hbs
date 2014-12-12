@@ -1,0 +1,20 @@
+<div class="text">{{view.prompt}}</div>
+{{#if icon}}
+  <i {{bind-attr class="icon :icon"}}></i>
+{{else}}
+  <i class="dropdown icon"></i>
+{{/if}}
+<div class="menu">
+  {{#if view.optionGroupPath}}
+    {{#each view.groupedContent}}
+      {{view view.groupView content=content label=label}}
+    {{/each}}
+  {{else}}
+    {{#each view.content}}
+      {{view view.optionView content=this initialized=0}}
+    {{/each}}
+  {{/if}}
+</div>
+{{#if view.template}}
+  {{yield}}
+{{/if}}
