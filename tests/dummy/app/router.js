@@ -6,6 +6,9 @@ var Router = Ember.Router.extend({
 });
 
 Router.map(function() {
+  this.resource('modules', function() {
+    this.route('accordion');
+  });
 });
 
 export default Router;
