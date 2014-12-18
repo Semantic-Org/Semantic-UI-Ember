@@ -21,7 +21,7 @@ A simple example of this is the Accordion module. The component that wraps the S
 
 We want to ensure that Semantic-UI documentation is the source, and any components built in this project is just an extension of the base framework.
 
-# How to Install
+# How to use as an addon
 
 Include the library as an NPM dependency, from within an Ember CLI app.
 
