@@ -27,9 +27,9 @@ ember generate semantic-ui-ember
  * **Documentation**: [Official Documentation](http://semantic-ui.com/modules/accordion.html)
  * **Class**: `ui accordion`
 
-Replace `<div class="ui accordion">` with {{#ui-accordion}} and fill the inside content with standard Semantic-UI.
+Replace `<div class="ui accordion">` with `{{#ui-accordion}}` and fill the inside content with standard Semantic-UI.
 
-```
+```handlebars
 {{#ui-accordion}}
   <div class="title">
     Semantic UI
@@ -40,9 +40,9 @@ Replace `<div class="ui accordion">` with {{#ui-accordion}} and fill the inside 
 {{/ui-accordion}}
 ```
 
-Variations can be used with {{#ui-accordion class="styled"}}.
+Variations can be used with `{{#ui-accordion class="styled"}}`.
 
-```
+```handlebars
 {{#ui-accordion class="styled"}}
   <div class="active title">
     <i class="dropdown icon"></i>
