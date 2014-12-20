@@ -26,6 +26,7 @@ ember generate semantic-ui-ember
 
  * **Documentation**: [Official Documentation](http://semantic-ui.com/modules/accordion.html)
  * **Class**: `ui accordion`
+ * **Component**: `ui-accordion`
 
 Replace `<div class="ui accordion">` with `{{#ui-accordion}}` and fill the inside content with standard Semantic-UI.
 
@@ -68,4 +69,135 @@ Variations can be used with `{{#ui-accordion class="styled"}}`.
   </div>
 {{/ui-accordion}}
 ```
+
+## Checkbox
+
+ * **Documentation**: [Official Documentation](http://semantic-ui.com/modules/checkbox.html)
+ * **Class**: `ui checkbox`
+ * **Component**: `ui-checkbox`
+
+Replace `<div class="ui checkbox">` with `{{ui-checkbox}}` and bind to a property on your model/controller/component.
+
+### Controller
+```javascript
+export default Ember.Controller.extend({
+  havingFun: false
+});
+```
+
+### Template
+```handlebars
+{{ui-checkbox checked=havingFun}}
+```
+
+## Radio
+
+* **Class**: `ui radio`
+* **Component**: `ui-radio`
+
+Replace `<div class="ui radio">` with `{{ui-radio}}` and bind to a property on your model/controller/component.
+
+### Controller
+```javascript
+export default Ember.Controller.extend({
+  fruit: null
+});
+```
+
+### Template
+```handlebars
+<div class="ui form">
+  <div class="grouped inline fields">
+    <div class="field">
+      {{ui-radio name="fruit" label="Once a week" checked=fruit}}
+    </div>
+    <div class="field">
+      {{ui-radio name="fruit" label="2-3 times a week" checked=fruit}}
+    </div>
+    <div class="field">
+      {{ui-radio name="fruit" label="Once a day" checked=fruit}}
+    </div>
+  </div>
+</div>
+```
+
+## Dimmer
+
+ * **Documentation**: [Official Documentation](http://semantic-ui.com/modules/dimmer.html)
+
+There isn't a corresponding Ember component for this since it isn't rendered to the screen but instead invoked.
+
+## Dropdown
+
+ * **Documentation**: [Official Documentation](http://semantic-ui.com/modules/dropdown.html)
+ * **Ember.Select**: [Follows Ember.Select Style](http://emberjs.com/api/classes/Ember.Select.html#sts=Ember.Select Class packages/ember-handlebars/lib/controls/select.js:93)
+ * **Class**: `ui dropdown`
+ * **Component**: `ui-dropdown`
+ * **Parameters**
+    * **content**: List of data that you want displayed. _Required_
+    * **value**: Bound value that is set to `optionValuePath`
+    * **prompt**: Text to display before an option has been chosen
+    * **icon**: Icon you want to use. _Default is `dropdown`_
+    * **optionLabelPath**: Path to the label that is displayed for each item. _Default is`content`_
+    * **optionValuePath**: Path to the value that is used when an item is selected. _Default is `content`_
+
+Replace `<div class="ui dropdown">` with `{{ui-dropdown}}` and bind to a list and set a bound property.
+
+### Controller
+```javascript
+export default Ember.Controller.extend({
+	itemActions: [ "Edit", "Remove", "Hide"],
+	selectedAction: null
+});
+```
+
+### Template
+```handlebars
+{{ui-dropdown
+	content=itemActions
+	value=selectedAction
+	prompt="Select"
+}}
+```
+
+## Modal
+
+ * **Documentation**: [Official Documentation](http://semantic-ui.com/modules/modal.html)
+ * **Class**: `ui modal`
+
+_COMING SOON_
+
+## Popup
+
+ * **Documentation**: [Official Documentation](http://semantic-ui.com/modules/popup.html)
+
+_COMING SOON_
+
+## Rating
+
+ * **Documentation**: [Official Documentation](http://semantic-ui.com/modules/rating.html)
+ * **Class**: `ui rating`
+
+_COMING SOON_
+
+## Shape
+
+ * **Documentation**: [Official Documentation](http://semantic-ui.com/modules/shape.html)
+ * **Class**: `ui shape`
+
+_NOT IMPLEMENTED_
+
+## Sidebar
+
+ * **Documentation**: [Official Documentation](http://semantic-ui.com/modules/sidebar.html)
+ * **Class**: `ui sidebar`
+
+_NOT IMPLEMENTED_
+
+## Transition
+
+ * **Documentation**: [Official Documentation](http://semantic-ui.com/modules/transition.html)
+ * **Class**: `ui sidebar`
+
+There isn't a cooresponding Ember component for this since it isn't rendered to the screen but instead invoked.
 
