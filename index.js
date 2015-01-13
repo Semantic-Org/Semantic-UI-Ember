@@ -6,19 +6,22 @@ module.exports = {
 
   included: function (app) {
     app.import({
-      development: 'bower_components/semantic-ui/dist/semantic.css',
-      production: 'bower_components/semantic-ui/dist/semantic.min.css'
+      development: 'bower_components/semantic-ui/build/packaged/css/semantic.css',
+      production:  'bower_components/semantic-ui/build/packaged/css/semantic.min.css'
     });
 
     app.import({
-      development: 'bower_components/semantic-ui/dist/semantic.js',
-      production: 'bower_components/semantic-ui/dist/semantic.min.js'
+      development: 'bower_components/semantic-ui/build/packaged/javascript/semantic.js',
+      production:  'bower_components/semantic-ui/build/packaged/javascript/semantic.min.js'
     });
 
 
     var fontExtensions = ['.eot','.otf','.svg','.ttf','.woff'];
     for (var i = fontExtensions.length - 1; i >= 0; i--) {
-      app.import('bower_components/semantic-ui/dist/themes/default/assets/fonts/icons'+fontExtensions[i], { destDir: 'assets/themes/default/assets/fonts' });
+      app.import('bower_components/semantic-ui/build/packaged/fonts/icons'+fontExtensions[i], { destDir: 'fonts' });
+      if (fontExtensions[i] !== '.otf') {
+        app.import('bower_components/semantic-ui/build/packaged/fonts/basic.icons'+fontExtensions[i], { destDir: 'fonts' });
+      }
     };
   }
 };
