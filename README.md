@@ -1,10 +1,16 @@
+![Semantic](http://www.semantic-ui.com/images/logo.png)
+
 # Semantic-UI-Ember
 
 We have ported our internal Ember Semantic-UI components for an official Semantic-UI integration. The code was original built for [CrowdOx](http://crowdox.com) and later [SpruceMail](http://sprucemail.com). This is officially in Alpha. We would appreciate any feedback that you might have.
 
-# Project Philosophy
+## Project Philosophy
 
 We feel that the Semantic-UI-Ember project should be an extension of Semantic-UI and not a complete rewrite. With that in mind, we will only be creating components to extend Semantic-UI modules, all other uses of Semantic-UI in your project should [follow the official documentation](http://semantic-ui.com/).
+
+## Release Schedule
+
+As mentioned our goal is to let Semantic do most of the work and we will simply maintain small bits of code to make it native for Ember. We will release when there are new components or incompatibilities but otherwise the same version should continue to work.
 
 # Installation
 
