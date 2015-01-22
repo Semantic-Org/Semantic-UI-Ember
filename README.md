@@ -1,6 +1,6 @@
 # Semantic-UI-Ember
 
-We are porting our internal Ember Semantic-UI components to an official Semantic-UI integration. The code was original built for [CrowdOx](http://crowdox.com) and later [SpruceMail](http://sprucemail.com). We should have a beta of Semantic-UI-Ember available by end of 2014.
+We have ported our internal Ember Semantic-UI components for an official Semantic-UI integration. The code was original built for [CrowdOx](http://crowdox.com) and later [SpruceMail](http://sprucemail.com). This is officially in Alpha. We would appreciate any feedback that you might have.
 
 # Project Philosophy
 
@@ -169,7 +169,7 @@ export default Ember.Controller.extend({
 In order to use the modal you must first prepare your Ember application for modals. This follows the same instructions [found on ember.js](http://emberjs.com/guides/cookbook/user_interface_and_interaction/using_modal_dialogs/).
 
 ### Application Template
-You must add the 'modal' outlet to the main application layout
+You must add the `modal` outlet to the main application layout
 
   * templates/application.hbs OR
   * pods/application/template.hbs
@@ -180,7 +180,7 @@ You must add the 'modal' outlet to the main application layout
 ```
 
 ### ApplicationRoute
-This provides the openModal and closeModal actions that allows modals to be opened from any controller.
+This provides the `openModal` and `closeModal` actions that allows modals to be opened from any controller.
 
   * routes/application.js OR
   * pods/application/route.js
