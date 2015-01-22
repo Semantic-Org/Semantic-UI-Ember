@@ -1,6 +1,5 @@
 {
   "name": "semantic-ui-ember",
-  "version": "1.7.3.1",
   "main": "index.js",
   "ignore": [
     "tests/**/*"
