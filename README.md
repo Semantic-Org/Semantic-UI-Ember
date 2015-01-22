@@ -164,21 +164,107 @@ export default Ember.Controller.extend({
 
  * **Documentation**: [Official Documentation](http://semantic-ui.com/modules/modal.html)
  * **Class**: `ui modal`
+ * **View**: `ui-modal`
 
-_COMING SOON_
+In order to use the modal you must first prepare your Ember application for modals. This follows the same instructions [found on ember.js](http://emberjs.com/guides/cookbook/user_interface_and_interaction/using_modal_dialogs/).
+
+### Application Template
+You must add the 'modal' outlet to the main application layout
+
+  * templates/application.hbs OR
+  * pods/application/template.hbs
+
+```handlebars
+{{outlet}}
+{{outlet 'modal'}}
+```
+
+### ApplicationRoute
+This provides the openModal and closeModal actions that allows modals to be opened from any controller.
+
+  * routes/application.js OR
+  * pods/application/route.js
+
+```javascript
+import SemanticModalMixin from 'semantic-ui-ember/mixins/modal';
+
+var ApplicationRoute = Ember.Route.extend(SemanticModalMixin, {});
+```
+
+Now to use the modal the bare minimum is to create a template and trigger `openModal`.
+
+### Template
+```handlebars
+<div class="ui modal">
+  <i class="close icon"></i>
+  <div class="header">
+    Demo Modal
+  </div>
+  <div class="content">
+    Content
+  </div>
+  <div class="actions">
+    <div class="ui black button">
+      Cancel
+    </div>
+    <div class="ui positive right labeled icon button">
+      Ok
+      <i class="checkmark icon"></i>
+    </div>
+  </div>
+</div>
+```
+
+Then you can fire `openModal` from any controller
+
+### Controller (no model)
+```javascript
+export default Ember.Controller.extend({
+  actions: {
+    confirm: function() {
+      this.send('openModal', 'projects/confirm');
+    }
+  }
+});
+```
+
+If you want to send a model in just use the third parameter
+
+### Controller (model)
+```javascript
+export default Ember.Controller.extend({
+  actions: {
+    confirm: function() {
+      this.send('openModal', 'projects/confirm', this.get('model'));
+    }
+  }
+});
+```
+
+If a controller is found with the same name as the template it will be used. You can also use your own view if necessary. You just need to make sure to inherit from the base class.
+
+### View
+```javascript
+import Ember from 'ember';
+import SemanticModalView from 'semantic-ui-ember/views/ui-modal';
+
+export default SemanticModalView.extend({
+  templateName: 'shared/modal'
+})
+```
 
 ## Popup
 
  * **Documentation**: [Official Documentation](http://semantic-ui.com/modules/popup.html)
 
-_COMING SOON_
+_NOT IMPLEMENTED_
 
 ## Rating
 
  * **Documentation**: [Official Documentation](http://semantic-ui.com/modules/rating.html)
  * **Class**: `ui rating`
 
-_COMING SOON_
+_NOT IMPLEMENTED_
 
 ## Shape
 
