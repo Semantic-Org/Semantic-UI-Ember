@@ -17,6 +17,12 @@ As mentioned our goal is to let Semantic do most of the work and we will simply 
 Include the library as an [NPM](https://www.npmjs.com/) dependency, from within an [ember-cli](http://www.ember-cli.com/) app.
 
 ```
+ember install:addon semantic-ui-ember
+```
+
+*Before 1.5*
+
+```
 npm install --save-dev Semantic-Org/Semantic-UI-Ember
 ```
 
