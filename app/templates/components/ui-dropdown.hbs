@@ -6,12 +6,12 @@
 {{/if}}
 <div class="menu">
   {{#if view.optionGroupPath}}
-    {{#each view.groupedContent}}
+    {{#each group in view.groupedContent}}
       {{view view.groupView content=content label=label}}
     {{/each}}
   {{else}}
-    {{#each view.content}}
-      {{view view.optionView content=this initialized=0}}
+    {{#each item in view.content}}
+      {{view view.optionView content=item initialized=0}}
     {{/each}}
   {{/if}}
 </div>
