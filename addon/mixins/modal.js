@@ -16,11 +16,11 @@ export default Ember.Mixin.create({
         try {
           controller = this.controllerFor(name);
         } catch (e) {
-          controller = Em.generateController(container, name, model);
+          controller = Ember.generateController(container, name, model);
         }
 
         controller.set('model', model);
-        if ($.isPlainObject(properties)) {
+        if (Ember.$.isPlainObject(properties)) {
           for (key in properties) {
             prop = properties[key];
             controller.set(key, prop);
