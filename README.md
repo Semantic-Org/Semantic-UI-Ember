@@ -268,8 +268,20 @@ export default SemanticModalView.extend({
 ## Popup
 
  * **Documentation**: [Official Documentation](http://semantic-ui.com/modules/popup.html)
+ * **Class**: `ui popup`
+ * **Component**: `ui-popup`
 
-_NOT IMPLEMENTED_
+Replace `<div class="ui popup">` with `{{ui-popup}}` and fill the inside content with standard Semantic-UI.
+
+```handlebars
+{{ui-popup content="The text you'd like to show"}}
+```
+
+You can also create an icon version by specifying the tagName
+
+```handlebars
+{{ui-popup tagName="i" class="icon link" content="The text you'd like to show"}}
+```
 
 ## Rating
 
