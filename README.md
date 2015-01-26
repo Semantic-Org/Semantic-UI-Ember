@@ -121,13 +121,13 @@ export default Ember.Controller.extend({
 <div class="ui form">
   <div class="grouped inline fields">
     <div class="field">
-      {{ui-radio name="fruit" label="Once a week" checked=fruit}}
+      {{ui-radio name="fruit" label="Once a week" value="apple" current=fruit}}
     </div>
     <div class="field">
-      {{ui-radio name="fruit" label="2-3 times a week" checked=fruit}}
+      {{ui-radio name="fruit" label="2-3 times a week" value="orange" current=fruit}}
     </div>
     <div class="field">
-      {{ui-radio name="fruit" label="Once a day" checked=fruit}}
+      {{ui-radio name="fruit" label="Once a day" value="grape" current=fruit}}
     </div>
   </div>
 </div>
