@@ -6,7 +6,7 @@ export default Ember.SelectOption.extend({
 
   initialized: false,
   initialize: function() {
-    _this = this
+    var _this = this;
     Ember.run(function() {
       Ember.run.scheduleOnce('afterRender', _this, _this.set_value);
     });
