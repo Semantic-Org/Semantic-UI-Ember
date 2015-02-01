@@ -3,6 +3,12 @@ import Ember from 'ember';
 export default Ember.SelectOption.extend({
   tagName: 'div',
   classNames: 'item',
+  attributeBindings: [ 'data_value:data-value' ],
+
+  data_value: function() {
+    var valuePath = this.get('parentView.optionValuePath');
+    return this.get(valuePath);
+  }.property('parentView.optionValuePath'),
 
   initialized: false,
   initialize: function() {
