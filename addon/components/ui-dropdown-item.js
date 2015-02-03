@@ -5,7 +5,7 @@ export default Ember.SelectOption.extend({
   classNames: 'item',
 
   bindData: function() {
-    var valuePath = this.get('parentView.optionValuePath');
+    var valuePath = this.get('valuePath');
 
     if (!valuePath) {
       return;
@@ -16,7 +16,6 @@ export default Ember.SelectOption.extend({
     }
 
     this.$().data('value', this.get(valuePath));
-    this.set('initialized',true);
   }.on('didInsertElement'),
 
   unbindData: function() {

@@ -11,7 +11,7 @@
     {{/each}}
   {{else}}
     {{#each item in view.content}}
-      {{view view.optionView content=item initialized=0}}
+      {{view view.optionView content=item valuePath=view.optionValuePath}}
     {{/each}}
   {{/if}}
 </div>

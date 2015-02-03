@@ -14,21 +14,12 @@ export default Ember.Select.extend(Base, DataAttributes, {
   groupedView: null,
   groupedContent: null,
 
-  onChildViewsChanged: function() {
-    var length = this.get('childViews.length');
-    if (length > 0) {
-      Ember.run.scheduleOnce('afterRender', this, this.initialize);
-    }
-  }.observes('childViews.@each.initialized'),
-
   initialize: function() {
     var value = this.get('value');
     if (typeof value !== "undefined" && value !== null) {
       this.execute('set selected', value);
     }
-  },
-
-  onChange: function(value) {
+  }.on('didInsertElement'),
     return this.set('value', value);
   },
 
