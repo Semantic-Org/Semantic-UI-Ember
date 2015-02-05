@@ -1,55 +1,48 @@
 import Ember from 'ember';
+import Base from '../mixins/base';
 
-export default Ember.Mixin.create({
-  actions: {
-    openModal: function(name, model, properties) {
-      var container,
-          controller,
-          key,
-          prop,
-          result,
-          view,
-          viewName;
+export default Ember.Mixin.create(Base, {
+  module: 'modal',
+  classNames: [ 'ui', 'modal' ],
+  closable: false,
+  transition: 'horizontal flip',
 
-      try {
-        container = this.get('container');
-        try {
-          controller = this.controllerFor(name);
-        } catch (e) {
-          controller = Ember.generateController(container, name, model);
-        }
+  setup: function() {
+    this.set('hiding', false);
+  }.on('init'),
 
-        controller.set('model', model);
-        if (Ember.$.isPlainObject(properties)) {
-          for (key in properties) {
-            prop = properties[key];
-            controller.set(key, prop);
-          }
-        }
+  showOnInsert: function() {
+    this.execute('show');
+  }.on('didInsertElement'),
 
-        view = container.lookup('view:' + name);
-        if (view) {
-          viewName = name;
-        } else {
-          viewName = 'ui-modal';
-        }
-
-        return result = this.render(name, {
-          into: 'application',
-          outlet: 'modal',
-          controller: controller,
-          view: viewName
-        });
-      } catch (e) {
-        return Ember.Logger.log(e);
-      }
-    },
-
-    closeModal: function() {
-      return this.disconnectOutlet({
-        outlet: 'modal',
-        parentView: 'application'
-      });
+  hideOnDestroy: function() {
+    if (!this.get('hiding')) {
+      this.execute('hide');
     }
+  }.on('willDestroyElement'),
+
+  onHide: function() {
+    this.set('hiding', true);
+    return false;
+  },
+
+  onHidden: function() {
+    // this.get('controller').send('closeModal');
+  },
+
+  onDeny: function() {
+    if (this.get('controller')._actions['cancel'] !== null &&
+        this.get('controller')._actions['cancel'] !== undefined) {
+      this.get('controller').send('cancel');
+    }
+    return true;
+  },
+
+  onApprove: function() {
+    if (this.get('controller')._actions['approve'] !== null &&
+        this.get('controller')._actions['approve'] !== undefined) {
+      this.get('controller').send('approve');
+    }
+    return false;
   }
 });
