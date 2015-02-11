@@ -23,11 +23,10 @@ export default Ember.Mixin.create(Base, {
 
   onHide: function() {
     this.set('hiding', true);
+    if (this.get('controller')) {
+      this.get('controller').send('closeModal');
+    }
     return false;
-  },
-
-  onHidden: function() {
-    this.get('controller').send('closeModal');
   },
 
   onDeny: function() {
