@@ -11,15 +11,17 @@ export default Ember.Mixin.create(Base, {
     this.set('hiding', false);
   }.on('init'),
 
-  showOnInsert: function() {
+  didInsertElement: function() {
+    this._super();
     this.execute('show');
-  }.on('didInsertElement'),
+  },
 
-  hideOnDestroy: function() {
+  willDestroyElement: function() {
+    this._super();
     if (!this.get('hiding')) {
       this.execute('hide');
     }
-  }.on('willDestroyElement'),
+  },
 
   onHide: function() {
     this.set('hiding', true);
