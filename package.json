@@ -1,6 +1,23 @@
 {
   "name": "semantic-ui-ember",
-  "version": "0.0.0",
+  "version": "0.0.1-rc.6",
+  "title": "Semantic UI Ember",
+  "description": "Semantic UI for Ember applications",
+  "homepage": "http://www.semantic-ui.com",
+  "contributors": [
+    {
+      "name": "Nathan Palmer",
+      "email": "nathan@nathanpalmer.com"
+    },
+    {
+      "name": "Aaron Hansen"
+    }
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/Semantic-Org/Semantic-UI-Ember.git"
+  },
   "directories": {
     "doc": "doc",
     "test": "tests"
@@ -10,12 +27,10 @@
     "build": "ember build",
     "test": "ember test"
   },
-  "repository": "",
   "engines": {
     "node": ">= 0.10.0"
   },
   "author": "",
-  "license": "MIT",
   "devDependencies": {
     "broccoli-asset-rev": "^1.0.0",
     "broccoli-ember-hbs-template-compiler": "^1.6.1",
@@ -31,7 +46,6 @@
     "express": "^4.8.5",
     "glob": "^4.0.5"
   },
-  "description": "The default blueprint for ember-cli addons.",
   "keywords": [
     "ember-addon"
   ],
