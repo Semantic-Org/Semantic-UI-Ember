@@ -1,6 +1,8 @@
 /* jshint node: true */
 'use strict';
 
+var fs = require('fs');
+
 module.exports = {
   name: 'semantic-ui-ember',
 
@@ -15,6 +17,10 @@ module.exports = {
       production:  'bower_components/semantic-ui/build/packaged/javascript/semantic.min.js'
     });
 
+    var images = fs.readdirSync('bower_components/semantic-ui/build/packaged/images/');
+    for (var i = images.length - 1; i >= 0; i--) {
+      app.import('bower_components/semantic-ui/build/packaged/images/'+images[i], { destDir: 'images' });
+    };
     var fontExtensions = ['.eot','.otf','.svg','.ttf','.woff'];
     for (var i = fontExtensions.length - 1; i >= 0; i--) {
       app.import('bower_components/semantic-ui/build/packaged/fonts/icons'+fontExtensions[i], { destDir: 'fonts' });
