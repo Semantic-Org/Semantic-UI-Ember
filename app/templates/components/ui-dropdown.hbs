@@ -1,13 +1,13 @@
 <div class="text">{{view.prompt}}</div>
-{{#if icon}}
-  <i {{bind-attr class="icon :icon"}}></i>
+{{#if view.icon}}
+  <i {{bind-attr class="view.icon :icon"}}></i>
 {{else}}
   <i class="dropdown icon"></i>
 {{/if}}
 <div class="menu">
   {{#if view.optionGroupPath}}
     {{#each group in view.groupedContent}}
-      {{view view.groupView content=content label=label}}
+      {{view view.groupView content=group.content label=group.label}}
     {{/each}}
   {{else}}
     {{#each item in view.content}}
