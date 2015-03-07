@@ -33,7 +33,7 @@ export default Ember.Select.extend(Base, DataAttributes, {
   },
 
   onUpdate: function() {
-    return this.$()[this.get("module")](this.settings(this.get("module")));
+    return Ember.run.scheduleOnce('afterRender', this, this.set_value);
   }.observes('value'),
 
   onContentChange: function() {
