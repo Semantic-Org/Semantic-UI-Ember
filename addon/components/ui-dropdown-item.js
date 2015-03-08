@@ -19,6 +19,6 @@ export default Ember.SelectOption.extend({
   }.on('didInsertElement'),
 
   unbindData: function() {
-    this.$().removeData('value')
+    this.$().removeData('value');
   }.on('willDestroyElement')
 });
