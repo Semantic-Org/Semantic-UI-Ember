@@ -43,7 +43,7 @@ export default Ember.Select.extend(Base, DataAttributes, {
     //
     // Without this, Dropdown Items will not be clickable if the content
     // is set after the initial render.
-    Ember.run.schedule('afterRender', this, this.didInsertElement);
+    Ember.run.scheduleOnce('afterRender', this, this.didInsertElement);
   }.observes('content'),
 
   set_value: function() {
