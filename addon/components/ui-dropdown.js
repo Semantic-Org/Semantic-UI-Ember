@@ -36,6 +36,16 @@ export default Ember.Select.extend(Base, DataAttributes, {
     return Ember.run.scheduleOnce('afterRender', this, this.set_value);
   }.observes('value'),
 
+  onContentChange: function() {
+    // Wait for the afterRender portion of the Run Loop to complete after
+    // after a content change. Once that happens, re-initialize the
+    // Semantic component the same way as Semantic.BaseMixin
+    //
+    // Without this, Dropdown Items will not be clickable if the content
+    // is set after the initial render.
+    Ember.run.schedule('afterRender', this, this.didInsertElement);
+  }.observes('content'),
+
   set_value: function() {
     var dropdownValue, inputValue, _ref;
     inputValue = (_ref = this.get('value')) != null ? _ref.toString() : void 0;
