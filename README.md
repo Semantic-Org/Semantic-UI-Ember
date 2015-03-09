@@ -198,7 +198,7 @@ This provides the `openModal` and `closeModal` actions that allows modals to be 
   * pods/application/route.js
 
 ```javascript
-import SemanticModalMixin from 'semantic-ui-ember/mixins/modal';
+import SemanticRouteMixin from 'semantic-ui-ember/mixins/application-route';
 
 var ApplicationRoute = Ember.Route.extend(SemanticModalMixin, {});
 ```
@@ -258,9 +258,9 @@ If a controller is found with the same name as the template it will be used. You
 ### View
 ```javascript
 import Ember from 'ember';
-import SemanticModalView from 'semantic-ui-ember/views/ui-modal';
+import SemanticModalMixin from 'semantic-ui-ember/mixins/modal';
 
-export default SemanticModalView.extend({
+export default Ember.View.extend(SemanticModalMixin, {
   templateName: 'shared/modal'
 })
 ```
