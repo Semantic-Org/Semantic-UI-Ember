@@ -17,7 +17,7 @@ export default Ember.Select.extend(Base, DataAttributes, {
   initialize: function() {
     var value = this.get('value');
     if (typeof value !== "undefined" && value !== null) {
-      this.execute('set selected', value);
+      this.execute('set value', value);
     }
   }.on('didInsertElement'),
 
@@ -53,7 +53,7 @@ export default Ember.Select.extend(Base, DataAttributes, {
     if (inputValue == null) {
       return this.execute("restore defaults");
     } else if (inputValue !== dropdownValue) {
-      return this.execute("set selected", this.get('value'));
+      return this.execute("set value", this.get('value'));
     }
   }
 });
