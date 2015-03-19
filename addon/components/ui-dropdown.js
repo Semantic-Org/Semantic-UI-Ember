@@ -17,7 +17,7 @@ export default Ember.Select.extend(Base, DataAttributes, {
   initialize: function() {
     var value = this.get('value');
     if (typeof value !== "undefined" && value !== null) {
-      this.execute('set value', value);
+      this.execute('set selected', value);
     }
   }.on('didInsertElement'),
 
@@ -43,7 +43,10 @@ export default Ember.Select.extend(Base, DataAttributes, {
     //
     // Without this, Dropdown Items will not be clickable if the content
     // is set after the initial render.
-    Ember.run.scheduleOnce('afterRender', this, this.didInsertElement);
+    Ember.run.scheduleOnce('afterRender', this, function() {
+      this.didInsertElement();
+      this.set_value();
+    });
   }.observes('content'),
 
   set_value: function() {
@@ -53,7 +56,7 @@ export default Ember.Select.extend(Base, DataAttributes, {
     if (inputValue == null) {
       return this.execute("restore defaults");
     } else if (inputValue !== dropdownValue) {
-      return this.execute("set value", this.get('value'));
+      return this.execute("set selected", this.get('value'));
     }
   }
 });
