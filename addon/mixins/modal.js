@@ -25,25 +25,41 @@ export default Ember.Mixin.create(Base, {
 
   onHide: function() {
     this.set('hiding', true);
+  },
+
+  onHidden: function() {
     if (this.get('controller')) {
-      this.get('controller').send('closeModal');
+      this.get('controller').send('closeModal', this);
     }
-    return false;
   },
 
   onDeny: function() {
-    if (this.get('controller')._actions['cancel'] !== null &&
-        this.get('controller')._actions['cancel'] !== undefined) {
-      this.get('controller').send('cancel');
+    var controller = this.checkControllerForAction('cancel');
+    if (controller) {
+      // if controller handles approves, they must manually call hideModal
+      controller.send('cancel', this);
+      return false
     }
     return true;
   },
 
   onApprove: function() {
-    if (this.get('controller')._actions['approve'] !== null &&
-        this.get('controller')._actions['approve'] !== undefined) {
-      this.get('controller').send('approve');
+    var controller = this.checkControllerForAction('approve');
+    if (controller) {
+      // if controller handles approves, they must manually call hideModal
+      controller.send('approve', this);
+      return false
     }
-    return false;
+    return true;
+  },
+
+  checkControllerForAction: function(action) {
+    var controller = this.get('controller');
+    if (typeof controller !== "undefined" && controller !== null &&
+        typeof controller._actions !== "undefined" && controller._actions !== null &&
+        typeof controller._actions[action] !== "undefined" && controller._actions[action] !== null) {
+      return controller;
+    }
+    return false
   }
 });
