@@ -18,13 +18,16 @@ export default Ember.Mixin.create(Base, {
 
   willDestroyElement: function() {
     this._super();
-    if (!this.get('hiding')) {
-      this.execute('hide');
-    }
+    Ember.assert("Semantic modal was destoryed without being properly hidden. Don't call closeModal from the controller.", this.get('hiding'));  
   },
 
   onHide: function() {
     this.set('hiding', true);
+    var controller = this.checkControllerForAction('hide');
+    if (controller) {
+      // we don't pass in view, since you can't stop it from hiding once it starts
+      controller.send('hide');
+    }
   },
 
   onHidden: function() {
@@ -34,10 +37,10 @@ export default Ember.Mixin.create(Base, {
   },
 
   onDeny: function() {
-    var controller = this.checkControllerForAction('cancel');
+    var controller = this.checkControllerForAction('deny');
     if (controller) {
-      // if controller handles approves, they must manually call hideModal
-      controller.send('cancel', this);
+      // if controller handles approves, they must manually call view.execute('hide')
+      controller.send('deny', this);
       return false
     }
     return true;
@@ -46,7 +49,7 @@ export default Ember.Mixin.create(Base, {
   onApprove: function() {
     var controller = this.checkControllerForAction('approve');
     if (controller) {
-      // if controller handles approves, they must manually call hideModal
+      // if controller handles approves, they must manually call view.execute('hide')
       controller.send('approve', this);
       return false
     }
