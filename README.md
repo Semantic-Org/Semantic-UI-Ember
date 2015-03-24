@@ -200,29 +200,27 @@ This provides the `openModal` and `closeModal` actions that allows modals to be 
 ```javascript
 import SemanticRouteMixin from 'semantic-ui-ember/mixins/application-route';
 
-var ApplicationRoute = Ember.Route.extend(SemanticModalMixin, {});
+var ApplicationRoute = Ember.Route.extend(SemanticRouteMixin, {});
 ```
 
 Now to use the modal the bare minimum is to create a template and trigger `openModal`.
 
 ### Template
 ```handlebars
-<div class="ui modal">
-  <i class="close icon"></i>
-  <div class="header">
-    Demo Modal
+<i class="close icon"></i>
+<div class="header">
+  Demo Modal
+</div>
+<div class="content">
+  Content
+</div>
+<div class="actions">
+  <div class="ui black button">
+    Cancel
   </div>
-  <div class="content">
-    Content
-  </div>
-  <div class="actions">
-    <div class="ui black button">
-      Cancel
-    </div>
-    <div class="ui positive right labeled icon button">
-      Ok
-      <i class="checkmark icon"></i>
-    </div>
+  <div class="ui positive right labeled icon button">
+    Ok
+    <i class="checkmark icon"></i>
   </div>
 </div>
 ```
