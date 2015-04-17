@@ -18,7 +18,7 @@ export default Ember.Mixin.create(Base, {
 
   willDestroyElement: function() {
     this._super();
-    Ember.assert("Semantic modal was destoryed without being properly hidden. Don't call closeModal from the controller. Instead add an approve or deny action, and then call view.execute('hide') from the view passed in.", this.get('hiding'));  
+    Ember.assert("Semantic modal was destroyed without being properly hidden. Don't call closeModal from the controller. Instead add an approve or deny action, and then call view.execute('hide') from the view passed in.", this.get('hiding'));  
   },
 
   onHide: function() {
