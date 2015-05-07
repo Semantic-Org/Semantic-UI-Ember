@@ -21,13 +21,13 @@ Include the library as an [NPM](https://www.npmjs.com/) dependency, from within 
 ember install semantic-ui-ember
 ```
 
-*Ember-cli 0.1.5 – 0.2.3*
+*If using ember-cli 0.1.5 – 0.2.3*
 
 ```
 ember install:addon semantic-ui-ember
 ```
 
-*Before Ember-cli 0.1.5*
+*If using ember-cli < 0.1.5*
 
 ```
 npm install --save-dev Semantic-Org/Semantic-UI-Ember
