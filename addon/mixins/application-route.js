@@ -13,10 +13,15 @@ export default Ember.Mixin.create({
 
       try {
         container = this.get('container');
-        try {
-          controller = this.controllerFor(name);
-        } catch (e) {
-          controller = Ember.generateController(container, name, model);
+
+        controller = container.lookup('component:' + name);
+
+        if (Ember.isEmpty(controller)) {
+          try {
+            controller = this.controllerFor(name);
+          } catch (e) {
+            controller = Ember.generateController(container, name, model);
+          }
         }
 
         controller.set('model', model);
