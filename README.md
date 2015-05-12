@@ -2,6 +2,8 @@
 
 # Semantic-UI-Ember
 
+[![Join the chat at https://gitter.im/Semantic-Org/Semantic-UI-Ember](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/Semantic-Org/Semantic-UI-Ember?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 We have ported our internal Ember Semantic-UI components for an official Semantic-UI integration. The code was original built for [CrowdOx](http://crowdox.com) and later [SpruceMail](http://sprucemail.com). This is officially in Alpha. We would appreciate any feedback that you might have.
 
 ## Project Philosophy
