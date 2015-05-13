@@ -1,6 +1,11 @@
 ---
 language: node_js
 
+node_js:
+  - "0.12"
+  - "iojs-v1"
+  - "iojs-v2"
+
 sudo: false
 
 cache:
