@@ -1,7 +1,14 @@
 import Ember from 'ember';
 import Semantic from '../semantic';
 
-var __indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
+var __indexOf = [].indexOf || function(item) {
+    for (var i = 0, l = this.length; i < l; i++) {
+        if (i in this && this[i] === item) {
+            return i;
+        }
+    }
+    return -1; 
+};
 
 Semantic.BaseMixin = Ember.Mixin.create({
   init: function() {
@@ -12,7 +19,7 @@ Semantic.BaseMixin = Ember.Mixin.create({
   },
   settings: function(module) {
     var component, custom, key, prop, value, _ref;
-    component = $.fn[module];
+    component = this.$.fn[module];
     if (!component) {
       throw "Unable to find semantic module: " + module;
     }
