@@ -7,9 +7,9 @@ export default Ember.Mixin.create(Base, {
   closable: false,
   transition: 'horizontal flip',
 
-  setup: function() {
+  setup: Ember.on('init', function() {
     this.set('hiding', false);
-  }.on('init'),
+  }),
 
   didInsertElement: function() {
     this._super();

@@ -14,12 +14,12 @@ export default Ember.Select.extend(Base, DataAttributes, {
   groupedView: null,
   groupedContent: null,
 
-  initialize: function() {
+  initialize: Ember.on('didInsertElement', function() {
     var value = this.get('value');
     if (typeof value !== "undefined" && value !== null) {
       this.execute('set selected', value);
     }
-  }.on('didInsertElement'),
+  }),
 
   onChange: function(value, text, $element) {
     if (value === undefined) {
@@ -32,11 +32,11 @@ export default Ember.Select.extend(Base, DataAttributes, {
     return this.set('value', value);
   },
 
-  onUpdate: function() {
-    return Ember.run.scheduleOnce('afterRender', this, this.set_value);
-  }.observes('value'),
+  onUpdate: Ember.observer('value', function() {
+    return Ember.run.scheduleOnce('afterRender', this, this.setValue);
+  }),
 
-  onContentChange: function() {
+  onContentChange: Ember.observer('content', function() {
     // Wait for the afterRender portion of the Run Loop to complete after
     // after a content change. Once that happens, re-initialize the
     // Semantic component the same way as Semantic.BaseMixin
@@ -44,9 +44,9 @@ export default Ember.Select.extend(Base, DataAttributes, {
     // Without this, Dropdown Items will not be clickable if the content
     // is set after the initial render.
     Ember.run.scheduleOnce('afterRender', this, this.didInsertElement);
-  }.observes('content'),
+  }),
 
-  set_value: function() {
+  setValue: function() {
     var dropdownValue, inputValue, _ref;
     inputValue = (_ref = this.get('value')) != null ? _ref.toString() : void 0;
     dropdownValue = this.execute("get value");
