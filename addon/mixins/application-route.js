@@ -15,6 +15,9 @@ export default Ember.Mixin.create({
         container = this.get('container');
         try {
           controller = this.controllerFor(name);
+          if (Ember.isBlank(controller)) {
+            throw "Controller not found";
+          }
         } catch (e) {
           controller = Ember.generateController(container, name, model);
         }
