@@ -1,18 +1,12 @@
 import Ember from 'ember';
 import Base from '../mixins/base';
 import DataAttributes from '../mixins/data-attributes';
-import Item from './ui-dropdown-item';
 
-export default Ember.Select.extend(Base, DataAttributes, {
+export default Ember.Component.extend(Base, DataAttributes, {
   classNames: ['ui', 'dropdown'],
   module: 'dropdown',
   tagName: 'div',
   defaultTemplate: null,
-
-  optionView: Item,
-
-  groupedView: null,
-  groupedContent: null,
 
   initialize: function() {
     var value = this.get('value');

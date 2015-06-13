@@ -1,21 +1,29 @@
 import Ember from 'ember';
 
-export default Ember.SelectOption.extend({
+export default Ember.Component.extend({
   tagName: 'div',
   classNames: 'item',
+  
+  label: Ember.computed('attrs.optionLabelPath', {
+    get: function() {
+      var path = this.get('attrs.optionLabelPath.value') || 'content';
+      if (path) {
+        return this.get(path);
+      }
+    }
+  }),
+  
+  value: Ember.computed('attrs.optionValuePath', {
+    get: function() {
+      var path = this.get('attrs.optionValuePath.value') || 'content';
+      if (path) {
+        return this.get(path);
+      }
+    }
+  }),
 
   bindData: function() {
-    var valuePath = this.get('valuePath');
-
-    if (!valuePath) {
-      return;
-    }
-
-    if (this.$() == null) {
-      return;
-    }
-
-    this.$().data('value', this.get(valuePath));
+    this.$().data('value', this.get('value'));
   }.on('didInsertElement'),
 
   unbindData: function() {
