@@ -7,6 +7,8 @@ export default Ember.Component.extend(Base, DataAttributes, {
   module: 'dropdown',
   tagName: 'div',
   defaultTemplate: null,
+  optionValuePath: 'content',
+  optionLabelPath: 'content',
 
   initialize: function() {
     var value = this.get('value');

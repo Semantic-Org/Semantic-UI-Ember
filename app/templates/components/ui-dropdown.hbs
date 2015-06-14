@@ -5,7 +5,7 @@
   <i class="dropdown icon"></i>
 {{/if}}
 <div class="menu">
-  {{#each content as |item|}}
+  {{#each content key="@guid" as |item|}}
     {{#ui-dropdown-item content=item optionLabelPath=optionLabelPath optionValuePath=optionValuePath as |label|}}
       {{label}}
     {{/ui-dropdown-item}}

@@ -6,7 +6,7 @@ export default Ember.Component.extend({
   
   label: Ember.computed('attrs.optionLabelPath', {
     get: function() {
-      var path = this.get('attrs.optionLabelPath.value') || 'content';
+      var path = this.get('attrs.optionLabelPath.value');
       if (path) {
         return this.get(path);
       }
@@ -15,7 +15,7 @@ export default Ember.Component.extend({
   
   value: Ember.computed('attrs.optionValuePath', {
     get: function() {
-      var path = this.get('attrs.optionValuePath.value') || 'content';
+      var path = this.get('attrs.optionValuePath.value');
       if (path) {
         return this.get(path);
       }
