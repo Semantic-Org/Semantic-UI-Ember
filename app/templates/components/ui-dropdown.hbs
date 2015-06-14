@@ -1,20 +1,16 @@
-<div class="text">{{view.prompt}}</div>
-{{#if view.icon}}
-  <i {{bind-attr class="view.icon :icon"}}></i>
+<div class="text">{{prompt}}</div>
+{{#if icon}}
+  <i class="{{icon}} icon"></i>
 {{else}}
   <i class="dropdown icon"></i>
 {{/if}}
 <div class="menu">
-  {{#if view.optionGroupPath}}
-    {{#each group in view.groupedContent}}
-      {{view view.groupView content=group.content label=group.label}}
-    {{/each}}
-  {{else}}
-    {{#each item in view.content}}
-      {{view view.optionView content=item valuePath=view.optionValuePath}}
-    {{/each}}
-  {{/if}}
+  {{#each content key="@guid" as |item|}}
+    {{#ui-dropdown-item content=item optionLabelPath=optionLabelPath optionValuePath=optionValuePath as |label|}}
+      {{label}}
+    {{/ui-dropdown-item}}
+  {{/each}}
 </div>
-{{#if view.template}}
+{{#if hasBlock}}
   {{yield}}
 {{/if}}

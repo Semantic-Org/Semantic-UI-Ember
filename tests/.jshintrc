@@ -38,7 +38,6 @@
     "find",
     "findWithAssert",
     "wait",
-    "DS",
     "isolatedContainer",
     "startApp",
     "andThen",

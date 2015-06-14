@@ -41,7 +41,7 @@ export default Ember.Mixin.create(Base, {
     if (controller) {
       // if controller handles approves, they must manually call view.execute('hide')
       controller.send('deny', this);
-      return false
+      return false;
     }
     return true;
   },
@@ -51,7 +51,7 @@ export default Ember.Mixin.create(Base, {
     if (controller) {
       // if controller handles approves, they must manually call view.execute('hide')
       controller.send('approve', this);
-      return false
+      return false;
     }
     return true;
   },
@@ -63,6 +63,6 @@ export default Ember.Mixin.create(Base, {
         typeof controller._actions[action] !== "undefined" && controller._actions[action] !== null) {
       return controller;
     }
-    return false
+    return false;
   }
 });
