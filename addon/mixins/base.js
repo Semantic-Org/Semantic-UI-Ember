@@ -47,15 +47,23 @@ Semantic.BaseMixin = Ember.Mixin.create({
     return custom;
   },
   didInsertElement: function() {
-    return window.$()[this.get("module")](this.settings(this.get("module")));
+    return this.$()[this.get("module")](this.settings(this.get("module")));
   },
   willDestroyElement: function() {
-    var _name, _ref;
-    return (_ref = window.$()) != null ? typeof _ref[_name = this.get("module")] === "function" ? _ref[_name]('destroy') : void 0 : void 0;
+    var name, selector;
+    if ((selector = this.$()) != null) {
+      if (typeof selector[name = this.get("module")] === "function") {
+        selector[name]('destroy');
+      }
+    }
   },
   execute: function() {
-    var _ref, _ref1;
-    return (_ref = window.$()) != null ? (_ref1 = _ref[this.get('module')]) != null ? _ref1.apply(window.$(), arguments) : void 0 : void 0;
+    var selector, module;
+    if ((selector = this.$()) != null) {
+      if ((module = selector[this.get('module')]) != null) {
+        module.apply(this.$(), arguments);
+      }
+    }
   }
 });
 
