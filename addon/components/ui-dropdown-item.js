@@ -4,7 +4,7 @@ export default Ember.SelectOption.extend({
   tagName: 'div',
   classNames: 'item',
 
-  bindData: function() {
+  bindData: Ember.on('didInsertElement', function() {
     var valuePath = this.get('valuePath');
 
     if (!valuePath) {
@@ -16,9 +16,9 @@ export default Ember.SelectOption.extend({
     }
 
     this.$().data('value', this.get(valuePath));
-  }.on('didInsertElement'),
+  }),
 
-  unbindData: function() {
+  unbindData: Ember.on('willDestroyElement', function() {
     this.$().removeData('value');
-  }.on('willDestroyElement')
+  })
 });
