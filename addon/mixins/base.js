@@ -53,7 +53,7 @@ Semantic.BaseMixin = Ember.Mixin.create({
     var name, selector;
     if ((selector = this.$()) != null) {
       if (typeof selector[name = this.get("module")] === "function") {
-        selector[name]('destroy');
+        return selector[name]('destroy');
       }
     }
   },
@@ -61,7 +61,7 @@ Semantic.BaseMixin = Ember.Mixin.create({
     var selector, module;
     if ((selector = this.$()) != null) {
       if ((module = selector[this.get('module')]) != null) {
-        module.apply(this.$(), arguments);
+        return module.apply(this.$(), arguments);
       }
     }
   }
