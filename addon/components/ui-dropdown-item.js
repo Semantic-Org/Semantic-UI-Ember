@@ -11,14 +11,14 @@ export default Ember.SelectOption.extend({
       return;
     }
 
-    if (this.$() == null) {
+    if (window.$() == null) {
       return;
     }
 
-    this.$().data('value', this.get(valuePath));
+    window.$().data('value', this.get(valuePath));
   }),
 
   unbindData: Ember.on('willDestroyElement', function() {
-    this.$().removeData('value');
+    window.$().removeData('value');
   })
 });
