@@ -19,6 +19,11 @@ export default Ember.Select.extend(Base, DataAttributes, {
     if (typeof value !== "undefined" && value !== null) {
       this.execute('set selected', value);
     }
+
+    var placeholder = this.get('prompt');
+    if (typeof placeholder !== "undefined" && placeholder !== null) {
+      this.$().data('placeholderText', placeholder);
+    }
   }),
 
   onChange: function(value, text, $element) {
