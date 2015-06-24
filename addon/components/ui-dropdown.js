@@ -53,7 +53,7 @@ export default Ember.Select.extend(Base, DataAttributes, {
   }),
 
   setValue: function() {
-    var dropdownValue, inputValue, _ref;
+    var dropdownValue, inputValue;
     inputValue = this.get('value');
     dropdownValue = this.execute("get value");
     if (inputValue == null) {
