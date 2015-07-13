@@ -18,7 +18,7 @@ var getWithDefault = function(property, default_property) {
 module.exports = {
   name: 'semantic-ui-ember',
 
-  included: function (app, x) {
+  included: function (app) {
     var options = (app && app.options['SemanticUI']) || {};
 
     if (getWithDefault(options['css'], defaults['css'])) {
@@ -29,7 +29,6 @@ module.exports = {
     }
 
     if (getWithDefault(options['javascript'], defaults['javascript'])) {
-      console.log('loading javascript');
       app.import({
         development: 'bower_components/semantic-ui/dist/semantic.js',
         production: 'bower_components/semantic-ui/dist/semantic.min.js'
