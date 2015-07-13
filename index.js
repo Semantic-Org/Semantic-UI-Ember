@@ -1,23 +1,49 @@
 /* jshint node: true */
 'use strict';
 
+var defaults = {
+  css: true,
+  javascript: true,
+  fonts: true
+};
+
+var getWithDefault = function(property, default_property) {
+  if (property === null || property === undefined) {
+    return default_property;
+  }
+
+  return property;
+}
+
 module.exports = {
   name: 'semantic-ui-ember',
 
-  included: function (app) {
-    app.import({
-      development: 'bower_components/semantic-ui/dist/semantic.css',
-      production: 'bower_components/semantic-ui/dist/semantic.min.css'
-    });
+  included: function (app, x) {
+    var options = (app && app.options['SemanticUI']) || {};
 
-    app.import({
-      development: 'bower_components/semantic-ui/dist/semantic.js',
-      production: 'bower_components/semantic-ui/dist/semantic.min.js'
-    });
+    if (getWithDefault(options['css'], defaults['css'])) {
+      app.import({
+        development: 'bower_components/semantic-ui/dist/semantic.css',
+        production: 'bower_components/semantic-ui/dist/semantic.min.css'
+      });
+    }
 
-    var fontExtensions = ['.eot','.otf','.svg','.ttf','.woff','.woff2'];
-    for (var i = fontExtensions.length - 1; i >= 0; i--) {
-      app.import('bower_components/semantic-ui/dist/themes/default/assets/fonts/icons'+fontExtensions[i], { destDir: 'assets/themes/default/assets/fonts' });
-    };
+    if (getWithDefault(options['javascript'], defaults['javascript'])) {
+      console.log('loading javascript');
+      app.import({
+        development: 'bower_components/semantic-ui/dist/semantic.js',
+        production: 'bower_components/semantic-ui/dist/semantic.min.js'
+      });
+    } else {
+
+    }
+
+    if (getWithDefault(options['fonts'], defaults['fonts'])) {
+      var fontExtensions = ['.eot','.otf','.svg','.ttf','.woff','.woff2'];
+      var fontOptions = { destDir: 'assets/themes/default/assets/fonts' };
+      for (var i = fontExtensions.length - 1; i >= 0; i--) {
+        app.import('bower_components/semantic-ui/dist/themes/default/assets/fonts/icons'+fontExtensions[i], fontOptions);
+      };
+    }
   }
 };
