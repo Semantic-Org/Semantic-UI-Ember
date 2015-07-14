@@ -1,2 +1,1 @@
-import Dropdown from 'semantic-ui-ember/components/ui-dropdown';
-export default Dropdown;
+export { default } from 'semantic-ui-ember/components/ui-dropdown';

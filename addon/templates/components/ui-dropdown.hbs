@@ -1,0 +1,11 @@
+{{#unless defaultBlank}}
+  <div class="text">{{prompt}}</div>
+{{/unless}}
+<select class="ui dropdown" {{action 'change' on='change'}}>
+  {{#if defaultBlank}}
+   <option disabled selected>{{prompt}}</option>
+  {{/if}}
+  {{#each computedCollection key="@index" as |item| }}
+    <option value="{{item.value}}" selected={{is-equal item.value selectedValue}}>{{item.label}}</option>
+  {{/each}}
+</select>

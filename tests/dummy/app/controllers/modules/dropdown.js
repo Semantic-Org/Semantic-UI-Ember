@@ -6,10 +6,15 @@ export default Ember.Controller.extend({
     'Home',
     'Bedroom'
   ],
-
-  gender: null,
-  genders: [
-    { id: 1, text: 'Male' },
-    { id: 0, text: 'Female' }
-  ]
+  color: null,
+  colors: [
+    { id: 1, name: 'Red' },
+    { id: 0, name: 'Green' },
+    { id: 3, name: 'Blue' }
+  ],
+  actions: {
+    onSelect: function (colorObject) {
+      this.set('color', colorObject.name);
+    }
+  }
 });
