@@ -2,7 +2,9 @@
   Dropdown
   <div class="sub header">A dropdown</div>
 </h4>
-
+<p>
+  If you don't pass in an action, then the value only change locally
+</p>
 {{ui-dropdown content=categories prompt="Shop"}}
 
 <hr>
@@ -11,10 +13,32 @@
   Selection
   <div class="sub header">A dropdown can be used to select between choices in a form</div>
 </h4>
+<p>
+  Pass in an action like below to be triggered.
+</p>
+<pre>
+<code class='code javascript'>
+  actions: {
+    onSelect: function (colorObject) {
+      this.set('color', colorObject.name);
+    }
+  }
+</code>
+</pre>
+
+
+<p>
+  Selected color: {{color}}
+</p>
+
+
 
 {{ui-dropdown class="selection"
-  content=genders
-  value=gender
-  prompt="Gender"
-  optionLabelPath="content.text"
-  optionValuePath="content.id"}}
+  defaultBlank=true
+  content=colors
+  value=color
+  prompt="Color"
+  optionLabel="name"
+  optionValue="id"
+  onSelect="onSelect"
+}}
