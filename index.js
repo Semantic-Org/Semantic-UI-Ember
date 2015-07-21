@@ -4,7 +4,8 @@
 var defaults = {
   css: true,
   javascript: true,
-  fonts: true
+  fonts: true,
+  images: true
 };
 
 var getWithDefault = function(property, default_property) {
@@ -35,6 +36,11 @@ module.exports = {
       });
     } else {
 
+    }
+
+    if (getWithDefault(options['images'], defaults['images'])) {
+      var imageOptions = { destDir: 'assets/themes/default/assets/images' };
+      app.import('bower_components/semantic-ui/dist/themes/default/assets/images/flags.png', imageOptions);
     }
 
     if (getWithDefault(options['fonts'], defaults['fonts'])) {
