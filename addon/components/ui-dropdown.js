@@ -1,28 +1,44 @@
 import Ember from 'ember';
 import Base from '../mixins/base';
 import DataAttributes from '../mixins/data-attributes';
-import Item from './ui-dropdown-item';
 
-export default Ember.Select.extend(Base, DataAttributes, {
+export default Ember.Component.extend(Base, DataAttributes, {
   classNames: ['ui', 'dropdown'],
   module: 'dropdown',
   tagName: 'div',
-  defaultTemplate: null,
-
-  optionView: Item,
-
-  groupedView: null,
-  groupedContent: null,
 
   initialize: Ember.on('didInsertElement', function() {
     var value = this.get('value');
     if (typeof value !== "undefined" && value !== null) {
       this.execute('set selected', value);
     }
+  }),
 
-    var placeholder = this.get('prompt');
-    if (typeof placeholder !== "undefined" && placeholder !== null) {
-      this.$().data('placeholderText', placeholder);
+  /**
+    When `multiple` is `false`, the element of `content` that is currently
+    selected, if any.
+    When `multiple` is `true`, an array of such elements.
+    @property selection
+    @type Object or Array
+    @default null
+  */
+  selection: null,
+
+  /**
+    In single selection mode (when `multiple` is `false`), value can be used to
+    get the current selection's value or set the selection by its value.
+    It is not currently supported in multiple selection mode.
+    @property value
+    @type String
+    @default null
+  */
+  value: Ember.computed('selection', {
+    get(/* key */) {
+      return this.get('selection');
+    },
+
+    set(key, value) {
+      return value;
     }
   }),
 
@@ -34,7 +50,7 @@ export default Ember.Select.extend(Base, DataAttributes, {
       // https://github.com/Semantic-Org/Semantic-UI/blob/master/src/definitions/modules/dropdown.js#L85
       value = $element.data('value');
     }
-    return this.set('value', value);
+    return this.set('selection', value);
   },
 
   onUpdate: Ember.observer('value', function() {
