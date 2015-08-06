@@ -205,7 +205,7 @@ This provides the `openModal` and `closeModal` actions that allows modals to be 
   * pods/application/route.js
 
 ```javascript
-import SemanticRouteMixin from 'semantic-ui-ember/mixins/application-route';
+import SemanticRouteMixin from 'semantic-ui-ember/mixins/modal';
 
 var ApplicationRoute = Ember.Route.extend(SemanticRouteMixin, {});
 ```
