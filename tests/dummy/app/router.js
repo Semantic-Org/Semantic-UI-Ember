@@ -14,6 +14,7 @@ Router.map(function() {
     this.route('embed');
     this.route('modal');
     this.route('nag');
+    this.route('popup');
     this.route('progress');
     this.route('rating');
   });
