@@ -400,6 +400,19 @@ Not implemented. Better suited to use routes through Ember. If you disagree plea
 ## Transition
 
  * **Documentation**: [Official Documentation](http://semantic-ui.com/modules/transition.html)
- * **Class**: `ui sidebar`
+ * **Class**: `ui transition`
 
-There isn't a cooresponding Ember component for this since it isn't rendered to the screen but instead invoked.
+You can invoke the semantic javascript directly.
+
+### Controller
+```javascript
+import Ember from 'ember';
+
+export default Ember.Controller.extend(Ember.Evented, {
+  actions: {
+    transition: function() {
+      $('img').transition('horizontal flip', '500ms');
+    }
+  }
+});
+```

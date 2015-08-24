@@ -22,6 +22,7 @@ Router.map(function() {
     this.route('sidebar');
     this.route('sticky');
     this.route('tab');
+    this.route('transition');
   });
 });
 
