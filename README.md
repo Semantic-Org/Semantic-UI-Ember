@@ -393,6 +393,10 @@ export default Ember.Controller.extend(Ember.Evented, {
 });
 ```
 
+## Tab
+
+Not implemented. Better suited to use routes through Ember. If you disagree please open an issue with how you would see it used.
+
 ## Transition
 
  * **Documentation**: [Official Documentation](http://semantic-ui.com/modules/transition.html)
