@@ -179,6 +179,23 @@ export default Ember.Controller.extend({
 }}
 ```
 
+## Embed
+
+* **Documentation**: [Official Documentation](http://semantic-ui.com/modules/embed.html)
+* **Class**: `ui embed`
+* **Parameters**
+   * **data-id**: The id of the video you wanted embedded
+   * **data-source**: The source provider of the video (youtube for example)
+   * **data-icon**: Icon to show for the play button
+   * **data-place**: Placeholder image to show before the video starts
+
+### Template
+```handlebars
+  {{ui-embed
+    data-source="youtube"
+ 	  data-id="pfdu_gTry8E"}}
+ ```
+
 ## Modal
 
  * **Documentation**: [Official Documentation](http://semantic-ui.com/modules/modal.html)
@@ -315,4 +332,3 @@ _NOT IMPLEMENTED_
  * **Class**: `ui sidebar`
 
 There isn't a cooresponding Ember component for this since it isn't rendered to the screen but instead invoked.
-

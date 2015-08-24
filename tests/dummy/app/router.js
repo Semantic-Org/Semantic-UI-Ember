@@ -11,6 +11,7 @@ Router.map(function() {
     this.route('checkbox');
     this.route('dimmer');
     this.route('dropdown');
+    this.route('embed');
     this.route('modal');
     this.route('progress');
     this.route('rating');
