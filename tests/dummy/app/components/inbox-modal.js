@@ -3,6 +3,7 @@ import UiModal from 'semantic-ui-ember/components/ui-modal';
 
 export default UiModal.extend({
   name: 'inbox',
+  classNames: [ 'inbox' ],
 
   actions: {
     yes: function() {

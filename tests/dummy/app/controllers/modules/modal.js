@@ -4,7 +4,7 @@ import Ember from 'ember';
 export default Ember.Controller.extend(Ember.Evented, {
   actions: {
     openModal: function(name) {
-      this.trigger('showModal', name);
+      $('.ui.' + name + '.modal').modal('show');
     },
 
     approveModal: function(name) {

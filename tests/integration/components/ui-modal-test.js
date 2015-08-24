@@ -19,12 +19,10 @@ test('it will show if triggered', function(assert) {
 
   var _this = this;
 
-  this.on('openModal', function(name) {
-    stop();
-
-    return _this.actions.showModal.apply(this, [ name ]).then(function() {
+  this.on('openModal', function() {
+    _this.$('.ui.modal').modal('show', function() {
       start();
-      assert.equal(_this.$('.ui.modal.visible').length, 1, ".ui.modal is visible");
+      assert.equal(_this.$('.ui.modal.visible').length, 1, ".ui.modal is visible after showing");
     });
   });
 
@@ -39,6 +37,7 @@ test('it will show if triggered', function(assert) {
   assert.equal(this.$('.ui.modal').length, 1, ".ui.modal exists");
   assert.equal(this.$('.ui.modal.visible').length, 0, ".ui.modal is not visible");
 
+  stop();
   this.$('.ui.button').click();
 });
 
@@ -47,10 +46,10 @@ test('it will send approve back to controller and hide', function(assert) {
 
   var _this = this;
 
-  this.on('openModal', function(name) {
-    return _this.actions.showModal.apply(this, [ name ]).then(function() {
+  this.on('openModal', function() {
+    _this.$('.ui.modal').modal('show', function() {
+      assert.equal(_this.$('.ui.modal.visible').length, 1, ".ui.modal is visible after showing");
       _this.$('.ui.modal .ui.positive.button').click();
-      assert.equal(_this.$('.ui.modal.visible').length, 1, ".ui.modal is visible");
     });
   });
 
@@ -85,10 +84,10 @@ test('it will send approve back to controller and skip the hide', function(asser
 
   var _this = this;
 
-  this.on('openModal', function(name) {
-    return _this.actions.showModal.apply(this, [ name ]).then(function() {
+  this.on('openModal', function() {
+    _this.$('.ui.modal').modal('show', function() {
+      assert.equal(_this.$('.ui.modal.visible').length, 1, ".ui.modal is visible after showing");
       _this.$('.ui.modal .ui.positive.button').click();
-      assert.equal(_this.$('.ui.modal.visible').length, 1, ".ui.modal is visible");
     });
   });
 
@@ -123,16 +122,14 @@ test('it will send deny back to controller', function(assert) {
 
   var _this = this;
 
-  this.on('openModal', function(name) {
-    stop();
-
-    return _this.actions.showModal.apply(this, [ name ]).then(function() {
-      start();
+  this.on('openModal', function() {
+    _this.$('.ui.modal').modal('show', function() {
       _this.$('.ui.modal.negative').click();
     });
   });
 
   this.on('deny', function(name) {
+    start();
     assert.equal('profile', name);
   });
 
@@ -149,5 +146,6 @@ test('it will send deny back to controller', function(assert) {
     {{/ui-modal}}
   `);
 
+  stop();
   this.$('.ui.button').click();
 });
