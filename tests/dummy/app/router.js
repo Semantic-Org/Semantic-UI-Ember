@@ -17,6 +17,7 @@ Router.map(function() {
     this.route('popup');
     this.route('progress');
     this.route('rating');
+    this.route('search');
   });
 });
 

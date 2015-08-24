@@ -300,6 +300,27 @@ You can also create an icon version by specifying the tagName
 
 _NOT IMPLEMENTED_
 
+## Search
+
+* **Documentation**: [Official Documentation](http://semantic-ui.com/modules/search.html)
+* **Class**: `ui search`
+* **Parameters**
+   * **url**: The url used for searching
+
+```handlebars
+{{#ui-search url="/search"}}
+  <input class="prompt" type="text" placeholder="Common passwords...">
+  <div class="results"></div>
+{{/ui-search}}
+```
+
+### Template
+```handlebars
+  {{ui-embed
+    data-source="youtube"
+ 	  data-id="pfdu_gTry8E"}}
+```
+
 ## Shape
 
  * **Documentation**: [Official Documentation](http://semantic-ui.com/modules/shape.html)
