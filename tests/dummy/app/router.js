@@ -20,6 +20,7 @@ Router.map(function() {
     this.route('search');
     this.route('shape');
     this.route('sidebar');
+    this.route('sticky');
   });
 });
 
