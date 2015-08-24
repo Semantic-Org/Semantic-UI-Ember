@@ -9,6 +9,7 @@ Router.map(function() {
   this.resource('modules', function() {
     this.route('accordion');
     this.route('checkbox');
+    this.route('dimmer');
     this.route('dropdown');
     this.route('modal');
     this.route('progress');
