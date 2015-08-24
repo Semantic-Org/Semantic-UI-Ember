@@ -1,0 +1,47 @@
+<!--
+This shows two different ways to use a modal:
+
+  1. Use the {{ui-model}} syntax and embed the template directly OR
+  2. Create your own component that inherits from the semantic-ui-ember/components/ui-modal and embeds its own template
+
+Depending on whether you have an inherited component or not you can handle actions in two different ways:
+
+  1. Pass in approve or deny to the component and those actions will get called
+  2. Create your own action in your controller and handle it outside of semantic's actions
+-->
+<h2 id='title'>Modal</h2>
+
+<div class="ui button" {{action 'openModal' 'profile'}}>
+  Open Profile
+</div>
+<div class="ui button" {{action 'openModal' 'inbox'}}>
+  Open Inbox
+</div>
+
+{{#ui-modal name="profile" class="profile" approve=(action 'approveModal') deny=(action 'denyModal')}}
+  <i class="close icon"></i>
+  <div class="header">
+    Profile Picture
+  </div>
+  <div class="image content">
+    <div class="ui medium image">
+      <img src="http://semantic-ui.com/images/avatar/large/chris.jpg">
+    </div>
+    <div class="description">
+      <div class="ui header">We've auto-chosen a profile image for you.</div>
+      <p>We've grabbed the following image from the <a href="https://www.gravatar.com" target="_blank">gravatar</a> image associated with your registered e-mail address.</p>
+      <p>Is it okay to use this photo?</p>
+    </div>
+  </div>
+  <div class="actions">
+    <div class="ui black deny button">
+      Nope
+    </div>
+    <div class="ui positive right labeled icon button">
+      Yep, that's me
+      <i class="checkmark icon"></i>
+    </div>
+  </div>
+{{/ui-modal}}
+
+{{inbox-modal}}

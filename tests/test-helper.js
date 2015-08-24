@@ -4,3 +4,5 @@ import {
 } from 'ember-qunit';
 
 setResolver(resolver);
+
+$.fn.modal.settings.context = "#ember-testing";

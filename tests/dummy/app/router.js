@@ -10,6 +10,7 @@ Router.map(function() {
     this.route('accordion');
     this.route('checkbox');
     this.route('dropdown');
+    this.route('modal');
     this.route('progress');
     this.route('rating');
   });
