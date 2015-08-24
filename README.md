@@ -293,12 +293,26 @@ You can also create an icon version by specifying the tagName
 {{ui-popup tagName="i" class="icon link" content="The text you'd like to show"}}
 ```
 
+## Progress
+
+ * **Documentation**: [Official Documentation](http://semantic-ui.com/modules/progress.html)
+ * **Class**: `ui progress`
+
+```handlebars
+{{#ui-progress percent=40 classNames="teal indicating"}}
+  <div class="bar"></div>
+  <div class="label">Completed</div>
+{{/ui-progress}}
+```
+
 ## Rating
 
  * **Documentation**: [Official Documentation](http://semantic-ui.com/modules/rating.html)
  * **Class**: `ui rating`
 
-_NOT IMPLEMENTED_
+```handlebars
+{{ui-rating initialRating=3 maxRating=7}}
+```
 
 ## Search
 
