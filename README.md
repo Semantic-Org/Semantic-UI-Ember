@@ -202,89 +202,62 @@ export default Ember.Controller.extend({
  * **Class**: `ui modal`
  * **View**: `ui-modal`
 
-In order to use the modal you must first prepare your Ember application for modals. This follows the same instructions [found on ember.js](http://emberjs.com/guides/cookbook/user_interface_and_interaction/using_modal_dialogs/).
+In order to use the modal you must include Ember.Evented in your controller.
 
-### Application Template
-You must add the `modal` outlet to the main application layout
-
-  * templates/application.hbs OR
-  * pods/application/template.hbs
-
-```handlebars
-{{outlet}}
-{{outlet 'modal'}}
-```
-
-### ApplicationRoute
-This provides the `openModal` and `closeModal` actions that allows modals to be opened from any controller.
-
-  * routes/application.js OR
-  * pods/application/route.js
+### Controller
 
 ```javascript
-import SemanticRouteMixin from 'semantic-ui-ember/mixins/application-route';
+import Ember from 'ember';
 
-var ApplicationRoute = Ember.Route.extend(SemanticRouteMixin, {});
+export default Ember.Controller.extend(Ember.Evented, {
+
+});
 ```
 
-Now to use the modal the bare minimum is to create a template and trigger `openModal`.
+Embed the Modal within your page's template, similar to the semantic-ui master documentation.
+Except instead of using `<div class='ui modal'>` you can use `{{ui-modal}}`. Each
+modal MUST include a name so it knows which one you are referring too.
 
 ### Template
 ```handlebars
-<i class="close icon"></i>
-<div class="header">
-  Demo Modal
-</div>
-<div class="content">
-  Content
-</div>
-<div class="actions">
-  <div class="ui black button">
-    Cancel
+{{#ui-modal name="profile" class="profile" approve=(action 'approveModal') deny=(action 'denyModal')}}
+  <i class="close icon"></i>
+  <div class="header">
+    Profile Picture
   </div>
-  <div class="ui positive right labeled icon button">
-    Ok
-    <i class="checkmark icon"></i>
+  <div class="image content">
+    <div class="ui medium image">
+      <img src="http://semantic-ui.com/images/avatar/large/chris.jpg">
+    </div>
+    <div class="description">
+      <div class="ui header">We've auto-chosen a profile image for you.</div>
+      <p>We've grabbed the following image from the <a href="https://www.gravatar.com" target="_blank">gravatar</a> image associated with your registered e-mail address.</p>
+      <p>Is it okay to use this photo?</p>
+    </div>
   </div>
-</div>
+  <div class="actions">
+    <div class="ui black deny button">
+      Nope
+    </div>
+    <div class="ui positive right labeled icon button">
+      Yep, that's me
+      <i class="checkmark icon"></i>
+    </div>
+  </div>
+{{/ui-modal}}
 ```
 
-Then you can fire `openModal` from any controller
+In order to open the modal you just need to create an action and fire the `showModal` event.
 
 ### Controller (no model)
 ```javascript
 export default Ember.Controller.extend({
   actions: {
-    confirm: function() {
-      this.send('openModal', 'projects/confirm');
+    openModal: function(name) {
+      this.trigger('showModal', name);
     }
   }
 });
-```
-
-If you want to send a model in just use the third parameter
-
-### Controller (model)
-```javascript
-export default Ember.Controller.extend({
-  actions: {
-    confirm: function() {
-      this.send('openModal', 'projects/confirm', this.get('model'));
-    }
-  }
-});
-```
-
-If a controller is found with the same name as the template it will be used. You can also use your own view if necessary. You just need to make sure to inherit from the base class.
-
-### View
-```javascript
-import Ember from 'ember';
-import SemanticModalMixin from 'semantic-ui-ember/mixins/modal';
-
-export default Ember.View.extend(SemanticModalMixin, {
-  templateName: 'shared/modal'
-})
 ```
 
 ## Nag
