@@ -194,7 +194,7 @@ export default Ember.Controller.extend({
   {{ui-embed
     data-source="youtube"
  	  data-id="pfdu_gTry8E"}}
- ```
+```
 
 ## Modal
 
@@ -285,6 +285,21 @@ import SemanticModalMixin from 'semantic-ui-ember/mixins/modal';
 export default Ember.View.extend(SemanticModalMixin, {
   templateName: 'shared/modal'
 })
+```
+
+## Nag
+
+* **Documentation**: [Official Documentation](http://semantic-ui.com/modules/nag.html)
+* **Class**: `ui nag`
+
+### Template
+```handlebars
+  {{#ui-nag}}
+    <span class="title">
+      We use cookies to ensure you get the best experience on our website
+    </span>
+    <i class="close icon"></i>
+  {{/ui-nag}}
 ```
 
 ## Popup

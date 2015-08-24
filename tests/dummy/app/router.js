@@ -13,6 +13,7 @@ Router.map(function() {
     this.route('dropdown');
     this.route('embed');
     this.route('modal');
+    this.route('nag');
     this.route('progress');
     this.route('rating');
   });
