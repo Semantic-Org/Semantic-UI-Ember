@@ -321,6 +321,7 @@ You can also create an icon version by specifying the tagName
 * **Parameters**
    * **url**: The url used for searching
 
+### Template
 ```handlebars
 {{#ui-search url="/search"}}
   <input class="prompt" type="text" placeholder="Common passwords...">
@@ -328,19 +329,32 @@ You can also create an icon version by specifying the tagName
 {{/ui-search}}
 ```
 
-### Template
-```handlebars
-  {{ui-embed
-    data-source="youtube"
- 	  data-id="pfdu_gTry8E"}}
-```
-
 ## Shape
 
  * **Documentation**: [Official Documentation](http://semantic-ui.com/modules/shape.html)
  * **Class**: `ui shape`
 
-_NOT IMPLEMENTED_
+### Template
+```handlebars
+{{#ui-shape}}
+ <p>Content</p>
+{{/ui-shape}}
+```
+
+### Controller
+You control the shape through semantic's regular javascript code
+
+```javascript
+import Ember from 'ember';
+
+export default Ember.Controller.extend(Ember.Evented, {
+  actions: {
+    flip: function(direction) {
+      $('.ui.shape').shape('flip ' + direction);
+    }
+  }
+});
+```
 
 ## Sidebar
 

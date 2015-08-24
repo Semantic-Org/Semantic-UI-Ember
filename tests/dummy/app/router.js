@@ -18,6 +18,7 @@ Router.map(function() {
     this.route('progress');
     this.route('rating');
     this.route('search');
+    this.route('shape');
   });
 });
 
