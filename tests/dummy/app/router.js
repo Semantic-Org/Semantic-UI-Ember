@@ -19,6 +19,7 @@ Router.map(function() {
     this.route('rating');
     this.route('search');
     this.route('shape');
+    this.route('sidebar');
   });
 });
 

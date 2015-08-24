@@ -298,6 +298,7 @@ You can also create an icon version by specifying the tagName
  * **Documentation**: [Official Documentation](http://semantic-ui.com/modules/progress.html)
  * **Class**: `ui progress`
 
+### Template
 ```handlebars
 {{#ui-progress percent=40 classNames="teal indicating"}}
   <div class="bar"></div>
@@ -310,6 +311,7 @@ You can also create an icon version by specifying the tagName
  * **Documentation**: [Official Documentation](http://semantic-ui.com/modules/rating.html)
  * **Class**: `ui rating`
 
+### Template
 ```handlebars
 {{ui-rating initialRating=3 maxRating=7}}
 ```
@@ -361,7 +363,35 @@ export default Ember.Controller.extend(Ember.Evented, {
  * **Documentation**: [Official Documentation](http://semantic-ui.com/modules/sidebar.html)
  * **Class**: `ui sidebar`
 
-_NOT IMPLEMENTED_
+### Template
+```handlebars
+{{#ui-sidebar class="inverted vertical menu"}}
+  <a class="item">
+    1
+  </a>
+  <a class="item">
+    2
+  </a>
+  <a class="item">
+    3
+  </a>
+{{/ui-sidebar}}
+```
+
+When you want to invoke the sidebar you simply use the semantic methods.
+
+### Controller
+```javascript
+import Ember from 'ember';
+
+export default Ember.Controller.extend(Ember.Evented, {
+  actions: {
+    toggle: function(direction) {
+      $('.ui.sidebar').sidebar('toggle');
+    }
+  }
+});
+```
 
 ## Transition
 
