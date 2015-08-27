@@ -102,3 +102,30 @@ test('it renders multiple', function(assert) {
   this.$(".menu .item[data-value=2]").click();
   assert.equal(this.get('value'), '1,2');
 });
+
+test('it binds to an object', function(assert) {
+  assert.expect(3);
+
+  this.set('people', [
+    { id: 1, name: "Sherlock Homes" },
+    { id: 2, name: "Patrick Bateman" }
+  ]);
+
+  this.render(hbs`
+    {{#ui-dropdown selection=value}}
+      <div class='menu'>
+      {{#each people as |person|}}
+        {{#ui-dropdown-item content=person}}
+          {{person.name}}
+        {{/ui-dropdown-item}}
+      {{/each}}
+      </div>
+    {{/ui-dropdown}}
+  `);
+
+  assert.equal(this.$('.item').length, 2);
+  assert.equal(this.get('value'), undefined);
+
+  this.$(".menu .item")[1].click();
+  assert.equal(this.get('value'), this.get('people')[1]);
+});

@@ -6,12 +6,13 @@
         <div class="sub header">A dropdown</div>
       </h4>
 
-      {{ui-dropdown content=categories prompt="Shop"}}
+      {{ui-dropdown content=categories prompt="Shop" active=dropdown_active}}
     </div>
     <div class="eight wide column">
-
+      <div class="ui button" {{action "set_active"}}>Active</div>
     </div>
   </div>
+
   <hr>
 
   <div class="row">
@@ -21,7 +22,7 @@
         <div class="sub header">A dropdown can be used to select between choices in a form</div>
       </h4>
 
-      {{#ui-dropdown class="selection" value=gender}}
+      {{#ui-dropdown class="selection" onChange=(action 'update_gender')}}
         <div class="default text">Gender</div>
         <i class="dropdown icon"></i>
         <div class="menu">
@@ -46,11 +47,40 @@
   <div class="row">
     <div class="eight wide column">
       <h4 class="ui header">
+        Selection
+        <div class="sub header">A dropdown can be used to select between choices in a form</div>
+      </h4>
+
+      {{#ui-dropdown class="selection" value=gender2}}
+        <div class="default text">Gender</div>
+        <i class="dropdown icon"></i>
+        <div class="menu">
+        {{#each genders as |gender|}}
+          {{#ui-dropdown-item content=gender}}
+            {{gender.text}}
+          {{/ui-dropdown-item}}
+        {{/each}}
+        </div>
+      {{/ui-dropdown}}
+    </div>
+    <div class="eight wide column">
+      <div class="ui form">
+        <div class="ui field">
+          <label>Selected</label>
+          {{input value=gender2.text readonly="true"}}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="eight wide column">
+      <h4 class="ui header">
         Multi Select
         <div class="sub header">A dropdown can be used to select between choices in a form</div>
       </h4>
 
-      {{#ui-dropdown class="fluid multiple selection" selection=country}}
+      {{#ui-dropdown class="fluid multiple selection" value=country}}
         <i class="dropdown icon"></i>
         <div class="default text">Select Country</div>
         <div class="menu">

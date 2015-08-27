@@ -18,5 +18,16 @@ export default Ember.Controller.extend({
     { iso2: 'us', name: 'United States' },
     { iso2: 'ca', name: 'Canada' },
     { iso2: 'mx', name: 'Mexico' }
-  ]
+  ],
+
+  actions: {
+    set_active: function() {
+      this.set('dropdown_active', true);
+    },
+
+    update_gender: function(id, value) {
+      this.set('gender', id)
+      return true;
+    }
+  }
 });
