@@ -25,7 +25,6 @@ Semantic.BaseMixin = Ember.Mixin.create({
     };
 
     for (key in component.settings) {
-      console.log(key + ' for ' + module)
       prop = component.settings[key];
        if (window.$.inArray(key, Semantic.BaseMixin.DEBUG) >= 0) {
         continue;
@@ -52,7 +51,7 @@ Semantic.BaseMixin = Ember.Mixin.create({
           custom[key] = value;
         }
       } else {
-        if (key.startsWith('on') && key != 'on') {
+        if (key.startsWith('on') && key !== 'on') {
           custom[key] = this.updateEvent(key);
         }
       }
@@ -70,7 +69,7 @@ Semantic.BaseMixin = Ember.Mixin.create({
   updateEvent: function(name) {
     return function() {
       return this.sendAction(name, arguments);
-    }
+    };
   },
 
   didInsertElement: function() {

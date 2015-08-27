@@ -10,7 +10,7 @@ test('it renders from an array', function(assert) {
 
   this.set('people', [ "Sherlock Homes", "Patrick Bateman" ]);
   this.render(hbs`
-    {{#ui-dropdown selection=value}}
+    {{#ui-dropdown value=value}}
       <div class='menu'>
       {{#each people as |person|}}
         <div class='item' data-value={{person}}>{{person}}</div>
@@ -35,7 +35,7 @@ test('it renders from an object array', function(assert) {
   ]);
 
   this.render(hbs`
-    {{#ui-dropdown selection=value}}
+    {{#ui-dropdown value=value}}
       <div class='menu'>
       {{#each people as |person|}}
         <div class='item' data-value={{person.id}}>{{person.name}}</div>
@@ -61,7 +61,7 @@ test('it renders with an option selected', function(assert) {
 
   this.set('value', 2);
   this.render(hbs`
-    {{#ui-dropdown selection=value}}
+    {{#ui-dropdown value=value}}
       <div class='menu'>
       {{#each people as |person|}}
         <div class='item' data-value={{person.id}}>{{person.name}}</div>
@@ -86,7 +86,7 @@ test('it renders multiple', function(assert) {
   ]);
 
   this.render(hbs`
-    {{#ui-dropdown class='multiple' selection=value}}
+    {{#ui-dropdown class='multiple' value=value}}
       <div class='menu'>
       {{#each people as |person|}}
         <div class='item' data-value={{person.id}}>{{person.name}}</div>
@@ -112,7 +112,7 @@ test('it binds to an object', function(assert) {
   ]);
 
   this.render(hbs`
-    {{#ui-dropdown selection=value}}
+    {{#ui-dropdown value=value}}
       <div class='menu'>
       {{#each people as |person|}}
         {{#ui-dropdown-item content=person}}
