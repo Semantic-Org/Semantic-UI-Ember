@@ -11,11 +11,7 @@ var Rating = Ember.Component.extend(Base,{
     if (!this.get('initialRating') && this.get('rating')) {
       this.set('initialRating', this.get('rating'));
     }
-  },
-
-  updateRating: Ember.observer('rating', function() {
-    this.execute('set rating', this.get('rating'));
-  })
+  }
 });
 
 export default Rating;

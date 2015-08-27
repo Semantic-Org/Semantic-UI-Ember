@@ -8,6 +8,7 @@ export default Ember.Component.extend(CheckboxMixin, {
 
   init: function() {
     this._super();
+
     if (!(this.get('name') && this.get('name') !== 'default')) {
       Ember.Logger.warn('Name was not passed into semantic radio component');
     }
@@ -15,13 +16,5 @@ export default Ember.Component.extend(CheckboxMixin, {
 
   checked: Ember.computed('current', 'value', function() {
     return this.get('current') === this.get('value');
-  }),
-
-  onChange: function() {
-    this.set('current', this.get('value'));
-    this.sendAction("action", {
-      checked: this.get('checked'),
-      value: this.get('value')
-    });
-  }
+  })
 });
