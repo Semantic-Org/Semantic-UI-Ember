@@ -8,6 +8,7 @@ export default Ember.Component.extend(Base, DataAttributes, {
   tagName: 'div',
 
   onChange: function(value, text, $element) {
+    this._super();
     if (value === undefined) {
       // The initial set selected doesn't have an value. This is potentially a problem
       // within the main Semantic library

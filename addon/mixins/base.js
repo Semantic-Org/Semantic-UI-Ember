@@ -50,10 +50,6 @@ Semantic.BaseMixin = Ember.Mixin.create({
         } else {
           custom[key] = value;
         }
-      } else {
-        if (key.startsWith('on') && key !== 'on') {
-          custom[key] = this.updateEvent(key);
-        }
       }
     }
 
@@ -63,12 +59,6 @@ Semantic.BaseMixin = Ember.Mixin.create({
   updateProperty: function(property) {
     return function() {
       this.execute('set ' + property, this.get(property));
-    };
-  },
-
-  updateEvent: function(name) {
-    return function() {
-      return this.sendAction(name, arguments);
     };
   },
 
