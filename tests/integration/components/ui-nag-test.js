@@ -46,5 +46,5 @@ test('it will only show once', function(assert) {
     assert.equal(_this.$('.ui.nag').css('display'), 'none');
     _this.$('.ui.nag').nag('show');
     assert.equal(_this.$('.ui.nag').css('display'), 'none');
-  }, 800);
+  }, 1000);
 });
