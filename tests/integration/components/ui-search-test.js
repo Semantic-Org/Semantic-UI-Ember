@@ -1,7 +1,7 @@
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 
-moduleForComponent('ui-dropdown', 'Integration | Component | ui search', {
+moduleForComponent('ui-search', 'Integration | Component | ui search', {
   integration: true
 });
 

@@ -6,8 +6,9 @@ export default Ember.Component.extend(Base, DataAttributes, {
   module: 'dropdown',
   classNames: [ 'ui', 'dropdown' ],
   tagName: 'div',
+  value: null,
 
-  onChange: function(value, text, $element) {
+  _onChange: function(value, text, $element) {
     this._super();
     if (value === undefined) {
       // The initial set selected doesn't have an value. This is potentially a problem

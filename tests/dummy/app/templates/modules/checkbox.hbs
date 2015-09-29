@@ -1,6 +1,8 @@
 <h2 id='title'>Checkbox</h2>
 
-{{ui-checkbox label="Make my profile visible" checked=checked}}
+{{ui-checkbox label="Make my profile visible (checked binding)" checked=checked}}
+
+{{ui-checkbox label="Make my profile visible (onChange action)" onChange=(action 'set_checked')}}
 
 <h4 class="ui header">
   Radio Box

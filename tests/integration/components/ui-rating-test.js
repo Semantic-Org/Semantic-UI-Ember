@@ -1,7 +1,7 @@
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 
-moduleForComponent('ui-dropdown', 'Integration | Component | ui rating', {
+moduleForComponent('ui-rating', 'Integration | Component | ui rating', {
   integration: true
 });
 

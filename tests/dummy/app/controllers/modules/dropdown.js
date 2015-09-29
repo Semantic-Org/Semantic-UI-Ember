@@ -25,7 +25,7 @@ export default Ember.Controller.extend({
       this.set('dropdown_active', true);
     },
 
-    update_gender: function(id /*, value*/) {
+    update_gender: function(component, id /*, value*/) {
       this.set('gender', id);
       return true;
     }

@@ -2,7 +2,7 @@
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 
-moduleForComponent('ui-dropdown', 'Integration | Component | ui progress', {
+moduleForComponent('ui-progress', 'Integration | Component | ui progress', {
   integration: true
 });
 

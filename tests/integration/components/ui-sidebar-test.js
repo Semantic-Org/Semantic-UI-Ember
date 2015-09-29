@@ -1,7 +1,8 @@
+/* global $ */
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 
-moduleForComponent('ui-dropdown', 'Integration | Component | ui sidebar', {
+moduleForComponent('ui-sidebar', 'Integration | Component | ui sidebar', {
   integration: true
 });
 

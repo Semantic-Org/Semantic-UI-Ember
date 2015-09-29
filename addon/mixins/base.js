@@ -26,7 +26,7 @@ Semantic.BaseMixin = Ember.Mixin.create({
 
     for (key in component.settings) {
       prop = component.settings[key];
-       if (window.$.inArray(key, Semantic.BaseMixin.DEBUG) >= 0) {
+      if (window.$.inArray(key, Semantic.BaseMixin.DEBUG) >= 0) {
         continue;
       }
 
@@ -34,19 +34,23 @@ Semantic.BaseMixin = Ember.Mixin.create({
         continue;
       }
 
-      if (typeof prop === 'function' && typeof this.get(key) !== 'function') {
+      if (typeof prop === 'function' && typeof (this.get(key) || this.get(`_${key}`)) !== 'function') {
         continue;
       }
 
       if (window.$.inArray(key, Semantic.BaseMixin.EMBER) >= 0) {
-        value = this.get("ui_" + key);
+        value = this.get(`ui_${key}`);
       } else {
-        value = this.get(key);
+        if (typeof this.get(key) !== 'undefined') {
+          value = this.get(key);
+        } else {
+          value = this.get(`_${key}`);
+        }
       }
 
       if (value != null) {
         if (typeof value === 'function') {
-          custom[key] = Ember.run.bind(this, value);
+          custom[key] = Ember.run.bind(this, this.updateFunctionWithParameters(key, value));
         } else {
           custom[key] = value;
         }
@@ -59,6 +63,23 @@ Semantic.BaseMixin = Ember.Mixin.create({
   updateProperty: function(property) {
     return function() {
       this.execute('set ' + property, this.get(property));
+    };
+  },
+
+  updateFunctionWithParameters: function(key, fn) {
+    return function() {
+      var args = [].splice.call(arguments, 0);
+      var internal = this.get(`_${key}`);
+
+      if (internal) {
+        internal.apply(this, args);
+      }
+
+      if (internal !== fn) {
+        return fn.apply(this, [this].concat(args));
+      }
+
+      return true;
     };
   },
 

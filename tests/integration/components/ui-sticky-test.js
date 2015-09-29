@@ -1,7 +1,7 @@
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 
-moduleForComponent('ui-dropdown', 'Integration | Component | ui sticky', {
+moduleForComponent('ui-sticky', 'Integration | Component | ui sticky', {
   integration: true
 });
 

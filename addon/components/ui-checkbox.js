@@ -5,8 +5,7 @@ export default Ember.Component.extend(CheckboxMixin, {
   type: 'checkbox',
   checked: false,
 
-  onChange: function() {
-    this._super();
+  _onChange: function() {
     this.set('checked', this.$('input').prop('checked'));
   }
 });

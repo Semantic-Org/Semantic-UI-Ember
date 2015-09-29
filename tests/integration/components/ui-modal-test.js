@@ -2,7 +2,7 @@
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 
-moduleForComponent('ui-dropdown', 'Integration | Component | ui modal', {
+moduleForComponent('ui-modal', 'Integration | Component | ui modal', {
   integration: true
 });
 
@@ -53,7 +53,8 @@ test('it will send approve back to controller and hide', function(assert) {
     });
   });
 
-  this.on('approve', function(name) {
+  this.on('approve', function(component) {
+    var name = component.get('name');
     assert.equal('profile', name, 'approve is called');
     setTimeout(function() {
       start();
@@ -67,7 +68,7 @@ test('it will send approve back to controller and hide', function(assert) {
       Open
     </div>
 
-    {{#ui-modal name='profile' approve=(action 'approve')}}
+    {{#ui-modal name='profile' onApprove=(action 'approve')}}
       <div class="actions">
         <div class="ui negative button">No</div>
         <div class="ui positive button">Yes</div>
@@ -91,7 +92,8 @@ test('it will send approve back to controller and skip the hide', function(asser
     });
   });
 
-  this.on('approve', function(name) {
+  this.on('approve', function(component) {
+    var name = component.get('name');
     assert.equal('profile', name, 'approve is called');
     setTimeout(function() {
       start();
@@ -105,7 +107,7 @@ test('it will send approve back to controller and skip the hide', function(asser
       Open
     </div>
 
-    {{#ui-modal name='profile' approve=(action 'approve')}}
+    {{#ui-modal name='profile' onApprove=(action 'approve')}}
       <div class="actions">
         <div class="ui negative button">No</div>
         <div class="ui positive button">Yes</div>
@@ -128,7 +130,8 @@ test('it will send deny back to controller', function(assert) {
     });
   });
 
-  this.on('deny', function(name) {
+  this.on('deny', function(component) {
+    var name = component.get('name');
     start();
     assert.equal('profile', name);
   });
@@ -138,7 +141,7 @@ test('it will send deny back to controller', function(assert) {
       Open
     </div>
 
-    {{#ui-modal name='profile' deny=(action 'deny')}}
+    {{#ui-modal name='profile' onDeny=(action 'deny')}}
       <div class="actions">
         <div class="ui negative button">No</div>
         <div class="ui positive button">Yes</div>
