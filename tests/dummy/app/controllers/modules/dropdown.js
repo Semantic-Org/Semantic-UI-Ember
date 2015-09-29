@@ -7,7 +7,7 @@ export default Ember.Controller.extend({
     'Bedroom'
   ],
 
-  gender: null,
+  gender: 0,
   genders: [
     { id: 1, text: 'Male' },
     { id: 0, text: 'Female' }

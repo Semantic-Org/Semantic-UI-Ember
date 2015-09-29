@@ -8,6 +8,13 @@ export default Ember.Component.extend(Base, DataAttributes, {
   tagName: 'div',
   value: null,
 
+  initialize: Ember.on('didInsertElement', function() {
+    var value = this.get('value');
+    if (typeof value !== "undefined" && value !== null) {
+      this.execute('set selected', value);
+    }
+  }),
+
   _onChange: function(value, text, $element) {
     this._super();
     if (value === undefined) {
