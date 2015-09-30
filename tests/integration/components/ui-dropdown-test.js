@@ -129,3 +129,28 @@ test('it binds to an object', function(assert) {
   this.$(".menu .item")[1].click();
   assert.equal(this.get('value'), this.get('people')[1]);
 });
+
+test('it sets the value from the binding', function(assert) {
+  assert.expect(2);
+
+  this.set('people_id', 2);
+  this.set('people', [
+    { id: 1, name: "Sherlock Homes" },
+    { id: 2, name: "Patrick Bateman" }
+  ]);
+
+  this.render(hbs`
+    {{#ui-dropdown value=people_id}}
+      <div class='menu'>
+      {{#each people as |person|}}
+        <div class="item" data-value="{{person.id}}">
+          {{person.name}}
+        </div>
+      {{/each}}
+      </div>
+    {{/ui-dropdown}}
+  `);
+
+  assert.equal(this.$('.item').length, 2);
+  assert.equal(this.$('.item.selected').length, 1);
+});
