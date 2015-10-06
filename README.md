@@ -284,13 +284,13 @@ export default Ember.Controller.extend({
 Replace `<div class="ui popup">` with `{{ui-popup}}` and fill the inside content with standard Semantic-UI.
 
 ```handlebars
-{{ui-popup content="The text you'd like to show"}}
+{{#ui-popup content="The text you'd like to show"}}TEXT HERE{{/ui-popup}}
 ```
 
 You can also create an icon version by specifying the tagName
 
 ```handlebars
-{{ui-popup tagName="i" class="icon link" content="The text you'd like to show"}}
+{{ui-popup tagName="i" class="info link" content="The text you'd like to show"}}
 ```
 
 ## Progress
