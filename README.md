@@ -290,7 +290,7 @@ Replace `<div class="ui popup">` with `{{ui-popup}}` and fill the inside content
 You can also create an icon version by specifying the tagName
 
 ```handlebars
-{{ui-popup tagName="i" class="info link" content="The text you'd like to show"}}
+{{ui-popup tagName="i" class="icon info" content="The text you'd like to show"}}
 ```
 
 ## Progress
