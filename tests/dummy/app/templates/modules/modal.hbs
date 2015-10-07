@@ -18,7 +18,7 @@ Depending on whether you have an inherited component or not you can handle actio
   Open Inbox
 </div>
 
-{{#ui-modal name="profile" class="profile" approve=(action 'approveModal') deny=(action 'denyModal')}}
+{{#ui-modal name="profile" class="profile" onApprove=(action 'approveModal') onDeny=(action 'denyModal')}}
   <i class="close icon"></i>
   <div class="header">
     Profile Picture
