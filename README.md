@@ -2,15 +2,12 @@
 
 # Semantic-UI-Ember
 
-We have ported our internal Ember Semantic-UI components for an official Semantic-UI integration. The code was original built for [CrowdOx](http://crowdox.com) and later [SpruceMail](http://sprucemail.com). This is officially in Alpha. We would appreciate any feedback that you might have.
+This is the official Ember library for the Semantic-UI modules. The code was original built for [CrowdOx](http://crowdox.com) and other projects that we were building for clients. We would appreciate any feedback that you have.
 
 ## Project Philosophy
 
-We feel that the Semantic-UI-Ember project should be an extension of Semantic-UI and not a complete rewrite. With that in mind, we will only be creating components to extend Semantic-UI modules, all other uses of Semantic-UI in your project should [follow the official documentation](http://semantic-ui.com/).
+We feel that the Semantic-UI-Ember project should be an extension of Semantic-UI and not a complete rewrite. With that in mind, we will always be a very lightweight layer on top to make the integration a first-class Ember experience. Please [follow the official documentation](http://semantic-ui.com/) for futher information.
 
-## Release Schedule
-
-As mentioned our goal is to let Semantic do most of the work and we will simply maintain small bits of code to make it native for Ember. We will release when there are new components or incompatibilities but otherwise the same version should continue to work.
 
 # Installation
 
@@ -149,34 +146,58 @@ There isn't a corresponding Ember component for this since it isn't rendered to 
 ## Dropdown
 
  * **Documentation**: [Official Documentation](http://semantic-ui.com/modules/dropdown.html)
- * **Ember.Select**: [Follows Ember.Select Style](http://emberjs.com/api/classes/Ember.Select.html#sts=Ember.Select Class packages/ember-handlebars/lib/controls/select.js:93)
  * **Class**: `ui dropdown`
  * **Component**: `ui-dropdown`
  * **Parameters**
-    * **content**: List of data that you want displayed. _Required_
     * **value**: Bound value that is set to `optionValuePath`
-    * **prompt**: Text to display before an option has been chosen
-    * **icon**: Icon you want to use. _Default is `dropdown`_
-    * **optionLabelPath**: Path to the label that is displayed for each item. _Default is`content`_
-    * **optionValuePath**: Path to the value that is used when an item is selected. _Default is `content`_
-
-Replace `<div class="ui dropdown">` with `{{ui-dropdown}}` and bind to a list and set a bound property.
+    * **onChange**: Event to bind changes too
+   
+Replace `<div class="ui dropdown">` with `{{ui-dropdown}}` and fill in your content
 
 ### Controller
 ```javascript
 export default Ember.Controller.extend({
 	itemActions: [ "Edit", "Remove", "Hide"],
-	selectedAction: null
+	selectedAction: null,
+	
+	actions: {
+	  update_selected: function(component, id, value) {
+	    this.set('selectedAction', id);
+	  }
+	}
 });
 ```
 
 ### Template
 ```handlebars
-{{ui-dropdown
-	content=itemActions
-	value=selectedAction
-	prompt="Select"
-}}
+{{#ui-dropdown class="selection" onChange(action 'update_selected')}}
+  <div class="default text">Select an item</div>
+  <i class="dropdown icon"></i>
+  <div class="menu">
+  {{#each itemActions as |action|}}
+    <div class="item" data-id="{{action}}">
+      {{action}}
+    </div>
+  {{/each}}
+  </div>
+{{/ui-dropdown}}
+```
+
+## Embed
+
+* **Documentation**: [Official Documentation](http://semantic-ui.com/modules/embed.html)
+* **Class**: `ui embed`
+* **Parameters**
+   * **data-id**: The id of the video you wanted embedded
+   * **data-source**: The source provider of the video (youtube for example)
+   * **data-icon**: Icon to show for the play button
+   * **data-place**: Placeholder image to show before the video starts
+
+### Template
+```handlebars
+{{ui-embed
+    data-source="youtube"
+    data-id="pfdu_gTry8E"}}
 ```
 
 ## Modal
@@ -185,89 +206,66 @@ export default Ember.Controller.extend({
  * **Class**: `ui modal`
  * **View**: `ui-modal`
 
-In order to use the modal you must first prepare your Ember application for modals. This follows the same instructions [found on ember.js](http://emberjs.com/guides/cookbook/user_interface_and_interaction/using_modal_dialogs/).
+Embed the Modal within your page's template, similar to the semantic-ui master documentation.
+Except instead of using `<div class='ui modal'>` you can use `{{ui-modal}}`. Each
+modal MUST include a name so it knows which one you are referring too.
 
-### Application Template
-You must add the `modal` outlet to the main application layout
-
-  * templates/application.hbs OR
-  * pods/application/template.hbs
+### Template
 
 ```handlebars
-{{outlet}}
-{{outlet 'modal'}}
+{{#ui-modal name="profile" class="profile" approve=(action 'approveModal') deny=(action 'denyModal')}}
+  <i class="close icon"></i>
+  <div class="header">
+    Profile Picture
+  </div>
+  <div class="image content">
+    <div class="ui medium image">
+      <img src="http://semantic-ui.com/images/avatar/large/chris.jpg">
+    </div>
+    <div class="description">
+      <div class="ui header">We've auto-chosen a profile image for you.</div>
+      <p>We've grabbed the following image from the <a href="https://www.gravatar.com" target="_blank">gravatar</a> image associated with your registered e-mail address.</p>
+      <p>Is it okay to use this photo?</p>
+    </div>
+  </div>
+  <div class="actions">
+    <div class="ui black deny button">
+      Nope
+    </div>
+    <div class="ui positive right labeled icon button">
+      Yep, that's me
+      <i class="checkmark icon"></i>
+    </div>
+  </div>
+{{/ui-modal}}
 ```
 
-### ApplicationRoute
-This provides the `openModal` and `closeModal` actions that allows modals to be opened from any controller.
+In order to open the modal you just need to execute the show command.
 
-  * routes/application.js OR
-  * pods/application/route.js
-
+### Controller
 ```javascript
-import SemanticRouteMixin from 'semantic-ui-ember/mixins/application-route';
-
-var ApplicationRoute = Ember.Route.extend(SemanticRouteMixin, {});
+export default Ember.Controller.extend({
+  actions: {
+    openModal: function(name) {
+      $('.ui.modal').modal('show');
+    }
+  }
+});
 ```
 
-Now to use the modal the bare minimum is to create a template and trigger `openModal`.
+## Nag
+
+* **Documentation**: [Official Documentation](http://semantic-ui.com/modules/nag.html)
+* **Class**: `ui nag`
 
 ### Template
 ```handlebars
-<i class="close icon"></i>
-<div class="header">
-  Demo Modal
-</div>
-<div class="content">
-  Content
-</div>
-<div class="actions">
-  <div class="ui black button">
-    Cancel
-  </div>
-  <div class="ui positive right labeled icon button">
-    Ok
-    <i class="checkmark icon"></i>
-  </div>
-</div>
-```
-
-Then you can fire `openModal` from any controller
-
-### Controller (no model)
-```javascript
-export default Ember.Controller.extend({
-  actions: {
-    confirm: function() {
-      this.send('openModal', 'projects/confirm');
-    }
-  }
-});
-```
-
-If you want to send a model in just use the third parameter
-
-### Controller (model)
-```javascript
-export default Ember.Controller.extend({
-  actions: {
-    confirm: function() {
-      this.send('openModal', 'projects/confirm', this.get('model'));
-    }
-  }
-});
-```
-
-If a controller is found with the same name as the template it will be used. You can also use your own view if necessary. You just need to make sure to inherit from the base class.
-
-### View
-```javascript
-import Ember from 'ember';
-import SemanticModalMixin from 'semantic-ui-ember/mixins/modal';
-
-export default Ember.View.extend(SemanticModalMixin, {
-  templateName: 'shared/modal'
-})
+  {{#ui-nag}}
+    <span class="title">
+      We use cookies to ensure you get the best experience on our website
+    </span>
+    <i class="close icon"></i>
+  {{/ui-nag}}
 ```
 
 ## Popup
@@ -279,13 +277,28 @@ export default Ember.View.extend(SemanticModalMixin, {
 Replace `<div class="ui popup">` with `{{ui-popup}}` and fill the inside content with standard Semantic-UI.
 
 ```handlebars
-{{ui-popup content="The text you'd like to show"}}
+{{#ui-popup content="The text you'd like to show"}}
+  <div class="ui button">BUTTON</div>
+{{/ui-popup}}
 ```
 
 You can also create an icon version by specifying the tagName
 
 ```handlebars
-{{ui-popup tagName="i" class="icon link" content="The text you'd like to show"}}
+{{ui-popup tagName="i" class="icon info" content="The text you'd like to show"}}
+```
+
+## Progress
+
+ * **Documentation**: [Official Documentation](http://semantic-ui.com/modules/progress.html)
+ * **Class**: `ui progress`
+
+### Template
+```handlebars
+{{#ui-progress percent=40 classNames="teal indicating"}}
+  <div class="bar"></div>
+  <div class="label">Completed</div>
+{{/ui-progress}}
 ```
 
 ## Rating
@@ -293,26 +306,119 @@ You can also create an icon version by specifying the tagName
  * **Documentation**: [Official Documentation](http://semantic-ui.com/modules/rating.html)
  * **Class**: `ui rating`
 
-_NOT IMPLEMENTED_
+### Template
+```handlebars
+{{ui-rating initialRating=3 maxRating=7}}
+```
+
+## Search
+
+* **Documentation**: [Official Documentation](http://semantic-ui.com/modules/search.html)
+* **Class**: `ui search`
+* **Parameters**
+   * **url**: The url used for searching
+
+### Template
+```handlebars
+{{#ui-search url="/search"}}
+  <input class="prompt" type="text" placeholder="Common passwords...">
+  <div class="results"></div>
+{{/ui-search}}
+```
 
 ## Shape
 
  * **Documentation**: [Official Documentation](http://semantic-ui.com/modules/shape.html)
  * **Class**: `ui shape`
 
-_NOT IMPLEMENTED_
+### Template
+```handlebars
+{{#ui-shape}}
+ <p>Content</p>
+{{/ui-shape}}
+```
+
+### Controller
+You control the shape through semantic's regular javascript code
+
+```javascript
+import Ember from 'ember';
+
+export default Ember.Controller.extend(Ember.Evented, {
+  actions: {
+    flip: function(direction) {
+      $('.ui.shape').shape('flip ' + direction);
+    }
+  }
+});
+```
 
 ## Sidebar
 
  * **Documentation**: [Official Documentation](http://semantic-ui.com/modules/sidebar.html)
  * **Class**: `ui sidebar`
 
-_NOT IMPLEMENTED_
+The sidebar, as per Semantic-UI's documentation, will need to be directly below the body element. Since Ember by default renders a container element you need to utilize a little trick to get rid of it.
+
+### Application View/Component
+```javascript
+export default Ember.Component.extend({
+  tagName: ''
+});
+```
+
+### Application Template
+```handlebars
+{{#ui-sidebar class="inverted vertical menu"}}
+  <a class="item">
+    1
+  </a>
+  <a class="item">
+    2
+  </a>
+  <a class="item">
+    3
+  </a>
+{{/ui-sidebar}}
+
+<div class="ui grid pusher">
+</div>
+```
+When you want to invoke the sidebar you simply use the semantic methods.
+
+### Controller
+```javascript
+import Ember from 'ember';
+
+export default Ember.Controller.extend(Ember.Evented, {
+  actions: {
+    toggle: function(direction) {
+      $('.ui.sidebar').sidebar('toggle');
+    }
+  }
+});
+```
+
+## Tab
+
+Not implemented. Better suited to use routes through Ember. If you disagree please open an issue with how you would see it used.
 
 ## Transition
 
  * **Documentation**: [Official Documentation](http://semantic-ui.com/modules/transition.html)
- * **Class**: `ui sidebar`
+ * **Class**: `ui transition`
 
-There isn't a cooresponding Ember component for this since it isn't rendered to the screen but instead invoked.
+You can invoke the semantic javascript directly.
 
+### Controller
+```javascript
+import Ember from 'ember';
+
+export default Ember.Controller.extend(Ember.Evented, {
+  actions: {
+    transition: function() {
+      $('img').transition('horizontal flip', '500ms');
+    }
+  }
+});
+```

@@ -1,24 +1,18 @@
 import Ember from 'ember';
 
-export default Ember.SelectOption.extend({
+export default Ember.Component.extend({
+  classNames: ['item'],
   tagName: 'div',
-  classNames: 'item',
 
-  bindData: Ember.on('didInsertElement', function() {
-    var valuePath = this.get('valuePath');
-
-    if (!valuePath) {
-      return;
-    }
-
-    if (this.$() == null) {
-      return;
-    }
-
-    this.$().data('value', this.get(valuePath));
+  initialize: Ember.on('init', function() {
+    Ember.run.scheduleOnce('afterRender', this, this.update_data);
   }),
 
-  unbindData: Ember.on('willDestroyElement', function() {
-    this.$().removeData('value');
-  })
+  update_data: function() {
+    if (this.$().data('value')) {
+      return;
+    }
+    
+    this.$().data('value', this.get('content'));
+  }
 });

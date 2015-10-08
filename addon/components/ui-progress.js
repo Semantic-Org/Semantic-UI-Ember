@@ -3,7 +3,8 @@ import Base from '../mixins/base';
 
 var Progress = Ember.Component.extend(Base,{
   module: 'progress',
-  classNames: ['ui', 'progress']
+  classNames: [ 'ui', 'progress' ],
+  attributeBindings: [ 'percent', 'total', 'value' ]
 });
 
 export default Progress;
