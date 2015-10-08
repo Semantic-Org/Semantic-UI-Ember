@@ -2,15 +2,12 @@
 
 # Semantic-UI-Ember
 
-We have ported our internal Ember Semantic-UI components for an official Semantic-UI integration. The code was original built for [CrowdOx](http://crowdox.com) and later [SpruceMail](http://sprucemail.com). This is officially in Alpha. We would appreciate any feedback that you might have.
+This is the official Ember library for the Semantic-UI modules. The code was original built for [CrowdOx](http://crowdox.com) and other projects that we were building for clients. We would appreciate any feedback that you have.
 
 ## Project Philosophy
 
-We feel that the Semantic-UI-Ember project should be an extension of Semantic-UI and not a complete rewrite. With that in mind, we will only be creating components to extend Semantic-UI modules, all other uses of Semantic-UI in your project should [follow the official documentation](http://semantic-ui.com/).
+We feel that the Semantic-UI-Ember project should be an extension of Semantic-UI and not a complete rewrite. With that in mind, we will always be a very lightweight layer on top to make the integration a first-class Ember experience. Please [follow the official documentation](http://semantic-ui.com/) for futher information.
 
-## Release Schedule
-
-As mentioned our goal is to let Semantic do most of the work and we will simply maintain small bits of code to make it native for Ember. We will release when there are new components or incompatibilities but otherwise the same version should continue to work.
 
 # Installation
 
@@ -149,34 +146,41 @@ There isn't a corresponding Ember component for this since it isn't rendered to 
 ## Dropdown
 
  * **Documentation**: [Official Documentation](http://semantic-ui.com/modules/dropdown.html)
- * **Ember.Select**: [Follows Ember.Select Style](http://emberjs.com/api/classes/Ember.Select.html#sts=Ember.Select Class packages/ember-handlebars/lib/controls/select.js:93)
  * **Class**: `ui dropdown`
  * **Component**: `ui-dropdown`
  * **Parameters**
-    * **content**: List of data that you want displayed. _Required_
     * **value**: Bound value that is set to `optionValuePath`
-    * **prompt**: Text to display before an option has been chosen
-    * **icon**: Icon you want to use. _Default is `dropdown`_
-    * **optionLabelPath**: Path to the label that is displayed for each item. _Default is`content`_
-    * **optionValuePath**: Path to the value that is used when an item is selected. _Default is `content`_
-
-Replace `<div class="ui dropdown">` with `{{ui-dropdown}}` and bind to a list and set a bound property.
+    * **onChange**: Event to bind changes too
+   
+Replace `<div class="ui dropdown">` with `{{ui-dropdown}}` and fill in your content
 
 ### Controller
 ```javascript
 export default Ember.Controller.extend({
 	itemActions: [ "Edit", "Remove", "Hide"],
-	selectedAction: null
+	selectedAction: null,
+	
+	actions: {
+	  update_selected: function(component, id, value) {
+	    this.set('selectedAction', id);
+	  }
+	}
 });
 ```
 
 ### Template
 ```handlebars
-{{ui-dropdown
-	content=itemActions
-	value=selectedAction
-	prompt="Select"
-}}
+{{#ui-dropdown class="selection" onChange(action 'update_selected')}}
+  <div class="default text">Select an item</div>
+  <i class="dropdown icon"></i>
+  <div class="menu">
+  {{#each itemActions as |action|}}
+    <div class="item" data-id="{{action}}">
+      {{action}}
+    </div>
+  {{/each}}
+  </div>
+{{/ui-dropdown}}
 ```
 
 ## Embed
@@ -191,9 +195,9 @@ export default Ember.Controller.extend({
 
 ### Template
 ```handlebars
-  {{ui-embed
+{{ui-embed
     data-source="youtube"
- 	  data-id="pfdu_gTry8E"}}
+    data-id="pfdu_gTry8E"}}
 ```
 
 ## Modal
@@ -202,23 +206,12 @@ export default Ember.Controller.extend({
  * **Class**: `ui modal`
  * **View**: `ui-modal`
 
-In order to use the modal you must include Ember.Evented in your controller.
-
-### Controller
-
-```javascript
-import Ember from 'ember';
-
-export default Ember.Controller.extend(Ember.Evented, {
-
-});
-```
-
 Embed the Modal within your page's template, similar to the semantic-ui master documentation.
 Except instead of using `<div class='ui modal'>` you can use `{{ui-modal}}`. Each
 modal MUST include a name so it knows which one you are referring too.
 
 ### Template
+
 ```handlebars
 {{#ui-modal name="profile" class="profile" approve=(action 'approveModal') deny=(action 'denyModal')}}
   <i class="close icon"></i>
@@ -247,14 +240,14 @@ modal MUST include a name so it knows which one you are referring too.
 {{/ui-modal}}
 ```
 
-In order to open the modal you just need to create an action and fire the `showModal` event.
+In order to open the modal you just need to execute the show command.
 
-### Controller (no model)
+### Controller
 ```javascript
 export default Ember.Controller.extend({
   actions: {
     openModal: function(name) {
-      this.trigger('showModal', name);
+      $('.ui.modal').modal('show');
     }
   }
 });
@@ -284,7 +277,9 @@ export default Ember.Controller.extend({
 Replace `<div class="ui popup">` with `{{ui-popup}}` and fill the inside content with standard Semantic-UI.
 
 ```handlebars
-{{#ui-popup content="The text you'd like to show"}}TEXT HERE{{/ui-popup}}
+{{#ui-popup content="The text you'd like to show"}}
+  <div class="ui button">BUTTON</div>
+{{/ui-popup}}
 ```
 
 You can also create an icon version by specifying the tagName
@@ -363,7 +358,16 @@ export default Ember.Controller.extend(Ember.Evented, {
  * **Documentation**: [Official Documentation](http://semantic-ui.com/modules/sidebar.html)
  * **Class**: `ui sidebar`
 
-### Template
+The sidebar, as per Semantic-UI's documentation, will need to be directly below the body element. Since Ember by default renders a container element you need to utilize a little trick to get rid of it.
+
+### Application View/Component
+```javascript
+export default Ember.Component.extend({
+  tagName: ''
+});
+```
+
+### Application Template
 ```handlebars
 {{#ui-sidebar class="inverted vertical menu"}}
   <a class="item">
@@ -376,8 +380,10 @@ export default Ember.Controller.extend(Ember.Evented, {
     3
   </a>
 {{/ui-sidebar}}
-```
 
+<div class="ui grid pusher">
+</div>
+```
 When you want to invoke the sidebar you simply use the semantic methods.
 
 ### Controller
