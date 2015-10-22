@@ -170,7 +170,7 @@ export default Ember.Controller.extend({
 
 ### Template
 ```handlebars
-{{#ui-dropdown class="selection" onChange(action 'update_selected')}}
+{{#ui-dropdown class="selection" onChange=(action 'update_selected')}}
   <div class="default text">Select an item</div>
   <i class="dropdown icon"></i>
   <div class="menu">
