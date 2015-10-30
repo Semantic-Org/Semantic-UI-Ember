@@ -1,7 +1,7 @@
 import Ember from 'ember';
-import Base from '../mixins/base';
+import ModuleSettings from '../mixins/module-settings';
 
-var Accordion = Ember.Component.extend(Base,{
+var Accordion = Ember.Component.extend(ModuleSettings, {
   module: 'accordion',
   classNames: [ 'ui', 'accordion' ]
 });

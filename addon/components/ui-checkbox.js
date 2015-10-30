@@ -1,11 +1,12 @@
 import Ember from 'ember';
-import CheckboxMixin from '../mixins/checkbox-mixin';
 
-export default Ember.Component.extend(CheckboxMixin, {
+export default Ember.Component.extend({
+  module: 'checkbox',
+  classNames: ['ui', 'checkbox'],
   type: 'checkbox',
   checked: false,
 
-  _onChange: function() {
+  onChange() {
     this.set('checked', this.$('input').prop('checked'));
   }
 });

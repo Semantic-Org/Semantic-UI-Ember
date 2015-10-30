@@ -1,7 +1,6 @@
 import Ember from 'ember';
-import Base from '../mixins/base';
 
-export default Ember.Component.extend(Base, {
+export default Ember.Component.extend({
   module: 'nag',
   classNames: [ 'ui', 'nag' ],
   attributeBindings: [ 'storageMethod', 'key', 'expires', 'domain', 'path', 'value' ],
