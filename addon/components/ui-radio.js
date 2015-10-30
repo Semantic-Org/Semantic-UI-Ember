@@ -18,7 +18,7 @@ export default Ember.Component.extend(CheckboxMixin, {
     this.set('current', this.get('value'));
   },
 
-  checked: Ember.computed('current', 'value', function() {
+  checked: Ember.computed(function() {
     return this.get('current') === this.get('value');
   })
 });
