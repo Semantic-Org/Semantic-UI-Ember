@@ -1,7 +1,7 @@
 import Ember from 'ember';
 import Base from '../mixins/base';
 
-var Rating = Ember.Component.extend(Base,{
+var Rating = Ember.Component.extend({
   module: 'rating',
   classNames: [ 'ui', 'rating' ],
 
