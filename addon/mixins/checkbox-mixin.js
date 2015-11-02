@@ -5,7 +5,7 @@ import Base from './base';
  * Checkbox Component Mixin
  */
 var CheckboxMixin = Ember.Mixin.create(Base, {
-  module: 'checkbox',
+  moduleName: 'checkbox',
   classNames: ['ui', 'checkbox'],
 
   didInsertElement: function() {
