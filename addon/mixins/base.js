@@ -83,10 +83,17 @@ Semantic.BaseMixin = Ember.Mixin.create({
   },
 
   didInsertElement() {
-    const moduleName = this.get("moduleName");
-    this.$()[moduleName](this.settings());
-    var properties = this.execute('set');
+    this.setSettings();
+    this.propertyObserver();
+  },
 
+  setSettings() {
+    const moduleName = this.get('moduleName');
+    this.$()[moduleName](this.settings());
+  },
+
+  propertyObserver() {
+    var properties = this.execute('set');
     for(let property in properties) {
       if (!properties.hasOwnProperty(property)) {
         continue;
