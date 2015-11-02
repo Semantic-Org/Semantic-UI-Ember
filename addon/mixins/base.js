@@ -2,35 +2,34 @@ import Ember from 'ember';
 import Semantic from '../semantic';
 
 Semantic.BaseMixin = Ember.Mixin.create({
-  init: function() {
+  moduleName: null,
+  init() {
     this._super();
-
-    if (!this.get('module')) {
-      return Ember.Logger.error('Module was not declared on semantic extended type');
-    }
+    Ember.assert('Module was not declared on semantic extended type', this.get('moduleName'));
   },
 
-  settings: function(module) {
-    var component, custom, key, prop, value;
+  settings() {
+    const moduleName = this.get('moduleName');
+    const component = Ember.$.fn[moduleName];
+    //console.log(component);
+    Ember.assert(`Unable to find semantic moduleName: ${moduleName}`, Ember.$.isFunction(component));
 
-    component = window.$.fn[module];
-    if (!component) {
-      throw "Unable to find semantic module: " + module;
-    }
+    Ember.assert(`Unable to find module settings: ${moduleName}`, Ember.$.isPlainObject(component.settings));
 
-    custom = {
+    var custom = {
       debug: Semantic.UI_DEBUG,
       performance: Semantic.UI_PERFORMANCE,
       verbose: Semantic.UI_VERBOSE
     };
 
-    for (key in component.settings) {
-      prop = component.settings[key];
-      if (window.$.inArray(key, Semantic.BaseMixin.DEBUG) >= 0) {
+    for (var key in component.settings) {
+      var value = null;
+      var prop = component.settings[key];
+      if (Ember.$.inArray(key, Semantic.BaseMixin.DEBUG) >= 0) {
         continue;
       }
 
-      if (window.$.inArray(key, Semantic.BaseMixin.STANDARD) >= 0) {
+      if (Ember.$.inArray(key, Semantic.BaseMixin.STANDARD) >= 0) {
         continue;
       }
 
@@ -38,7 +37,7 @@ Semantic.BaseMixin = Ember.Mixin.create({
         continue;
       }
 
-      if (window.$.inArray(key, Semantic.BaseMixin.EMBER) >= 0) {
+      if (Ember.$.inArray(key, Semantic.BaseMixin.EMBER) >= 0) {
         value = this.get(`ui_${key}`);
       } else {
         if (typeof this.get(key) !== 'undefined') {
@@ -48,7 +47,7 @@ Semantic.BaseMixin = Ember.Mixin.create({
         }
       }
 
-      if (value != null) {
+      if (value !== null) {
         if (typeof value === 'function') {
           custom[key] = Ember.run.bind(this, this.updateFunctionWithParameters(key, value));
         } else {
@@ -60,13 +59,13 @@ Semantic.BaseMixin = Ember.Mixin.create({
     return custom;
   },
 
-  updateProperty: function(property) {
+  updateProperty(property) {
     return function() {
       this.execute('set ' + property, this.get(property));
     };
   },
 
-  updateFunctionWithParameters: function(key, fn) {
+  updateFunctionWithParameters(key, fn) {
     return function() {
       var args = [].splice.call(arguments, 0);
       var internal = this.get(`_${key}`);
@@ -83,38 +82,27 @@ Semantic.BaseMixin = Ember.Mixin.create({
     };
   },
 
-  didInsertElement: function() {
-    this.$()[this.get("module")](this.settings(this.get("module")));
-
-    var _this = this;
+  didInsertElement() {
+    const moduleName = this.get("moduleName");
+    this.$()[moduleName](this.settings());
     var properties = this.execute('set');
-    var property;
 
-    for(property in properties) {
+    for(let property in properties) {
       if (!properties.hasOwnProperty(property)) {
         continue;
       }
-
-      _this.addObserver(property, _this, _this.updateProperty(property));
+      this.addObserver(property, this, this.updateProperty(property));
     }
   },
 
-  willDestroyElement: function() {
-    var name, selector;
-    if ((selector = this.$()) != null) {
-      if (typeof selector[name = this.get("module")] === "function") {
-        return selector[name]('destroy');
-      }
-    }
+  willDestroyElement() {
+    const moduleName = this.get('moduleName');
+    return this.$()[moduleName]('destroy');
   },
 
-  execute: function() {
-    var selector, module;
-    if ((selector = this.$()) != null) {
-      if ((module = selector[this.get('module')]) != null) {
-        return module.apply(this.$(), arguments);
-      }
-    }
+  execute() {
+    const module = this.$()[this.get('moduleName')];
+    return module.apply(this.$(), arguments);
   }
 });
 

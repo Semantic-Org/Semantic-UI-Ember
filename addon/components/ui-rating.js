@@ -2,7 +2,7 @@ import Ember from 'ember';
 import Base from '../mixins/base';
 
 var Rating = Ember.Component.extend(Base,{
-  module: 'rating',
+  moduleName: 'rating',
   classNames: [ 'ui', 'rating' ],
 
   init: function() {

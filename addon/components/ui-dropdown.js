@@ -3,7 +3,7 @@ import Base from '../mixins/base';
 import DataAttributes from '../mixins/data-attributes';
 
 export default Ember.Component.extend(Base, DataAttributes, {
-  module: 'dropdown',
+  moduleName: 'dropdown',
   classNames: [ 'ui', 'dropdown' ],
   tagName: 'div',
   value: null,
