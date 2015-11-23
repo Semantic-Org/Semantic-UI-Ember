@@ -14,6 +14,12 @@ export default Ember.Component.extend(Base, DataAttributes, {
       this.execute('set selected', value);
     }
   }),
+  
+  _onValueChanged: Ember.observer('value', function () {
+    this.$().dropdown({
+        action: this.get('value')
+      });
+  }),
 
   _onChange: function(value, text, $element) {
     this._super();
