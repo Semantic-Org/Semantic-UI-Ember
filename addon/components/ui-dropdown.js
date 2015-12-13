@@ -15,6 +15,7 @@ export default Ember.Component.extend(Base, DataAttributes, {
 
     var value = this.get('value');
     if (typeof value !== "undefined" && value !== null) {
+      Ember.deprecate('Bind to selected on ui-dropdown instead of value as semantic doesn\'t update the display when the value is set', false);
       this.execute('set value', value);
     }
   }),
