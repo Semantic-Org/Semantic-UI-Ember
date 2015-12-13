@@ -6,7 +6,6 @@ export default Ember.Component.extend(Base, DataAttributes, {
   module: 'dropdown',
   classNames: [ 'ui', 'dropdown' ],
   tagName: 'div',
-  value: null,
 
   initialize: Ember.on('didInsertElement', function() {
     var selected = this.get('selected');
@@ -20,7 +19,7 @@ export default Ember.Component.extend(Base, DataAttributes, {
     }
   }),
 
-  _onChange: function(value, text, $element) {
-    this.set('value', value);
+  _onChange: function(value/*, text, $element*/) {
+    this.set('selected', value);
   }
 });
