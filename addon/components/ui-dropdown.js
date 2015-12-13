@@ -9,21 +9,18 @@ export default Ember.Component.extend(Base, DataAttributes, {
   value: null,
 
   initialize: Ember.on('didInsertElement', function() {
+    var selected = this.get('selected');
+    if (typeof selected !== "undefined" && selected !== null) {
+      this.execute('set selected', selected);
+    }
+
     var value = this.get('value');
     if (typeof value !== "undefined" && value !== null) {
-      this.execute('set selected', value);
+      this.execute('set value', value);
     }
   }),
 
   _onChange: function(value, text, $element) {
-    this._super();
-    if (typeof value === "undefined" && $element) {
-      // The initial set selected doesn't have an value. This is potentially a problem
-      // within the main Semantic library
-      //
-      // https://github.com/Semantic-Org/Semantic-UI/blob/master/src/definitions/modules/dropdown.js#L85
-      value = $element.data('value');
-    }
-    return this.set('value', value);
+    this.set('value', value);
   }
 });

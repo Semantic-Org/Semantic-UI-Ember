@@ -131,7 +131,7 @@ test('it binds to an object', function(assert) {
 });
 
 test('it sets the value from the binding', function(assert) {
-  assert.expect(2);
+  assert.expect(3);
 
   this.set('people_id', 2);
   this.set('people', [
@@ -153,4 +153,32 @@ test('it sets the value from the binding', function(assert) {
 
   assert.equal(this.$('.item').length, 2);
   assert.equal(this.$('.item.selected').length, 1);
+  assert.equal(this.$('.item.selected').data('value'), 2);
+});
+
+test('it updates the value if updated from the binding', function(assert) {
+  assert.expect(2);
+
+  this.set('people_id', 2);
+  this.set('people', [
+    { id: 1, name: "Sherlock Homes" },
+    { id: 2, name: "Patrick Bateman" }
+  ]);
+
+  this.render(hbs`
+    {{#ui-dropdown selected=people_id}}
+      <div class='menu'>
+      {{#each people as |person|}}
+        <div class="item" data-value="{{person.id}}">
+          {{person.name}}
+        </div>
+      {{/each}}
+      </div>
+    {{/ui-dropdown}}
+  `);
+
+  assert.equal(this.$('.item').length, 2);
+
+  this.set('people_id', 1);
+  assert.equal(this.$('.item.selected').data('value'), 1);
 });
