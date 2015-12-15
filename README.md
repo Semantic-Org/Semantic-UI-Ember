@@ -213,7 +213,7 @@ modal MUST include a name so it knows which one you are referring too.
 ### Template
 
 ```handlebars
-{{#ui-modal name="profile" class="profile" approve=(action 'approveModal') deny=(action 'denyModal')}}
+{{#ui-modal name="profile" class="profile" onApprove=(action 'approveModal') onDeny=(action 'denyModal')}}
   <i class="close icon"></i>
   <div class="header">
     Profile Picture
