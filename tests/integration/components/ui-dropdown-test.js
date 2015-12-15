@@ -157,7 +157,7 @@ test('it sets the value from the binding', function(assert) {
 });
 
 test('it updates the value if updated from the binding', function(assert) {
-  assert.expect(2);
+  assert.expect(3);
 
   this.set('people_id', 2);
   this.set('people', [
@@ -181,10 +181,13 @@ test('it updates the value if updated from the binding', function(assert) {
 
   this.set('people_id', 1);
   assert.equal(this.$('.item.selected').data('value'), 1);
+
+  $(this.$('.item')[0]).click();
+  assert.equal(this.get('people_id'), 1);
 });
 
 test('it can set the selected value without binding for full DDAU', function(assert) {
-  assert.expect(3);
+  assert.expect(4);
 
   this.set('people_id', 2);
   this.set('people', [
@@ -192,7 +195,7 @@ test('it can set the selected value without binding for full DDAU', function(ass
     { id: 2, name: "Patrick Bateman" }
   ]);
 
-  this.on('update', function(value) {
+  this.on('update', function(component, value) {
     this.set('people_id', value);
   });
 
@@ -214,19 +217,20 @@ test('it can set the selected value without binding for full DDAU', function(ass
 
   $(this.$('.item')[0]).click();
   assert.equal(this.$('.item.selected').data('value'), 1);
+  assert.equal(this.get('people_id'), 1);
 });
 
 test('value binding should set the value as well', function(assert) {
-  assert.expect(2);
+  assert.expect(3);
 
-  // this.set('people_id', 2);
+  this.set('people_id', 2);
   this.set('people', [
     { id: 1, name: "Sherlock Homes" },
     { id: 2, name: "Patrick Bateman" }
   ]);
 
   this.render(hbs`
-    {{#ui-dropdown value=2}}
+    {{#ui-dropdown value=people_id}}
       <div class='menu'>
       {{#each people as |person|}}
         <div class="item" data-value="{{person.id}}">
@@ -238,5 +242,8 @@ test('value binding should set the value as well', function(assert) {
   `);
 
   assert.equal(this.$('.item').length, 2);
-  assert.equal(this.$('.item.selected').text(), "Patrick Bateman");
+  assert.equal(this.$('.item.selected').text().trim(), "Patrick Bateman");
+
+  $(this.$('.item')[0]).click();
+  assert.equal(this.get('people_id'), 1);
 });
