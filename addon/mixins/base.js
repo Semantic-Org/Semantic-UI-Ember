@@ -1,6 +1,12 @@
 import Ember from 'ember';
 import Semantic from '../semantic';
 
+// Static properties to ignore
+var DEBUG = ['debug', 'performance', 'verbose'];
+var STANDARD = ['name', 'namespace', 'className', 'error', 'metadata', 'selector'];
+var EMBER = ['context', 'on', 'template', 'execute'];
+
+
 Semantic.BaseMixin = Ember.Mixin.create({
   init: function() {
     this._super();
@@ -26,11 +32,11 @@ Semantic.BaseMixin = Ember.Mixin.create({
 
     for (key in component.settings) {
       prop = component.settings[key];
-      if (window.$.inArray(key, Semantic.BaseMixin.DEBUG) >= 0) {
+      if (window.$.inArray(key, DEBUG) >= 0) {
         continue;
       }
 
-      if (window.$.inArray(key, Semantic.BaseMixin.STANDARD) >= 0) {
+      if (window.$.inArray(key, STANDARD) >= 0) {
         continue;
       }
 
@@ -38,7 +44,7 @@ Semantic.BaseMixin = Ember.Mixin.create({
         continue;
       }
 
-      if (window.$.inArray(key, Semantic.BaseMixin.EMBER) >= 0) {
+      if (window.$.inArray(key, EMBER) >= 0) {
         value = this.get(`ui_${key}`);
       } else {
         if (typeof this.get(key) !== 'undefined') {
@@ -121,10 +127,5 @@ Semantic.BaseMixin = Ember.Mixin.create({
     }
   }
 });
-
-// Static properties to ignore
-Semantic.BaseMixin.DEBUG = ['debug', 'performance', 'verbose'];
-Semantic.BaseMixin.STANDARD = ['name', 'namespace', 'className', 'error', 'metadata', 'selector'];
-Semantic.BaseMixin.EMBER = ['context', 'on', 'template', 'execute'];
 
 export default Semantic.BaseMixin;
