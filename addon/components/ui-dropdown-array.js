@@ -5,6 +5,16 @@ export default UiDropdown.extend({
   content: null,
   find_by: 'id',
 
+  updateProperty: function(property) {
+    return function() {
+      if (property === 'selected') {
+        this.execute('set ' + property, this.get(`${property}.${this.get('find_by')}`));  
+      } else {
+        this.execute('set ' + property, this.get(property));
+      }
+    };
+  },
+
   _onChange: function(value, text, $element) {
     if (!$element) {
       return;
