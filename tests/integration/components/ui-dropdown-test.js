@@ -103,33 +103,6 @@ test('it renders multiple', function(assert) {
   assert.equal(this.get('selected'), '1,2');
 });
 
-test('it binds to an object', function(assert) {
-  assert.expect(3);
-
-  this.set('people', [
-    { id: 1, name: "Sherlock Homes" },
-    { id: 2, name: "Patrick Bateman" }
-  ]);
-
-  this.render(hbs`
-    {{#ui-dropdown selected=selected}}
-      <div class='menu'>
-      {{#each people as |person|}}
-        {{#ui-dropdown-item content=person}}
-          {{person.name}}
-        {{/ui-dropdown-item}}
-      {{/each}}
-      </div>
-    {{/ui-dropdown}}
-  `);
-
-  assert.equal(this.$('.item').length, 2);
-  assert.equal(this.get('selected'), undefined);
-
-  this.$(".menu .item")[1].click();
-  assert.equal(this.get('selected'), this.get('people')[1]);
-});
-
 test('it sets the value from the binding', function(assert) {
   assert.expect(3);
 

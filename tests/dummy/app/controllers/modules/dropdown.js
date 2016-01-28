@@ -8,10 +8,10 @@ export default Ember.Controller.extend({
   ],
 
   gender: 0,
-  genders: [
+  genders: Ember.A([
     { id: 1, text: 'Male' },
     { id: 0, text: 'Female' }
-  ],
+  ]),
 
   country: null,
   countries: [
