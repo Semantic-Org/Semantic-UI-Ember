@@ -1,8 +1,8 @@
 <h2 id='title'>Checkbox</h2>
 
-{{ui-checkbox label="Make my profile visible (checked binding)" checked=checked}}
+{{!--ui-checkbox label="Make my profile visible (checked binding)" checked=checked}}
 
-{{ui-checkbox label="Make my profile visible (onChange action)" onChange=(action 'set_checked')}}
+{{ui-checkbox label="Make my profile visible (onChange action)" onChange=(action 'set_checked')--}}
 
 <h4 class="ui header">
   Radio Box
@@ -12,13 +12,13 @@
 <div class="ui form">
   <div class="grouped inline fields">
     <div class="field">
-      {{ui-radio name="fruit" label="Once a week" checked=fruit}}
+      {{ui-radio name="fruit" label="Once a week" current=fruit value="apple"}}
     </div>
     <div class="field">
-      {{ui-radio name="fruit" label="2-3 times a week" checked=fruit}}
+      {{ui-radio name="fruit" label="2-3 times a week" current=fruit value="orange"}}
     </div>
     <div class="field">
-      {{ui-radio name="fruit" label="Once a day" checked=fruit}}
+      {{ui-radio name="fruit" label="Once a day" current=fruit value="banana"}}
     </div>
   </div>
 </div>
