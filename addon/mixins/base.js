@@ -66,11 +66,11 @@ Semantic.BaseMixin = Ember.Mixin.create({
     return custom;
   },
 
-  updateProperty: function(property) {
-    return function() {
-      this.execute('set ' + property, this.get(property));
-    };
-  },
+  // updateProperty: function(property) {
+  //   return function() {
+  //     this.execute('set ' + property, this.get(property));
+  //   };
+  // },
 
   updateFunctionWithParameters: function(key, fn) {
     return function() {
@@ -89,24 +89,29 @@ Semantic.BaseMixin = Ember.Mixin.create({
     };
   },
 
-  didInsertElement: function() {
+  // didInsertElement: function() {
+  //   this.$()[this.get("module")](this.settings(this.get("module")));
+
+  //   var _this = this;
+  //   var properties = {};
+  //   // Modules without setable properties
+  //   if (['accordion', 'nag'].indexOf(this.get('module')) === -1) {
+  //     properties = this.execute('set');
+  //   }
+  //   var property;
+
+  //   for(property in properties) {
+  //     if (!properties.hasOwnProperty(property)) {
+  //       continue;
+  //     }
+
+  //     _this.addObserver(property, _this, _this.updateProperty(property));
+  //   }
+  // },
+
+  didRender: function() {
+    this._super(...arguments);
     this.$()[this.get("module")](this.settings(this.get("module")));
-
-    var _this = this;
-    var properties = {};
-    // Modules without setable properties
-    if (['accordion', 'nag'].indexOf(this.get('module')) === -1) {
-      properties = this.execute('set');
-    }
-    var property;
-
-    for(property in properties) {
-      if (!properties.hasOwnProperty(property)) {
-        continue;
-      }
-
-      _this.addObserver(property, _this, _this.updateProperty(property));
-    }
   },
 
   willDestroyElement: function() {
