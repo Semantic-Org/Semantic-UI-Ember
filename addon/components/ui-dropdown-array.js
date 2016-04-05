@@ -37,7 +37,7 @@ export default UiDropdown.extend({
 
     var record = this.get('content').find((item) => {
       var current = Ember.get(item, this.get('find_by'));
-      return current === value || current.toString() === value;
+      return current === value || current.toString() === value || current === (value || '').toString();
     });
     this.set(this.get('boundValue') || 'selected', record);
   }
