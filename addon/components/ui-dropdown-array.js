@@ -5,7 +5,8 @@ export default UiDropdown.extend({
   content: null,
   find_by: 'id',
 
-  initialize: Ember.on('didInsertElement', function() {
+  didInsertElement() {
+    this._super(...arguments);
     var selected = this.get('selected');
     if (typeof selected !== "undefined" && selected !== null) {
       this.set('boundValue', 'selected');
@@ -18,7 +19,7 @@ export default UiDropdown.extend({
       this.set('boundValue', 'value');
       this.execute('set value', Ember.get(value, this.get('find_by')));
     }
-  }),
+  },
 
   updateProperty: function(property) {
     return function() {
