@@ -4,21 +4,13 @@ import UiDropdown from 'semantic-ui-ember/components/ui-dropdown';
 export default UiDropdown.extend({
   content: null,
   find_by: 'id',
-
-  didInsertElement() {
-    this._super(...arguments);
-    var selected = this.get('selected');
-    if (typeof selected !== "undefined" && selected !== null) {
-      this.set('boundValue', 'selected');
-      this.execute('set selected', Ember.get(selected, this.get('find_by')));
-    }
-
-    var value = this.get('value');
-    if (typeof value !== "undefined" && value !== null) {
-      Ember.deprecate('Bind to selected on ui-dropdown instead of value as semantic doesn\'t update the display when the value is set', false);
-      this.set('boundValue', 'value');
-      this.execute('set value', Ember.get(value, this.get('find_by')));
-    }
+  
+  getSelected(selected) {
+    return Ember.get(selected, this.get('find_by'));
+  },
+  
+  getValue(value) {
+    return Ember.get(value, this.get('find_by'));
   },
 
   updateProperty: function(property) {
