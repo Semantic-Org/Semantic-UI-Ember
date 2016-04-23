@@ -3,7 +3,7 @@ import Semantic from '../semantic';
 
 // Static properties to ignore
 const DEBUG = ['debug', 'performance', 'verbose'];
-const STANDARD = ['name', 'namespace', 'className', 'error', 'metadata', 'selector'];
+const STANDARD = ['name', 'namespace', 'className', 'metadata', 'selector'];
 const EMBER = ['context', 'on', 'template', 'execute'];
 
 
