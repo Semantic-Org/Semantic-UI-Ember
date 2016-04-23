@@ -9,3 +9,18 @@
 <br>
 
 {{ui-popup tagName="i" class="info icon" content="The text you'd like to show"}}
+
+
+<div class="ui header">
+  Updates with content change
+</div>
+
+<div class="ui input">
+  {{input value=popup_message}}
+</div>
+
+{{#ui-popup content=popup_message}}
+  <div class="ui icon button">
+    <i class="help icon"></i>
+  </div>
+{{/ui-popup}}
