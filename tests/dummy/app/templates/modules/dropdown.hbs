@@ -49,17 +49,17 @@
         <div class="sub header">A dropdown can be used to select between choices in a form</div>
       </h4>
 
-      {{#ui-dropdown class="selection" value=(mut gender2)}}
+      {{#ui-dropdown-array class="selection" content=genders selected=gender2}}
         <div class="default text">Gender</div>
         <i class="dropdown icon"></i>
         <div class="menu">
         {{#each genders as |gender|}}
-          {{#ui-dropdown-item content=gender}}
+          <div class="item" data-value={{gender.id}}>
             {{gender.text}}
-          {{/ui-dropdown-item}}
+          </div>
         {{/each}}
         </div>
-      {{/ui-dropdown}}
+      {{/ui-dropdown-array}}
     </div>
     <div class="eight wide column">
       <div class="ui form">
@@ -78,7 +78,7 @@
         <div class="sub header">A dropdown can be used to select between choices in a form</div>
       </h4>
 
-      {{#ui-dropdown class="fluid multiple selection" value=country}}
+      {{#ui-dropdown class="fluid multiple selection" selected=country}}
         <i class="dropdown icon"></i>
         <div class="default text">Select Country</div>
         <div class="menu">
