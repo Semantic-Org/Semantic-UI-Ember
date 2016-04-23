@@ -1,8 +1,21 @@
 <h2 id='title'>Checkbox</h2>
 
-{{ui-checkbox label="Make my profile visible (checked binding)" checked=checked}}
+<div class="ui form">
+  <div class="field">
+    {{ui-checkbox label="Make my profile visible (checked binding)" checked=checked}}
+    - {{if checked "Checked" "Not Checked"}}
+  </div>
 
-{{ui-checkbox label="Make my profile visible (onChange action)" onChange=(action 'set_checked')}}
+  <div class="field">
+    {{ui-checkbox label="Make my profile visible (pre checked binding)" checked=pre_checked}}
+    - {{if pre_checked "Checked" "Not Checked"}}
+  </div>
+
+  <div class="field">
+    {{ui-checkbox label="Make my profile visible (onChange action)" checked=action_checked onChange=(action 'set_checked')}}
+    - {{if action_checked "Checked" "Not Checked"}}
+  </div>
+</div>
 
 <h4 class="ui header">
   Radio Box
@@ -12,13 +25,39 @@
 <div class="ui form">
   <div class="grouped inline fields">
     <div class="field">
-      {{ui-radio name="fruit" label="Once a week" checked=fruit}}
+      {{ui-radio name="fruit" label="Once a week" value="once-a-week" current=fruit}}
     </div>
     <div class="field">
-      {{ui-radio name="fruit" label="2-3 times a week" checked=fruit}}
+      {{ui-radio name="fruit" label="2-3 times a week" value="few-times-a-week" current=fruit}}
     </div>
     <div class="field">
-      {{ui-radio name="fruit" label="Once a day" checked=fruit}}
+      {{ui-radio name="fruit" label="Once a day" value="once-a-day" current=fruit}}
     </div>
   </div>
+</div>
+
+<div class="ui label">
+  Current fruit - {{fruit}}
+</div>
+
+<h4 class="ui header">
+  Radio Box (Pre-selected)
+</h4>
+
+<div class="ui form">
+  <div class="grouped inline fields">
+    <div class="field">
+      {{ui-radio name="color" label="Red" value="red" current=color}}
+    </div>
+    <div class="field">
+      {{ui-radio name="color" label="Yellow" value="yellow" current=color}}
+    </div>
+    <div class="field">
+      {{ui-radio name="color" label="Blue" value="blue" current=color}}
+    </div>
+  </div>
+</div>
+
+<div class="ui label">
+  Current Color - {{color}}
 </div>
