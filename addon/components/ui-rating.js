@@ -7,19 +7,23 @@ var Rating = Ember.Component.extend(Base,{
 
   init() {
     this._super(...arguments);
-
     if (!this.get('initialRating') && this.get('rating')) {
       this.set('initialRating', this.get('rating'));
     }
   },
 
-  onRate(value) {
-    this.set('rating', this.get('value'));
+  didInsertElement() {
+    this.set('initialized', false);
+    this._super(...arguments);
+    this.set('initialized', true);
   },
 
-  didUpdateAttrs() {
-    this._super(...arguments);
-    this.$()[this.get("module")](this.settings(this.get("module")));
+  _onRate(value) {
+    // Values are set on init, and causes render errors
+    if (!this.get('initialized')) {
+      return;
+    }
+    this.set('rating', value);
   }
 });
 

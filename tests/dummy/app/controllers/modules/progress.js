@@ -1,5 +1,6 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
-  popup_message: "A message to popup"
+  progressOne: 40,
+  progressTwo: 15
 });

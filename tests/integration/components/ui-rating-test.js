@@ -7,10 +7,12 @@ moduleForComponent('ui-rating', 'Integration | Component | ui rating', {
 
 test('it renders', function(assert) {
   this.render(hbs`
-    {{ui-rating initialRating=3 maxRating=7}}
+    {{ui-rating initialRating=3 maxRating=6}}
   `);
 
   assert.equal(this.$('.ui.rating').length, 1);
+  assert.equal(this.$('.ui.rating i').length, 6);
+  assert.equal(this.$('.ui.rating .active').length, 3);
 });
 
 test('it updates with bound values', function(assert) {
@@ -20,7 +22,9 @@ test('it updates with bound values', function(assert) {
   `);
 
   assert.equal(this.$('.ui.rating').length, 1);
+  assert.equal(this.$('.ui.rating i').length, 7);
   assert.equal(this.$('.ui.rating .active').length, 3);
   this.set('rating', 6);
   assert.equal(this.$('.ui.rating .active').length, 6);
+
 });

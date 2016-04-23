@@ -15,6 +15,11 @@
     {{ui-checkbox label="Make my profile visible (onChange action)" checked=action_checked onChange=(action 'set_checked')}}
     - {{if action_checked "Checked" "Not Checked"}}
   </div>
+
+  <div class="field">
+    {{ui-checkbox label="Disabled checkbox (checked binding)" checked=disabled_checked disabled=true}}
+    - {{if disabled_checked "Checked" "Not Checked"}}
+  </div>
 </div>
 
 <h4 class="ui header">
@@ -54,6 +59,9 @@
     </div>
     <div class="field">
       {{ui-radio name="color" label="Blue" value="blue" current=color}}
+    </div>
+    <div class="field">
+      {{ui-radio name="color" label="Disabled" value="disabled" current=color disabled=true}}
     </div>
   </div>
 </div>

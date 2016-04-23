@@ -14,5 +14,5 @@ test('it renders', function(assert) {
     {{/ui-popup}}
   `);
 
-  assert.equal(this.$('div[data-content]').length, 1);
+  assert.equal(this.$('div').popup('get content')[0], 'Add users to your feed');
 });

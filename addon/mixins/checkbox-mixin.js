@@ -6,21 +6,8 @@ import Base from './base';
  */
 var CheckboxMixin = Ember.Mixin.create(Base, {
   module: 'checkbox',
-  classNames: ['ui', 'checkbox']
-
-  // didInsertElement: function() {
-  //   if (this.get("disabled")) {
-  //     return;
-  //   }
-  //   this._super(...arguments);
-  // },
-
-  // willDestroyElement: function() {
-  //   if (this.get("disabled")) {
-  //     return;
-  //   }
-  //   this._super(...arguments);
-  // }
+  classNames: ['ui', 'checkbox'],
+  classNameBindings: ['disabled:disabled']
 });
 
 export default CheckboxMixin;
