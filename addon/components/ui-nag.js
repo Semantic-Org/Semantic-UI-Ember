@@ -6,8 +6,8 @@ export default Ember.Component.extend(Base, {
   classNames: [ 'ui', 'nag' ],
   attributeBindings: [ 'storageMethod', 'key', 'expires', 'domain', 'path', 'value' ],
 
-  init: function() {
-    this._super();
+  didInsertElement: function() {
+    this._super(...arguments);
     this.execute('show');
   }
 });

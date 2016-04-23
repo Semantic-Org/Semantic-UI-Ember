@@ -2,14 +2,13 @@ import Ember from 'ember';
 import Semantic from '../semantic';
 
 // Static properties to ignore
-const DEBUG = ['debug', 'performance', 'verbose'];
+const DEBUG = ['debug', 'verbose', 'performance'];
 const STANDARD = ['name', 'namespace', 'className', 'error', 'metadata', 'selector'];
 const EMBER = ['context', 'on', 'template', 'execute'];
 
-
 Semantic.BaseMixin = Ember.Mixin.create({
   init: function() {
-    this._super();
+    this._super(...arguments);
 
     if (!this.get('module')) {
       return Ember.Logger.error('Module was not declared on semantic extended type');
