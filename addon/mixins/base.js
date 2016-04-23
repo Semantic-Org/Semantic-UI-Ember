@@ -95,7 +95,7 @@ Semantic.BaseMixin = Ember.Mixin.create({
     var _this = this;
     var properties = {};
     // Modules without setable properties
-    if (['accordion', 'nag'].indexOf(this.get('module')) === -1) {
+    if (['accordion', 'nag', 'checkbox'].indexOf(this.get('module')) === -1) {
       properties = this.execute('set');
     }
     var property;
