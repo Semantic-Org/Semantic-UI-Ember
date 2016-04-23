@@ -1,2 +1,1 @@
-import Search from 'semantic-ui-ember/components/ui-search';
-export default Search;
+export { default } from 'semantic-ui-ember/components/ui-search';

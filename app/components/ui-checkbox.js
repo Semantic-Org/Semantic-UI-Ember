@@ -1,2 +1,1 @@
-import Checkbox from 'semantic-ui-ember/components/ui-checkbox';
-export default Checkbox;
+export { default } from 'semantic-ui-ember/components/ui-checkbox';

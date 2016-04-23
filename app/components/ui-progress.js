@@ -1,2 +1,1 @@
-import Progress from 'semantic-ui-ember/components/ui-progress';
-export default Progress;
+export { default } from 'semantic-ui-ember/components/ui-progress';
