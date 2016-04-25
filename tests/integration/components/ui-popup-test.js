@@ -16,3 +16,20 @@ test('it renders', function(assert) {
 
   assert.equal(this.$('div').popup('get content')[0], 'Add users to your feed');
 });
+
+test('updating content updates popup', function(assert) {
+  this.set('content', 'This is dynamic content');
+  this.render(hbs`
+    {{#ui-popup content=content}}
+      <div class="ui icon button">
+        <i class="add icon"></i>
+      </div>
+    {{/ui-popup}}
+  `);
+
+  assert.equal(this.$('div').popup('get content')[0], 'This is dynamic content');
+
+  this.set('content', 'Now it magically changed!');
+
+  assert.equal(this.$('div').popup('get content')[0], 'Now it magically changed!');
+});
