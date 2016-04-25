@@ -2,8 +2,8 @@ import Ember from 'ember';
 import Semantic from '../semantic';
 
 // Static properties to ignore
-const DEBUG = ['debug', 'verbose', 'performance'];
-const STANDARD = ['name', 'namespace', 'className', 'error', 'metadata', 'selector'];
+const DEBUG = ['debug', 'performance', 'verbose'];
+const STANDARD = ['name', 'namespace', 'className', 'metadata', 'selector'];
 const EMBER = ['context', 'on', 'template', 'execute'];
 
 Semantic.BaseMixin = Ember.Mixin.create({
