@@ -20,8 +20,6 @@ test('it renders', function(assert) {
 test('binding updates progress', function(assert) {
   assert.expect(4);
 
-  var _this = this;
-
   this.set('progress', 40);
   this.render(hbs`
     {{#ui-progress percent=progress class="teal indicating"}}
@@ -36,10 +34,10 @@ test('binding updates progress', function(assert) {
   this.set('progress', 60);
 
   stop();
-  setTimeout(function() {
+  setTimeout(() => {
     start();
 
-    assert.equal(_this.$('.ui.progress').attr('data-percent'), 60);
-    assert.notEqual(_this.$('.ui.progress .bar').css('width'), width);
+    assert.equal(this.$('.ui.progress').attr('data-percent'), 60);
+    assert.notEqual(this.$('.ui.progress .bar').css('width'), width);
   }, 500);
 });

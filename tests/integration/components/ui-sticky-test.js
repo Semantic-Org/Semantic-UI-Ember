@@ -12,7 +12,7 @@ test('it renders', function(assert) {
     {{/ui-sticky}}
   `);
 
-  assert.equal($('.ui.sticky').length, 1);
-  assert.ok($('.ui.sticky').css('width') !== undefined);
-  assert.ok($('.ui.sticky').css('height') !== undefined);
+  assert.equal(this.$('.ui.sticky').length, 1);
+  assert.ok(this.$('.ui.sticky').css('width') !== undefined);
+  assert.ok(this.$('.ui.sticky').css('height') !== undefined);
 });
