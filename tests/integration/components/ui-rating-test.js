@@ -26,5 +26,4 @@ test('it updates with bound values', function(assert) {
   assert.equal(this.$('.ui.rating .active').length, 3);
   this.set('rating', 6);
   assert.equal(this.$('.ui.rating .active').length, 6);
-
 });

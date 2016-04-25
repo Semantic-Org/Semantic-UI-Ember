@@ -8,7 +8,7 @@
 </div>
 
 <div class="ui basic segment">
-  {{#ui-progress value=progressTwo total=30}}
+  {{#ui-progress value=(unbound progressTwo) progress=progressTwo total=30}}
     <div class="bar"></div>
     <div class="label">Uploaded {{input value=progressTwo type="range" min=0 max=30}}</div>
   {{/ui-progress}}
