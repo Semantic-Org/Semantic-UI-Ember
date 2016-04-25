@@ -7,6 +7,8 @@ moduleForComponent('ui-accordion', 'Integration | Component | ui accordion', {
 });
 
 test('it renders', function(assert) {
+  assert.expect(2);
+
   this.render(hbs`
     {{#ui-accordion class="styled"}}
       <div class="title" data-id="title-1">
@@ -30,6 +32,8 @@ test('it renders', function(assert) {
 });
 
 test('clicking activates title', function(assert) {
+  assert.expect(2);
+
   this.render(hbs`
     {{#ui-accordion class="styled"}}
       <div class="title" data-id="title-1">
@@ -54,6 +58,8 @@ test('clicking activates title', function(assert) {
 });
 
 test('dynamically added content is clickable', function(assert) {
+  assert.expect(7);
+
   this.set('panes', Ember.A([]));
 
   this.render(hbs`

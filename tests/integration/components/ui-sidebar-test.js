@@ -6,6 +6,8 @@ moduleForComponent('ui-sidebar', 'Integration | Component | ui sidebar', {
 });
 
 test('it renders', function(assert) {
+  assert.expect(2);
+
   this.render(hbs`
     <div class="component context">
       {{#ui-sidebar ui_context=".component.context"}}

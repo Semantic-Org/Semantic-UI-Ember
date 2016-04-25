@@ -6,6 +6,8 @@ moduleForComponent('ui-rating', 'Integration | Component | ui rating', {
 });
 
 test('it renders', function(assert) {
+  assert.expect(3);
+
   this.render(hbs`
     {{ui-rating initialRating=3 maxRating=6}}
   `);
@@ -16,6 +18,8 @@ test('it renders', function(assert) {
 });
 
 test('it updates with bound values', function(assert) {
+  assert.expect(4);
+
   this.set('rating', 3);
   this.render(hbs`
     {{ui-rating rating=rating maxRating=7}}

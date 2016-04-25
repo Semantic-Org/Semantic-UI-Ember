@@ -6,6 +6,8 @@ moduleForComponent('ui-sticky', 'Integration | Component | ui sticky', {
 });
 
 test('it renders', function(assert) {
+  assert.expect(3);
+
   this.render(hbs`
     {{#ui-sticky}}
       <p>Some text</p>

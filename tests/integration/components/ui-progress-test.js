@@ -7,6 +7,8 @@ moduleForComponent('ui-progress', 'Integration | Component | ui progress', {
 });
 
 test('it renders', function(assert) {
+  assert.expect(1);
+
   this.render(hbs`
     {{#ui-progress percent=40 class="teal indicating"}}
       <div class="bar"></div>

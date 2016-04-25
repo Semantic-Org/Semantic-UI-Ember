@@ -7,6 +7,8 @@ moduleForComponent('ui-modal', 'Integration | Component | ui modal', {
 });
 
 test('it renders', function(assert) {
+  assert.expect(1);
+
   this.render(hbs`
     {{ui-modal name='profile'}}
   `);

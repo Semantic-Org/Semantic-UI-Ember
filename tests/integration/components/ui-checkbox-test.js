@@ -6,6 +6,8 @@ moduleForComponent('ui-checkbox', 'Integration | Component | ui checkbox', {
 });
 
 test('it renders', function(assert) {
+  assert.expect(1);
+
   this.set('checked', false);
   this.render(hbs`
     {{ui-checkbox label="Make my profile visible" checked=checked}}
@@ -15,6 +17,8 @@ test('it renders', function(assert) {
 });
 
 test('checking will update the bound property', function(assert) {
+  assert.expect(2);
+
   this.set('checked', false);
   this.render(hbs`
     {{ui-checkbox label="Make my profile visible" checked=checked}}
@@ -26,6 +30,8 @@ test('checking will update the bound property', function(assert) {
 });
 
 test('setting disabled ignores click', function(assert) {
+  assert.expect(3);
+
   this.set('checked', false);
   this.set('disabled', true);
   this.render(hbs`
@@ -42,6 +48,8 @@ test('setting disabled ignores click', function(assert) {
 });
 
 test('setting readonly ignores click', function(assert) {
+  assert.expect(3);
+
   this.set('checked', false);
   this.set('readonly', true);
   this.render(hbs`

@@ -6,6 +6,8 @@ moduleForComponent('ui-popup', 'Integration | Component | ui popup', {
 });
 
 test('it renders', function(assert) {
+  assert.expect(1);
+
   this.render(hbs`
     {{#ui-popup content="Add users to your feed"}}
       <div class="ui icon button">
@@ -18,6 +20,8 @@ test('it renders', function(assert) {
 });
 
 test('updating content updates popup', function(assert) {
+  assert.expect(2);
+
   this.set('content', 'This is dynamic content');
   this.render(hbs`
     {{#ui-popup content=content}}

@@ -6,6 +6,8 @@ moduleForComponent('ui-radio', 'Integration | Component | ui radio', {
 });
 
 test('it renders', function(assert) {
+  assert.expect(1);
+
   this.render(hbs`
     <div class="ui form">
       <div class="grouped inline fields">
@@ -26,6 +28,8 @@ test('it renders', function(assert) {
 });
 
 test('selecting will update the bound property', function(assert) {
+  assert.expect(2);
+
   this.set('frequency', 'weekly');
   this.render(hbs`
     <div class="ui form">
@@ -49,6 +53,8 @@ test('selecting will update the bound property', function(assert) {
 });
 
 test('selecting twice will update the bound property to the latest', function(assert) {
+  assert.expect(4);
+
   this.set('frequency', 'weekly');
   this.render(hbs`
     <div class="ui form">
@@ -81,6 +87,8 @@ test('selecting twice will update the bound property to the latest', function(as
 });
 
 test('setting disabled ignores click', function(assert) {
+  assert.expect(3);
+
   this.set('checked', false);
   this.set('disabled', true);
   this.set('frequency', 'weekly');
@@ -114,6 +122,8 @@ test('setting disabled ignores click', function(assert) {
 });
 
 test('setting readonly ignores click', function(assert) {
+  assert.expect(3);
+
   this.set('checked', false);
   this.set('readonly', true);
   this.set('frequency', 'weekly');

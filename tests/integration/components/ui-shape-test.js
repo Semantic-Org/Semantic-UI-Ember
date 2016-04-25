@@ -6,6 +6,8 @@ moduleForComponent('ui-shape', 'Integration | Component | ui shape', {
 });
 
 test('it renders', function(assert) {
+  assert.expect(1);
+
   this.render(hbs`
     {{#ui-shape}}
       <p>Content</p>

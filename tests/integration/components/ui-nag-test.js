@@ -7,6 +7,8 @@ moduleForComponent('ui-nag', 'Integration | Component | ui nag', {
 });
 
 test('it renders', function(assert) {
+  assert.expect(1);
+
   this.render(hbs`
     {{#ui-nag class="inline cookie"}}
       <span class="title">
