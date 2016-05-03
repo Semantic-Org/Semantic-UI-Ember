@@ -149,7 +149,6 @@ There isn't a corresponding Ember component for this since it isn't rendered to 
  * **Class**: `ui dropdown`
  * **Component**: `ui-dropdown`
  * **Parameters**
-    * **value**: Bound value that is set to `optionValuePath` (deprecated, bind to selected on ui-dropdown instead of value as semantic doesn't update the display when the value is set)
     * **selected**: Bound value that is set to `optionValuePath`
     * **onChange**: Event to bind changes too
    
