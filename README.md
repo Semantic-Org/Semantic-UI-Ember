@@ -149,7 +149,7 @@ There isn't a corresponding Ember component for this since it isn't rendered to 
  * **Class**: `ui dropdown`
  * **Component**: `ui-dropdown`
  * **Parameters**
-    * **value**: Bound value that is set to `optionValuePath`
+    * **selected**: Bound value that is set to `optionValuePath`
     * **onChange**: Event to bind changes too
 
 Replace `<div class="ui dropdown">` with `{{ui-dropdown}}` and fill in your content
