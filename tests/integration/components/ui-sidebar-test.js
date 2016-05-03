@@ -1,4 +1,3 @@
-/* global $ */
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 
@@ -7,14 +6,21 @@ moduleForComponent('ui-sidebar', 'Integration | Component | ui sidebar', {
 });
 
 test('it renders', function(assert) {
+  assert.expect(2);
+
   this.render(hbs`
-    {{#ui-sidebar}}
-      <a class="item">1</a>
-      <a class="item">2</a>
-      <a class="item">3</a>
-    {{/ui-sidebar}}
+    <div class="component context">
+      {{#ui-sidebar ui_context=".component.context"}}
+        <a class="item">1</a>
+        <a class="item">2</a>
+        <a class="item">3</a>
+      {{/ui-sidebar}}
+      <div class="pusher">
+        Main Content here
+      </div>
+    </div>
   `);
 
-  assert.equal($('.ui.sidebar').length, 1);
-  assert.equal($('.ui.sidebar a').length, 3);
+  assert.equal(this.$('.ui.sidebar').length, 1);
+  assert.equal(this.$('.ui.sidebar a').length, 3);
 });

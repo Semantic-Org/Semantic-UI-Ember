@@ -151,7 +151,7 @@ There isn't a corresponding Ember component for this since it isn't rendered to 
  * **Parameters**
     * **value**: Bound value that is set to `optionValuePath`
     * **onChange**: Event to bind changes too
-   
+
 Replace `<div class="ui dropdown">` with `{{ui-dropdown}}` and fill in your content
 
 ### Controller
@@ -159,7 +159,7 @@ Replace `<div class="ui dropdown">` with `{{ui-dropdown}}` and fill in your cont
 export default Ember.Controller.extend({
 	itemActions: [ "Edit", "Remove", "Hide"],
 	selectedAction: null,
-	
+
 	actions: {
 	  updateSelected: function(component, id, value) {
 	    this.set('selectedAction', id);
@@ -384,6 +384,28 @@ export default Ember.Component.extend({
 <div class="ui grid pusher">
 </div>
 ```
+
+### Scoped Template
+If you need to have the sidebar under a specific scope or can't have it directly under the body element, you can also specify the context in which the sidebar will exist.
+```handlebars
+<body>
+  <div class="something">
+    <div class="sidebar context">
+      {{#ui-sidebar ui_context=".sidebar.context"}}
+        <a class="item">1</a>
+        <a class="item">2</a>
+        <a class="item">3</a>
+      {{/ui-sidebar}}
+      <div class="pusher">
+        Main Content here
+        or
+        {{outlet}}
+      </div>
+    </div>
+  </div>
+</body>
+```
+
 When you want to invoke the sidebar you simply use the semantic methods.
 
 ### Controller

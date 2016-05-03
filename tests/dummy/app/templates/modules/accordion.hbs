@@ -19,4 +19,22 @@
   <div class="content">
     Content Three
   </div>
+  {{#each sections as |section|}}
+    <div class="title">
+      Accordion Extra {{section}}
+    </div>
+    <div class="content">
+      Content Extra {{section}}
+    </div>
+  {{/each}}
 {{/ui-accordion}}
+
+<div class="ui basic segment">
+  <div class="ui button" {{action "change_sections" 1}}>
+    Add Extra Section
+  </div>
+
+  <div class="ui button {{unless total_sections "disabled"}}" {{action "change_sections" -1}}>
+    Remove Extra Section
+  </div>
+</div>

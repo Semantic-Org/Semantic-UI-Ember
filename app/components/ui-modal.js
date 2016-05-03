@@ -1,2 +1,1 @@
-import Modal from 'semantic-ui-ember/components/ui-modal';
-export default Modal;
+export { default } from 'semantic-ui-ember/components/ui-modal';

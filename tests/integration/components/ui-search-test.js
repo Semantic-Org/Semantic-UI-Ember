@@ -6,6 +6,8 @@ moduleForComponent('ui-search', 'Integration | Component | ui search', {
 });
 
 test('it renders', function(assert) {
+  assert.expect(1);
+
   this.render(hbs`
     {{#ui-search url="/search"}}
       <input class="prompt" type="text" placeholder="Common passwords...">

@@ -7,6 +7,8 @@ moduleForComponent('ui-nag', 'Integration | Component | ui nag', {
 });
 
 test('it renders', function(assert) {
+  assert.expect(1);
+
   this.render(hbs`
     {{#ui-nag class="inline cookie"}}
       <span class="title">
@@ -21,8 +23,6 @@ test('it renders', function(assert) {
 
 test('it will only show once', function(assert) {
   assert.expect(4);
-
-  var _this = this;
 
   this.render(hbs`
     {{#ui-nag class="inline cookie"}}
@@ -40,11 +40,11 @@ test('it will only show once', function(assert) {
   this.$('.ui.nag .close').click();
 
   stop();
-  setTimeout(function() {
+  setTimeout(() => {
     start();
 
-    assert.equal(_this.$('.ui.nag').css('display'), 'none');
-    _this.$('.ui.nag').nag('show');
-    assert.equal(_this.$('.ui.nag').css('display'), 'none');
+    assert.equal(this.$('.ui.nag').css('display'), 'none');
+    this.$('.ui.nag').nag('show');
+    assert.equal(this.$('.ui.nag').css('display'), 'block');
   }, 1000);
 });

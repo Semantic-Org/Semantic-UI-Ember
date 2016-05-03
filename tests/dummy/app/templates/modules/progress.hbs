@@ -1,15 +1,15 @@
 <h2 id='title'>Progress</h2>
 
 <div class="ui basic segment">
-  {{#ui-progress percent=40 class="teal indicating"}}
+  {{#ui-progress percent=progressOne class="teal indicating"}}
     <div class="bar"></div>
-    <div class="label">Completed</div>
+    <div class="label">Completed {{input value=progressOne type="range" min=0 max=100}}</div>
   {{/ui-progress}}
 </div>
 
 <div class="ui basic segment">
-  {{#ui-progress value=15 total=30}}
+  {{#ui-progress value=(unbound progressTwo) progress=progressTwo total=30}}
     <div class="bar"></div>
-    <div class="label">Uploaded</div>
+    <div class="label">Uploaded {{input value=progressTwo type="range" min=0 max=30}}</div>
   {{/ui-progress}}
 </div>

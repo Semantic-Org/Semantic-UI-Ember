@@ -1,2 +1,1 @@
-import Radio from 'semantic-ui-ember/components/ui-radio';
-export default Radio;
+export { default } from 'semantic-ui-ember/components/ui-radio';

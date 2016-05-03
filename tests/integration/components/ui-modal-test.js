@@ -7,6 +7,8 @@ moduleForComponent('ui-modal', 'Integration | Component | ui modal', {
 });
 
 test('it renders', function(assert) {
+  assert.expect(1);
+
   this.render(hbs`
     {{ui-modal name='profile'}}
   `);
@@ -17,12 +19,10 @@ test('it renders', function(assert) {
 test('it will show if triggered', function(assert) {
   assert.expect(3);
 
-  var _this = this;
-
-  this.on('openModal', function() {
-    _this.$('.ui.modal').modal('show', function() {
+  this.on('openModal', () => {
+    this.$('.ui.modal').modal('show', () => {
       start();
-      assert.equal(_this.$('.ui.modal.visible').length, 1, ".ui.modal is visible after showing");
+      assert.equal(this.$('.ui.modal.visible').length, 1, ".ui.modal is visible after showing");
     });
   });
 
@@ -44,21 +44,19 @@ test('it will show if triggered', function(assert) {
 test('it will send approve back to controller and hide', function(assert) {
   assert.expect(3);
 
-  var _this = this;
-
-  this.on('openModal', function() {
-    _this.$('.ui.modal').modal('show', function() {
-      assert.equal(_this.$('.ui.modal.visible').length, 1, ".ui.modal is visible after showing");
-      _this.$('.ui.modal .ui.positive.button').click();
+  this.on('openModal', () => {
+    this.$('.ui.modal').modal('show', () => {
+      assert.equal(this.$('.ui.modal.visible').length, 1, ".ui.modal is visible after showing");
+      this.$('.ui.modal .ui.positive.button').click();
     });
   });
 
   this.on('approve', function(component) {
     var name = component.get('name');
     assert.equal('profile', name, 'approve is called');
-    setTimeout(function() {
+    setTimeout(() => {
       start();
-      assert.equal(_this.$('.ui.modal.visible').length, 0, ".ui.modal is not visible after clicking");
+      assert.equal(this.$('.ui.modal.visible').length, 0, ".ui.modal is not visible after clicking");
     }, 1000);
     return true;
   });
@@ -83,21 +81,19 @@ test('it will send approve back to controller and hide', function(assert) {
 test('it will send approve back to controller and skip the hide', function(assert) {
   assert.expect(3);
 
-  var _this = this;
-
-  this.on('openModal', function() {
-    _this.$('.ui.modal').modal('show', function() {
-      assert.equal(_this.$('.ui.modal.visible').length, 1, ".ui.modal is visible after showing");
-      _this.$('.ui.modal .ui.positive.button').click();
+  this.on('openModal', () => {
+    this.$('.ui.modal').modal('show', () => {
+      assert.equal(this.$('.ui.modal.visible').length, 1, ".ui.modal is visible after showing");
+      this.$('.ui.modal .ui.positive.button').click();
     });
   });
 
   this.on('approve', function(component) {
     var name = component.get('name');
     assert.equal('profile', name, 'approve is called');
-    setTimeout(function() {
+    setTimeout(() => {
       start();
-      assert.equal(_this.$('.ui.modal.visible').length, 1, ".ui.modal is visible after clicking");
+      assert.equal(this.$('.ui.modal.visible').length, 1, ".ui.modal is visible after clicking");
     }, 1000);
     return false;
   });
@@ -122,11 +118,9 @@ test('it will send approve back to controller and skip the hide', function(asser
 test('it will send deny back to controller', function(assert) {
   assert.expect(1);
 
-  var _this = this;
-
-  this.on('openModal', function() {
-    _this.$('.ui.modal').modal('show', function() {
-      _this.$('.ui.modal.negative').click();
+  this.on('openModal', () => {
+    this.$('.ui.modal').modal('show', () => {
+      this.$('.ui.modal.negative').click();
     });
   });
 

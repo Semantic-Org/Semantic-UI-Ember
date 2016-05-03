@@ -4,13 +4,9 @@ import UiDropdown from 'semantic-ui-ember/components/ui-dropdown';
 export default UiDropdown.extend({
   content: null,
   find_by: 'id',
-  
+
   getSelected(selected) {
     return Ember.get(selected, this.get('find_by'));
-  },
-  
-  getValue(value) {
-    return Ember.get(value, this.get('find_by'));
   },
 
   updateProperty: function(property) {
@@ -32,6 +28,6 @@ export default UiDropdown.extend({
       var current = Ember.get(item, this.get('find_by'));
       return current === value || current.toString() === value || current === (value || '').toString();
     });
-    this.set(this.get('boundValue') || 'selected', record);
+    this.set('selected', record);
   }
 });

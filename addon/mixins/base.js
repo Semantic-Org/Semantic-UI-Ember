@@ -6,17 +6,16 @@ const DEBUG = ['debug', 'performance', 'verbose'];
 const STANDARD = ['name', 'namespace', 'className', 'metadata', 'selector'];
 const EMBER = ['context', 'on', 'template', 'execute'];
 
-
 Semantic.BaseMixin = Ember.Mixin.create({
-  init: function() {
-    this._super();
+  init() {
+    this._super(...arguments);
 
     if (!this.get('module')) {
       return Ember.Logger.error('Module was not declared on semantic extended type');
     }
   },
 
-  settings: function(module) {
+  settings(module) {
     var component, custom, key, prop, value;
 
     component = window.$.fn[module];
@@ -66,13 +65,13 @@ Semantic.BaseMixin = Ember.Mixin.create({
     return custom;
   },
 
-  updateProperty: function(property) {
+  updateProperty(property) {
     return function() {
       this.execute('set ' + property, this.get(property));
     };
   },
 
-  updateFunctionWithParameters: function(key, fn) {
+  updateFunctionWithParameters(key, fn) {
     return function() {
       var args = [].splice.call(arguments, 0);
       var internal = this.get(`_${key}`);
@@ -89,27 +88,35 @@ Semantic.BaseMixin = Ember.Mixin.create({
     };
   },
 
-  didInsertElement: function() {
+  initializeModule() {
     this.$()[this.get("module")](this.settings(this.get("module")));
+  },
+
+  didInsertElement() {
+    this._super(...arguments);
+    this.initializeModule();
 
     var _this = this;
     var properties = {};
+
     // Modules without setable properties
-    if (['accordion', 'nag'].indexOf(this.get('module')) === -1) {
-      properties = this.execute('set');
-    }
+    properties = this.execute('internal', 'set');
     var property;
 
-    for(property in properties) {
-      if (!properties.hasOwnProperty(property)) {
-        continue;
-      }
+    if (typeof properties === "object" && !Ember.isArray(properties)) {
+      for(property in properties) {
+        if (!properties.hasOwnProperty(property)) {
+          continue;
+        }
 
-      _this.addObserver(property, _this, _this.updateProperty(property));
+        if (this.hasOwnProperty(property)) {
+          _this.addObserver(property, _this, _this.updateProperty(property));
+        }
+      }
     }
   },
 
-  willDestroyElement: function() {
+  willDestroyElement() {
     var name, selector;
     if ((selector = this.$()) != null) {
       if (typeof selector[name = this.get("module")] === "function") {
@@ -118,7 +125,7 @@ Semantic.BaseMixin = Ember.Mixin.create({
     }
   },
 
-  execute: function() {
+  execute() {
     var selector, module;
     if ((selector = this.$()) != null) {
       if ((module = selector[this.get('module')]) != null) {

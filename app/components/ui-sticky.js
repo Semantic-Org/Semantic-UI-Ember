@@ -1,2 +1,1 @@
-import Sticky from 'semantic-ui-ember/components/ui-sticky';
-export default Sticky;
+export { default } from 'semantic-ui-ember/components/ui-sticky';

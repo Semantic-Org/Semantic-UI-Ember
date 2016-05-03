@@ -1,7 +1,7 @@
 /* global alert */
 import Ember from 'ember';
 
-export default Ember.Controller.extend(Ember.Evented, {
+export default Ember.Controller.extend({
   actions: {
     openModal: function(name) {
       $('.ui.' + name + '.modal').modal('show');

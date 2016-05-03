@@ -3,9 +3,8 @@ import CheckboxMixin from '../mixins/checkbox-mixin';
 
 export default Ember.Component.extend(CheckboxMixin, {
   type: 'checkbox',
-  checked: false,
 
   _onChange: function() {
-    this.set('checked', this.$('input').prop('checked'));
+    this.set('checked', this.$('input').is(':checked'));
   }
 });

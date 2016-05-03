@@ -6,13 +6,15 @@ moduleForComponent('ui-sticky', 'Integration | Component | ui sticky', {
 });
 
 test('it renders', function(assert) {
+  assert.expect(3);
+
   this.render(hbs`
     {{#ui-sticky}}
       <p>Some text</p>
     {{/ui-sticky}}
   `);
 
-  assert.equal($('.ui.sticky').length, 1);
-  assert.ok($('.ui.sticky').css('width') !== undefined);
-  assert.ok($('.ui.sticky').css('height') !== undefined);
+  assert.equal(this.$('.ui.sticky').length, 1);
+  assert.ok(this.$('.ui.sticky').css('width') !== undefined);
+  assert.ok(this.$('.ui.sticky').css('height') !== undefined);
 });
