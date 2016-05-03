@@ -1,3 +1,4 @@
+import Ember from 'ember';
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 
@@ -191,4 +192,39 @@ test('it can set the selected value without binding for full DDAU', function(ass
   $(this.$('.item')[0]).click();
   assert.equal(this.$('.item.selected').data('value'), 1);
   assert.equal(this.get('people_id'), 1);
+});
+
+test('it renders and clears the value if it changes and isnt found', function(assert) {
+  assert.expect(7);
+
+  this.set('people', Ember.A([
+    { id: 1, name: "Sherlock Homes" },
+    { id: 2, name: "Patrick Bateman" }
+  ]));
+
+  this.render(hbs`
+    {{#ui-dropdown selected=selected.id}}
+      <div class='menu'>
+      {{#each people as |person|}}
+        <div class='item' data-value={{person.id}}>{{person.name}}</div>
+      {{/each}}
+      </div>
+    {{/ui-dropdown}}
+  `);
+
+  assert.equal(this.$('.item').length, 2, "Right number of items");
+  assert.equal(this.get('selected'), undefined, "Nothing is selected");
+
+  this.set('selected', this.get('people').objectAt(1));
+  assert.equal(this.$('.item.active').text(), "Patrick Bateman");
+
+  this.$(".menu .item[data-value=1]").click();
+  assert.equal(this.get('selected.id'), "1", "Sherlock has been selected");
+
+  // Now clear the property
+  this.set('selected', null);
+
+  assert.equal(this.$('.item').length, 2, "Right number of items");
+  assert.equal(this.$('.item.active').length, 0);
+  assert.equal(this.get('selected'), undefined, "Nothing is selected");
 });

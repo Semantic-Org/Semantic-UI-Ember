@@ -18,6 +18,21 @@ export default Ember.Component.extend(Base, DataAttributes, {
     return selected;
   },
 
+  updateProperty: function(property) {
+    return function() {
+      if (property === 'selected') {
+        let value = this.get(property);
+        if (Ember.isBlank(value)) {
+          this.execute('clear');
+        } else {
+          this.execute('set ' + property, value);
+        }
+      } else {
+        this.execute('set ' + property, this.get(property));
+      }
+    };
+  },
+
   _onChange: function(value/*, text, $element*/) {
     this.set('selected', value);
   }

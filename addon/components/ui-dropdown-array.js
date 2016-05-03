@@ -12,7 +12,12 @@ export default UiDropdown.extend({
   updateProperty: function(property) {
     return function() {
       if (property === 'selected') {
-        this.execute('set ' + property, this.get(`${property}.${this.get('find_by')}`));
+        let value = this.get(`${property}.${this.get('find_by')}`);
+        if (Ember.isBlank(value)) {
+          this.execute('clear');
+        } else {
+          this.execute('set ' + property, value);
+        }
       } else {
         this.execute('set ' + property, this.get(property));
       }
