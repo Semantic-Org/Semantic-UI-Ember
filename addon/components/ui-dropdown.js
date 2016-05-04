@@ -9,7 +9,7 @@ export default Ember.Component.extend(Base, DataAttributes, {
   didInsertElement() {
     this._super(...arguments);
     var selected = this.get('selected');
-    if (typeof selected !== "undefined" && selected !== null) {
+    if (Ember.isPresent(selected)) {
       this.execute('set selected', this.getSelected(selected));
     }
   },
@@ -21,7 +21,8 @@ export default Ember.Component.extend(Base, DataAttributes, {
   updateProperty: function(property) {
     return function() {
       if (property === 'selected') {
-        let value = this.get(property);
+        let selected = this.get(property);
+        let value = this.getSelected(selected);
         if (Ember.isBlank(value)) {
           this.execute('clear');
         } else {
