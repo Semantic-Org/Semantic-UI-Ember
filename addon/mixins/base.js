@@ -6,15 +6,19 @@ import Semantic from '../semantic';
 // const STANDARD = ['name', 'namespace', 'className', 'metadata', 'selector'];
 // const EMBER = ['context', 'on', 'template', 'execute'];
 
-const EMBER = Ember.A(['class', 'classNames', 'classNameBindings']);
+const EMBER = Ember.A(['class', 'classNames', 'classNameBindings', 'tagName']);
 
 Semantic.BaseMixin = Ember.Mixin.create({
+  initialized: false,
+  bindableAttrs: null,
+
   init() {
     this._super(...arguments);
 
     if (Ember.isBlank(this.get('module'))) {
       return Ember.Logger.error('A module was not declared on semantic extended type');
     }
+    this.set('bindableAttrs', Ember.A());
   },
 
   settings(module) {
@@ -22,7 +26,7 @@ Semantic.BaseMixin = Ember.Mixin.create({
 
     component = window.$.fn[module];
     if (!component) {
-      throw "Unable to find semantic module: " + module;
+      throw 'Unable to find semantic module: ' + module;
     }
 
     custom = {
@@ -32,15 +36,8 @@ Semantic.BaseMixin = Ember.Mixin.create({
     };
 
     for (let key in this.attrs) {
-      let value = this.attrs[key];
+      let value = this.getAttrValue(key);
 
-      // ensure it isn't a mutable object
-      if (typeof value === "object") {
-        let objectKeys = Ember.A(Object.keys(value));
-        if (objectKeys.any((objectkey) => objectkey.startsWith('MUTABLE_CELL') )) {
-          value = value.value;
-        }
-      }
 
       if (Ember.isBlank(component.settings[key])) {
         if (!EMBER.contains(key)) {
@@ -108,7 +105,10 @@ Semantic.BaseMixin = Ember.Mixin.create({
       // }
 
       // if (internal !== fn) {
-      return fn.apply(this, [this].concat(args));
+      // return fn.apply(this, [this].concat(args));
+      if (this.get('initialized')) {
+        return fn.apply(this, args);
+      }
       // }
 
       // return true;
@@ -123,40 +123,68 @@ Semantic.BaseMixin = Ember.Mixin.create({
     this._super(...arguments);
     this.initializeModule();
 
-    // var _this = this;
-    // var properties = {};
+    // Get the modules settable and gettable properties.
+    let settableProperties = Ember.A(Object.keys(this.execute('internal', 'set')));
+    let gettableProperties = Ember.A(Object.keys(this.execute('internal', 'get')));
 
-    // Modules without setable properties
-    // properties = this.execute('internal', 'set');
-    // var property;
+    for (let key in this.attrs) {
+      if (settableProperties.contains(key) && gettableProperties.contains(key)) {
+        this.get('bindableAttrs').push(key);
+      }
+    }
+    this.set('initialized', true);
+  },
 
-    // if (typeof properties === "object" && !Ember.isArray(properties)) {
-    //   for(property in properties) {
-    //     if (!properties.hasOwnProperty(property)) {
-    //       continue;
-    //     }
+  didUpdateAttrs() {
+    this._super(...arguments);
+    for (let bindableAttr of this.get('bindableAttrs')) {
+      let attrValue = this.getAttrValue(bindableAttr);
+      let moduleValue = this.execute(`get ${bindableAttr}`);
+      if (this.notEqual(attrValue, moduleValue)) {
+        this.execute(`set ${bindableAttr}`, attrValue);
+      }
+    }
+  },
 
-    //     if (this.hasOwnProperty(property)) {
-    //       _this.addObserver(property, _this, _this.updateProperty(property));
-    //     }
-    //   }
-    // }
+  getAttrValue(name) {
+    let value = this.attrs[name];
+
+    if (Ember.isBlank(value)) {
+      return value;
+    }
+
+    // if its a mutable object, get the actual value
+    if (typeof value === 'object') {
+      let objectKeys = Ember.A(Object.keys(value));
+      if (objectKeys.any((objectkey) => objectkey.startsWith('MUTABLE_CELL') )) {
+        value = value.value;
+      }
+    }
+
+    return value;
+  },
+
+  notEqual(attrValue, moduleValue) {
+    // Enhance this
+    return attrValue !== moduleValue;
   },
 
   willDestroyElement() {
     this._super(...arguments);
-    var name, selector;
-    if ((selector = this.$()) != null) {
-      if (typeof selector[name = this.get("module")] === "function") {
-        return selector[name]('destroy');
+    let selector = this.$();
+    if (selector != null) {
+      let module = selector[this.get('module')];
+      if (typeof module === 'function') {
+        return module('destroy');
       }
     }
   },
 
   execute() {
-    var selector, module;
-    if ((selector = this.$()) != null) {
-      if ((module = selector[this.get('module')]) != null) {
+    let selector = this.$();
+    if (selector != null) {
+      let module = selector[this.get('module')];
+      if (typeof module === 'function') {
         return module.apply(this.$(), arguments);
       }
     }

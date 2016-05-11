@@ -1,9 +1,16 @@
 <h2 id='title'>Rating</h2>
 
 <div class="ui basic segment">
-  {{ui-rating initialRating=3 rating=rating maxRating=7}} - Rating {{rating}}
+  {{ui-rating
+      initialRating=3
+      rating=rating
+      maxRating=7
+      onRate=(action (mut rating))}} - Rating {{rating}}
 </div>
 
 <div class="ui basic segment">
-  {{ui-rating rating=heartRating class="heart"}} - Rating {{heartRating}}
+  {{ui-rating
+      class="heart"
+      rating=heartRating
+      onRate=(action (mut heartRating))}} - Rating {{heartRating}}
 </div>
