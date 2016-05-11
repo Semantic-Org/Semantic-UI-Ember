@@ -11,6 +11,7 @@ const EMBER = Ember.A(['class', 'classNames', 'classNameBindings', 'tagName']);
 Semantic.BaseMixin = Ember.Mixin.create({
   initialized: false,
   bindableAttrs: null,
+  settableAttrs: null,
 
   init() {
     this._super(...arguments);
@@ -19,6 +20,7 @@ Semantic.BaseMixin = Ember.Mixin.create({
       return Ember.Logger.error('A module was not declared on semantic extended type');
     }
     this.set('bindableAttrs', Ember.A());
+    this.set('settableAttrs', Ember.A());
   },
 
   settings(module) {
@@ -129,7 +131,7 @@ Semantic.BaseMixin = Ember.Mixin.create({
 
     for (let key in this.attrs) {
       if (settableProperties.contains(key) && gettableProperties.contains(key)) {
-        this.get('bindableAttrs').push(key);
+        this.get('bindableAttrs').addObject(key);
       }
     }
     this.set('initialized', true);
@@ -143,6 +145,10 @@ Semantic.BaseMixin = Ember.Mixin.create({
       if (this.notEqual(attrValue, moduleValue)) {
         this.execute(`set ${bindableAttr}`, attrValue);
       }
+    }
+    for (let settableAttr of this.get('settableAttrs')) {
+      let attrValue = this.getAttrValue(settableAttr);
+      this.execute(`set ${settableAttr}`, attrValue);
     }
   },
 
