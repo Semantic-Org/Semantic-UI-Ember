@@ -1,11 +1,6 @@
 import Ember from 'ember';
 import Semantic from '../semantic';
 
-// Static properties to ignore
-// const DEBUG = ['debug', 'performance', 'verbose'];
-// const STANDARD = ['name', 'namespace', 'className', 'metadata', 'selector'];
-// const EMBER = ['context', 'on', 'template', 'execute'];
-
 const EMBER = Ember.A(['class', 'classNames', 'classNameBindings', 'tagName']);
 
 Semantic.BaseMixin = Ember.Mixin.create({
@@ -57,45 +52,8 @@ Semantic.BaseMixin = Ember.Mixin.create({
       }
     }
 
-    // for (key in component.settings) {
-    //   prop = component.settings[key];
-    //   if (window.$.inArray(key, DEBUG) >= 0) {
-
-    //   if (window.$.inArray(key, STANDARD) >= 0) {
-    //     continue;
-    //   }
-
-    //   if (typeof prop === 'function' && typeof (this.get(key) || this.get(`_${key}`)) !== 'function') {
-    //     continue;
-    //   }
-
-    //   if (window.$.inArray(key, EMBER) >= 0) {
-    //     value = this.get(`ui_${key}`);
-    //   } else {
-    //     if (typeof this.get(key) !== 'undefined') {
-    //       value = this.get(key);
-    //     } else {
-    //       value = this.get(`_${key}`);
-    //     }
-    //   }
-
-    //   if (value != null) {
-    //     if (typeof value === 'function') {
-    //       custom[key] = Ember.run.bind(this, this.updateFunctionWithParameters(key, value));
-    //     } else {
-    //       custom[key] = value;
-    //     }
-    //   }
-    // }
-
     return custom;
   },
-
-  // updateProperty(property) {
-  //   return function() {
-  //     this.execute('set ' + property, this.get(property));
-  //   };
-  // },
 
   updateFunctionWithParameters(key, fn) {
     return function() {
@@ -130,8 +88,12 @@ Semantic.BaseMixin = Ember.Mixin.create({
     let gettableProperties = Ember.A(Object.keys(this.execute('internal', 'get')));
 
     for (let key in this.attrs) {
+      // If it has a settable and gettable attribute, then its bindable
       if (settableProperties.contains(key) && gettableProperties.contains(key)) {
         this.get('bindableAttrs').addObject(key);
+      } else if (settableProperties.contains(key)) {
+        // otherwise, its settable only
+        this.get('settableAttrs').addObject(key);
       }
     }
     this.set('initialized', true);
