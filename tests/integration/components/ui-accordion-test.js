@@ -1,3 +1,4 @@
+/* global stop, start */
 import Ember from 'ember';
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
@@ -102,4 +103,127 @@ test('dynamically added content is clickable', function(assert) {
   this.$('.ui.accordion [data-id=extra-title-1]').click();
   assert.equal(this.$('.ui.accordion [data-id=extra-title-1].active').length, 1);
   assert.equal(this.$('.ui.accordion .active').length, 1);
+});
+
+test('exclusive false allows more than one active title', function(assert) {
+  assert.expect(2);
+
+  this.render(hbs`
+    {{#ui-accordion class="styled" exclusive=false}}
+      <div class="title" data-id="title-1">
+        Semantic UI
+      </div>
+      <div class="content" data-id="content-1">
+        Accordion Component
+      </div>
+      <div class="title" data-id="title-2">
+        Section Two
+      </div>
+      <div class="content" data-id="content-2">
+        Content Two
+      </div>
+    {{/ui-accordion}}
+  `);
+
+  // Test clicking activates accordion
+  this.$('.ui.accordion [data-id=title-2]').click();
+  assert.equal(this.$('.ui.accordion [data-id=title-2].active').length, 1);
+  assert.equal(this.$('.ui.accordion .active').length, 1);
+});
+
+test('exclusive false allows more than one active title', function(assert) {
+  assert.expect(4);
+
+  this.render(hbs`
+    {{#ui-accordion class="styled" exclusive=false}}
+      <div class="title" data-id="title-1">
+        Semantic UI
+      </div>
+      <div class="content" data-id="content-1">
+        Accordion Component
+      </div>
+      <div class="title" data-id="title-2">
+        Section Two
+      </div>
+      <div class="content" data-id="content-2">
+        Content Two
+      </div>
+    {{/ui-accordion}}
+  `);
+
+  // Test clicking activates accordion
+  this.$('.ui.accordion [data-id=title-2]').click();
+  assert.equal(this.$('.ui.accordion [data-id=title-2].active').length, 1);
+  assert.equal(this.$('.ui.accordion .active').length, 1);
+
+  this.$('.ui.accordion [data-id=title-1]').click();
+  assert.equal(this.$('.ui.accordion [data-id=title-1].active').length, 1);
+  assert.equal(this.$('.ui.accordion .active').length, 2);
+});
+
+test('collapsible false allows doesnt allow active to close', function(assert) {
+  assert.expect(4);
+
+  this.render(hbs`
+    {{#ui-accordion class="styled" collapsible=false}}
+      <div class="title" data-id="title-1">
+        Semantic UI
+      </div>
+      <div class="content" data-id="content-1">
+        Accordion Component
+      </div>
+      <div class="title" data-id="title-2">
+        Section Two
+      </div>
+      <div class="content" data-id="content-2">
+        Content Two
+      </div>
+    {{/ui-accordion}}
+  `);
+
+  assert.equal(this.$('.ui.accordion .active').length, 0);
+  // Test clicking activates accordion
+  this.$('.ui.accordion [data-id=title-2]').click();
+  assert.equal(this.$('.ui.accordion [data-id=title-2].active').length, 1);
+  assert.equal(this.$('.ui.accordion .active').length, 1);
+
+  this.$('.ui.accordion [data-id=title-2]').click();
+  assert.equal(this.$('.ui.accordion .active').length, 1);
+});
+
+test('composable action closes open tab', function(assert) {
+  assert.expect(4);
+
+  this.render(hbs`
+    {{#ui-accordion class="styled" collapsible=false as |execute|}}
+      <div class="title" data-id="title-1">
+        Semantic UI
+      </div>
+      <div class="content" data-id="content-1">
+        Accordion Component
+      </div>
+      <div class="title" data-id="title-2">
+        Section Two
+      </div>
+      <div class="content" data-id="content-2">
+        Content Two
+
+        <div class="ui button" data-id="content-2-button" {{action execute "close" 1}}>Close</div>
+      </div>
+    {{/ui-accordion}}
+  `);
+
+  assert.equal(this.$('.ui.accordion .active').length, 0);
+  // Test clicking activates accordion
+  this.$('.ui.accordion [data-id=title-2]').click();
+  assert.equal(this.$('.ui.accordion [data-id=title-2].active').length, 1);
+  assert.equal(this.$('.ui.accordion .active').length, 1);
+
+  this.$('.ui.accordion [data-id=content-2-button]').click();
+  stop();
+  setTimeout(() => {
+    start();
+    // animation takes a second after click
+    assert.equal(this.$('.ui.accordion .active').length, 0);
+  }, 500);
 });

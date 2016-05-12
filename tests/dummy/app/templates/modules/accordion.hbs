@@ -1,11 +1,19 @@
 <h2 id='title'>Accordion</h2>
 
-{{#ui-accordion class="styled"}}
+{{#ui-accordion class="styled" as |execute|}}
   <div class="title">
     Semantic UI
   </div>
   <div class="content">
     Accordion Component
+
+    <div class="ui basic segment">
+      <div class="ui tiny header">
+        Example using composable actions from within accordion
+      </div>
+      <div class="ui button" {{action execute "close" 0}}>Close</div>
+      <div class="ui button" {{action execute "open" 1}}>Open two</div>
+    </div>
   </div>
   <div class="title">
     Accordion Two
