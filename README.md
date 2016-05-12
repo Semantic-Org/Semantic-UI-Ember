@@ -8,26 +8,19 @@ This is the official Ember library for the Semantic-UI modules. The code was ori
 
 We feel that the Semantic-UI-Ember project should be an extension of Semantic-UI and not a complete rewrite. With that in mind, we will always be a very lightweight layer on top to make the integration a first-class Ember experience. Please [follow the official documentation](http://semantic-ui.com/) for futher information.
 
+The main core of this add-on focuses on the Semantic-UI modules. Anything that's not a module (i.e. segment, button, etc), should be added to your templates as plain HTML. We didn't find any value in creating Ember components that in the end represented simple HTML elements.
+
+This is the 2.0 release which focuses on Data Down Actions Up as the way to interact with Semantic-UI. We've moved away from data bindings to be more inline with Ember, and we found it better ties into Semantic-UI's existing events.
+
+If you're looking for the 1.0 release, you can find it [here](https://github.com/Semantic-Org/Semantic-UI-Ember/tree/release-1-0).
 
 # Installation
 
-Include the library as an [NPM](https://www.npmjs.com/) dependency, from within an [ember-cli](http://www.ember-cli.com/) app.
+Install this add-on through Ember CLI. We support Ember versions 1.13 latest - 2.X.
 
 
 ```
 ember install semantic-ui-ember
-```
-
-*If using ember-cli 0.1.5 – 0.2.3*
-
-```
-ember install:addon semantic-ui-ember
-```
-
-*If using ember-cli < 0.1.5*
-
-```
-npm install --save-dev Semantic-Org/Semantic-UI-Ember
 ```
 
 Run the library's blueprint to pull in its Bower dependencies. This only needs to be done once.
@@ -37,6 +30,94 @@ ember generate semantic-ui-ember
 ```
 
 # Modules
+
+## Preface
+
+The [base mixin](https://github.com/Semantic-Org/Semantic-UI-Ember/blob/master/addon/mixins/base.js) that interacts with all of Semantic-UI's modules, is just a proxy layer from Semantic-UI to Ember.
+
+If you look at the actual components source code, you might be surprised that the actual code is very sparse. The [accordion](https://github.com/Semantic-Org/Semantic-UI-Ember/blob/master/addon/components/ui-accordion.js) is really only 3 lines of code. The mixin where all the proxying happens, the name of the module, and the default class names.
+
+Because of the base mixin, any property that can be set on module. To add a property, all you need to do is add it to the component template and it will be passed through. If you look at any of the modules documentation, you'll notice the same 4 tabs at the top. They are: Definition, Examples, Usage, Settings. Definition and Examples give you a good idea of what can be done with that module, but Usage and Settings is what you'll want to look at to know what can be passed to the Ember component.
+
+# Usage
+
+We'll use [accordion usage](http://semantic-ui.com/modules/accordion.html#/usage) as an example. At the bottom you'll see a header for Behaviors and a list of commands that can be executed on the accordion. Through the use of a composable action, you can call any of those commands.
+
+For example, if you wanted to open another tab it would be possible through a composable action like this:
+
+```handlebars
+{{#ui-accordion as |execute|}}
+  <div class="title">
+    Semantic UI
+  </div>
+  <div class="content">
+    Be sure to check out <div class="ui button" {{action (execute "open" 1)}}>the example</div>
+  </div>
+  <div class="title">
+    Example
+  </div>
+  <div class="content">
+    This is a great example!
+  </div>
+{{/ui-accordion}}
+```
+
+As you can see on the accordions behavior page, you can "open" another tab by passing in the index. Execute allows you to call a behavior. One thing to note, some of the behaviors require you to pass the arguments in as one. If passing them in separately didn't work, try combing the text. For example if you were trying to set enabled on a checkbox, you would need to pass in the arguments like this:
+
+```handlebars
+<div class="ui button" {{action (execute "set enabled")}}>Enable Checkbox (correct)</div>
+```
+
+instead of like
+
+```handlebars
+<div class="ui button" {{action (execute "set" "enabled")}}>Enable Checkbox (incorrect)</div>
+```
+
+If it doesn't work as separate words, play around with combining the text.
+
+# Settings
+
+On the settings page for each of the modules, there is a list of settings and callbacks that are available for that module. Some of those settings are bindable, meaning if you update it after the initialization, it will update the setting, some are initialization only settings. To know which are bindable and which are only initialized, look at the behaviors page. Usually bindable settings have the same name but with a set in front ("set {property}") on the behaviors page.
+
+To pass any of the settings to the component, just add it as a component property and it will be passed through to Semantic-UI if it exists in the modules setting.
+
+For example, if we look at the [accordions settings](http://semantic-ui.com/modules/accordion.html#/settings), you'll notice that there are some defaults, but we could change those on our accordion by just passing them through. Lets pass through exclusive, collapsible, and duration as a different configuration.
+
+
+```handlebars
+{{#ui-accordion exclusive=false collapsible=false duration=100}}
+  <div class="title">
+    Semantic UI
+  </div>
+  <div class="content">
+    Is amazing!
+  </div>
+{{/ui-accordion}}
+```
+
+The other thing that's possible, is any callback that exists as an option, can also be available when we set our component. We could bind to the accordions opened callback and increment a counter.
+
+```handlebars
+{{#ui-accordion onOpen=(action "incrementOpens")}}
+  <div class="title">
+    Semantic UI
+  </div>
+  <div class="content">
+    Dynamic callbacks!
+  </div>
+{{/ui-accordion}}
+```
+
+It's also possibly to mutate a value directly by composing a helper. Let's use the rating module as an example.
+
+```handlebars
+{{ui-rating
+    rating=internalRating
+    onRate=(action (mut internalRating)) }}
+```
+
+By combining the action and mut helper, we can directly set the internalRating based on the callback value being passed in. Hopefully this gives you some ideas of how to compose your components using Semantic-UI's documentation as the source. We really intent to have the Ember components be as much of a proxy as possibly and will call out any differences from Semantic-UI's documentation in the examples below.
 
 ## Accordion
 
