@@ -35,7 +35,6 @@ Semantic.BaseMixin = Ember.Mixin.create({
     for (let key in this.attrs) {
       let value = this.getAttrValue(key);
 
-
       if (Ember.isBlank(component.settings[key])) {
         if (!EMBER.contains(key)) {
           Ember.Logger.debug(`You passed in the property '${key}', but a setting doesn't exist on the Semantic UI module: ${module}`);
@@ -44,11 +43,18 @@ Semantic.BaseMixin = Ember.Mixin.create({
       }
 
       if (value != null) {
-        if (typeof value === 'function') {
-          custom[key] = Ember.run.bind(this, this.updateFunctionWithParameters(key, value));
-        } else {
-          custom[key] = value;
-        }
+        custom[key] = value;
+      }
+    }
+
+    // Init, and allow any overrides
+    this.willInitSemantic(custom);
+
+    // Late bind any functions over to use the right scope
+    for (let key in custom) {
+      let value = custom[key];
+      if (typeof value === 'function') {
+        custom[key] = Ember.run.bind(this, this.updateFunctionWithParameters(key, value));
       }
     }
 
@@ -76,7 +82,21 @@ Semantic.BaseMixin = Ember.Mixin.create({
   },
 
   initializeModule() {
-    this.$()[this.get("module")](this.settings(this.get("module")));
+    let settings = this.settings(this.get("module"));
+    this.$()[this.get("module")](settings);
+  },
+
+  // Semantic helper methods
+  willInitSemantic(settings) {
+    // Use this method to modify the settings object on inherited components, before module initialization
+  },
+
+  didInitSemantic() {
+    // Use this method after the module is initialized to do post initialized changes
+  },
+
+  willUpdateSemanticValue(attrName, attrValue) {
+    this.execute(`set ${attrName}`, attrValue);
   },
 
   didInsertElement() {
@@ -96,6 +116,7 @@ Semantic.BaseMixin = Ember.Mixin.create({
         this.get('settableAttrs').addObject(key);
       }
     }
+    this.didInitSemantic();
     this.set('initialized', true);
   },
 
@@ -105,12 +126,12 @@ Semantic.BaseMixin = Ember.Mixin.create({
       let attrValue = this.getAttrValue(bindableAttr);
       let moduleValue = this.execute(`get ${bindableAttr}`);
       if (this.notEqual(attrValue, moduleValue)) {
-        this.execute(`set ${bindableAttr}`, attrValue);
+        this.willUpdateSemanticValue(bindableAttr, attrValue);
       }
     }
     for (let settableAttr of this.get('settableAttrs')) {
       let attrValue = this.getAttrValue(settableAttr);
-      this.execute(`set ${settableAttr}`, attrValue);
+      this.willUpdateSemanticValue(settableAttr, attrValue);
     }
   },
 
