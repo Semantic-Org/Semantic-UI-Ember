@@ -6,6 +6,6 @@ export default Ember.Component.extend(Base, {
 
   didUpdate() {
     this._super(...arguments);
-    this.initializeModule();
+    this.initSemanticModule();
   }
 });
