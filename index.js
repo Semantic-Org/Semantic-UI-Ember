@@ -39,13 +39,25 @@ module.exports = {
     }
 
     if (getWithDefault(options['images'], defaults['images'])) {
-      var imageOptions = { destDir: 'assets/themes/default/assets/images' };
+      var imageOptions;
+      if (options["cssPath"] && options["cssPath"] !== null) {
+        imageOptions = { destDir: options.cssPath + '/themes/default/assets/images' };
+      }
+      else {
+        imageOptions = { destDir: 'assets/themes/default/assets/images' };
+      }
       app.import('bower_components/semantic-ui/dist/themes/default/assets/images/flags.png', imageOptions);
     }
 
     if (getWithDefault(options['fonts'], defaults['fonts'])) {
       var fontExtensions = ['.eot','.otf','.svg','.ttf','.woff','.woff2'];
-      var fontOptions = { destDir: 'assets/themes/default/assets/fonts' };
+      var fontOptions;
+      if (options["cssPath"] && options["cssPath"] !== null) {
+        fontOptions = { destDir: options.cssPath + '/themes/default/assets/fonts' };
+      }
+      else {
+        fontOptions = { destDir: 'assets/themes/default/assets/fonts' };
+      }
       for (var i = fontExtensions.length - 1; i >= 0; i--) {
         app.import('bower_components/semantic-ui/dist/themes/default/assets/fonts/icons'+fontExtensions[i], fontOptions);
       };
