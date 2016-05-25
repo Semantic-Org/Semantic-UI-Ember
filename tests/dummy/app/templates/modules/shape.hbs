@@ -1,6 +1,30 @@
 <h2 id='title'>Shape</h2>
 
-{{#ui-shape class="people"}}
+{{#ui-shape class="people" as |execute|}}
+
+  <div class="ui basic segment">
+    <div class="ui button" title="Flip Left" {{action execute 'flip left'}}>
+      <i class="left long arrow icon"></i>
+    </div>
+    <div class="ui button" title="Flip Up"  {{action execute 'flip up'}}>
+      <i class="up long arrow icon"></i>
+    </div>
+    <div class="ui icon button" title="Flip Down" {{action execute 'flip down'}}>
+      <i class="down long arrow icon"></i>
+    </div>
+    <div class="ui icon button" title="Flip Right"  {{action execute 'flip right'}}>
+      <i class="right long arrow icon"></i>
+    </div>
+    <div class="ui ignored icon direction buttons">
+      <div class="ui button" title="Flip Over"  {{action execute 'flip over'}}>
+        <i class="retweet icon"></i>
+      </div>
+      <div class="ui button" title="Flip Back"  {{action execute 'flip back'}}>
+        <i class="flipped retweet icon"></i>
+      </div>
+    </div>
+  </div>
+
   <div class="sides">
     <div class="active side">
       <div class="ui card">
@@ -51,24 +75,3 @@
     </div>
   </div>
 {{/ui-shape}}
-
-<div class="ui button" title="Flip Left" {{action 'flip' 'left'}}>
-  <i class="left long arrow icon"></i>
-</div>
-<div class="ui button" title="Flip Up"  {{action 'flip' 'up'}}>
-  <i class="up long arrow icon"></i>
-</div>
-<div class="ui icon button" title="Flip Down" {{action 'flip' 'down'}}>
-  <i class="down long arrow icon"></i>
-</div>
-<div class="ui icon button" title="Flip Right"  {{action 'flip' 'right'}}>
-  <i class="right long arrow icon"></i>
-</div>
-<div class="ui ignored icon direction buttons">
-  <div class="ui button" title="Flip Over"  {{action 'flip' 'over'}}>
-    <i class="retweet icon"></i>
-  </div>
-  <div class="ui button" title="Flip Back"  {{action 'flip' 'back'}}>
-    <i class="flipped retweet icon"></i>
-  </div>
-</div>

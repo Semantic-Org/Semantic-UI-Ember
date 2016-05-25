@@ -1,7 +1,8 @@
 import Ember from 'ember';
 import Semantic from '../semantic';
 
-const EMBER_ATTRS = Ember.A(['class', 'classNames', 'classNameBindings', 'tagName']);
+const EMBER_ATTRS = ['class', 'classNames', 'classNameBindings', 'tagName'];
+const CUSTOM_ATTRS = ['onElement'];
 
 Semantic.BaseMixin = Ember.Mixin.create({
   /// Internal Variables
@@ -71,10 +72,14 @@ Semantic.BaseMixin = Ember.Mixin.create({
       ignorableAttrs = ignorableAttrs.concat(this.get('ignorableAttrs'));
     }
     ignorableAttrs = ignorableAttrs.concat(EMBER_ATTRS);
+    ignorableAttrs = ignorableAttrs.concat(CUSTOM_ATTRS);
     return Ember.A(ignorableAttrs);
   },
 
   getSemanticScope() {
+    if (Ember.isPresent(this.get('onElement'))) {
+      return this.$(this.get('onElement'));
+    }
     return this.$();
   },
 
