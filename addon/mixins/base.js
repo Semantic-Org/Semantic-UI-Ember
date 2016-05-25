@@ -13,9 +13,10 @@ Semantic.BaseMixin = Ember.Mixin.create({
   init() {
     this._super(...arguments);
 
-    if (Ember.isBlank(this.get('module'))) {
+    if (Ember.isBlank(this.getSemanticModuleName())) {
       return Ember.Logger.error('A module was not declared on semantic extended type');
     }
+    this.set('_initialized', false);
     this.set('_bindableAttrs', Ember.A());
     this.set('_settableAttrs', Ember.A());
   },
@@ -43,13 +44,7 @@ Semantic.BaseMixin = Ember.Mixin.create({
 
   willDestroyElement() {
     this._super(...arguments);
-    let selector = this.$();
-    if (selector != null) {
-      let module = selector[this.get('module')];
-      if (typeof module === 'function') {
-        return module('destroy');
-      }
-    }
+    this.execute('destroy');
   },
 
   didUpdateAttrs() {
@@ -58,23 +53,41 @@ Semantic.BaseMixin = Ember.Mixin.create({
       let attrValue = this._getAttrValue(bindableAttr);
       let moduleValue = this.getSemanticAttr(bindableAttr);
       if (!this.areAttrValuesEqual(bindableAttr, attrValue, moduleValue)) {
-        this.updateSemanticAttr(bindableAttr, attrValue);
+        this.setSemanticAttr(bindableAttr, attrValue);
       }
     }
     for (let settableAttr of this.get('_settableAttrs')) {
       let attrValue = this._getAttrValue(settableAttr);
-      this.updateSemanticAttr(settableAttr, attrValue);
+      this.setSemanticAttr(settableAttr, attrValue);
     }
   },
 
   /// Semantic Hooks
+  getSemanticModuleName() {
+    return this.get('module');
+  },
+
+  getSemanticModule() {
+    let selector = this.$();
+    if (selector != null) {
+      let module = selector[this.getSemanticModuleName()];
+      if (typeof module === 'function') {
+        return module;
+      }
+    }
+  },
+
   willInitSemantic(settings) {
     // Use this method to modify the settings object on inherited components, before module initialization
   },
 
   initSemanticModule() {
-    let settings = this._settings(this.get("module"));
-    this.$()[this.get("module")](settings);
+    let module = this.getSemanticModule();
+    if (module) {
+      module(this._settings());
+    } else {
+      Ember.Logger.error(`The Semantic UI module ${this.getSemanticModuleName()} was not found and did not initialize`);
+    }
   },
 
   didInitSemantic() {
@@ -85,7 +98,7 @@ Semantic.BaseMixin = Ember.Mixin.create({
     this.execute(`get ${attrName}`);
   },
 
-  updateSemanticAttr(attrName, attrValue) {
+  setSemanticAttr(attrName, attrValue) {
     this.execute(`set ${attrName}`, attrValue);
   },
 
@@ -96,22 +109,19 @@ Semantic.BaseMixin = Ember.Mixin.create({
 
   // Semantic Helper Methods
   execute() {
-    let selector = this.$();
-    if (selector != null) {
-      let module = selector[this.get('module')];
-      if (typeof module === 'function') {
-        return module.apply(this.$(), arguments);
-      }
+    let module = this.getSemanticModule();
+    if (module) {
+      return module.apply(this.$(), arguments);
     }
   },
 
   actions: {
     execute() {
-      this.execute(...arguments);
+      return this.execute(...arguments);
     }
   },
 
-  // Internal Methods
+  // Private Methods
   _getAttrValue(name) {
     let value = this.attrs[name];
 
@@ -130,15 +140,16 @@ Semantic.BaseMixin = Ember.Mixin.create({
     return value;
   },
 
-  _settings(module) {
-    var component, custom, key, prop, value;
+  _settings() {
+    let moduleName = this.getSemanticModuleName();
 
-    component = window.$.fn[module];
+    let component = window.$.fn[moduleName];
     if (!component) {
-      throw 'Unable to find semantic module: ' + module;
+      Ember.Logger.error(`Unable to find jQuery Semantic UI module: ${moduleName}`);
+      return;
     }
 
-    custom = {
+    let custom = {
       debug: Semantic.UI_DEBUG,
       performance: Semantic.UI_PERFORMANCE,
       verbose: Semantic.UI_VERBOSE
@@ -149,7 +160,8 @@ Semantic.BaseMixin = Ember.Mixin.create({
 
       if (Ember.isBlank(component.settings[key])) {
         if (!EMBER.contains(key)) {
-          Ember.Logger.debug(`You passed in the property '${key}', but a setting doesn't exist on the Semantic UI module: ${module}`);
+          // TODO: Add better ember keys here
+          Ember.Logger.debug(`You passed in the property '${key}', but a setting doesn't exist on the Semantic UI module: ${moduleName}`);
         }
         continue;
       }
@@ -175,6 +187,7 @@ Semantic.BaseMixin = Ember.Mixin.create({
 
   _updateFunctionWithParameters(key, fn) {
     return function() {
+      // TODO: Allow internal wrapper
       var args = [].splice.call(arguments, 0);
       // var internal = this.get(`_${key}`);
 
