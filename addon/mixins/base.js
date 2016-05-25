@@ -1,13 +1,14 @@
 import Ember from 'ember';
 import Semantic from '../semantic';
 
-const EMBER = Ember.A(['class', 'classNames', 'classNameBindings', 'tagName']);
+const EMBER_ATTRS = Ember.A(['class', 'classNames', 'classNameBindings', 'tagName']);
 
 Semantic.BaseMixin = Ember.Mixin.create({
   /// Internal Variables
   _initialized: false,
   _bindableAttrs: null,
   _settableAttrs: null,
+  _ignorableAttrs: null,
 
   /// EMBER HOOKS
   init() {
@@ -19,6 +20,7 @@ Semantic.BaseMixin = Ember.Mixin.create({
     this.set('_initialized', false);
     this.set('_bindableAttrs', Ember.A());
     this.set('_settableAttrs', Ember.A());
+    this.set('_ignorableAttrs', this.getSemanticIgnorableAttrs());
   },
 
   didInsertElement() {
@@ -63,12 +65,25 @@ Semantic.BaseMixin = Ember.Mixin.create({
   },
 
   /// Semantic Hooks
+  getSemanticIgnorableAttrs() {
+    let ignorableAttrs = [];
+    if (Ember.isPresent(this.get('ignorableAttrs'))) {
+      ignorableAttrs = ignorableAttrs.concat(this.get('ignorableAttrs'));
+    }
+    ignorableAttrs = ignorableAttrs.concat(EMBER_ATTRS);
+    return Ember.A(ignorableAttrs);
+  },
+
+  getSemanticScope() {
+    return this.$();
+  },
+
   getSemanticModuleName() {
     return this.get('module');
   },
 
   getSemanticModule() {
-    let selector = this.$();
+    let selector = this.getSemanticScope();
     if (selector != null) {
       let module = selector[this.getSemanticModuleName()];
       if (typeof module === 'function') {
@@ -84,7 +99,7 @@ Semantic.BaseMixin = Ember.Mixin.create({
   initSemanticModule() {
     let module = this.getSemanticModule();
     if (module) {
-      module(this._settings());
+      module.call(this.getSemanticScope(), this._settings());
     } else {
       Ember.Logger.error(`The Semantic UI module ${this.getSemanticModuleName()} was not found and did not initialize`);
     }
@@ -111,7 +126,7 @@ Semantic.BaseMixin = Ember.Mixin.create({
   execute() {
     let module = this.getSemanticModule();
     if (module) {
-      return module.apply(this.$(), arguments);
+      return module.apply(this.getSemanticScope(), arguments);
     }
   },
 
@@ -159,7 +174,7 @@ Semantic.BaseMixin = Ember.Mixin.create({
       let value = this._getAttrValue(key);
 
       if (Ember.isBlank(component.settings[key])) {
-        if (!EMBER.contains(key)) {
+        if (!this.get('_ignorableAttrs').contains(key)) {
           // TODO: Add better ember keys here
           Ember.Logger.debug(`You passed in the property '${key}', but a setting doesn't exist on the Semantic UI module: ${moduleName}`);
         }
