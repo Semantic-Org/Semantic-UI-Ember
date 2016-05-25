@@ -106,32 +106,6 @@ test('dynamically added content is clickable', function(assert) {
 });
 
 test('exclusive false allows more than one active title', function(assert) {
-  assert.expect(2);
-
-  this.render(hbs`
-    {{#ui-accordion class="styled" exclusive=false}}
-      <div class="title" data-id="title-1">
-        Semantic UI
-      </div>
-      <div class="content" data-id="content-1">
-        Accordion Component
-      </div>
-      <div class="title" data-id="title-2">
-        Section Two
-      </div>
-      <div class="content" data-id="content-2">
-        Content Two
-      </div>
-    {{/ui-accordion}}
-  `);
-
-  // Test clicking activates accordion
-  this.$('.ui.accordion [data-id=title-2]').click();
-  assert.equal(this.$('.ui.accordion [data-id=title-2].active').length, 1);
-  assert.equal(this.$('.ui.accordion .active').length, 1);
-});
-
-test('exclusive false allows more than one active title', function(assert) {
   assert.expect(4);
 
   this.render(hbs`
