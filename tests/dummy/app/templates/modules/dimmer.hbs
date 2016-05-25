@@ -1,6 +1,6 @@
 <h2 id='title'>Dimmer</h2>
 
-{{#ui-dimmer onElement=".ui.segment" variation="inverted" duration=(hash show=1500) as |execute|}}
+{{#ui-dimmer onElement=".ui.segment" variation="inverted" duration=(hash show=1500) on="click" as |execute|}}
   <div class="ui show button" {{action execute 'show'}}><i class="plus icon"></i></div>
   <div class="ui hide button" {{action execute 'hide'}}><i class="minus icon"></i></div>
 
