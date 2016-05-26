@@ -21,6 +21,7 @@ var CheckboxMixin = Ember.Mixin.create(Base, {
   },
 
   didInitSemantic() {
+    this._super(...arguments);
     // We need to fake that its bindable for checked and disabled
     this._swapAttrs('checked');
     this._swapAttrs('disabled');

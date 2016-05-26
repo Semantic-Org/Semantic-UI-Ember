@@ -20,18 +20,8 @@ export default Ember.Controller.extend({
     { iso2: 'mx', name: 'Mexico' }
   ],
 
-  initialize: Ember.on('init', function() {
+  init() {
+    this._super(...arguments);
     this.set('gender2', this.get('genders.firstObject'));
-  }),
-
-  actions: {
-    set_active: function() {
-      this.set('dropdown_active', true);
-    },
-
-    update_gender: function(component, id /*, value*/) {
-      this.set('gender', id);
-      return true;
-    }
   }
 });

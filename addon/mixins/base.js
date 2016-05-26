@@ -222,19 +222,6 @@ Semantic.BaseMixin = Ember.Mixin.create({
       if (this.get('_initialized')) {
         return fn.apply(this, args);
       }
-
-      // var internal = this.get(`_${key}`);
-
-      // if (internal) {
-      //   internal.apply(this, args);
-      // }
-
-      // if (internal !== fn) {
-      // return fn.apply(this, [this].concat(args));
-
-      // }
-
-      // return true;
     };
   }
 });

@@ -5,7 +5,7 @@ export default Ember.Component.extend(CheckboxMixin, {
   type: 'radio',
   classNames: ['radio'],
 
-  init: function() {
+  init() {
     this._super(...arguments);
 
     if (Ember.isBlank(this.get('name'))) {

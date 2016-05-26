@@ -6,12 +6,7 @@
         <div class="sub header">A dropdown</div>
       </h4>
     </div>
-    <div class="eight wide column">
-      <div class="ui button" {{action "set_active"}}>Active</div>
-    </div>
   </div>
-
-  <hr>
 
   <div class="row">
     <div class="eight wide column">
@@ -20,7 +15,7 @@
         <div class="sub header">A dropdown can be used to select between choices in a form</div>
       </h4>
 
-      {{#ui-dropdown class="selection" value=gender onChange=(action 'update_gender')}}
+      {{#ui-dropdown class="selection" selected=gender onChange=(action (mut gender))}}
         <div class="default text">Gender</div>
         <i class="dropdown icon"></i>
         <div class="menu">
@@ -49,7 +44,7 @@
         <div class="sub header">A dropdown can be used to select between choices in a form</div>
       </h4>
 
-      {{#ui-dropdown-array class="selection" content=genders selected=gender2}}
+      {{#ui-dropdown-array class="selection" content=genders selected=gender2 onChange=(action (mut gender2))}}
         <div class="default text">Gender</div>
         <i class="dropdown icon"></i>
         <div class="menu">
@@ -78,7 +73,7 @@
         <div class="sub header">A dropdown can be used to select between choices in a form</div>
       </h4>
 
-      {{#ui-dropdown class="fluid multiple selection" selected=country}}
+      {{#ui-dropdown class="fluid multiple selection" selected=country onChange=(action (mut country))}}
         <i class="dropdown icon"></i>
         <div class="default text">Select Country</div>
         <div class="menu">

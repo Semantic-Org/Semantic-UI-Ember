@@ -11,7 +11,7 @@ test('it renders from an array', function(assert) {
 
   this.set('people', [ "Sherlock Homes", "Patrick Bateman" ]);
   this.render(hbs`
-    {{#ui-dropdown selected=selected}}
+    {{#ui-dropdown selected=selected onChange=(action (mut selected))}}
       <div class='menu'>
       {{#each people as |person|}}
         <div class='item' data-value={{person}}>{{person}}</div>
@@ -36,7 +36,7 @@ test('it renders from an object array', function(assert) {
   ]);
 
   this.render(hbs`
-    {{#ui-dropdown selected=selected}}
+    {{#ui-dropdown selected=selected onChange=(action (mut selected))}}
       <div class='menu'>
       {{#each people as |person|}}
         <div class='item' data-value={{person.id}}>{{person.name}}</div>
@@ -62,7 +62,7 @@ test('it renders with an option selected', function(assert) {
 
   this.set('selected', 2);
   this.render(hbs`
-    {{#ui-dropdown selected=selected}}
+    {{#ui-dropdown selected=selected onChange=(action (mut selected))}}
       <div class='menu'>
       {{#each people as |person|}}
         <div class='item' data-value={{person.id}}>{{person.name}}</div>
@@ -87,7 +87,7 @@ test('it renders multiple', function(assert) {
   ]);
 
   this.render(hbs`
-    {{#ui-dropdown class='multiple' selected=selected}}
+    {{#ui-dropdown class='multiple' selected=selected onChange=(action (mut selected))}}
       <div class='menu'>
       {{#each people as |person|}}
         <div class='item' data-value={{person.id}}>{{person.name}}</div>
@@ -114,7 +114,7 @@ test('it sets the value from the binding', function(assert) {
   ]);
 
   this.render(hbs`
-    {{#ui-dropdown selected=people_id}}
+    {{#ui-dropdown selected=people_id onChange=(action (mut selected))}}
       <div class='menu'>
       {{#each people as |person|}}
         <div class="item" data-value="{{person.id}}">
@@ -140,7 +140,7 @@ test('it updates the value if updated from the binding', function(assert) {
   ]);
 
   this.render(hbs`
-    {{#ui-dropdown selected=people_id}}
+    {{#ui-dropdown selected=people_id onChange=(action (mut selected))}}
       <div class='menu'>
       {{#each people as |person|}}
         <div class="item" data-value="{{person.id}}">
@@ -169,12 +169,8 @@ test('it can set the selected value without binding for full DDAU', function(ass
     { id: 2, name: "Patrick Bateman" }
   ]);
 
-  this.on('update', function(component, value) {
-    this.set('people_id', value);
-  });
-
   this.render(hbs`
-    {{#ui-dropdown onChange=(action 'update')}}
+    {{#ui-dropdown onChange=(action (mut people_id))}}
       <input type="hidden" name="person" value="{{people_id}}" />
       <div class='menu'>
       {{#each people as |person|}}
@@ -203,7 +199,7 @@ test('it renders and clears the value if it changes and isnt found', function(as
   ]));
 
   this.render(hbs`
-    {{#ui-dropdown selected=selected.id}}
+    {{#ui-dropdown selected=selected.id onChange=(action (mut selected.id))}}
       <div class='menu'>
       {{#each people as |person|}}
         <div class='item' data-value={{person.id}}>{{person.name}}</div>
