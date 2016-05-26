@@ -18,8 +18,14 @@
   {{input value=popup_message}}
 </div>
 
-{{#ui-popup content=popup_message}}
+{{#ui-popup content=popup_message title="Dynamic content"}}
   <div class="ui icon button">
     <i class="help icon"></i>
   </div>
+{{/ui-popup}}
+
+<br>
+
+{{#ui-popup html='<div class="ui red segment"> <div class="ui button">A button!</div> </div>'}}
+  <div class="ui label">Html Popup</div>
 {{/ui-popup}}

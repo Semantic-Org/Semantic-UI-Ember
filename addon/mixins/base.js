@@ -97,6 +97,11 @@ Semantic.BaseMixin = Ember.Mixin.create({
     }
   },
 
+  getSemanticModuleGlobal() {
+    let moduleName = this.getSemanticModuleName();
+    return window.$.fn[moduleName];
+  },
+
   willInitSemantic(settings) {
     // Use this method to modify the settings object on inherited components, before module initialization
   },
@@ -163,8 +168,8 @@ Semantic.BaseMixin = Ember.Mixin.create({
   _settings() {
     let moduleName = this.getSemanticModuleName();
 
-    let component = window.$.fn[moduleName];
-    if (!component) {
+    let moduleGlobal = this.getSemanticModuleGlobal();
+    if (!moduleGlobal) {
       Ember.Logger.error(`Unable to find jQuery Semantic UI module: ${moduleName}`);
       return;
     }
@@ -178,7 +183,7 @@ Semantic.BaseMixin = Ember.Mixin.create({
     for (let key in this.attrs) {
       let value = this._getAttrValue(key);
 
-      if (Ember.isBlank(component.settings[key])) {
+      if (Ember.isBlank(moduleGlobal.settings[key])) {
         if (!this.get('_ignorableAttrs').contains(key)) {
           // TODO: Add better ember keys here
           Ember.Logger.debug(`You passed in the property '${key}', but a setting doesn't exist on the Semantic UI module: ${moduleName}`);

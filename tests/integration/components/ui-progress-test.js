@@ -17,7 +17,7 @@ test('it renders with percent', function(assert) {
   `);
 
   assert.equal(this.$('.ui.progress').length, 1);
-  assert.equal(this.$('.ui.progress').attr('data-percent'), 40)
+  assert.equal(this.$('.ui.progress').attr('data-percent'), 40);
 });
 
 test('it renders with value', function(assert) {
@@ -31,7 +31,7 @@ test('it renders with value', function(assert) {
   `);
 
   assert.equal(this.$('.ui.progress').length, 1);
-  assert.equal(this.$('.ui.progress').attr('data-percent'), 40)
+  assert.equal(this.$('.ui.progress').attr('data-percent'), 40);
 });
 
 test('binding updates precent progress', function(assert) {
