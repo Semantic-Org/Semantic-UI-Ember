@@ -2,6 +2,7 @@ import Ember from 'ember';
 import Semantic from '../semantic';
 
 const EMBER_ATTRS = ['class', 'classNames', 'classNameBindings', 'tagName'];
+const HTML_ATTRS = ['id'];
 const CUSTOM_ATTRS = ['onElement'];
 
 Semantic.BaseMixin = Ember.Mixin.create({
@@ -72,6 +73,7 @@ Semantic.BaseMixin = Ember.Mixin.create({
       ignorableAttrs = ignorableAttrs.concat(this.get('ignorableAttrs'));
     }
     ignorableAttrs = ignorableAttrs.concat(EMBER_ATTRS);
+    ignorableAttrs = ignorableAttrs.concat(HTML_ATTRS);
     ignorableAttrs = ignorableAttrs.concat(CUSTOM_ATTRS);
     return Ember.A(ignorableAttrs);
   },
@@ -184,7 +186,7 @@ Semantic.BaseMixin = Ember.Mixin.create({
       let value = this._getAttrValue(key);
 
       if (Ember.isBlank(moduleGlobal.settings[key])) {
-        if (!this.get('_ignorableAttrs').contains(key)) {
+        if (!this.get('_ignorableAttrs').contains(Ember.String.camelize(key))) {
           // TODO: Add better ember keys here
           Ember.Logger.debug(`You passed in the property '${key}', but a setting doesn't exist on the Semantic UI module: ${moduleName}`);
         }
