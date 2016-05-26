@@ -2,7 +2,7 @@
 
 <div class="ui basic segment">
   {{ui-rating
-      initialRating=3
+      initialRating=rating
       rating=rating
       maxRating=7
       onRate=(action (mut rating))}} - Rating {{rating}}
@@ -12,5 +12,6 @@
   {{ui-rating
       class="heart"
       rating=heartRating
-      onRate=(action (mut heartRating))}} - Rating {{heartRating}}
+      onRate=(action (mut heartRating))
+      clearable=true}} - Rating {{heartRating}}
 </div>
