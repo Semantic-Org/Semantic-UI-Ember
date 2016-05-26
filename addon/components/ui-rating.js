@@ -8,8 +8,8 @@ var Rating = Ember.Component.extend(Base, {
 
   willInitSemantic(settings) {
     this._super(...arguments);
-    if (!settings.initialRating && this._getAttrValue('rating')) {
-      settings.initialRating = this._getAttrValue('rating');
+    if (!settings.initialRating && this.get('rating')) {
+      settings.initialRating = this.get('rating');
     }
   }
 });

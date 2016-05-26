@@ -30,13 +30,13 @@
 <div class="ui form">
   <div class="grouped inline fields">
     <div class="field">
-      {{ui-radio name="fruit" label="Once a week" value="once-a-week" current=fruit}}
+      {{ui-radio name="fruit" label="Once a week" value="once-a-week" onChange=(action (mut fruit))}}
     </div>
     <div class="field">
-      {{ui-radio name="fruit" label="2-3 times a week" value="few-times-a-week" current=fruit}}
+      {{ui-radio name="fruit" label="2-3 times a week" value="few-times-a-week" onChange=(action (mut fruit))}}
     </div>
     <div class="field">
-      {{ui-radio name="fruit" label="Once a day" value="once-a-day" current=fruit}}
+      {{ui-radio name="fruit" label="Once a day" value="once-a-day" onChange=(action (mut fruit))}}
     </div>
   </div>
 </div>
@@ -52,16 +52,16 @@
 <div class="ui form">
   <div class="grouped inline fields">
     <div class="field">
-      {{ui-radio name="color" label="Red" value="red" current=color}}
+      {{ui-radio name="color" label="Red" value="red" current=color onChange=(action (mut color))}}
     </div>
     <div class="field">
-      {{ui-radio name="color" label="Yellow" value="yellow" current=color}}
+      {{ui-radio name="color" label="Yellow" value="yellow" current=color onChange=(action (mut color))}}
     </div>
     <div class="field">
-      {{ui-radio name="color" label="Blue" value="blue" current=color}}
+      {{ui-radio name="color" label="Blue" value="blue" current=color onChange=(action (mut color))}}
     </div>
     <div class="field">
-      {{ui-radio name="color" label="Disabled" value="disabled" current=color disable=true}}
+      {{ui-radio name="color" label="Disabled" value="disabled" current=color disabled=true onChange=(action (mut color))}}
     </div>
   </div>
 </div>

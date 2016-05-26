@@ -7,21 +7,16 @@ import Base from './base';
 var CheckboxMixin = Ember.Mixin.create(Base, {
   module: 'checkbox',
   classNames: ['ui', 'checkbox'],
-  ignorableAttrs: ['checked', 'label'],
-
-  // Internal wrapper for onchange, to pass through checked
-  _onChange() {
-    let checked = this.execute('is checked');
-    this.attrs.onChange(checked, this);
-  },
+  ignorableAttrs: ['checked', 'label', 'disabled'],
 
   willInitSemantic(settings) {
     this._super(...arguments);
     if (settings.onChange) {
+      // Checkbox and radio both have an implementation for this
       settings.onChange = this._onChange;
     }
-    if (this._getAttrValue('readonly') != null) {
-      this.$().toggleClass('read-only', this._getAttrValue('readonly'));
+    if (this.get('readonly') != null) {
+      this.$().toggleClass('read-only', this.get('readonly'));
     }
   },
 
@@ -30,7 +25,7 @@ var CheckboxMixin = Ember.Mixin.create(Base, {
     this._swapAttrs('checked');
     this._swapAttrs('disabled');
     this._swapAttrs('enabled');
-    if (this._getAttrValue('readonly') != null) {
+    if (this.get('readonly') != null) {
       this.get('_settableAttrs').addObject('readonly');
     }
   },

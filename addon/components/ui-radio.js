@@ -4,21 +4,32 @@ import CheckboxMixin from '../mixins/checkbox-mixin';
 export default Ember.Component.extend(CheckboxMixin, {
   type: 'radio',
   classNames: ['radio'],
-  name: 'default',
 
   init: function() {
     this._super(...arguments);
 
-    if (!(this.get('name') && this.get('name') !== 'default')) {
-      Ember.Logger.warn('Name was not passed into semantic radio component');
+    if (Ember.isBlank(this.get('name'))) {
+      this.set('name', 'default');
+      Ember.Logger.warn("The required component parameter of 'name' was not passed into the ui-radio component");
     }
   },
 
-  _onChange: function() {
-    this.set('current', this.get('value'));
+  // Internal wrapper for onchange, to pass through checked
+  _onChange() {
+    let value = this.get('value');
+    this.attrs.onChange(value, this);
   },
 
-  checked: Ember.computed('current', 'value', function() {
-    return this.get('current') === this.get('value');
-  })
+  getSemanticIgnorableAttrs() {
+    let ignorableAttrs = this._super(...arguments);
+    ignorableAttrs.pushObjects(['value', 'current']);
+    return ignorableAttrs;
+  },
+
+  didInitSemantic() {
+    this._super(...arguments);
+    if (this.areAttrValuesEqual('checked', this.get('value'), this.get('current'))) {
+      this.execute('set checked');
+    }
+  }
 });
