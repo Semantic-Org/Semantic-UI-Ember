@@ -216,6 +216,13 @@ Semantic.BaseMixin = Ember.Mixin.create({
     return function() {
       // TODO: Allow internal wrapper
       var args = [].splice.call(arguments, 0);
+      // always add component instance as the last parameter incase they need access to it
+      args.push(this);
+
+      if (this.get('_initialized')) {
+        return fn.apply(this, args);
+      }
+
       // var internal = this.get(`_${key}`);
 
       // if (internal) {
@@ -224,9 +231,7 @@ Semantic.BaseMixin = Ember.Mixin.create({
 
       // if (internal !== fn) {
       // return fn.apply(this, [this].concat(args));
-      if (this.get('_initialized')) {
-        return fn.apply(this, args);
-      }
+
       // }
 
       // return true;

@@ -51,7 +51,7 @@ test('it will send approve back to controller and hide', function(assert) {
     });
   });
 
-  this.on('approve', function(component) {
+  this.on('approve', function(element, component) {
     var name = component.get('name');
     assert.equal('profile', name, 'approve is called');
     setTimeout(() => {
@@ -88,7 +88,7 @@ test('it will send approve back to controller and skip the hide', function(asser
     });
   });
 
-  this.on('approve', function(component) {
+  this.on('approve', function(element, component) {
     var name = component.get('name');
     assert.equal('profile', name, 'approve is called');
     setTimeout(() => {
@@ -124,7 +124,7 @@ test('it will send deny back to controller', function(assert) {
     });
   });
 
-  this.on('deny', function(component) {
+  this.on('deny', function(element, component) {
     var name = component.get('name');
     start();
     assert.equal('profile', name);
