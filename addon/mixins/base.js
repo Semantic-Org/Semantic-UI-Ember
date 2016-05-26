@@ -1,8 +1,8 @@
 import Ember from 'ember';
 import Semantic from '../semantic';
 
-const EMBER_ATTRS = ['class', 'classNames', 'classNameBindings', 'tagName'];
-const HTML_ATTRS = ['id'];
+const EMBER_ATTRS = ['class', 'classNameBindings', 'classNames', 'tagName'];
+const HTML_ATTRS = ['id', 'name', 'readonly', 'tabindex'];
 const CUSTOM_ATTRS = ['onElement'];
 
 Semantic.BaseMixin = Ember.Mixin.create({
@@ -122,11 +122,11 @@ Semantic.BaseMixin = Ember.Mixin.create({
   },
 
   getSemanticAttr(attrName) {
-    this.execute(`get ${attrName}`);
+    return this.execute(`get ${attrName}`);
   },
 
   setSemanticAttr(attrName, attrValue) {
-    this.execute(`set ${attrName}`, attrValue);
+    return this.execute(`set ${attrName}`, attrValue);
   },
 
   areAttrValuesEqual(attrName, attrValue, moduleValue) {

@@ -11,9 +11,8 @@ export default Ember.Component.extend(Base, {
 
   setSemanticAttr(attrName, attrValue) {
     if (attrName === 'content' || attrName === 'title' || attrName === 'html') {
-      this.execute('setting', attrName, attrValue);
-    } else {
-      this._super(...arguments);
+      return this.execute('setting', attrName, attrValue);
     }
+    return this._super(...arguments);
   }
 });
