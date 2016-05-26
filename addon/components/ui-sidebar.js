@@ -3,5 +3,5 @@ import Base from '../mixins/base';
 
 export default Ember.Component.extend(Base, {
   module: 'sidebar',
-  classNames: [ 'ui', 'sidebar' ]
+  classNames: ['ui', 'sidebar']
 });

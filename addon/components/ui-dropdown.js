@@ -4,7 +4,7 @@ import DataAttributes from '../mixins/data-attributes';
 
 export default Ember.Component.extend(Base, DataAttributes, {
   module: 'dropdown',
-  classNames: [ 'ui', 'dropdown' ],
+  classNames: ['ui', 'dropdown'],
 
   didInsertElement() {
     this._super(...arguments);

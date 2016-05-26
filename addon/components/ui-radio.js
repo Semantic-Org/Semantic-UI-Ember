@@ -3,7 +3,7 @@ import CheckboxMixin from '../mixins/checkbox-mixin';
 
 export default Ember.Component.extend(CheckboxMixin, {
   type: 'radio',
-  classNames: [ 'radio' ],
+  classNames: ['radio'],
   name: 'default',
 
   init: function() {
