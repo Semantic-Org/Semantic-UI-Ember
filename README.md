@@ -174,9 +174,9 @@ export default Ember.Controller.extend({
   <div class="default text">Select an item</div>
   <i class="dropdown icon"></i>
   <div class="menu">
-  {{#each itemActions as |action|}}
-    <div class="item" data-id="{{action}}">
-      {{action}}
+  {{#each itemActions as |item|}}
+    <div class="item" data-id="{{item}}">
+      {{item}}
     </div>
   {{/each}}
   </div>
