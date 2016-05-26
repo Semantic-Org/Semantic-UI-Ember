@@ -21,7 +21,7 @@ test('checking will update the bound property', function(assert) {
 
   this.set('checked', false);
   this.render(hbs`
-    {{ui-checkbox label="Make my profile visible" checked=checked}}
+    {{ui-checkbox label="Make my profile visible" checked=checked onChange=(action (mut checked))}}
   `);
 
   assert.equal(this.$('.ui.checkbox').length, 1);
@@ -35,7 +35,7 @@ test('setting disabled ignores click', function(assert) {
   this.set('checked', false);
   this.set('disabled', true);
   this.render(hbs`
-    {{ui-checkbox label="Make my profile visible" checked=checked disable=disabled}}
+    {{ui-checkbox label="Make my profile visible" checked=checked disabled=disabled onChange=(action (mut checked))}}
   `);
 
   assert.equal(this.$('.ui.checkbox').length, 1);
@@ -53,7 +53,7 @@ test('setting readonly ignores click', function(assert) {
   this.set('checked', false);
   this.set('readonly', true);
   this.render(hbs`
-    {{ui-checkbox label="Make my profile visible" checked=checked readonly=readonly}}
+    {{ui-checkbox label="Make my profile visible" checked=checked readonly=readonly onChange=(action (mut checked))}}
   `);
 
   assert.equal(this.$('.ui.checkbox').length, 1);

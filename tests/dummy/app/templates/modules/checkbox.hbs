@@ -2,23 +2,23 @@
 
 <div class="ui form">
   <div class="field">
-    {{ui-checkbox label="Make my profile visible (checked binding)" checked=checked}}
+    {{ui-checkbox label="Make my profile visible (checked binding)" checked=checked onChange=(action (mut checked))}}
     - {{if checked "Checked" "Not Checked"}}
   </div>
 
   <div class="field">
-    {{ui-checkbox label="Make my profile visible (pre checked binding)" checked=pre_checked}}
+    {{ui-checkbox label="Make my profile visible (pre checked binding)" checked=pre_checked onChange=(action (mut pre_checked))}}
     - {{if pre_checked "Checked" "Not Checked"}}
   </div>
 
   <div class="field">
-    {{ui-checkbox label="Make my profile visible (onChange action)" checked=action_checked onChange=(action 'set_checked')}}
-    - {{if action_checked "Checked" "Not Checked"}}
+    {{ui-checkbox label="Disabled checkbox (checked binding)" checked=disabled_checked disabled=true onChange=(action (mut disabled_checked))}}
+    - {{if disabled_checked "Checked" "Not Checked"}}
   </div>
 
   <div class="field">
-    {{ui-checkbox label="Disabled checkbox (checked binding)" checked=disabled_checked disable=true}}
-    - {{if disabled_checked "Checked" "Not Checked"}}
+    {{ui-checkbox label="Readonly checkbox (checked binding)" checked=readonly_checked readonly=true onChange=(action (mut readonly_checked))}}
+    - {{if readonly_checked "Checked" "Not Checked"}}
   </div>
 </div>
 

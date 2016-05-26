@@ -4,17 +4,8 @@ export default Ember.Controller.extend({
   checked: false,
   pre_checked: true,
   disabled_checked: false,
-  _action_checked: false,
-  action_checked: Ember.computed('_action_checked', function() {
-    return this.get('_action_checked');
-  }),
+  readonly_checked: false,
 
   fruit: null,
-  color: "red",
-
-  actions: {
-    set_checked: function(value) {
-      this.set('_action_checked', value);
-    }
-  }
+  color: "red"
 });
