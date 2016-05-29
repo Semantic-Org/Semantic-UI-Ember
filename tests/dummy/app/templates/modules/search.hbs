@@ -1,6 +1,17 @@
 <h2 id='title'>Search</h2>
 
-{{#ui-search url="/search"}}
+<div class="ui segment">
+  <div class="ui small header">Callback info</div>
+  <p>
+    Searching for: {{query}}
+  </p>
+
+  <p>
+    Selected: {{selected.title}}
+  </p>
+</div>
+
+{{#ui-search source=commonPasswords onSearchQuery=(action (mut query)) onSelect=(action (mut selected))}}
   <input class="prompt" type="text" placeholder="Common passwords...">
   <div class="results"></div>
 {{/ui-search}}
