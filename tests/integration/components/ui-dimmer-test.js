@@ -1,4 +1,3 @@
-/* global stop, start */
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 
@@ -30,16 +29,14 @@ test('dimmer shows and hides on click', function(assert) {
   assert.equal(this.$('.ui.segment .ui.dimmer.active').length, 0);
   this.$('.ui.segment').click();
 
-  stop();
+  let done = assert.async();
   setTimeout(() => {
-    start();
     assert.equal(this.$('.ui.segment .ui.dimmer.active').length, 1);
     this.$('.ui.segment').click();
 
-    stop();
     setTimeout(() => {
-      start();
       assert.equal(this.$('.ui.segment .ui.dimmer.active').length, 0);
+      done();
     }, 100);
   }, 100);
 });
@@ -58,18 +55,14 @@ test('dimmer only works on scoped element for shows and hides on click', functio
   assert.equal(this.$().children('.ui.dimmer').length, 0);
   this.$().click();
 
-  stop();
+  let done = assert.async();
   setTimeout(() => {
-    start();
-    // Check all dimmers
     assert.equal(this.$('.ui.dimmer.active').length, 0);
     this.$('.ui.segment').click();
 
-    stop();
     setTimeout(() => {
-      start();
-      // animation takes a second after click
       assert.equal(this.$('.ui.segment .ui.dimmer.active').length, 1);
+      done();
     }, 100);
   }, 100);
 });
@@ -90,17 +83,15 @@ test('dimmer shows and hides from composable action', function(assert) {
   assert.equal(this.$().children('.ui.dimmer').length, 0);
   this.$('[data-id=show]').click();
 
-  stop();
+  let done = assert.async();
+
   setTimeout(() => {
-    start();
     assert.equal(this.$('.ui.segment .ui.dimmer.active').length, 1);
     this.$('[data-id=hide]').click();
 
-    stop();
     setTimeout(() => {
-      start();
-      // animation takes a second after click
       assert.equal(this.$('.ui.segment .ui.dimmer.active').length, 0);
+      done();
     }, 100);
   }, 100);
 });
