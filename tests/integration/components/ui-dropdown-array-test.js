@@ -15,7 +15,7 @@ test('it renders from an array', function(assert) {
   ]));
 
   this.render(hbs`
-    {{#ui-dropdown-array content=people selected=selected}}
+    {{#ui-dropdown-array content=people selected=selected onChange=(action (mut selected))}}
       <div class='menu'>
       {{#each people as |person|}}
         <div class='item' data-value={{person.id}}>{{person.name}}</div>
@@ -43,7 +43,7 @@ test('it renders from an array and preselects the right value', function(assert)
   this.set('selected', this.get('people').objectAt(1));
 
   this.render(hbs`
-    {{#ui-dropdown-array content=people selected=selected}}
+    {{#ui-dropdown-array content=people selected=selected onChange=(action (mut selected))}}
       <div class='menu'>
       {{#each people as |person|}}
         <div class='item' data-value={{person.id}}>{{person.name}}</div>
@@ -68,7 +68,7 @@ test('it renders from an array and selects the right value if late', function(as
   ]));
 
   this.render(hbs`
-    {{#ui-dropdown-array content=people selected=selected}}
+    {{#ui-dropdown-array content=people selected=selected onChange=(action (mut selected))}}
       <div class='menu'>
       {{#each people as |person|}}
         <div class='item' data-value={{person.id}}>{{person.name}}</div>
@@ -96,7 +96,7 @@ test('it renders from an array and clears the value if it changes and isnt found
   ]));
 
   this.render(hbs`
-    {{#ui-dropdown-array content=people selected=selected}}
+    {{#ui-dropdown-array content=people selected=selected onChange=(action (mut selected))}}
       <div class='menu'>
       {{#each people as |person|}}
         <div class='item' data-value={{person.id}}>{{person.name}}</div>
@@ -131,7 +131,7 @@ test('it renders from an array and clears the value if it changes and isnt found
   ]));
 
   this.render(hbs`
-    {{#ui-dropdown-array content=people selected=selected.sub}}
+    {{#ui-dropdown-array content=people selected=selected.sub onChange=(action (mut selected.sub))}}
       <div class='menu'>
       {{#each people as |person|}}
         <div class='item' data-value={{person.id}}>{{person.name}}</div>
@@ -168,7 +168,7 @@ test('it renders from an array and binds to value if find_by is empty (value bin
   ]));
 
   this.render(hbs`
-    {{#ui-dropdown-array content=numbers selected=selected find_by=''}}
+    {{#ui-dropdown-array content=numbers selected=selected find_by='' onChange=(action (mut selected))}}
       <div class='menu'>
       {{#each numbers as |number|}}
         <div class='item' data-value={{number}}>{{number}}</div>
