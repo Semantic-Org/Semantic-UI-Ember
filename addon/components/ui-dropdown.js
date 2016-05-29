@@ -32,8 +32,7 @@ export default Ember.Component.extend(Base, {
 
   setSemanticAttr(attrName, attrValue) {
     if (attrName === 'selected') {
-      let selected = this.get(attrName);
-      let value = this.getSelectedValue(selected);
+      let value = this.getSelectedValue(attrValue);
       if (Ember.isBlank(value)) {
         return this.execute('clear');
       }

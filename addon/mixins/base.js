@@ -104,7 +104,8 @@ Semantic.BaseMixin = Ember.Mixin.create({
     return window.$.fn[moduleName];
   },
 
-  willInitSemantic(settings) {
+
+  willInitSemantic(settings) { // jshint ignore:line
     // Use this method to modify the settings object on inherited components, before module initialization
   },
 
@@ -133,7 +134,7 @@ Semantic.BaseMixin = Ember.Mixin.create({
     return attrValue === moduleValue ||
            this._stringCompare(attrValue) === moduleValue ||
            attrValue === this._stringCompare(moduleValue) ||
-           this._stringCompare(attrValue) == this._stringCompare(moduleValue) ||
+           this._stringCompare(attrValue) === this._stringCompare(moduleValue) ||
            Ember.isEqual(attrValue, moduleValue);
   },
 

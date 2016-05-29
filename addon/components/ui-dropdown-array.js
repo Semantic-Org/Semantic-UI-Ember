@@ -9,7 +9,7 @@ const _proxyCallback = function(callbackName) {
 
     let contentValue = this._findValue(value);
     this.attrs[callbackName](contentValue, text, $element, this);
-  }
+  };
 };
 
 export default UiDropdown.extend({
