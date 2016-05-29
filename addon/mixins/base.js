@@ -130,8 +130,11 @@ Semantic.BaseMixin = Ember.Mixin.create({
   },
 
   areAttrValuesEqual(attrName, attrValue, moduleValue) {
-    // Enhance this
-    return attrValue === moduleValue;
+    return attrValue === moduleValue ||
+           this._stringCompare(attrValue) === moduleValue ||
+           attrValue === this._stringCompare(moduleValue) ||
+           this._stringCompare(attrValue) == this._stringCompare(moduleValue) ||
+           Ember.isEqual(attrValue, moduleValue);
   },
 
   // Semantic Helper Methods
@@ -186,7 +189,7 @@ Semantic.BaseMixin = Ember.Mixin.create({
       let value = this._getAttrValue(key);
 
       if (Ember.isBlank(moduleGlobal.settings[key])) {
-        if (!this.get('_ignorableAttrs').contains(Ember.String.camelize(key))) {
+        if (!this.get('_ignorableAttrs').contains(key) && !this.get('_ignorableAttrs').contains(Ember.String.camelize(key))) {
           // TODO: Add better ember keys here
           Ember.Logger.debug(`You passed in the property '${key}', but a setting doesn't exist on the Semantic UI module: ${moduleName}`);
         }
@@ -223,6 +226,21 @@ Semantic.BaseMixin = Ember.Mixin.create({
         return fn.apply(this, args);
       }
     };
+  },
+
+  _stringCompare(value) {
+    if (value == null) {
+      return null;
+    }
+    switch (typeof value) {
+      case "string":
+        return value;
+      case "boolean":
+      case "number":
+        return value.toString();
+      default:
+        return value;
+    }
   }
 });
 

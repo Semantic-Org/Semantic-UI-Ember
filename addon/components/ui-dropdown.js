@@ -15,11 +15,11 @@ export default Ember.Component.extend(Base, {
     }
 
     if (Ember.isPresent(selected)) {
-      this.execute('set selected', this.getSelected(selected));
+      this.execute('set selected', this.getSelectedValue(selected));
     }
   },
 
-  getSelected(selected) {
+  getSelectedValue(selected) {
     return selected;
   },
 
@@ -33,7 +33,7 @@ export default Ember.Component.extend(Base, {
   setSemanticAttr(attrName, attrValue) {
     if (attrName === 'selected') {
       let selected = this.get(attrName);
-      let value = this.getSelected(selected);
+      let value = this.getSelectedValue(selected);
       if (Ember.isBlank(value)) {
         return this.execute('clear');
       }

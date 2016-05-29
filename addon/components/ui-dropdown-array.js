@@ -1,13 +1,24 @@
 import Ember from 'ember';
 import UiDropdown from 'semantic-ui-ember/components/ui-dropdown';
 
+const _proxyCallback = function(callbackName) {
+  return function(value, text, $element) {
+    if (!$element) {
+      return;
+    }
+
+    let contentValue = this._findValue(value);
+    this.attrs[callbackName](contentValue, text, $element, this);
+  }
+};
+
 export default UiDropdown.extend({
   content: null,
   find_by: 'id',
 
   getSemanticIgnorableAttrs() {
     let ignorableAttrs = this._super(...arguments);
-    ignorableAttrs.pushObjects(['content']);
+    ignorableAttrs.pushObjects(['content', 'find_by']);
     return ignorableAttrs;
   },
 
@@ -24,65 +35,21 @@ export default UiDropdown.extend({
     }
   },
 
-  getSelected(selected) {
+  getSelectedValue(selected) {
     if (Ember.isBlank(selected)) {
       return null;
     }
     return Ember.get(selected, this.get('find_by'));
   },
 
-  areAttrValuesEqual(attrName, attrValue, moduleValues) {
-    if (attrName === 'selected') {
-      let selectedValue = this.getSelected(attrValue);
-      return this._areEqual(selectedValue, moduleValues);
-    }
-    return this._super(...arguments);
-  },
-
-  _onChange() {
-    let args = [].splice.call(arguments, 0);
-    args.push(this.attrs.onChange);
-    this._proxyCallback.apply(this, args);
-  },
-
-  _onAdd() {
-    let args = [].splice.call(arguments, 0);
-    args.push(this.attrs.onAdd);
-    this._proxyCallback.apply(this, args);
-  },
-
-  _onRemove() {
-    let args = [].splice.call(arguments, 0);
-    args.push(this.attrs.onRemove);
-    this._proxyCallback.apply(this, args);
-  },
-
-  _proxyCallback(value, text, $element, component, callback) {
-    if (!$element) {
-      return;
-    }
-
-    let contentValue = this._findValue(value);
-    callback(contentValue, text, $element, component);
-  },
+  _onChange: _proxyCallback('onChange'),
+  _onAdd: _proxyCallback('onAdd'),
+  _onRemove: _proxyCallback('onRemove'),
 
   _findValue(value) {
     return this.get('content').find((item) => {
       var current = Ember.get(item, this.get('find_by'));
-      if (current == null) {
-        current = '';
-      }
-      if (value == null) {
-        value = '';
-      }
-      return this._areEqual(current, value);
+      return this.areAttrValuesEqual("selected", current, value);
     });
-  },
-
-  _areEqual(valueOne, valueTwo) {
-    return valueOne === valueTwo ||
-             valueOne.toString() === valueTwo ||
-             valueOne === valueTwo.toString() ||
-             valueOne.toString() == valueTwo.toString();
   }
 });
