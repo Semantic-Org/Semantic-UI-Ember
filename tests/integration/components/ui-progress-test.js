@@ -1,4 +1,3 @@
-/* global stop, start */
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 
@@ -50,12 +49,13 @@ test('binding updates precent progress', function(assert) {
   var width = this.$('.ui.progress .bar').css('width');
   this.set('progress', 60);
 
-  stop();
-  setTimeout(() => {
-    start();
+  let done = assert.async();
 
+  setTimeout(() => {
     assert.equal(this.$('.ui.progress').attr('data-percent'), 60);
     assert.notEqual(this.$('.ui.progress .bar').css('width'), width);
+
+    done();
   }, 500);
 });
 
@@ -75,12 +75,13 @@ test('binding updates precent progress with total', function(assert) {
   var width = this.$('.ui.progress .bar').css('width');
   this.set('progress', 60);
 
-  stop();
-  setTimeout(() => {
-    start();
+  let done = assert.async();
 
+  setTimeout(() => {
     assert.equal(this.$('.ui.progress').attr('data-percent'), 60);
     assert.notEqual(this.$('.ui.progress .bar').css('width'), width);
+
+    done();
   }, 500);
 });
 
@@ -100,12 +101,13 @@ test('binding updates progress', function(assert) {
   var width = this.$('.ui.progress .bar').css('width');
   this.set('value', 70);
 
-  stop();
-  setTimeout(() => {
-    start();
+  let done = assert.async();
 
+  setTimeout(() => {
     assert.equal(this.$('.ui.progress').attr('data-percent'), 70);
     assert.notEqual(this.$('.ui.progress .bar').css('width'), width);
+
+    done();
   }, 500);
 });
 
@@ -125,11 +127,12 @@ test('binding updates progress with total', function(assert) {
   var width = this.$('.ui.progress .bar').css('width');
   this.set('value', 21);
 
-  stop();
-  setTimeout(() => {
-    start();
+  let done = assert.async();
 
+  setTimeout(() => {
     assert.equal(this.$('.ui.progress').attr('data-percent'), 70);
     assert.notEqual(this.$('.ui.progress .bar').css('width'), width);
+
+    done();
   }, 500);
 });

@@ -1,4 +1,3 @@
-/* global stop, start */
 import Ember from 'ember';
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
@@ -194,10 +193,11 @@ test('composable action closes open tab', function(assert) {
   assert.equal(this.$('.ui.accordion .active').length, 1);
 
   this.$('.ui.accordion [data-id=content-2-button]').click();
-  stop();
+
+  let done = assert.async();
+
   setTimeout(() => {
-    start();
-    // animation takes a second after click
     assert.equal(this.$('.ui.accordion .active').length, 0);
+    done();
   }, 500);
 });

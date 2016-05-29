@@ -1,4 +1,3 @@
-/* global stop, start */
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 
@@ -19,10 +18,12 @@ test('it renders', function(assert) {
 test('it will show if triggered', function(assert) {
   assert.expect(3);
 
+  let done = assert.async();
+
   this.on('openModal', () => {
     this.$('.ui.modal').modal('show', () => {
-      start();
       assert.equal(this.$('.ui.modal.visible').length, 1, ".ui.modal is visible after showing");
+      done();
     });
   });
 
@@ -37,12 +38,13 @@ test('it will show if triggered', function(assert) {
   assert.equal(this.$('.ui.modal').length, 1, ".ui.modal exists");
   assert.equal(this.$('.ui.modal.visible').length, 0, ".ui.modal is not visible");
 
-  stop();
   this.$('.ui.button').click();
 });
 
 test('it will send approve back to controller and hide', function(assert) {
   assert.expect(3);
+
+  let done = assert.async();
 
   this.on('openModal', () => {
     this.$('.ui.modal').modal('show', () => {
@@ -55,8 +57,8 @@ test('it will send approve back to controller and hide', function(assert) {
     var name = component.get('name');
     assert.equal('profile', name, 'approve is called');
     setTimeout(() => {
-      start();
       assert.equal(this.$('.ui.modal.visible').length, 0, ".ui.modal is not visible after clicking");
+      done();
     }, 1000);
     return true;
   });
@@ -74,12 +76,13 @@ test('it will send approve back to controller and hide', function(assert) {
     {{/ui-modal}}
   `);
 
-  stop();
   this.$('.ui.open.button').click();
 });
 
 test('it will send approve back to controller and skip the hide', function(assert) {
   assert.expect(3);
+
+  let done = assert.async();
 
   this.on('openModal', () => {
     this.$('.ui.modal').modal('show', () => {
@@ -92,8 +95,8 @@ test('it will send approve back to controller and skip the hide', function(asser
     var name = component.get('name');
     assert.equal('profile', name, 'approve is called');
     setTimeout(() => {
-      start();
       assert.equal(this.$('.ui.modal.visible').length, 1, ".ui.modal is visible after clicking");
+      done();
     }, 1000);
     return false;
   });
@@ -111,12 +114,13 @@ test('it will send approve back to controller and skip the hide', function(asser
     {{/ui-modal}}
   `);
 
-  stop();
   this.$('.ui.open.button').click();
 });
 
 test('it will send deny back to controller', function(assert) {
   assert.expect(1);
+
+  let done = assert.async();
 
   this.on('openModal', () => {
     this.$('.ui.modal').modal('show', () => {
@@ -126,8 +130,8 @@ test('it will send deny back to controller', function(assert) {
 
   this.on('deny', function(element, component) {
     var name = component.get('name');
-    start();
     assert.equal('profile', name);
+    done();
   });
 
   this.render(hbs`
@@ -143,6 +147,5 @@ test('it will send deny back to controller', function(assert) {
     {{/ui-modal}}
   `);
 
-  stop();
   this.$('.ui.button').click();
 });
