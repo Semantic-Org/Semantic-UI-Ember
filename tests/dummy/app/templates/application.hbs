@@ -1,20 +1,19 @@
-{{#ui-sidebar class="inverted vertical menu" id="main-sidebar"}}
-  <a class="item">
-    1
-  </a>
-  <a class="item">
-    2
-  </a>
-  <a class="item">
-    3
-  </a>
-{{/ui-sidebar}}
-
-<div class="ui grid pusher">
-  <div class="three wide column">
-    {{partial "menu"}}
+<div class="full height">
+  <div class="toc">
+    <div class="ui vertical inverted sidebar menu left overlay visible">
+      <div class="item">
+        <a class="ui logo icon image" href="/">
+          <img src="http://semantic-ui.com/images/logo.png">
+        </a>
+        <a href="/"><b>UI Ember Docs</b></a>
+      </div>
+      {{partial "menu"}}
+    </div>
   </div>
-  <div class="eleven wide column">
-    {{outlet}}
+
+  <div class="article">
+    <div class="ui main container">
+      {{outlet}}
+    </div>
   </div>
 </div>
