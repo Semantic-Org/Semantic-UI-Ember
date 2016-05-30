@@ -1,48 +1,78 @@
-<h2 id='title'>Accordion</h2>
+<div class="ui masthead vertical segment">
+  <div class="ui container">
+    <div class="introduction">
 
-{{#ui-accordion class="styled" as |execute|}}
-  <div class="title">
-    Semantic UI
-  </div>
-  <div class="content">
-    Accordion Component
+      <h1 class="ui header">
+        Accordion
 
-    <div class="ui basic segment">
-      <div class="ui tiny header">
-        Example using composable actions from within accordion
+        <div class="sub header">
+          An accordion allows users to toggle the display of sections of content
+        </div>
+      </h1>
+
+      <div class="ui hidden divider"></div>
+
+      <p>
+        To view Semantic UI's documentation click on the buttons links below
+      </p>
+
+      <div class="ui four item stackable tabs menu">
+        <a class="item" href="http://semantic-ui.com/modules/accordion.html" target="_blank">Definition</a>
+        <a class="item" href="http://semantic-ui.com/modules/accordion.html#/examples" target="_blank">Examples</a>
+        <a class="item" href="http://semantic-ui.com/modules/accordion.html#/usage" target="_blank">Usage</a>
+        <a class="item" href="http://semantic-ui.com/modules/accordion.html#/settings" target="_blank">Settings</a>
       </div>
-      <div class="ui button" {{action execute "close" 0}}>Close</div>
-      <div class="ui button" {{action execute "open" 1}}>Open two</div>
+
     </div>
+
   </div>
-  <div class="title">
-    Accordion Two
-  </div>
-  <div class="content">
-    Content Two
-  </div>
-  <div class="title">
-    Accordion Three
-  </div>
-  <div class="content">
-    Content Three
-  </div>
-  {{#each sections as |section|}}
+</div>
+
+<div class="ui main container">
+  {{#ui-accordion class="styled" as |execute|}}
     <div class="title">
-      Accordion Extra {{section}}
+      Semantic UI
     </div>
     <div class="content">
-      Content Extra {{section}}
+      Accordion Component
+
+      <div class="ui basic segment">
+        <div class="ui tiny header">
+          Example using composable actions from within accordion
+        </div>
+        <div class="ui button" {{action execute "close" 0}}>Close</div>
+        <div class="ui button" {{action execute "open" 1}}>Open two</div>
+      </div>
     </div>
-  {{/each}}
-{{/ui-accordion}}
+    <div class="title">
+      Accordion Two
+    </div>
+    <div class="content">
+      Content Two
+    </div>
+    <div class="title">
+      Accordion Three
+    </div>
+    <div class="content">
+      Content Three
+    </div>
+    {{#each sections as |section|}}
+      <div class="title">
+        Accordion Extra {{section}}
+      </div>
+      <div class="content">
+        Content Extra {{section}}
+      </div>
+    {{/each}}
+  {{/ui-accordion}}
 
-<div class="ui basic segment">
-  <div class="ui button" {{action "change_sections" 1}}>
-    Add Extra Section
-  </div>
+  <div class="ui basic segment">
+    <div class="ui button" {{action "change_sections" 1}}>
+      Add Extra Section
+    </div>
 
-  <div class="ui button {{unless total_sections "disabled"}}" {{action "change_sections" -1}}>
-    Remove Extra Section
+    <div class="ui button {{unless total_sections "disabled"}}" {{action "change_sections" -1}}>
+      Remove Extra Section
+    </div>
   </div>
 </div>

@@ -1,17 +1,49 @@
-<h2 id='title'>Search</h2>
+<div class="ui masthead vertical segment">
+  <div class="ui container">
+    <div class="introduction">
 
-<div class="ui segment">
-  <div class="ui small header">Callback info</div>
-  <p>
-    Searching for: {{query}}
-  </p>
+      <h1 class="ui header">
+        Search
 
-  <p>
-    Selected: {{selected.title}}
-  </p>
+        <div class="sub header">
+          A search module allows a user to query for results from a selection of data
+        </div>
+      </h1>
+
+      <div class="ui hidden divider"></div>
+
+      <p>
+        To view Semantic UI's documentation click on the buttons links below
+      </p>
+
+      <div class="ui four item stackable tabs menu">
+        <a class="item" href="http://semantic-ui.com/modules/search.html" target="_blank">Definition</a>
+        <a class="item" href="http://semantic-ui.com/modules/search.html#/examples" target="_blank">Examples</a>
+        <a class="item" href="http://semantic-ui.com/modules/search.html#/usage" target="_blank">Usage</a>
+        <a class="item" href="http://semantic-ui.com/modules/search.html#/settings" target="_blank">Settings</a>
+      </div>
+
+    </div>
+
+  </div>
 </div>
 
-{{#ui-search source=commonPasswords onSearchQuery=(action (mut query)) onSelect=(action (mut selected))}}
-  <input class="prompt" type="text" placeholder="Common passwords...">
-  <div class="results"></div>
-{{/ui-search}}
+<div class="ui main container">
+
+  <div class="ui segment">
+    <div class="ui small header">Callback info</div>
+    <p>
+      Searching for: {{query}}
+    </p>
+
+    <p>
+      Selected: {{selected.title}}
+    </p>
+  </div>
+
+  {{#ui-search source=commonPasswords onSearchQuery=(action (mut query)) onSelect=(action (mut selected))}}
+    <input class="prompt" type="text" placeholder="Common passwords...">
+    <div class="results"></div>
+  {{/ui-search}}
+
+</div>

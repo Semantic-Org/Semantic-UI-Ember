@@ -1,98 +1,123 @@
-<div class="ui grid">
-  <div class="row">
-    <div class="eight wide column">
-      <h4 class="ui header">
+<div class="ui masthead vertical segment">
+  <div class="ui container">
+    <div class="introduction">
+
+      <h1 class="ui header">
         Dropdown
-        <div class="sub header">A dropdown</div>
-      </h4>
-    </div>
-  </div>
 
-  <div class="row">
-    <div class="eight wide column">
-      <h4 class="ui header">
-        Selection
-        <div class="sub header">A dropdown can be used to select between choices in a form</div>
-      </h4>
-
-      {{#ui-dropdown class="selection" selected=gender onChange=(action (mut gender))}}
-        <div class="default text">Gender</div>
-        <i class="dropdown icon"></i>
-        <div class="menu">
-        {{#each genders as |gender|}}
-          <div class="item" data-value={{gender.id}}>
-            {{gender.text}}
-          </div>
-        {{/each}}
+        <div class="sub header">
+          A dropdown allows a user to select a value from a series of options
         </div>
-      {{/ui-dropdown}}
+      </h1>
+
+      <div class="ui hidden divider"></div>
+
+      <p>
+        To view Semantic UI's documentation click on the buttons links below
+      </p>
+
+      <div class="ui four item stackable tabs menu">
+        <a class="item" href="http://semantic-ui.com/modules/dropdown.html" target="_blank">Definition</a>
+        <a class="item" href="http://semantic-ui.com/modules/dropdown.html#/examples" target="_blank">Examples</a>
+        <a class="item" href="http://semantic-ui.com/modules/dropdown.html#/usage" target="_blank">Usage</a>
+        <a class="item" href="http://semantic-ui.com/modules/dropdown.html#/settings" target="_blank">Settings</a>
+      </div>
+
     </div>
-    <div class="eight wide column">
-      <div class="ui form">
-        <div class="ui field">
-          <label>Selected</label>
-          {{input value=gender readonly="true"}}
+
+  </div>
+</div>
+
+<div class="ui main container">
+
+  <div class="ui grid">
+    <div class="row">
+      <div class="eight wide column">
+        <h4 class="ui header">
+          Selection
+          <div class="sub header">A dropdown can be used to select between choices in a form</div>
+        </h4>
+
+        {{#ui-dropdown class="selection" selected=gender onChange=(action (mut gender))}}
+          <div class="default text">Gender</div>
+          <i class="dropdown icon"></i>
+          <div class="menu">
+          {{#each genders as |gender|}}
+            <div class="item" data-value={{gender.id}}>
+              {{gender.text}}
+            </div>
+          {{/each}}
+          </div>
+        {{/ui-dropdown}}
+      </div>
+      <div class="eight wide column">
+        <div class="ui form">
+          <div class="ui field">
+            <label>Selected</label>
+            {{input value=gender readonly="true"}}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="eight wide column">
+        <h4 class="ui header">
+          Selection
+          <div class="sub header">A dropdown can be used to select between choices in a form</div>
+        </h4>
+
+        {{#ui-dropdown-array class="selection" content=genders selected=gender2 onChange=(action (mut gender2))}}
+          <div class="default text">Gender</div>
+          <i class="dropdown icon"></i>
+          <div class="menu">
+          {{#each genders as |gender|}}
+            <div class="item" data-value={{gender.id}}>
+              {{gender.text}}
+            </div>
+          {{/each}}
+          </div>
+        {{/ui-dropdown-array}}
+      </div>
+      <div class="eight wide column">
+        <div class="ui form">
+          <div class="ui field">
+            <label>Selected</label>
+            {{input value=gender2.text readonly="true"}}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="eight wide column">
+        <h4 class="ui header">
+          Multi Select
+          <div class="sub header">A dropdown can be used to select between choices in a form</div>
+        </h4>
+
+        {{#ui-dropdown class="fluid multiple selection" selected=country onChange=(action (mut country))}}
+          <i class="dropdown icon"></i>
+          <div class="default text">Select Country</div>
+          <div class="menu">
+          {{#each countries as |country|}}
+            <div class="item" data-value={{country.iso2}}>
+              <i class="{{country.iso2}} flag"></i>
+              {{country.name}}
+            </div>
+          {{/each}}
+          </div>
+        {{/ui-dropdown}}
+      </div>
+      <div class="eight wide column">
+        <div class="ui form">
+          <div class="ui field">
+            <label>Selected</label>
+            {{input value=country readonly="true"}}
+          </div>
         </div>
       </div>
     </div>
   </div>
 
-  <div class="row">
-    <div class="eight wide column">
-      <h4 class="ui header">
-        Selection
-        <div class="sub header">A dropdown can be used to select between choices in a form</div>
-      </h4>
-
-      {{#ui-dropdown-array class="selection" content=genders selected=gender2 onChange=(action (mut gender2))}}
-        <div class="default text">Gender</div>
-        <i class="dropdown icon"></i>
-        <div class="menu">
-        {{#each genders as |gender|}}
-          <div class="item" data-value={{gender.id}}>
-            {{gender.text}}
-          </div>
-        {{/each}}
-        </div>
-      {{/ui-dropdown-array}}
-    </div>
-    <div class="eight wide column">
-      <div class="ui form">
-        <div class="ui field">
-          <label>Selected</label>
-          {{input value=gender2.text readonly="true"}}
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="eight wide column">
-      <h4 class="ui header">
-        Multi Select
-        <div class="sub header">A dropdown can be used to select between choices in a form</div>
-      </h4>
-
-      {{#ui-dropdown class="fluid multiple selection" selected=country onChange=(action (mut country))}}
-        <i class="dropdown icon"></i>
-        <div class="default text">Select Country</div>
-        <div class="menu">
-        {{#each countries as |country|}}
-          <div class="item" data-value={{country.iso2}}>
-            <i class="{{country.iso2}} flag"></i>
-            {{country.name}}
-          </div>
-        {{/each}}
-        </div>
-      {{/ui-dropdown}}
-    </div>
-    <div class="eight wide column">
-      <div class="ui form">
-        <div class="ui field">
-          <label>Selected</label>
-          {{input value=country readonly="true"}}
-        </div>
-      </div>
-    </div>
-  </div>
 </div>

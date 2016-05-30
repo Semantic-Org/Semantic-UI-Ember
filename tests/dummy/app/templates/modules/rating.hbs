@@ -1,17 +1,49 @@
-<h2 id='title'>Rating</h2>
+<div class="ui masthead vertical segment">
+  <div class="ui container">
+    <div class="introduction">
 
-<div class="ui basic segment">
-  {{ui-rating
-      initialRating=rating
-      rating=rating
-      maxRating=7
-      onRate=(action (mut rating))}} - Rating {{rating}}
+      <h1 class="ui header">
+        Rating
+
+        <div class="sub header">
+          A rating indicates user interest in content
+        </div>
+      </h1>
+
+      <div class="ui hidden divider"></div>
+
+      <p>
+        To view Semantic UI's documentation click on the buttons links below
+      </p>
+
+      <div class="ui four item stackable tabs menu">
+        <a class="item" href="http://semantic-ui.com/modules/rating.html" target="_blank">Definition</a>
+        <a class="item" href="http://semantic-ui.com/modules/rating.html#/examples" target="_blank">Examples</a>
+        <a class="item" href="http://semantic-ui.com/modules/rating.html#/usage" target="_blank">Usage</a>
+        <a class="item" href="http://semantic-ui.com/modules/rating.html#/settings" target="_blank">Settings</a>
+      </div>
+
+    </div>
+
+  </div>
 </div>
 
-<div class="ui basic segment">
-  {{ui-rating
-      class="heart"
-      rating=heartRating
-      onRate=(action (mut heartRating))
-      clearable=true}} - Rating {{heartRating}}
+<div class="ui main container">
+
+  <div class="ui basic segment">
+    {{ui-rating
+        initialRating=rating
+        rating=rating
+        maxRating=7
+        onRate=(action (mut rating))}} - Rating {{rating}}
+  </div>
+
+  <div class="ui basic segment">
+    {{ui-rating
+        class="heart"
+        rating=heartRating
+        onRate=(action (mut heartRating))
+        clearable=true}} - Rating {{heartRating}}
+  </div>
+
 </div>

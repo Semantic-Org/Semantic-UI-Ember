@@ -1,71 +1,103 @@
-<h2 id='title'>Checkbox</h2>
+<div class="ui masthead vertical segment">
+  <div class="ui container">
+    <div class="introduction">
 
-<div class="ui form">
-  <div class="field">
-    {{ui-checkbox label="Make my profile visible (checked binding)" checked=checked onChange=(action (mut checked))}}
-    - {{if checked "Checked" "Not Checked"}}
-  </div>
+      <h1 class="ui header">
+        Checkbox
 
-  <div class="field">
-    {{ui-checkbox label="Make my profile visible (pre checked binding)" checked=pre_checked onChange=(action (mut pre_checked))}}
-    - {{if pre_checked "Checked" "Not Checked"}}
-  </div>
+        <div class="sub header">
+          A checkbox allows a user to select a value from a small set of options, often binary
+        </div>
+      </h1>
 
-  <div class="field">
-    {{ui-checkbox label="Disabled checkbox (checked binding)" checked=disabled_checked disabled=true onChange=(action (mut disabled_checked))}}
-    - {{if disabled_checked "Checked" "Not Checked"}}
-  </div>
+      <div class="ui hidden divider"></div>
 
-  <div class="field">
-    {{ui-checkbox label="Readonly checkbox (checked binding)" checked=readonly_checked readonly=true onChange=(action (mut readonly_checked))}}
-    - {{if readonly_checked "Checked" "Not Checked"}}
-  </div>
-</div>
+      <p>
+        To view Semantic UI's documentation click on the buttons links below
+      </p>
 
-<h4 class="ui header">
-  Radio Box
-  <div class="sub header">A checkbox can be formatted as a radio element. This means it is an exclusive option.</div>
-</h4>
+      <div class="ui four item stackable tabs menu">
+        <a class="item" href="http://semantic-ui.com/modules/checkbox.html" target="_blank">Definition</a>
+        <a class="item" href="http://semantic-ui.com/modules/checkbox.html#/examples" target="_blank">Examples</a>
+        <a class="item" href="http://semantic-ui.com/modules/checkbox.html#/usage" target="_blank">Usage</a>
+        <a class="item" href="http://semantic-ui.com/modules/checkbox.html#/settings" target="_blank">Settings</a>
+      </div>
 
-<div class="ui form">
-  <div class="grouped inline fields">
-    <div class="field">
-      {{ui-radio name="fruit" label="Once a week" value="once-a-week" onChange=(action (mut fruit))}}
     </div>
-    <div class="field">
-      {{ui-radio name="fruit" label="2-3 times a week" value="few-times-a-week" onChange=(action (mut fruit))}}
-    </div>
-    <div class="field">
-      {{ui-radio name="fruit" label="Once a day" value="once-a-day" onChange=(action (mut fruit))}}
-    </div>
+
   </div>
 </div>
 
-<div class="ui label">
-  Current fruit - {{fruit}}
-</div>
+<div class="ui main container">
 
-<h4 class="ui header">
-  Radio Box (Pre-selected)
-</h4>
+  <div class="ui form">
+    <div class="field">
+      {{ui-checkbox label="Make my profile visible (checked binding)" checked=checked onChange=(action (mut checked))}}
+      - {{if checked "Checked" "Not Checked"}}
+    </div>
 
-<div class="ui form">
-  <div class="grouped inline fields">
     <div class="field">
-      {{ui-radio name="color" label="Red" value="red" current=color onChange=(action (mut color))}}
+      {{ui-checkbox label="Make my profile visible (pre checked binding)" checked=pre_checked onChange=(action (mut pre_checked))}}
+      - {{if pre_checked "Checked" "Not Checked"}}
     </div>
+
     <div class="field">
-      {{ui-radio name="color" label="Yellow" value="yellow" current=color onChange=(action (mut color))}}
+      {{ui-checkbox label="Disabled checkbox (checked binding)" checked=disabled_checked disabled=true onChange=(action (mut disabled_checked))}}
+      - {{if disabled_checked "Checked" "Not Checked"}}
     </div>
+
     <div class="field">
-      {{ui-radio name="color" label="Blue" value="blue" current=color onChange=(action (mut color))}}
-    </div>
-    <div class="field">
-      {{ui-radio name="color" label="Disabled" value="disabled" current=color disabled=true onChange=(action (mut color))}}
+      {{ui-checkbox label="Readonly checkbox (checked binding)" checked=readonly_checked readonly=true onChange=(action (mut readonly_checked))}}
+      - {{if readonly_checked "Checked" "Not Checked"}}
     </div>
   </div>
-</div>
 
-<div class="ui label">
-  Current Color - {{color}}
+  <h4 class="ui header">
+    Radio Box
+    <div class="sub header">A checkbox can be formatted as a radio element. This means it is an exclusive option.</div>
+  </h4>
+
+  <div class="ui form">
+    <div class="grouped inline fields">
+      <div class="field">
+        {{ui-radio name="fruit" label="Once a week" value="once-a-week" onChange=(action (mut fruit))}}
+      </div>
+      <div class="field">
+        {{ui-radio name="fruit" label="2-3 times a week" value="few-times-a-week" onChange=(action (mut fruit))}}
+      </div>
+      <div class="field">
+        {{ui-radio name="fruit" label="Once a day" value="once-a-day" onChange=(action (mut fruit))}}
+      </div>
+    </div>
+  </div>
+
+  <div class="ui label">
+    Current fruit - {{fruit}}
+  </div>
+
+  <h4 class="ui header">
+    Radio Box (Pre-selected)
+  </h4>
+
+  <div class="ui form">
+    <div class="grouped inline fields">
+      <div class="field">
+        {{ui-radio name="color" label="Red" value="red" current=color onChange=(action (mut color))}}
+      </div>
+      <div class="field">
+        {{ui-radio name="color" label="Yellow" value="yellow" current=color onChange=(action (mut color))}}
+      </div>
+      <div class="field">
+        {{ui-radio name="color" label="Blue" value="blue" current=color onChange=(action (mut color))}}
+      </div>
+      <div class="field">
+        {{ui-radio name="color" label="Disabled" value="disabled" current=color disabled=true onChange=(action (mut color))}}
+      </div>
+    </div>
+  </div>
+
+  <div class="ui label">
+    Current Color - {{color}}
+  </div>
+
 </div>

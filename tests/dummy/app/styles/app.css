@@ -93,6 +93,54 @@ blockquote .author {
   padding: 3px 4px;
 }
 
+
+/*--------------
+   Page Headers
+---------------*/
+
+#example .masthead.segment {
+  position: relative;
+  z-index: 1;
+  margin: 0em;
+  min-height: 185px;
+  padding: 3em 0em;
+  background-color: #FFFFFF;
+  border-bottom: 1px solid #DDDDDD;
+  box-shadow: none;
+}
+
+#example .masthead .introduction {
+  display: block;
+}
+#example .masthead .introduction:after {
+  content: ".";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+}
+
+#example .masthead.segment h1 {
+  margin: 0em;
+}
+
+#example .masthead iframe {
+  margin-left: 5px;
+  width: 101px !important;
+  float: right;
+}
+
+/* Align with buttons */
+#example .masthead .main.menu {
+  margin-top: -2px;
+  min-height: 0em;
+}
+#example .masthead .main.menu > .item {
+  padding-top: 0.785714em;
+  padding-bottom: 0.785714em;
+}
+
+
 /*--------------
      Sidebar
 ---------------*/
@@ -163,6 +211,10 @@ blockquote .author {
   width: 700px !important;
   left: 0px;
   margin-right: 4em !important;
+}
+
+#example .main.container {
+  padding: 2em 0em 7em;
 }
 
 #example.basic .main.container > .rail,
@@ -924,8 +976,6 @@ code .chunk {
 #example .fixed.menu > .container {
   margin-left: 3em !important;
   margin-right: 3em !important;
-  margin-top: 3em !important;
-  margin-bottom: 3em !important;
   width: auto !important;
   max-width: 960px !important;
 }
@@ -982,8 +1032,8 @@ code .chunk {
     max-width: none !important;
   }
   #example .masthead .introduction {
-    display: table-cell;
-    vertical-align: top;
+    /*display: table-cell;
+    vertical-align: top;*/
     width: 100%;
   }
   #example .masthead .advertisement {

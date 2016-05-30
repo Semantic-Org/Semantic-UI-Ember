@@ -1,77 +1,109 @@
-<h2 id='title'>Shape</h2>
+<div class="ui masthead vertical segment">
+  <div class="ui container">
+    <div class="introduction">
 
-{{#ui-shape class="people" as |execute|}}
+      <h1 class="ui header">
+        Shape
 
-  <div class="ui basic segment">
-    <div class="ui button" title="Flip Left" {{action execute 'flip left'}}>
-      <i class="left long arrow icon"></i>
-    </div>
-    <div class="ui button" title="Flip Up"  {{action execute 'flip up'}}>
-      <i class="up long arrow icon"></i>
-    </div>
-    <div class="ui icon button" title="Flip Down" {{action execute 'flip down'}}>
-      <i class="down long arrow icon"></i>
-    </div>
-    <div class="ui icon button" title="Flip Right"  {{action execute 'flip right'}}>
-      <i class="right long arrow icon"></i>
-    </div>
-    <div class="ui ignored icon direction buttons">
-      <div class="ui button" title="Flip Over"  {{action execute 'flip over'}}>
-        <i class="retweet icon"></i>
+        <div class="sub header">
+          A shape is a three dimensional object displayed on a two dimensional plane
+        </div>
+      </h1>
+
+      <div class="ui hidden divider"></div>
+
+      <p>
+        To view Semantic UI's documentation click on the buttons links below
+      </p>
+
+      <div class="ui four item stackable tabs menu">
+        <a class="item" href="http://semantic-ui.com/modules/shape.html" target="_blank">Definition</a>
+        <a class="item" href="http://semantic-ui.com/modules/shape.html#/examples" target="_blank">Examples</a>
+        <a class="item" href="http://semantic-ui.com/modules/shape.html#/usage" target="_blank">Usage</a>
+        <a class="item" href="http://semantic-ui.com/modules/shape.html#/settings" target="_blank">Settings</a>
       </div>
-      <div class="ui button" title="Flip Back"  {{action execute 'flip back'}}>
-        <i class="flipped retweet icon"></i>
-      </div>
+
     </div>
+
   </div>
+</div>
 
-  <div class="sides">
-    <div class="active side">
-      <div class="ui card">
-        <div class="image">
-          <img src="http://semantic-ui.com/images/avatar/large/steve.jpg">
+<div class="ui main container">
+
+  {{#ui-shape class="people" as |execute|}}
+
+    <div class="ui basic segment">
+      <div class="ui button" title="Flip Left" {{action execute 'flip left'}}>
+        <i class="left long arrow icon"></i>
+      </div>
+      <div class="ui button" title="Flip Up"  {{action execute 'flip up'}}>
+        <i class="up long arrow icon"></i>
+      </div>
+      <div class="ui icon button" title="Flip Down" {{action execute 'flip down'}}>
+        <i class="down long arrow icon"></i>
+      </div>
+      <div class="ui icon button" title="Flip Right"  {{action execute 'flip right'}}>
+        <i class="right long arrow icon"></i>
+      </div>
+      <div class="ui ignored icon direction buttons">
+        <div class="ui button" title="Flip Over"  {{action execute 'flip over'}}>
+          <i class="retweet icon"></i>
         </div>
-        <div class="content">
-          <div class="header">Steve Jobes</div>
-          <div class="meta">
-            <a>Acquaintances</a>
-          </div>
-          <div class="description">
-            Steve Jobes is a fictional character designed to resemble someone familiar to readers.
-          </div>
-        </div>
-        <div class="extra content">
-          <span class="right floated">
-            Joined in 2014
-          </span>
-          <span>
-            <i class="user icon"></i>
-            151 Friends
-          </span>
+        <div class="ui button" title="Flip Back"  {{action execute 'flip back'}}>
+          <i class="flipped retweet icon"></i>
         </div>
       </div>
     </div>
-    <div class="side">
-      <div class="ui card">
-        <div class="image">
-          <img src="http://semantic-ui.com/images/avatar/large/stevie.jpg">
-        </div>
-        <div class="content">
-          <a class="header">Stevie Feliciano</a>
-          <div class="meta">
-            <span class="date">Joined in 2014</span>
+
+    <div class="sides">
+      <div class="active side">
+        <div class="ui card">
+          <div class="image">
+            <img src="http://semantic-ui.com/images/avatar/large/steve.jpg">
           </div>
-          <div class="description">
-            Stevie Feliciano is a library scientist living in New York City. She likes to spend her time reading, running, and writing.
+          <div class="content">
+            <div class="header">Steve Jobes</div>
+            <div class="meta">
+              <a>Acquaintances</a>
+            </div>
+            <div class="description">
+              Steve Jobes is a fictional character designed to resemble someone familiar to readers.
+            </div>
+          </div>
+          <div class="extra content">
+            <span class="right floated">
+              Joined in 2014
+            </span>
+            <span>
+              <i class="user icon"></i>
+              151 Friends
+            </span>
           </div>
         </div>
-        <div class="extra content">
-          <a>
-            <i class="user icon"></i>
-            22 Friends
-          </a>
+      </div>
+      <div class="side">
+        <div class="ui card">
+          <div class="image">
+            <img src="http://semantic-ui.com/images/avatar/large/stevie.jpg">
+          </div>
+          <div class="content">
+            <a class="header">Stevie Feliciano</a>
+            <div class="meta">
+              <span class="date">Joined in 2014</span>
+            </div>
+            <div class="description">
+              Stevie Feliciano is a library scientist living in New York City. She likes to spend her time reading, running, and writing.
+            </div>
+          </div>
+          <div class="extra content">
+            <a>
+              <i class="user icon"></i>
+              22 Friends
+            </a>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-{{/ui-shape}}
+  {{/ui-shape}}
+
+</div>

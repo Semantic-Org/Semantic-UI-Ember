@@ -1,47 +1,68 @@
-<!--
-This shows two different ways to use a modal:
+<div class="ui masthead vertical segment">
+  <div class="ui container">
+    <div class="introduction">
 
-  1. Use the {{ui-model}} syntax and embed the template directly OR
-  2. Create your own component that inherits from the semantic-ui-ember/components/ui-modal and embeds its own template
+      <h1 class="ui header">
+        Modal
 
-Depending on whether you have an inherited component or not you can handle actions in two different ways:
+        <div class="sub header">
+          A modal displays content that temporarily blocks interactions with the main view of a site
+        </div>
+      </h1>
 
-  1. Pass in approve or deny to the component and those actions will get called
-  2. Create your own action in your controller and handle it outside of semantic's actions
--->
-<h2 id='title'>Modal</h2>
+      <div class="ui hidden divider"></div>
 
-<div class="ui button" {{action 'openModal' 'profile'}}>
-  Open Profile
+      <p>
+        To view Semantic UI's documentation click on the buttons links below
+      </p>
+
+      <div class="ui four item stackable tabs menu">
+        <a class="item" href="http://semantic-ui.com/modules/modal.html" target="_blank">Definition</a>
+        <a class="item" href="http://semantic-ui.com/modules/modal.html#/examples" target="_blank">Examples</a>
+        <a class="item" href="http://semantic-ui.com/modules/modal.html#/usage" target="_blank">Usage</a>
+        <a class="item" href="http://semantic-ui.com/modules/modal.html#/settings" target="_blank">Settings</a>
+      </div>
+
+    </div>
+
+  </div>
 </div>
-<div class="ui button" {{action 'openModal' 'inbox'}}>
-  Open Inbox
+
+<div class="ui main container">
+
+  <div class="ui button" {{action 'openModal' 'profile'}}>
+    Open Profile
+  </div>
+  <div class="ui button" {{action 'openModal' 'inbox'}}>
+    Open Inbox
+  </div>
+
+  {{#ui-modal name="profile" class="profile" onApprove=(action 'approveModal') onDeny=(action 'denyModal')}}
+    <i class="close icon"></i>
+    <div class="header">
+      Profile Picture
+    </div>
+    <div class="image content">
+      <div class="ui medium image">
+        <img src="http://semantic-ui.com/images/avatar/large/chris.jpg">
+      </div>
+      <div class="description">
+        <div class="ui header">We've auto-chosen a profile image for you.</div>
+        <p>We've grabbed the following image from the <a href="https://www.gravatar.com" target="_blank">gravatar</a> image associated with your registered e-mail address.</p>
+        <p>Is it okay to use this photo?</p>
+      </div>
+    </div>
+    <div class="actions">
+      <div class="ui black deny button">
+        Nope
+      </div>
+      <div class="ui positive right labeled icon button">
+        Yep, that's me
+        <i class="checkmark icon"></i>
+      </div>
+    </div>
+  {{/ui-modal}}
+
+  {{inbox-modal}}
+
 </div>
-
-{{#ui-modal name="profile" class="profile" onApprove=(action 'approveModal') onDeny=(action 'denyModal')}}
-  <i class="close icon"></i>
-  <div class="header">
-    Profile Picture
-  </div>
-  <div class="image content">
-    <div class="ui medium image">
-      <img src="http://semantic-ui.com/images/avatar/large/chris.jpg">
-    </div>
-    <div class="description">
-      <div class="ui header">We've auto-chosen a profile image for you.</div>
-      <p>We've grabbed the following image from the <a href="https://www.gravatar.com" target="_blank">gravatar</a> image associated with your registered e-mail address.</p>
-      <p>Is it okay to use this photo?</p>
-    </div>
-  </div>
-  <div class="actions">
-    <div class="ui black deny button">
-      Nope
-    </div>
-    <div class="ui positive right labeled icon button">
-      Yep, that's me
-      <i class="checkmark icon"></i>
-    </div>
-  </div>
-{{/ui-modal}}
-
-{{inbox-modal}}

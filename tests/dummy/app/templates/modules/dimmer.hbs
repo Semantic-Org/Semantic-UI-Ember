@@ -1,19 +1,51 @@
-<h2 id='title'>Dimmer</h2>
+<div class="ui masthead vertical segment">
+  <div class="ui container">
+    <div class="introduction">
 
-{{#ui-dimmer onElement=".ui.segment" variation="inverted" duration=(hash show=1500) on="click" as |execute|}}
-  <div class="ui show button" {{action execute 'show'}}><i class="plus icon"></i></div>
-  <div class="ui hide button" {{action execute 'hide'}}><i class="minus icon"></i></div>
+      <h1 class="ui header">
+        Dimmer
 
-  <div class="ui segment">
-    <!-- Dimmer Generated Automatically No Need to Include !-->
-    <h3 class="ui header">
-      Overlayable Section
-    </h3>
-    <div class="ui small images">
-      <img class="ui wireframe image" src="http://semantic-ui.com/images/wireframe/image.png">
-      <img class="ui wireframe image" src="http://semantic-ui.com/images/wireframe/image.png">
-      <img class="ui wireframe image" src="http://semantic-ui.com/images/wireframe/image.png">
+        <div class="sub header">
+          A dimmer hides distractions to focus attention on particular content
+        </div>
+      </h1>
+
+      <div class="ui hidden divider"></div>
+
+      <p>
+        To view Semantic UI's documentation click on the buttons links below
+      </p>
+
+      <div class="ui four item stackable tabs menu">
+        <a class="item" href="http://semantic-ui.com/modules/dimmer.html" target="_blank">Definition</a>
+        <a class="item" href="http://semantic-ui.com/modules/dimmer.html#/examples" target="_blank">Examples</a>
+        <a class="item" href="http://semantic-ui.com/modules/dimmer.html#/usage" target="_blank">Usage</a>
+        <a class="item" href="http://semantic-ui.com/modules/dimmer.html#/settings" target="_blank">Settings</a>
+      </div>
+
     </div>
-    <img class="ui medium wireframe image" src="http://semantic-ui.com/images/wireframe/media-paragraph.png">
+
   </div>
-{{/ui-dimmer}}
+</div>
+
+<div class="ui main container">
+
+  {{#ui-dimmer onElement=".ui.segment" variation="inverted" duration=(hash show=1500) on="click" as |execute|}}
+    <div class="ui show button" {{action execute 'show'}}><i class="plus icon"></i></div>
+    <div class="ui hide button" {{action execute 'hide'}}><i class="minus icon"></i></div>
+
+    <div class="ui segment">
+      <!-- Dimmer Generated Automatically No Need to Include !-->
+      <h3 class="ui header">
+        Overlayable Section
+      </h3>
+      <div class="ui small images">
+        <img class="ui wireframe image" src="http://semantic-ui.com/images/wireframe/image.png">
+        <img class="ui wireframe image" src="http://semantic-ui.com/images/wireframe/image.png">
+        <img class="ui wireframe image" src="http://semantic-ui.com/images/wireframe/image.png">
+      </div>
+      <img class="ui medium wireframe image" src="http://semantic-ui.com/images/wireframe/media-paragraph.png">
+    </div>
+  {{/ui-dimmer}}
+
+</div>
