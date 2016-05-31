@@ -30,8 +30,13 @@ p:last-child {
      Code
 ---------------*/
 
+.hljs::selection,
+.hljs span::selection {
+  background: #cce2ff;
+}
+
 /* Inline Code */
-pre {
+/*pre {
   white-space: pre-wrap;
   white-space: -moz-pre-wrap;
   white-space: -pre-wrap;
@@ -41,11 +46,11 @@ pre {
 pre {
   background-color: #FFFFFF;
   text-align: left;
-}
+}*/
 
 
 /*rtl:ignore*/
-pre.console {
+/*pre.console {
   background-color: transparent;
   line-height: 1.6;
   font-family:  'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'source-code-pro', monospace;
@@ -83,16 +88,16 @@ blockquote .author {
   display: block;
   margin: 1em 0em 0em;
   font-weight: bold;
-}
+}*/
 
 /* Code Inside Message */
-.ui.message > p > code,
+/*.ui.message > p > code,
 .ui.message > code {
   background-color: rgba(0, 0, 0, 0.06);
   line-height: 1;
   padding: 3px 4px;
 }
-
+*/
 
 /*--------------
    Page Headers
@@ -416,11 +421,11 @@ blockquote .author {
 }
 
 /* Description */
-#example .example .anchor + p {
+#example .example .icon.code + p {
   margin-top: 0;
   padding-bottom: 1em;
 }
-#example .no.example .anchor + p {
+#example .no.example .icon.code + p {
   margin: 0em 0px 1em;
   padding-bottom: 0em;
 }
@@ -429,8 +434,8 @@ blockquote .author {
 }
 
 /* Message */
-#example .example .anchor + p + .ignored.message:not(.attached),
-#example .example .anchor + p + .ignored.message + .ignored.message:not(.attached) {
+#example .example .icon.code + p + .ignored.message:not(.attached),
+#example .example .icon.code + p + .ignored.message + .ignored.message:not(.attached) {
   margin: 0em 0 2em;
 }
 
@@ -468,8 +473,8 @@ blockquote .author {
 #example .examples.tab .example > p {
   margin: 1em 0em;
 }
-#example .tab[data-tab*="examples"] .example .anchor + p,
-#example .examples.tab .example .anchor + p {
+#example .tab[data-tab*="examples"] .example .icon.code + p,
+#example .examples.tab .example .icon.code + p {
   padding: 0em;
 }
 
@@ -477,7 +482,7 @@ blockquote .author {
 #example .intro > h3.ui.header {
   margin-top: 4em;
 }
-#example .intro .example .anchor + p {
+#example .intro .example .icon.code + p {
   margin-top: 0.5em;
 }
 #example .intro .example > p {
@@ -730,7 +735,7 @@ blockquote .author {
 *******************************/
 
 
-code.code {
+/*code.code {
   display: block;
   overflow-x: auto;
   padding: 0em;
@@ -738,12 +743,12 @@ code.code {
   background-color: transparent;
   -webkit-text-size-adjust: none;
 }
-
+*/
 /*--------------
    Hover Only
 ---------------*/
 
-code.code,
+/*code.code,
 code.code span {
   -moz-transition: 0.5s color ease;
   -webkit-transition: 0.5s color ease;
@@ -760,9 +765,9 @@ code.code.xml {
 code.code.xml:hover {
   color: #333333;
 }
-
+*/
 /* Class Name */
-code .string,
+/*code .string,
 code .tag .value,
 code .phpdoc,
 code .dartdoc,
@@ -775,20 +780,20 @@ code:hover .phpdoc,
 code:hover .dartdoc,
 code:hover .tex .formula {
   color: #007b6b;
-}
+}*/
 
 /* Comment */
-code .comment,
+/*code .comment,
 code .template_comment,
 code .diff .header,
 code .javadoc {
   color: #AAAAAA;
   font-style: italic;
-}
+}*/
 
 
 /* Properties */
-code .tag,
+/*code .tag,
 code .rules .property,
 code .django .tag .keyword {
   color: #858188;
@@ -800,19 +805,19 @@ code:hover .rules .property,
 code:hover .django .tag .keyword {
   color: #892A6F;
   font-weight: normal;
-}
+}*/
 
 /* HTML Tag */
-code .tag .title {
+/*code .tag .title {
   color: #858188;
   font-weight: normal;
 }
 code:hover .tag .title {
   color: #892A6F;
-}
+}*/
 
 /* Attribute */
-code .attribute,
+/*code .attribute,
 code .variable,
 code .lisp .body {
   color: #8D8A8A;
@@ -822,26 +827,26 @@ code:hover .attribute,
 code:hover .variable,
 code:hover .lisp .body {
   color: #934E4E;
-}
+}*/
 
 /* CSS ID */
-code .title,
+/*code .title,
 code .id,
 code .scss .preprocessor {
   color: #9C989F;
   font-weight: bold;
-}
+}*/
 
 /* CSS Attribute */
-code .rule .attribute {
+/*code .rule .attribute {
   color: #892A6F;
 }
 code:hover .rule .attribute {
   color: #892A6F;
-}
+}*/
 
 /* CSS Value */
-code .number,
+/*code .number,
 code .hexcolor,
 code .ruby .constant {
   color: #666666;
@@ -851,10 +856,10 @@ code:hover .number,
 code:hover .hexcolor,
 code:hover .ruby .constant {
   color: #333333;
-}
+}*/
 
 /* LESS */
-code.less .number,
+/*code.less .number,
 code.less .hexcolor,
 code.less .ruby .constant {
   color: #005FAA;
@@ -863,9 +868,9 @@ code.less:hover .number,
 code.less:hover .hexcolor,
 code.less:hover .ruby .constant {
   color: #005FAA;
-}
+}*/
 /* LESS Variable */
-code.less .attribute,
+/*code.less .attribute,
 code.less .variable,
 code.less .lisp .body {
   color: #333333;
@@ -875,10 +880,10 @@ code.less:hover .attribute,
 code.less:hover .variable,
 code.less:hover .lisp .body {
   color: #333333;
-}
+}*/
 
 /* Emphasized Value */
-code.code .class {
+/*code.code .class {
   color: #008C79;
 }
 code.code .class b {
@@ -896,7 +901,7 @@ code.code .class b {
 code.code .class b {
   background-color: rgba(218, 189, 40, 0.15);
   color: #9E6C00;
-}
+}*/
 
 /*
 code.code:hover .class.string b,
@@ -908,7 +913,7 @@ code.code:hover .class.value b {
 
 
 /* Linked UI */
-code .tag .value a {
+/*code .tag .value a {
   position: relative;
   border-radius: 5px;
   line-height: 1;
@@ -929,7 +934,7 @@ code .tag .value a:hover {
 code .tag .value a:hover b {
   background-color: transparent;
   color: inherit;
-}
+}*/
 
 
 
@@ -937,7 +942,7 @@ code .tag .value a:hover b {
       Normal
 ---------------*/
 
-code .keyword,
+/*code .keyword,
 code .css .rule .keyword,
 code .winutils,
 code .javascript .title,
@@ -996,7 +1001,7 @@ code .diff .change {
 
 code .chunk {
   color: #aaa;
-}
+}*/
 
 #example .masthead > .container,
 #example .main.container,

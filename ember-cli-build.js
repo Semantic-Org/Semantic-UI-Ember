@@ -21,5 +21,12 @@ module.exports = function(defaults) {
   app.import('bower_components/semantic-ui/dist/semantic.css');
   app.import('bower_components/semantic-ui/dist/semantic.js');
 
+  // Import Highlight.js
+  app.import(app.bowerDirectory + "/highlightjs/highlight.pack.min.js");
+
+  app.import(app.bowerDirectory + "/highlightjs/styles/github-gist.css");
+  app.import(app.bowerDirectory + "/highlightjs/styles/hybrid.css");
+
+
   return app.toTree();
 };

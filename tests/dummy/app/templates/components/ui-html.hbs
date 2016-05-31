@@ -1,0 +1,13 @@
+{{! Actual Code }}
+{{yield}}
+
+<div class="ui top attached label">
+  Example
+  {{#copy-button
+    clipboardText=copyCode
+    success=(action 'copied')
+    error=(action 'copyError')
+  }}
+    {{ui-popup tagName="i" class="copy link icon" content=copyMessage variation="inverted"}}
+  {{/copy-button}}
+</div>

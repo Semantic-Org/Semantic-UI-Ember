@@ -13,7 +13,7 @@
       <div class="ui hidden divider"></div>
 
       <p>
-        To view Semantic UI's documentation click on the buttons links below
+        For additional documentation on how to configure this module, please refer to the <a href="/">Getting Started</a> section and Semantic UI's module specific external documentation links below.
       </p>
 
       <div class="ui four item stackable tabs menu">
@@ -75,4 +75,21 @@
       Remove Extra Section
     </div>
   </div>
+
+  {{#ui-example
+    header="Simple Example"
+    subHeader="This is the basic example"
+    as |showing copyCode setCopyCode|}}
+
+    {{#ui-html showing=showing copyCode=copyCode}}
+      {{ui-checkbox label="Make my profile visible (checked binding)" checked=checked onChange=(action (mut checked))}}
+      - {{if checked "Checked" "Not Checked"}}
+    {{/ui-html}}
+
+    {{#ui-annotation showing=showing setCopyCode=setCopyCode}}
+      \{{ui-checkbox label="Make my profile visible (checked binding)" checked=checked onChange=(action (mut checked))}}
+      - \{{if checked "Checked" "Not Checked"}}
+    {{/ui-annotation}}
+
+  {{/ui-example}}
 </div>

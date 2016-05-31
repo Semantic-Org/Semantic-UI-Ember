@@ -1,42 +1,13 @@
-<div class="standard example">
-  <h4 class="ui header">Standard</h4>
+<div class="{{unless header "another"}} standard example">
+  {{#if header}}
+    <h4 class="ui header">
+      {{header}}
+    </h4>
+  {{/if}}
   <i class="icon code" {{action "toggle" "showing"}}></i>
-  <a class="anchor" id="standard"></a>
-  <p>A search can display a set of results</p>
-  <div class="html {{if showing "ui top attached segment"}}">
-    <div class="ui search focus">
-      <input class="prompt" type="text" placeholder="Common passwords..." autocomplete="off">
-      <div class="results">
-      </div>
-    </div>
-    <div class="ui top attached label">
-      Example
-      {{#copy-button
-        clipboardText='text to be copied'
-        success=(action 'copied')
-        error=(action 'copyError')
-      }}
-        {{ui-popup tagName="i" class="copy link icon" content=copyMessage variation="inverted"}}
-      {{/copy-button}}
-    </div>
-  </div>
+  {{#if subHeader}}
+    <p>{{subHeader}}</p>
+  {{/if}}
 
-  <div class="annotation transition {{if showing "visible" "hidden"}}">
-    <div class="ui instructive bottom attached segment">
-      <pre>
-        <code class="code xml">
-          <span class="tag">&lt;<span class="title">div</span>
-          <span class="attribute">class</span>=<span class="value">"ui search"</span>&gt;</span>
-          <span class="tag">&lt;<span class="title">input</span> <span class="attribute">class</span>=
-          <span class="value">"prompt"</span> <span class="attribute">type</span>=
-          <span class="value">"text"</span> <span class="attribute">placeholder</span>=
-          <span class="value">"Common passwords..."</span>&gt;</span>
-          <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=
-          <span class="value">"results"</span>&gt;</span>
-          <span class="tag">&lt;/<span class="title">div</span>&gt;</span>
-          <span class="tag">&lt;/<span class="title">div</span>&gt;</span>
-        </code>
-      </pre>
-    </div>
-  </div>
+  {{yield showing copyCode (action 'setCopyCode')}}
 </div>
