@@ -42,11 +42,11 @@
           <div class="default text">Gender</div>
           <i class="dropdown icon"></i>
           <div class="menu">
-          {{#each genders as |gender|}}
-            <div class="item" data-value={{gender.id}}>
-              {{gender.text}}
-            </div>
-          {{/each}}
+            {{#each genders as |gender|}}
+              <div class="item" data-value={{gender.id}}>
+                {{gender.text}}
+              </div>
+            {{/each}}
           </div>
         {{/ui-dropdown}}
       </div>
@@ -67,17 +67,47 @@
           <div class="sub header">A dropdown can be used to select between choices in a form</div>
         </h4>
 
-        {{#ui-dropdown-array class="selection" content=genders selected=gender2 onChange=(action (mut gender2))}}
+        {{#ui-dropdown class="selection" selected=selected_type onChange=(action (mut selected_type)) as |execute mapper|}}
+          <div class="default text">Types</div>
+          <i class="dropdown icon"></i>
+          <div class="menu">
+            <div class="item" data-value="">All Items</div>
+            {{#each types as |type|}}
+              <div class="item" data-value={{map-value mapper type}}>
+                {{type}}
+              </div>
+            {{/each}}
+          </div>
+        {{/ui-dropdown}}
+      </div>
+      <div class="eight wide column">
+        <div class="ui form">
+          <div class="ui field">
+            <label>Selected</label>
+            {{input value=selected_type readonly="true"}}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="eight wide column">
+        <h4 class="ui header">
+          Selection
+          <div class="sub header">A dropdown can be used to select between choices in a form</div>
+        </h4>
+
+        {{#ui-dropdown class="selection" selected=gender2 onChange=(action (mut gender2)) as |execute mapper|}}
           <div class="default text">Gender</div>
           <i class="dropdown icon"></i>
           <div class="menu">
-          {{#each genders as |gender|}}
-            <div class="item" data-value={{gender.id}}>
-              {{gender.text}}
-            </div>
-          {{/each}}
+            {{#each genders as |gender|}}
+              <div class="item" data-value={{map-value mapper gender}}>
+                {{gender.text}}
+              </div>
+            {{/each}}
           </div>
-        {{/ui-dropdown-array}}
+        {{/ui-dropdown}}
       </div>
       <div class="eight wide column">
         <div class="ui form">
@@ -100,12 +130,12 @@
           <i class="dropdown icon"></i>
           <div class="default text">Select Country</div>
           <div class="menu">
-          {{#each countries as |country|}}
-            <div class="item" data-value={{country.iso2}}>
-              <i class="{{country.iso2}} flag"></i>
-              {{country.name}}
-            </div>
-          {{/each}}
+            {{#each countries as |country|}}
+              <div class="item" data-value={{country.iso2}}>
+                <i class="{{country.iso2}} flag"></i>
+                {{country.name}}
+              </div>
+            {{/each}}
           </div>
         {{/ui-dropdown}}
       </div>

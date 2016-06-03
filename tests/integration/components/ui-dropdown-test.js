@@ -224,3 +224,195 @@ test('it renders and clears the value if it changes and isnt found', function(as
   assert.equal(this.$('.item.active').length, 0);
   assert.equal(this.get('selected'), undefined, "Nothing is selected");
 });
+
+
+///
+// Object mapping
+///
+test('it renders from a mapper', function(assert) {
+  assert.expect(3);
+
+  this.set('people', Ember.A([
+    { id: 1, name: "Sherlock Homes" },
+    { id: 2, name: "Patrick Bateman" }
+  ]));
+
+  this.render(hbs`
+    {{#ui-dropdown selected=selected onChange=(action (mut selected)) as |execute mapper|}}
+      <div class='menu'>
+      {{#each people as |person|}}
+        <div class='item' data-value={{map-value mapper person}} data-id={{person.id}}>{{person.name}}</div>
+      {{/each}}
+      </div>
+    {{/ui-dropdown}}
+  `);
+
+  assert.equal(this.$('.item').length, 2, "Right number of items");
+  assert.equal(this.get('selected'), undefined, "Nothing is selected");
+
+  this.$(".menu .item[data-id=1]").click();
+  assert.equal(this.get('selected.id'), "1", "Sherlock has been selected");
+});
+
+
+test('it renders from a mapper and preselects the right value', function(assert) {
+  assert.expect(3);
+
+  this.set('people', Ember.A([
+    { id: 1, name: "Sherlock Homes" },
+    { id: 2, name: "Patrick Bateman" }
+  ]));
+
+  this.set('selected', this.get('people').objectAt(1));
+
+  this.render(hbs`
+    {{#ui-dropdown selected=selected onChange=(action (mut selected)) as |execute mapper|}}
+      <div class='menu'>
+      {{#each people as |person|}}
+        <div class='item' data-value={{map-value mapper person}} data-id={{person.id}}>{{person.name}}</div>
+      {{/each}}
+      </div>
+    {{/ui-dropdown}}
+  `);
+
+  assert.equal(this.$('.item').length, 2, "Right number of items");
+  assert.equal(this.get('selected.id'), "2", "Patrick has been selected");
+
+  this.$(".menu .item[data-id=1]").click();
+  assert.equal(this.get('selected.id'), "1", "Sherlock has been selected");
+});
+
+test('it renders from a mapper and selects the right value if late', function(assert) {
+  assert.expect(4);
+
+  this.set('people', Ember.A([
+    { id: 1, name: "Sherlock Homes" },
+    { id: 2, name: "Patrick Bateman" }
+  ]));
+
+  this.render(hbs`
+    {{#ui-dropdown selected=selected onChange=(action (mut selected)) as |execute mapper|}}
+      <div class='menu'>
+      {{#each people as |person|}}
+        <div class='item' data-value={{map-value mapper person}} data-id={{person.id}}>{{person.name}}</div>
+      {{/each}}
+      </div>
+    {{/ui-dropdown}}
+  `);
+
+  assert.equal(this.$('.item').length, 2, "Right number of items");
+  assert.equal(this.get('selected'), undefined, "Nothing is selected");
+
+  this.set('selected', this.get('people').objectAt(1));
+  assert.equal(this.$('.item.active').text(), "Patrick Bateman");
+
+  this.$(".menu .item[data-id=1]").click();
+  assert.equal(this.get('selected.id'), "1", "Sherlock has been selected");
+});
+
+test('it renders from a mapper and clears the value if it changes and isnt found', function(assert) {
+  assert.expect(7);
+
+  this.set('people', Ember.A([
+    { id: 1, name: "Sherlock Homes" },
+    { id: 2, name: "Patrick Bateman" }
+  ]));
+
+  this.render(hbs`
+    {{#ui-dropdown selected=selected onChange=(action (mut selected)) as |execute mapper|}}
+      <div class='menu'>
+      {{#each people as |person|}}
+        <div class='item' data-value={{map-value mapper person}} data-id={{person.id}}>{{person.name}}</div>
+      {{/each}}
+      </div>
+    {{/ui-dropdown}}
+  `);
+
+  assert.equal(this.$('.item').length, 2, "Right number of items");
+  assert.equal(this.get('selected'), undefined, "Nothing is selected");
+
+  this.set('selected', this.get('people').objectAt(1));
+  assert.equal(this.$('.item.active').text(), "Patrick Bateman");
+
+  this.$(".menu .item[data-id=1]").click();
+  assert.equal(this.get('selected.id'), "1", "Sherlock has been selected");
+
+  // Now clear the property
+  this.set('selected', null);
+
+  assert.equal(this.$('.item').length, 2, "Right number of items");
+  assert.equal(this.$('.item.active').length, 0);
+  assert.equal(this.get('selected'), undefined, "Nothing is selected");
+});
+
+test('it renders from a mapper and clears the value if it changes and isnt found on sub property', function(assert) {
+  assert.expect(7);
+
+  this.set('people', Ember.A([
+    { id: 1, name: "Sherlock Homes" },
+    { id: 2, name: "Patrick Bateman" }
+  ]));
+
+  this.render(hbs`
+    {{#ui-dropdown selected=selected.sub onChange=(action (mut selected.sub)) as |execute mapper|}}
+      <div class='menu'>
+      {{#each people as |person|}}
+        <div class='item' data-value={{map-value mapper person}} data-id={{person.id}}>{{person.name}}</div>
+      {{/each}}
+      </div>
+    {{/ui-dropdown}}
+  `);
+
+  let selected = Ember.Object.create({ sub: this.get('people').objectAt(1) });
+
+  assert.equal(this.$('.item').length, 2, "Right number of items");
+  assert.equal(this.get('selected.sub'), undefined, "Nothing is selected");
+
+  this.set('selected', selected);
+  assert.equal(this.$('.item.active').text(), "Patrick Bateman");
+
+  this.$(".menu .item[data-id=1]").click();
+  assert.equal(this.get('selected.sub.id'), "1", "Sherlock has been selected");
+
+  // Now clear the property
+  this.set('selected.sub', null);
+
+  assert.equal(this.$('.item').length, 2, "Right number of items");
+  assert.equal(this.$('.item.active').length, 0);
+  assert.equal(this.get('selected.sub'), undefined, "Nothing is selected");
+});
+
+test('it renders from a mapper and binds to value', function(assert) {
+  assert.expect(7);
+
+  this.set('numbers', Ember.A([
+    1,
+    2
+  ]));
+
+  this.render(hbs`
+    {{#ui-dropdown selected=selected onChange=(action (mut selected)) as |execute mapper|}}
+      <div class='menu'>
+      {{#each numbers as |number|}}
+        <div class='item' data-value={{map-value mapper number}} data-id={{number}}>{{number}}</div>
+      {{/each}}
+      </div>
+    {{/ui-dropdown}}
+  `);
+
+  assert.equal(this.$('.item').length, 2, "Right number of items");
+  assert.equal(this.get('selected'), undefined, "Nothing is selected");
+
+  this.set('selected', 2);
+  assert.equal(this.$('.item.active').text(), "2");
+
+  this.$(".menu .item[data-id=1]").click();
+  assert.equal(this.get('selected'), 1, "Sherlock has been selected");
+
+  // Now clear the property
+  this.set('selected', null);
+
+  assert.equal(this.$('.item').length, 2, "Right number of items");
+  assert.equal(this.$('.item.active').length, 0);
+  assert.equal(this.get('selected'), null, "Nothing is selected");
+});

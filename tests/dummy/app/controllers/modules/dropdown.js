@@ -7,6 +7,18 @@ export default Ember.Controller.extend({
     'Bedroom'
   ],
 
+  types: [
+    2,
+    3,
+    true,
+    false,
+    3.3,
+    5.5,
+    "string"
+  ],
+
+  selected_type: 5.5,
+
   gender: 0,
   genders: Ember.A([
     { id: 1, text: 'Male' },
