@@ -4,6 +4,7 @@ import CheckboxMixin from '../mixins/checkbox-mixin';
 export default Ember.Component.extend(CheckboxMixin, {
   type: 'radio',
   classNames: ['radio'],
+  ignorableAttrs: ['checked', 'label', 'disabled', 'value', 'current'],
 
   init() {
     this._super(...arguments);
@@ -18,12 +19,6 @@ export default Ember.Component.extend(CheckboxMixin, {
   _onChange() {
     let value = this.get('value');
     this.attrs.onChange(value, this);
-  },
-
-  getSemanticIgnorableAttrs() {
-    let ignorableAttrs = this._super(...arguments);
-    ignorableAttrs.pushObjects(['value', 'current']);
-    return ignorableAttrs;
   },
 
   didInitSemantic() {

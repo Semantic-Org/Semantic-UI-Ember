@@ -3,10 +3,6 @@ import Base from '../mixins/base';
 
 const _proxyCallback = function(callbackName) {
   return function(value, text, $element) {
-    // if (!$element) {
-    //   return;
-    // }
-
     this.attrs[callbackName](this._getObjectOrValue(value), text, $element, this);
   };
 };
@@ -44,10 +40,7 @@ export default Ember.Component.extend(Base, {
   didInitSemantic() {
     this._super(...arguments);
     var selected = this.get('selected');
-    if (this.get('_settableAttrs').contains('selected')) {
-      this.get('_settableAttrs').removeObject('selected');
-      this.get('_bindableAttrs').addObject('selected');
-    }
+    this._swapAttrs('selected');
 
     if (Ember.isPresent(selected)) {
       let selectedValue = this._getObjectKeyByValue(selected);
@@ -81,11 +74,10 @@ export default Ember.Component.extend(Base, {
     mapping(object) {
       let guid = Ember.guidFor(object);
       if (this.get('objectMap').hasOwnProperty(guid)) {
-        Ember.Logger.warn('The dropdown already had a guid generated for the object passed in.');
+        Ember.Logger.warn('The dropdown already had a guid generated for the object passed in. Is it in the list twice?');
         Ember.Logger.warn(object);
       } else {
         this.get('objectMap')[guid] = object;
-        // Ember.Logger.info(guid);
       }
       return guid;
     }

@@ -7,7 +7,6 @@ import Base from './base';
 var CheckboxMixin = Ember.Mixin.create(Base, {
   module: 'checkbox',
   classNames: ['ui', 'checkbox'],
-  ignorableAttrs: ['checked', 'label', 'disabled'],
 
   willInitSemantic(settings) {
     this._super(...arguments);
@@ -28,13 +27,6 @@ var CheckboxMixin = Ember.Mixin.create(Base, {
     this._swapAttrs('enabled');
     if (this.get('readonly') != null) {
       this.get('_settableAttrs').addObject('readonly');
-    }
-  },
-
-  _swapAttrs(attrName) {
-    if (this.get('_settableAttrs').contains(attrName)) {
-      this.get('_settableAttrs').removeObject(attrName);
-      this.get('_bindableAttrs').addObject(attrName);
     }
   },
 

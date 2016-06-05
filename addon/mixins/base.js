@@ -97,13 +97,13 @@ Semantic.BaseMixin = Ember.Mixin.create({
         return module;
       }
     }
+    return null;
   },
 
   getSemanticModuleGlobal() {
     let moduleName = this.getSemanticModuleName();
     return window.$.fn[moduleName];
   },
-
 
   willInitSemantic(settings) { // jshint ignore:line
     // Use this method to modify the settings object on inherited components, before module initialization
@@ -218,7 +218,6 @@ Semantic.BaseMixin = Ember.Mixin.create({
 
   _updateFunctionWithParameters(key, fn) {
     return function() {
-      // TODO: Allow internal wrapper
       var args = [].splice.call(arguments, 0);
       // always add component instance as the last parameter incase they need access to it
       args.push(this);
@@ -242,7 +241,14 @@ Semantic.BaseMixin = Ember.Mixin.create({
       default:
         return value;
     }
-  }
+  },
+
+  _swapAttrs(attrName) {
+    if (this.get('_settableAttrs').contains(attrName)) {
+      this.get('_settableAttrs').removeObject(attrName);
+      this.get('_bindableAttrs').addObject(attrName);
+    }
+  },
 });
 
 export default Semantic.BaseMixin;
