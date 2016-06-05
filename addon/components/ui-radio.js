@@ -18,7 +18,7 @@ export default Ember.Component.extend(CheckboxMixin, {
   // Internal wrapper for onchange, to pass through checked
   _onChange() {
     let value = this.get('value');
-    this.attrs.onChange(value, this);
+    return this.attrs.onChange(value, this);
   },
 
   didInitSemantic() {

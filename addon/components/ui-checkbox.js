@@ -8,6 +8,6 @@ export default Ember.Component.extend(CheckboxMixin, {
   // Internal wrapper for onchange, to pass through checked
   _onChange() {
     let checked = this.execute('is checked');
-    this.attrs.onChange(checked, this);
+    return this.attrs.onChange(checked, this);
   }
 });
