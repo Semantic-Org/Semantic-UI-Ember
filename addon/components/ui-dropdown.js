@@ -50,7 +50,8 @@ export default Ember.Component.extend(Base, {
 
   getSemanticAttr(attrName) {
     if (attrName === 'selected') {
-      return this.execute('get value');
+      let value = this.execute('get value');
+      return this._getObjectOrValue(value);
     }
     return this._super(...arguments);
   },
