@@ -38,7 +38,7 @@
           <div class="sub header">A dropdown can be used to select between choices in a form</div>
         </h4>
 
-        {{#ui-dropdown class="selection" selected=gender onChange=(action (mut gender))}}
+        {{#ui-dropdown class="search selection" allowAdditions=true selected="Bob" onChange=(action (mut gender))}}
           <div class="default text">Gender</div>
           <i class="dropdown icon"></i>
           <div class="menu">
@@ -67,7 +67,7 @@
           <div class="sub header">A dropdown can be used to select between choices in a form</div>
         </h4>
 
-        {{#ui-dropdown class="selection" selected=selected_type onChange=(action (mut selected_type)) as |execute mapper|}}
+        {{#ui-dropdown class="search selection" allowAdditions=true selected=selected_type onChange=(action (mut selected_type)) as |execute mapper|}}
           <div class="default text">Types</div>
           <i class="dropdown icon"></i>
           <div class="menu">
@@ -130,10 +130,10 @@
           <i class="dropdown icon"></i>
           <div class="default text">Select Country</div>
           <div class="menu">
-            {{#each countries as |country|}}
-              <div class="item" data-value={{country.iso2}}>
-                <i class="{{country.iso2}} flag"></i>
-                {{country.name}}
+            {{#each countries as |item|}}
+              <div class="item" data-value={{item.iso2}}>
+                <i class="{{item.iso2}} flag"></i>
+                {{item.name}}
               </div>
             {{/each}}
           </div>
@@ -144,6 +144,36 @@
           <div class="ui field">
             <label>Selected</label>
             {{input value=country readonly="true"}}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="eight wide column">
+        <h4 class="ui header">
+          Multi Select Binded
+          <div class="sub header">A dropdown can be used to select between choices in a form</div>
+        </h4>
+
+        {{#ui-dropdown class="fluid multiple selection" selected=countries onChange=(action (mut country2)) as |execute mapper|}}
+          <i class="dropdown icon"></i>
+          <div class="default text">Select Country</div>
+          <div class="menu">
+            {{#each countries as |item|}}
+              <div class="item" data-value={{map-value mapper item}}>
+                <i class="{{item.iso2}} flag"></i>
+                {{item.name}}
+              </div>
+            {{/each}}
+          </div>
+        {{/ui-dropdown}}
+      </div>
+      <div class="eight wide column">
+        <div class="ui form">
+          <div class="ui field">
+            <label>Selected</label>
+            {{input value=country2.length readonly="true"}}
           </div>
         </div>
       </div>
