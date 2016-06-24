@@ -114,6 +114,10 @@ blockquote .author {
   box-shadow: none;
 }
 
+#example .masthead.segment.minimum {
+  min-height: 100px;
+}
+
 #example .masthead .introduction {
   display: block;
 }
@@ -389,7 +393,7 @@ blockquote .author {
 #example .example > .ignored.message,
 #example .example > .ignore.message,
 #example .example > p {
-  max-width: 700px;
+  /*max-width: 700px;*/
 }
 
 #example .example:last-child {
@@ -551,7 +555,7 @@ blockquote .author {
 #example .main.container > h2,
 #example .main.container > .tab > h2{
   position: relative;
-  margin: 5rem 0rem 3rem;
+  margin: 3rem 0rem 1rem;
 }
 #example .main.container .examples > h3,
 #example .main.container > h3,

@@ -1,0 +1,95 @@
+<div class="ui masthead minimum vertical segment">
+  <div class="ui container">
+    <div class="introduction">
+
+      <h1 class="ui header">
+        Introduction Semantic-UI-Ember
+        <div class="sub header">
+          This is the official Ember library for the Semantic-UI modules.
+          The code was original built for <a class="http://wwww.crowdox.com" target="_blank">CrowdOx</a> and other projects that we were building for clients.
+        </div>
+      </h1>
+
+    </div>
+
+  </div>
+</div>
+
+<div class="ui main container">
+
+
+  <h2 class="ui header">
+    Project Philosophy
+  </h2>
+
+  <div class="no example">
+
+    <p>
+      We feel that the Semantic-UI-Ember project should be an extension of Semantic-UI and not a complete rewrite.
+      With that in mind, the project will always be a very lightweight layer on top of Semantic-UI to make the integration a first-class Ember experience.
+      Please <a href="http://semantic-ui.com" target="_blank">follow the official documentation</a> for futher information.
+    </p>
+
+    <p>
+      The main core of this add-on focuses on the Semantic-UI modules.
+      Anything that's not a module (i.e. segment, button, etc), should be added to your templates as plain HTML.
+      We didn't find any value in creating Ember components that in the end represented simple HTML elements.
+    </p>
+
+    <p>
+      This is the 2.0 release which focuses on Data Down Actions Up as the way to interact with Semantic-UI.
+      We've moved away from data bindings to be more inline with Ember, and we found it better ties into Semantic-UI's existing events.
+    </p>
+
+    <p>
+      If you're looking for the 1.0 release, you can find it <a href="https://github.com/Semantic-Org/Semantic-UI-Ember/tree/release-1-0" target="_blank">here</a>.
+    </p>
+
+  </div>
+
+  <h2 class="ui dividing header">
+    Installation
+  </h2>
+
+  <div class="no example">
+    <p>
+      Install this add-on through Ember CLI. We support Ember versions 1.13 latest - 2.X.
+    </p>
+
+    <p>
+      From the command line run:
+    </p>
+
+    {{#ui-annotation showing=true type="bash"}}
+      ember install semantic-ui-ember
+    {{/ui-annotation}}
+
+    <p>
+      Run the library's blueprint to pull in its Bower dependencies. This only needs to be done once.
+    </p>
+
+    {{#ui-annotation showing=true type="bash"}}
+      ember generate semantic-ui-ember
+    {{/ui-annotation}}
+
+  </div>
+
+  <h2 class="ui dividing header">
+    Next Step
+  </h2>
+
+  <div class="no example">
+
+    <p>
+      Please carefully read and understand the {{#link-to 'modules.usage' class='item'}}Usage{{/link-to}} section.
+      It's critical to understand the overall usage principles. All components are based on the same base mixin and operate the same.
+    </p>
+
+    <p>
+      If you're upgrading from Semantic-UI-Ember 1.0, there are some minor changes you will need to be aware of in upgrading.
+      Please review the upgrade changes {{#link-to 'modules.upgrading' class='item'}}here{{/link-to}}.
+    </p>
+
+  </div>
+
+</div>
