@@ -421,6 +421,25 @@ export default Ember.Controller.extend(Ember.Evented, {
 });
 ```
 
+## Sticky
+
+ * **Documentation**: [Official Documentation](http://semantic-ui.com/modules/sticky.html)
+ * **Class**: `ui sticky`
+
+### Template
+```handlebars
+{{#ui-sticky}}
+  <div class="ui three item menu">
+    <a class="active item">Editorials</a>
+    <a class="item">Reviews</a>
+    <a class="item">Upcoming Events</a>
+  </div>
+{{/ui-sticky}}
+<div>
+<!-- Any arbitary content -->
+</div>
+```
+
 ## Tab
 
 Not implemented. Better suited to use routes through Ember. If you disagree please open an issue with how you would see it used.
