@@ -63,7 +63,7 @@
   </div>
 
   <h2 class="ui dividing header">
-    Digging Deeper
+    An Example
   </h2>
 
   <div class="no example">
@@ -105,9 +105,9 @@
     </p>
 
     <p>
-      One thing to note, some of the behaviors require you to pass the arguments in as one.
-      If passing them in separately didn't work, try combing the text.
-      For example if you were trying to execute <u>set enabled</u> on a checkbox, you would need to pass in the arguments like this:
+      One thing to note, when executing behaviors, you need to keep the full command together when executing.
+      For example, if you would like to call the <u>set enabled</u> command which is defined in Semantic UI's documention as a single string of <b>set enabled</b> then you would
+      pass the arguments like this:
     </p>
 
     {{#ui-annotation showing=true}}
@@ -116,19 +116,7 @@
 \{{/ui-checkbox}}
     {{/ui-annotation}}
 
-    <p>
-      Instead of passing through <u>set</u> <u>enabled</u> as two separate properties.
-    </p>
-
-    {{#ui-annotation showing=true}}
-\{{#ui-checkbox label="Some Label" checked=checked onChange=(action (mut checked)) as |execute|}}
-    <div class="ui button" onclick="\{{action (execute 'set' 'enabled')}}">Enable Checkbox (incorrect passed as two arguments)</div>
-\{{/ui-checkbox}}
-    {{/ui-annotation}}
-
-    <p>
-      If passing the arguments through together doesn't work, then try separately, or vise versa.
-    </p>
+    <p>Refer to the usage section on Semantic UI's site for more information.</p>
 
     <h3 class="ui header">
       Module Settings
