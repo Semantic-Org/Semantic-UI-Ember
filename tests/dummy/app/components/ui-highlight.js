@@ -5,10 +5,21 @@ export default Ember.Component.extend({
   didInsertElement() {
     this._super(...arguments);
     const elem = this.$('pre.code');
-    elem.html(elem.html().trim());
+    let html = elem.html();
+    let escaped = this.escapeHtml(html.trim());
+    elem.html(escaped);
     if (this.get('before')) {
-      this.get('before')(elem.html());
+      this.get('before')(html);
     }
     hljs.highlightBlock(elem[0]);
-  }
+  },
+
+  escapeHtml(html) {
+    return html
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
+ }
 });
