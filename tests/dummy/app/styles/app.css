@@ -35,6 +35,10 @@ p:last-child {
   background: #cce2ff;
 }
 
+.hljs {
+  color: #737373;
+}
+
 /* Inline Code */
 /*pre {
   white-space: pre-wrap;
