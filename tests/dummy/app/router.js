@@ -10,6 +10,7 @@ Router.map(function() {
     this.route('introduction');
     this.route('usage');
     this.route('upgrading');
+    this.route('base_mixin');
 
     this.route('accordion');
     this.route('checkbox');
