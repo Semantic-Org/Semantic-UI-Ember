@@ -175,7 +175,7 @@
     {{/ui-annotation}}
 
     <p>
-      It's also possibly to mutate a value directly by through a composable helper from the Semantic-UI callback.
+      It's also possibly to mutate a value directly through a composable helper from the Semantic-UI callback.
       This allows you to have simple value binding in your templates without having to create actions on a component or controller.
       Let's use the rating module as an example.
     </p>
@@ -204,10 +204,13 @@
 
   <div class="no example">
     <p>
-      If you've read through this code and believe you've found a bug, please let us know, but first check to see if you can replicate the bug in Semantic-UI.
-      If you can the bug within Semantic-UI, the bug isn't with Semantic-UI-Ember. If you can't replicate it in Semantic-UI, please ensure you properly understand the documentation above.
-      Many of the issues that are opened are mainly because individuals don't understand the basic concepts above and something isn't spelled out explicitly in
-      the Semantic-UI-Ember documentation.
+      If you've read through this code and believe you've found a bug, please let us know, but first run through these steps.
+
+      <ol>
+        <li>Try to replicate it with Semantic-UI only. If the bug is still occurring then please report it <a href="https://github.com/Semantic-Org/Semantic-UI/issues">to the main repository</a></li>
+        <li>Try to review the documentation on how each module should work within ember. Many issues opened have been because of a misunderstanding of how this library is meant to work</li>
+        <li>If you've done all of that and it still looks like a problem then put together an isolated replication of the it and <a href="https://github.com/Semantic-Org/Semantic-UI-Ember/issues">submit an issue</a></li>
+      </ol>
     </p>
 
     <p>
@@ -218,7 +221,7 @@
 
     <p>
       If you would like to contribute to this project, please add a description to the pull request, the fix in the code, and a test to cover the fix.
-      We won't except any pull requests that don't have those pieces.
+      <em>We won't except any pull requests that don't have those pieces.</em>
     </p>
 
     <p>
