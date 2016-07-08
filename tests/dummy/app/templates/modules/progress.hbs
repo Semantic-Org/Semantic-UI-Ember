@@ -30,18 +30,46 @@
 
 <div class="ui main container">
 
-  <div class="ui basic segment">
-    {{#ui-progress percent=progressOne class="teal indicating"}}
-      <div class="bar"></div>
-      <div class="label">Completed {{input value=progressOne type="range" min=0 max=100}}</div>
-    {{/ui-progress}}
-  </div>
+  {{#ui-example
+    header="Simple Example"
+    subHeader="Percent Progress"
+    as |showing copyCode setCopyCode|}}
 
-  <div class="ui basic segment">
-    {{#ui-progress value=progressTwo progress=progressTwo total=30}}
-      <div class="bar"></div>
-      <div class="label">Uploaded {{input value=progressTwo type="range" min=0 max=30}}</div>
-    {{/ui-progress}}
-  </div>
+    {{#ui-html showing=showing copyCode=copyCode}}
+      {{#ui-progress percent=progressOne class="teal indicating"}}
+        <div class="bar"></div>
+        <div class="label">Completed {{input value=progressOne type="range" min=0 max=100}}</div>
+      {{/ui-progress}}
+    {{/ui-html}}
+
+    {{#ui-annotation showing=showing setCopyCode=setCopyCode}}
+\{{#ui-progress percent=progressOne class="teal indicating"}}
+  <div class="bar"></div>
+  <div class="label">Completed \{{input value=progressOne type="range" min=0 max=100}}</div>
+\{{/ui-progress}}
+    {{/ui-annotation}}
+
+  {{/ui-example}}
+
+  {{#ui-example
+    header="Simple Example"
+    subHeader="Value Progress"
+    as |showing copyCode setCopyCode|}}
+
+    {{#ui-html showing=showing copyCode=copyCode}}
+      {{#ui-progress value=progressTwo progress=progressTwo total=30}}
+        <div class="bar"></div>
+        <div class="label">Uploaded {{input value=progressTwo type="range" min=0 max=30}}</div>
+      {{/ui-progress}}
+    {{/ui-html}}
+
+    {{#ui-annotation showing=showing setCopyCode=setCopyCode}}
+\{{#ui-progress value=progressTwo progress=progressTwo total=30}}
+  <div class="bar"></div>
+  <div class="label">Uploaded \{{input value=progressTwo type="range" min=0 max=30}}</div>
+\{{/ui-progress}}
+    {{/ui-annotation}}
+
+  {{/ui-example}}
 
 </div>
