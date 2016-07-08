@@ -30,15 +30,33 @@
 
 <div class="ui main container">
 
-  <div class="ui button" {{action 'clear'}}>
-    Clear
-  </div>
+  {{#ui-example
+    header="Simple Example"
+    subHeader="Basic Checkbox"
+    as |showing copyCode setCopyCode|}}
 
-  {{#ui-nag class="inline cookie"}}
-    <span class="title">
-      We use cookies to ensure you get the best experience on our website
-    </span>
-    <i class="close icon"></i>
-  {{/ui-nag}}
+    {{#ui-html showing=showing copyCode=copyCode}}
+      {{#ui-nag class="inline cookie"}}
+        <span class="title">
+          We use cookies to ensure you get the best experience on our website
+        </span>
+        <i class="close icon"></i>
+      {{/ui-nag}}
+    {{/ui-html}}
+
+    {{#ui-annotation showing=showing setCopyCode=setCopyCode}}
+\{{#ui-nag class="inline cookie"}}
+  <span class="title">
+    We use cookies to ensure you get the best experience on our website
+  </span>
+  <i class="close icon"></i>
+\{{/ui-nag}}
+    {{/ui-annotation}}
+
+  {{/ui-example}}
+
+  <div class="ui button" {{action 'clear'}}>
+    Reset
+  </div>
 
 </div>
