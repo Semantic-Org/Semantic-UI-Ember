@@ -21,6 +21,7 @@ Router.map(function() {
     this.route('nag');
     this.route('popup');
     this.route('progress');
+    this.route('radio');
     this.route('rating');
     this.route('search');
     this.route('shape');
