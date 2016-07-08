@@ -1,0 +1,26 @@
+{
+  "name": "semantic-ui-ember",
+  "description": "Semantic UI for Ember applications",
+  "url": "http://github.com/Semantic-Org/semantic-ui-ember",
+  "version": "1.0.0",
+  "options": {
+    "enabledEnvironments": ["production"],
+    "paths": [
+      "app",
+      "addon"
+    ],
+    "external": {
+      "data": [{
+        "base": "http://emberjs.com/api/",
+        "json": "http://builds.emberjs.com/tags/v2.4.0/ember-docs.json"
+      }]
+    },
+    "exclude": "vendor",
+    "outdir": "docs",
+    "linkNatives": true,
+    "quiet": true,
+    "parseOnly": false,
+    "lint": false,
+    "nocode": false
+  }
+}

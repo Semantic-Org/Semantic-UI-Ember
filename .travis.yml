@@ -1,35 +1,46 @@
----
 language: node_js
 node_js:
-  - "0.12"
-
-sudo: false
-
+  - '0.12'
+sudo: required
 cache:
   directories:
     - node_modules
-
 env:
   - EMBER_TRY_SCENARIO=default
   - EMBER_TRY_SCENARIO=ember-1.13
+  - EMBER_TRY_SCENARIO=ember-2.2
+  - EMBER_TRY_SCENARIO=ember-2.3
+  - EMBER_TRY_SCENARIO=ember-2.4
+  - EMBER_TRY_SCENARIO=ember-2.5
+  - EMBER_TRY_SCENARIO=ember-2.6
   - EMBER_TRY_SCENARIO=ember-release
-  - EMBER_TRY_SCENARIO=ember-beta
-  - EMBER_TRY_SCENARIO=ember-canary
-
+  - ALLOW_DEPRECATIONS=true EMBER_TRY_SCENARIO=ember-beta
+  - ALLOW_DEPRECATIONS=true EMBER_TRY_SCENARIO=ember-canary
 matrix:
   fast_finish: true
   allow_failures:
-    - env: EMBER_TRY_SCENARIO=ember-canary
-
+    - env: ALLOW_DEPRECATIONS=true EMBER_TRY_SCENARIO=ember-beta
+    - env: ALLOW_DEPRECATIONS=true EMBER_TRY_SCENARIO=ember-canary
 before_install:
-  - export PATH=/usr/local/phantomjs-2.0.0/bin:$PATH
-  - "npm config set spin false"
-  - "npm install -g npm@^2"
-
+  - 'export DISPLAY=:99.0'
+  - sh -e /etc/init.d/xvfb start
+  - npm config set spin false
+  - npm install -g npm@^2
+  - npm install -g codeclimate-test-reporter
 install:
   - npm install -g bower
   - npm install
   - bower install
-
 script:
-  - ember try $EMBER_TRY_SCENARIO test
+  - 'ember try:one $EMBER_TRY_SCENARIO --- ember test'
+dist: trusty
+addons:
+  apt:
+    sources:
+      - google-chrome
+    packages:
+      - google-chrome-stable
+  code_climate:
+    repo_token: 05fd1578b53db2450402144ecf20105dc5ca6a99f44b41ebd6810bfadb4116c0
+after_script:
+  - codeclimate-test-reporter < lcov.dat

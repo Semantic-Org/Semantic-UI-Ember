@@ -34,19 +34,24 @@
   "license": "MIT",
   "devDependencies": {
     "broccoli-asset-rev": "^2.4.2",
+    "ember-addon-genie": "0.0.6",
     "ember-ajax": "0.7.1",
     "ember-cli": "2.5.1",
     "ember-cli-app-version": "^1.0.0",
+    "ember-cli-blanket": "0.9.5",
     "ember-cli-clipboard": "0.3.2",
     "ember-cli-dependency-checker": "^1.2.0",
+    "ember-cli-es5-shim": "0.3.0",
+    "ember-cli-github-pages": "0.1.0",
     "ember-cli-htmlbars": "^1.0.3",
     "ember-cli-htmlbars-inline-precompile": "^0.3.1",
     "ember-cli-inject-live-reload": "^1.4.0",
     "ember-cli-jshint": "^1.0.0",
     "ember-cli-qunit": "^1.4.0",
-    "ember-cli-release": "0.2.8",
+    "ember-cli-release": "1.0.0-beta.2",
     "ember-cli-sri": "^2.1.0",
     "ember-cli-uglify": "^1.2.0",
+    "ember-cli-yuidoc": "0.8.4",
     "ember-composable-helpers": "0.26.2",
     "ember-data": "^2.5.0",
     "ember-disable-prototype-extensions": "^1.1.0",
@@ -63,6 +68,7 @@
     "ember-cli-babel": "^5.1.6"
   },
   "ember-addon": {
-    "configPath": "tests/dummy/config"
+    "configPath": "tests/dummy/config",
+    "demoURL": "http://Semantic-UI.github.io/semantic-ui-ember"
   }
 }
