@@ -30,10 +30,32 @@
 
 <div class="ui main container">
 
-  <h3>Using data-url (with placeholder)</h3>
-  {{ui-embed data-url="https://www.youtube.com/embed/o12-90Dm-Qs" data-placeholder="http://semantic-ui.com/images/image-16by9.png"}}
+  {{#ui-example
+    header="Placeholder Example"
+    as |showing copyCode setCopyCode|}}
 
-  <h3>Using parameters directly</h3>
-  {{ui-embed source="youtube" id="1YLT-ZlPH-0"}}
+    {{#ui-html showing=showing copyCode=copyCode}}
+      {{ui-embed data-url="https://www.youtube.com/embed/o12-90Dm-Qs" data-placeholder="http://semantic-ui.com/images/image-16by9.png"}}
+    {{/ui-html}}
+
+    {{#ui-annotation showing=showing setCopyCode=setCopyCode}}
+\{{ui-embed data-url="https://www.youtube.com/embed/o12-90Dm-Qs" data-placeholder="http://semantic-ui.com/images/image-16by9.png"}}
+    {{/ui-annotation}}
+
+  {{/ui-example}}
+
+  {{#ui-example
+    header="Parameter Example"
+    as |showing copyCode setCopyCode|}}
+
+    {{#ui-html showing=showing copyCode=copyCode}}
+      {{ui-embed source="youtube" id="1YLT-ZlPH-0"}}
+    {{/ui-html}}
+
+    {{#ui-annotation showing=showing setCopyCode=setCopyCode}}
+\{{ui-embed source="youtube" id="1YLT-ZlPH-0"}}
+    {{/ui-annotation}}
+
+  {{/ui-example}}
 
 </div>
