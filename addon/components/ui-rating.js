@@ -1,7 +1,7 @@
 import Ember from 'ember';
 import Base from '../mixins/base';
 
-var Rating = Ember.Component.extend(Base, {
+export default Ember.Component.extend(Base, {
   module: 'rating',
   classNames: ['ui', 'rating'],
   ignorableAttrs: ['rating'],
@@ -13,5 +13,3 @@ var Rating = Ember.Component.extend(Base, {
     }
   }
 });
-
-export default Rating;
