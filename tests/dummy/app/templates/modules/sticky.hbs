@@ -35,6 +35,21 @@
   {{#ui-sticky class="segment"}}
     <p>Cras id nisi vitae libero bibendum eleifend vel eu purus. Aliquam consectetur, nisl eu condimentum condimentum, lacus orci ullamcorper nisi, in porttitor urna lectus at tortor. Mauris fermentum dolor metus, vitae fermentum risus vulputate in. Vivamus porttitor mi nec pharetra tempus. Phasellus at mi sed ante molestie pretium id vel elit. Sed tincidunt, dolor quis euismod interdum, justo mauris pretium diam, sit amet egestas sem sem quis turpis. Donec eu est id tortor pulvinar auctor.</p>
   {{/ui-sticky}}
+  {{#ui-example
+    header="Simple Example"
+    subHeader=""
+    as |showing copyCode setCopyCode|}}
+
+    {{#ui-html showing=showing copyCode=copyCode}}
+    {{/ui-html}}
+
+    {{#ui-annotation showing=showing setCopyCode=setCopyCode}}
+\{{#ui-sticky class="segment"}}
+  <p>Cras id nisi vitae libero bibendum eleifend vel eu purus. Aliquam consectetur, nisl eu condimentum condimentum, lacus orci ullamcorper nisi, in porttitor urna lectus at tortor. Mauris fermentum dolor metus, vitae fermentum risus vulputate in. Vivamus porttitor mi nec pharetra tempus. Phasellus at mi sed ante molestie pretium id vel elit. Sed tincidunt, dolor quis euismod interdum, justo mauris pretium diam, sit amet egestas sem sem quis turpis. Donec eu est id tortor pulvinar auctor.</p>
+\{{/ui-sticky}}
+    {{/ui-annotation}}
+
+  {{/ui-example}}
 
   <p>Etiam facilisis ipsum eget dui lacinia, ut elementum nisi bibendum. Nulla euismod, mauris et elementum posuere, libero nulla aliquam ex, vel feugiat lacus justo quis justo. Etiam commodo luctus rhoncus. Curabitur sed quam ornare, hendrerit nunc quis, cursus turpis. Suspendisse potenti. Ut eget odio nec augue aliquet iaculis. In dapibus cursus mi.</p>
 
