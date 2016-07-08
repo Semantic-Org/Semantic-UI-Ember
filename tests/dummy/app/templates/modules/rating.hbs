@@ -30,20 +30,50 @@
 
 <div class="ui main container">
 
-  <div class="ui basic segment">
-    {{ui-rating
+  {{#ui-example
+    header="Simple Example"
+    subHeader="Rating with max"
+    as |showing copyCode setCopyCode|}}
+
+    {{#ui-html showing=showing copyCode=copyCode}}
+      {{ui-rating
         initialRating=rating
         rating=rating
         maxRating=7
         onRate=(action (mut rating))}} - Rating {{rating}}
-  </div>
+    {{/ui-html}}
 
-  <div class="ui basic segment">
-    {{ui-rating
-        class="heart"
-        rating=heartRating
-        onRate=(action (mut heartRating))
-        clearable=true}} - Rating {{heartRating}}
-  </div>
+    {{#ui-annotation showing=showing setCopyCode=setCopyCode}}
+\{{ui-rating
+    initialRating=rating
+    rating=rating
+    maxRating=7
+    onRate=(action (mut rating))}} - Rating \{{rating}}
+    {{/ui-annotation}}
+
+  {{/ui-example}}
+
+  {{#ui-example
+    header="Simple Example"
+    subHeader="Styled Rating"
+    as |showing copyCode setCopyCode|}}
+
+    {{#ui-html showing=showing copyCode=copyCode}}
+      {{ui-rating
+          class="heart"
+          rating=heartRating
+          onRate=(action (mut heartRating))
+          clearable=true}} - Rating {{heartRating}}
+    {{/ui-html}}
+
+    {{#ui-annotation showing=showing setCopyCode=setCopyCode}}
+\{{ui-rating
+    class="heart"
+    rating=heartRating
+    onRate=(action (mut heartRating))
+    clearable=true}} - Rating \{{heartRating}}
+    {{/ui-annotation}}
+
+  {{/ui-example}}
 
 </div>
