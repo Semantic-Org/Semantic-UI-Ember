@@ -30,22 +30,51 @@
 
 <div class="ui main container">
 
-  {{#ui-dimmer onElement=".ui.segment" variation="inverted" duration=(hash show=1500) on="click" as |execute|}}
-    <div class="ui show button" {{action execute 'show'}}><i class="plus icon"></i></div>
-    <div class="ui hide button" {{action execute 'hide'}}><i class="minus icon"></i></div>
+  {{#ui-example
+    header="Simple Example"
+    subHeader="Dimmer selecting the .ui.segment as the element to dim"
+    as |showing copyCode setCopyCode|}}
 
-    <div class="ui segment">
-      <!-- Dimmer Generated Automatically No Need to Include !-->
-      <h3 class="ui header">
-        Overlayable Section
-      </h3>
-      <div class="ui small images">
-        <img class="ui wireframe image" src="http://semantic-ui.com/images/wireframe/image.png">
-        <img class="ui wireframe image" src="http://semantic-ui.com/images/wireframe/image.png">
-        <img class="ui wireframe image" src="http://semantic-ui.com/images/wireframe/image.png">
-      </div>
-      <img class="ui medium wireframe image" src="http://semantic-ui.com/images/wireframe/media-paragraph.png">
+    {{#ui-html showing=showing copyCode=copyCode}}
+      {{#ui-dimmer onElement=".ui.segment" variation="inverted" duration=(hash show=1500) on="click" as |execute|}}
+        <div class="ui show button" {{action execute 'show'}}><i class="plus icon"></i></div>
+        <div class="ui hide button" {{action execute 'hide'}}><i class="minus icon"></i></div>
+
+        <div class="ui segment">
+          <!-- Dimmer Generated Automatically No Need to Include !-->
+          <h3 class="ui header">
+            Overlayable Section
+          </h3>
+          <div class="ui small images">
+            <img class="ui wireframe image" src="http://semantic-ui.com/images/wireframe/image.png">
+            <img class="ui wireframe image" src="http://semantic-ui.com/images/wireframe/image.png">
+            <img class="ui wireframe image" src="http://semantic-ui.com/images/wireframe/image.png">
+          </div>
+          <img class="ui medium wireframe image" src="http://semantic-ui.com/images/wireframe/media-paragraph.png">
+        </div>
+      {{/ui-dimmer}}
+    {{/ui-html}}
+
+    {{#ui-annotation showing=showing setCopyCode=setCopyCode}}
+\{{#ui-dimmer onElement=".ui.segment" variation="inverted" duration=(hash show=1500) on="click" as |execute|}}
+  <div class="ui show button" onclick="\{{action execute 'show'}}"><i class="plus icon"></i></div>
+  <div class="ui hide button" onclick="\{{action execute 'hide'}}"><i class="minus icon"></i></div>
+
+  <div class="ui segment">
+    <!-- Dimmer Generated Automatically No Need to Include !-->
+    <h3 class="ui header">
+      Overlayable Section
+    </h3>
+    <div class="ui small images">
+      <img class="ui wireframe image" src="http://semantic-ui.com/images/wireframe/image.png">
+      <img class="ui wireframe image" src="http://semantic-ui.com/images/wireframe/image.png">
+      <img class="ui wireframe image" src="http://semantic-ui.com/images/wireframe/image.png">
     </div>
-  {{/ui-dimmer}}
+    <img class="ui medium wireframe image" src="http://semantic-ui.com/images/wireframe/media-paragraph.png">
+  </div>
+\{{/ui-dimmer}}
+    {{/ui-annotation}}
+
+  {{/ui-example}}
 
 </div>
