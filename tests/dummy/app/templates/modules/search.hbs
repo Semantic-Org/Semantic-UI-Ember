@@ -41,9 +41,25 @@
     </p>
   </div>
 
-  {{#ui-search source=commonPasswords onSearchQuery=(action (mut query)) onSelect=(action (mut selected))}}
-    <input class="prompt" type="text" placeholder="Common passwords...">
-    <div class="results"></div>
-  {{/ui-search}}
+  {{#ui-example
+    header="Simple Example"
+    subHeader="Search based on a list"
+    as |showing copyCode setCopyCode|}}
+
+    {{#ui-html showing=showing copyCode=copyCode}}
+      {{#ui-search source=commonPasswords onSearchQuery=(action (mut query)) onSelect=(action (mut selected))}}
+        <input class="prompt" type="text" placeholder="Common passwords...">
+        <div class="results"></div>
+      {{/ui-search}}
+    {{/ui-html}}
+
+    {{#ui-annotation showing=showing setCopyCode=setCopyCode}}
+\{{#ui-search source=commonPasswords onSearchQuery=(action (mut query)) onSelect=(action (mut selected))}}
+  <input class="prompt" type="text" placeholder="Common passwords...">
+  <div class="results"></div>
+\{{/ui-search}}
+    {{/ui-annotation}}
+
+  {{/ui-example}}
 
 </div>
