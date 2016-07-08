@@ -26,6 +26,7 @@ export default Ember.Controller.extend({
   ]),
 
   country: null,
+  country2: null,
   countries: [
     { iso2: 'us', name: 'United States' },
     { iso2: 'ca', name: 'Canada' },
@@ -35,5 +36,6 @@ export default Ember.Controller.extend({
   init() {
     this._super(...arguments);
     this.set('gender2', this.get('genders.firstObject'));
+    this.set('country2', Ember.A([]).pushObjects(this.get('countries')));
   }
 });

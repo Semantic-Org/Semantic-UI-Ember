@@ -416,3 +416,5 @@ test('it renders from a mapper and binds to value', function(assert) {
   assert.equal(this.$('.item.active').length, 0);
   assert.equal(this.get('selected'), null, "Nothing is selected");
 });
+
+// TODO: Add dropdown multiple binded tests

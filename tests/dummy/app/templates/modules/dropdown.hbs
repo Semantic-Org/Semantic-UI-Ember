@@ -30,154 +30,317 @@
 
 <div class="ui main container">
 
-  <div class="ui grid">
-    <div class="row">
-      <div class="eight wide column">
-        <h4 class="ui header">
-          Selection
-          <div class="sub header">A dropdown can be used to select between choices in a form</div>
-        </h4>
-
-        {{#ui-dropdown class="search selection" allowAdditions=true selected="Bob" onChange=(action (mut gender))}}
-          <div class="default text">Gender</div>
-          <i class="dropdown icon"></i>
-          <div class="menu">
-            {{#each genders as |gender|}}
-              <div class="item" data-value={{gender.id}}>
-                {{gender.text}}
-              </div>
-            {{/each}}
-          </div>
-        {{/ui-dropdown}}
-      </div>
-      <div class="eight wide column">
-        <div class="ui form">
-          <div class="ui field">
-            <label>Selected</label>
-            {{input value=gender readonly="true"}}
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="eight wide column">
-        <h4 class="ui header">
-          Selection
-          <div class="sub header">A dropdown can be used to select between choices in a form</div>
-        </h4>
-
-        {{#ui-dropdown class="search selection" allowAdditions=true selected=selected_type onChange=(action (mut selected_type)) as |execute mapper|}}
-          <div class="default text">Types</div>
-          <i class="dropdown icon"></i>
-          <div class="menu">
-            <div class="item" data-value="">All Items</div>
-            {{#each types as |type|}}
-              <div class="item" data-value={{map-value mapper type}}>
-                {{type}}
-              </div>
-            {{/each}}
-          </div>
-        {{/ui-dropdown}}
-      </div>
-      <div class="eight wide column">
-        <div class="ui form">
-          <div class="ui field">
-            <label>Selected</label>
-            {{input value=selected_type readonly="true"}}
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="eight wide column">
-        <h4 class="ui header">
-          Selection
-          <div class="sub header">A dropdown can be used to select between choices in a form</div>
-        </h4>
-
-        {{#ui-dropdown class="selection" selected=gender2 onChange=(action (mut gender2)) as |execute mapper|}}
-          <div class="default text">Gender</div>
-          <i class="dropdown icon"></i>
-          <div class="menu">
-            {{#each genders as |gender|}}
-              <div class="item" data-value={{map-value mapper gender}}>
-                {{gender.text}}
-              </div>
-            {{/each}}
-          </div>
-        {{/ui-dropdown}}
-      </div>
-      <div class="eight wide column">
-        <div class="ui form">
-          <div class="ui field">
-            <label>Selected</label>
-            {{input value=gender2.text readonly="true"}}
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="eight wide column">
-        <h4 class="ui header">
-          Multi Select
-          <div class="sub header">A dropdown can be used to select between choices in a form</div>
-        </h4>
-
-        {{#ui-dropdown class="fluid multiple selection" selected=country onChange=(action (mut country))}}
-          <i class="dropdown icon"></i>
-          <div class="default text">Select Country</div>
-          <div class="menu">
-            {{#each countries as |item|}}
-              <div class="item" data-value={{item.iso2}}>
-                <i class="{{item.iso2}} flag"></i>
-                {{item.name}}
-              </div>
-            {{/each}}
-          </div>
-        {{/ui-dropdown}}
-      </div>
-      <div class="eight wide column">
-        <div class="ui form">
-          <div class="ui field">
-            <label>Selected</label>
-            {{input value=country readonly="true"}}
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="eight wide column">
-        <h4 class="ui header">
-          Multi Select Binded
-          <div class="sub header">A dropdown can be used to select between choices in a form</div>
-        </h4>
-
-        {{#ui-dropdown class="fluid multiple selection" selected=countries onChange=(action (mut country2)) as |execute mapper|}}
-          <i class="dropdown icon"></i>
-          <div class="default text">Select Country</div>
-          <div class="menu">
-            {{#each countries as |item|}}
-              <div class="item" data-value={{map-value mapper item}}>
-                <i class="{{item.iso2}} flag"></i>
-                {{item.name}}
-              </div>
-            {{/each}}
-          </div>
-        {{/ui-dropdown}}
-      </div>
-      <div class="eight wide column">
-        <div class="ui form">
-          <div class="ui field">
-            <label>Selected</label>
-            {{input value=country2.length readonly="true"}}
-          </div>
-        </div>
-      </div>
-    </div>
+  <div class="ui yellow message">
+    There are API module differences for checkbox.
   </div>
+
+  {{#ui-annotation showing=true type="javascript"}}
+Original: onChange()
+Modified: onChange(value [binded])
+
+// Description:
+//  The onChange event has been modify to include the bound value if you use the
+//  map-value mapper helper. If you don't it will return the data-value string
+  {{/ui-annotation}}
+
+  <div class="ui divider"></div>
+
+  <div class="ui blue message">
+    Dropdown allows value bindings, string bindings or mixed bindings.
+    In the examples below you'll see the \{{map-value mapper}} helper usage to
+    accomplish this.
+  </div>
+
+  <div class="ui divider"></div>
+
+  {{#ui-example
+    header="String Bound Dropdown Example"
+    subHeader="A dropdown can be used to select between choices in a form"
+    as |showing copyCode setCopyCode|}}
+
+    {{#ui-html showing=showing copyCode=copyCode}}
+      <div class="ui two column grid">
+        <div class="column">
+          {{#ui-dropdown class="selection" selected=gender onChange=(action (mut gender))}}
+            <div class="default text">Gender</div>
+            <i class="dropdown icon"></i>
+            <div class="menu">
+              {{#each genders as |gender|}}
+                <div class="item" data-value={{gender.id}}>
+                  {{gender.text}}
+                </div>
+              {{/each}}
+            </div>
+          {{/ui-dropdown}}
+        </div>
+        <div class="column">
+          <div class="ui form">
+            <div class="ui inline field">
+              <label>Selected</label>
+              {{input value=gender readonly="true"}}
+            </div>
+          </div>
+        </div>
+      </div>
+    {{/ui-html}}
+
+    {{#ui-annotation showing=showing setCopyCode=setCopyCode}}
+\{{#ui-dropdown class="selection" selected="Bob" onChange=(action (mut gender))}}
+<div class="default text">Gender</div>
+<i class="dropdown icon"></i>
+<div class="menu">
+  \{{#each genders as |gender|}}
+    <div class="item" data-value="\{{gender.id}}">
+      \{{gender.text}}
+    </div>
+  \{{/each}}
+</div>
+\{{/ui-dropdown}}
+    {{/ui-annotation}}
+
+  {{/ui-example}}
+
+  {{#ui-example
+    header="Value Bound Dropdown Example"
+    subHeader="Using the map-value helper and mapper action"
+    as |showing copyCode setCopyCode|}}
+
+    {{#ui-html showing=showing copyCode=copyCode}}
+      <div class="ui two column grid">
+        <div class="column">
+          {{#ui-dropdown class="selection" selected=selected_type onChange=(action (mut selected_type)) as |execute mapper|}}
+            <div class="default text">Types</div>
+            <i class="dropdown icon"></i>
+            <div class="menu">
+              <div class="item" data-value="">All Items</div>
+              {{#each types as |type|}}
+                <div class="item" data-value={{map-value mapper type}}>
+                  {{type}}
+                </div>
+              {{/each}}
+            </div>
+          {{/ui-dropdown}}
+        </div>
+        <div class="column">
+          <div class="ui form">
+            <div class="ui inline field">
+              <label>Selected</label>
+              {{input value=selected_type readonly="true"}}
+            </div>
+          </div>
+        </div>
+      </div>
+    {{/ui-html}}
+
+    {{#ui-annotation showing=showing setCopyCode=setCopyCode}}
+\{{#ui-dropdown class="selection" selected=selected_type onChange=(action (mut selected_type)) as |execute mapper|}}
+  <div class="default text">Types</div>
+  <i class="dropdown icon"></i>
+  <div class="menu">
+    <div class="item" data-value="">All Items</div>
+    \{{#each types as |type|}}
+      <div class="item" data-value="\{{map-value mapper type}}">
+        \{{type}}
+      </div>
+    \{{/each}}
+  </div>
+\{{/ui-dropdown}}
+    {{/ui-annotation}}
+
+  {{/ui-example}}
+
+  {{#ui-example
+    header="Object Bound Dropdown Example"
+    subHeader="Using the map-value helper and mapper action"
+    as |showing copyCode setCopyCode|}}
+
+    {{#ui-html showing=showing copyCode=copyCode}}
+      <div class="ui two column grid">
+        <div class="column">
+          {{#ui-dropdown class="selection" selected=gender2 onChange=(action (mut gender2)) as |execute mapper|}}
+            <div class="default text">Gender</div>
+            <i class="dropdown icon"></i>
+            <div class="menu">
+              {{#each genders as |gender|}}
+                <div class="item" data-value={{map-value mapper gender}}>
+                  {{gender.text}}
+                </div>
+              {{/each}}
+            </div>
+          {{/ui-dropdown}}
+        </div>
+        <div class="column">
+          <div class="ui form">
+            <div class="ui inline field">
+              <label>Selected</label>
+              {{input value=gender2.text readonly="true"}}
+            </div>
+          </div>
+        </div>
+      </div>
+    {{/ui-html}}
+
+    {{#ui-annotation showing=showing setCopyCode=setCopyCode}}
+\{{#ui-dropdown class="selection" selected=gender2 onChange=(action (mut gender2)) as |execute mapper|}}
+  <div class="default text">Gender</div>
+  <i class="dropdown icon"></i>
+  <div class="menu">
+    \{{#each genders as |gender|}}
+      <div class="item" data-value="\{{map-value mapper gender}}">
+        \{{gender.text}}
+      </div>
+    \{{/each}}
+  </div>
+\{{/ui-dropdown}}
+    {{/ui-annotation}}
+
+  {{/ui-example}}
+
+  {{#ui-example
+    header="Value Bound Allowing Selections and Search Dropdown Example"
+    subHeader="Type in the box to add it"
+    as |showing copyCode setCopyCode|}}
+
+    {{#ui-html showing=showing copyCode=copyCode}}
+      <div class="ui two column grid">
+        <div class="column">
+          {{#ui-dropdown class="search selection" allowAdditions=true selected=selected_type_addition onChange=(action (mut selected_type_addition)) as |execute mapper|}}
+            <div class="default text">Types</div>
+            <i class="dropdown icon"></i>
+            <div class="menu">
+              <div class="item" data-value="">All Items</div>
+              {{#each types as |type|}}
+                <div class="item" data-value={{map-value mapper type}}>
+                  {{type}}
+                </div>
+              {{/each}}
+            </div>
+          {{/ui-dropdown}}
+        </div>
+        <div class="column">
+          <div class="ui form">
+            <div class="ui inline field">
+              <label>Selected</label>
+              {{input value=selected_type_addition readonly="true"}}
+            </div>
+          </div>
+        </div>
+      </div>
+    {{/ui-html}}
+
+    {{#ui-annotation showing=showing setCopyCode=setCopyCode}}
+\{{#ui-dropdown class="search selection" allowAdditions=true selected=selected_type_addition onChange=(action (mut selected_type_addition)) as |execute mapper|}}
+  <div class="default text">Types</div>
+  <i class="dropdown icon"></i>
+  <div class="menu">
+    <div class="item" data-value="">All Items</div>
+    \{{#each types as |type|}}
+      <div class="item" data-value="\{{map-value mapper type}}">
+        \{{type}}
+      </div>
+    \{{/each}}
+  </div>
+\{{/ui-dropdown}}
+    {{/ui-annotation}}
+
+  {{/ui-example}}
+
+  {{#ui-example
+    header="Multi Select Bound Dropdown Example"
+    subHeader="A dropdown can be used to select between choices in a form"
+    as |showing copyCode setCopyCode|}}
+
+    {{#ui-html showing=showing copyCode=copyCode}}
+      <div class="ui two column grid">
+        <div class="column">
+          {{#ui-dropdown class="fluid multiple selection" selected=country onChange=(action (mut country))}}
+            <i class="dropdown icon"></i>
+            <div class="default text">Select Country</div>
+            <div class="menu">
+              {{#each countries as |item|}}
+                <div class="item" data-value={{item.iso2}}>
+                  <i class="{{item.iso2}} flag"></i>
+                  {{item.name}}
+                </div>
+              {{/each}}
+            </div>
+          {{/ui-dropdown}}
+        </div>
+        <div class="column">
+          <div class="ui form">
+            <div class="ui inline field">
+              <label>Selected</label>
+              {{input value=country readonly="true"}}
+            </div>
+          </div>
+        </div>
+      </div>
+    {{/ui-html}}
+
+    {{#ui-annotation showing=showing setCopyCode=setCopyCode}}
+\{{#ui-dropdown class="fluid multiple selection" selected=country onChange=(action (mut country))}}
+  <i class="dropdown icon"></i>
+  <div class="default text">Select Country</div>
+  <div class="menu">
+    \{{#each countries as |item|}}
+      <div class="item" data-value="\{{item.iso2}}">
+        <i class="\{{item.iso2}} flag"></i>
+        \{{item.name}}
+      </div>
+    \{{/each}}
+  </div>
+\{{/ui-dropdown}}
+    {{/ui-annotation}}
+
+  {{/ui-example}}
+
+  {{#ui-example
+    header="Multi Select Binded Dropdown Example"
+    subHeader="A dropdown can be used to select between choices in a form"
+    as |showing copyCode setCopyCode|}}
+
+    {{#ui-html showing=showing copyCode=copyCode}}
+      <div class="ui two column grid">
+        <div class="eight wide column">
+          {{#ui-dropdown class="fluid multiple selection" selected=country2 onChange=(action (mut country2)) as |execute mapper|}}
+            <i class="dropdown icon"></i>
+            <div class="default text">Select Country</div>
+            <div class="menu">
+              {{#each countries as |item|}}
+                <div class="item" data-value={{map-value mapper item}}>
+                  <i class="{{item.iso2}} flag"></i>
+                  {{item.name}}
+                </div>
+              {{/each}}
+            </div>
+          {{/ui-dropdown}}
+        </div>
+        <div class="eight wide column">
+          <div class="ui form">
+            <div class="ui inline field">
+              <label>Total Selected (length)</label>
+              {{input value=country2.length readonly="true"}}
+            </div>
+          </div>
+        </div>
+      </div>
+    {{/ui-html}}
+
+    {{#ui-annotation showing=showing setCopyCode=setCopyCode}}
+\{{#ui-dropdown class="fluid multiple selection" selected=country2 onChange=(action (mut country2)) as |execute mapper|}}
+  <i class="dropdown icon"></i>
+  <div class="default text">Select Country</div>
+  <div class="menu">
+    \{{#each countries as |item|}}
+      <div class="item" data-value="\{{map-value mapper item}}">
+        <i class="\{{item.iso2}} flag"></i>
+        \{{item.name}}
+      </div>
+    \{{/each}}
+  </div>
+\{{/ui-dropdown}}
+    {{/ui-annotation}}
+
+  {{/ui-example}}
 
 </div>
