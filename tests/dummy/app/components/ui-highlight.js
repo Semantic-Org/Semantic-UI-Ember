@@ -5,8 +5,8 @@ export default Ember.Component.extend({
   didInsertElement() {
     this._super(...arguments);
     const elem = this.$('pre.code');
-    let html = elem.html();
-    let escaped = this.escapeHtml(html.trim());
+    let html = elem.html().trim();
+    let escaped = this.escapeHtml(html);
     elem.html(escaped);
     if (this.get('before')) {
       this.get('before')(html);

@@ -29,66 +29,184 @@
 </div>
 
 <div class="ui main container">
-  {{#ui-accordion class="styled" as |execute|}}
-    <div class="title">
-      Semantic UI
-    </div>
-    <div class="content">
-      Accordion Component
-
-      <div class="ui basic segment">
-        <div class="ui tiny header">
-          Example using composable actions from within accordion
-        </div>
-        <div class="ui button" {{action execute "close" 0}}>Close</div>
-        <div class="ui button" {{action execute "open" 1}}>Open two</div>
-      </div>
-    </div>
-    <div class="title">
-      Accordion Two
-    </div>
-    <div class="content">
-      Content Two
-    </div>
-    <div class="title">
-      Accordion Three
-    </div>
-    <div class="content">
-      Content Three
-    </div>
-    {{#each sections as |section|}}
-      <div class="title">
-        Accordion Extra {{section}}
-      </div>
-      <div class="content">
-        Content Extra {{section}}
-      </div>
-    {{/each}}
-  {{/ui-accordion}}
-
-  <div class="ui basic segment">
-    <div class="ui button" {{action "change_sections" 1}}>
-      Add Extra Section
-    </div>
-
-    <div class="ui button {{unless total_sections "disabled"}}" {{action "change_sections" -1}}>
-      Remove Extra Section
-    </div>
-  </div>
 
   {{#ui-example
     header="Simple Example"
-    subHeader="This is the basic example"
+    subHeader="Styled Accordion"
     as |showing copyCode setCopyCode|}}
 
     {{#ui-html showing=showing copyCode=copyCode}}
-      {{ui-checkbox label="Make my profile visible (checked binding)" checked=checked onChange=(action (mut checked))}}
-      - {{if checked "Checked" "Not Checked"}}
+      {{#ui-accordion class="styled"}}
+        <div class="title">
+          Semantic UI
+        </div>
+        <div class="content">
+          Accordion Component
+        </div>
+        <div class="title">
+          Accordion Two
+        </div>
+        <div class="content">
+          Content Two
+        </div>
+      {{/ui-accordion}}
     {{/ui-html}}
 
     {{#ui-annotation showing=showing setCopyCode=setCopyCode}}
-      \{{ui-checkbox label="Make my profile visible (checked binding)" checked=checked onChange=(action (mut checked))}}
-      - \{{if checked "Checked" "Not Checked"}}
+\{{#ui-accordion class="styled"}}
+  <div class="title">
+    Semantic UI
+  </div>
+  <div class="content">
+    Accordion Component
+  </div>
+  <div class="title">
+    Accordion Two
+  </div>
+  <div class="content">
+    Content Two
+  </div>
+\{{/ui-accordion}}
+    {{/ui-annotation}}
+
+  {{/ui-example}}
+
+
+  {{#ui-example
+    header="Execute Example"
+    subHeader="Using the execute composable action"
+    as |showing copyCode setCopyCode|}}
+
+    {{#ui-html showing=showing copyCode=copyCode}}
+      {{#ui-accordion as |execute|}}
+        <div class="title">
+          <i class="dropdown icon"></i>
+          Semantic UI
+        </div>
+        <div class="content">
+          Accordion Component
+
+          <div class="ui basic segment">
+            <div class="ui tiny header">
+              Example using composable actions from within accordion
+            </div>
+            <div class="ui button" {{action execute "close" 0}}>Close</div>
+            <div class="ui button" {{action execute "open" 1}}>Open two</div>
+          </div>
+        </div>
+        <div class="title">
+          <i class="dropdown icon"></i>
+          Accordion Two
+        </div>
+        <div class="content">
+          Content Two
+        </div>
+      {{/ui-accordion}}
+    {{/ui-html}}
+
+    {{#ui-annotation showing=showing setCopyCode=setCopyCode}}
+\{{#ui-accordion as |execute|}}
+  <div class="title">
+    <i class="dropdown icon"></i>
+    Semantic UI
+  </div>
+  <div class="content">
+    Accordion Component
+
+    <div class="ui basic segment">
+      <div class="ui tiny header">
+        Example using composable actions from within accordion
+      </div>
+      <div class="ui button" onclick="\{{action execute 'close' 0}}">Close</div>
+      <div class="ui button" onclick="\{{action execute 'open' 1}}">Open two</div>
+    </div>
+  </div>
+  <div class="title">
+    <i class="dropdown icon"></i>
+    Accordion Two
+  </div>
+  <div class="content">
+    Content Two
+  </div>
+\{{/ui-accordion}}
+    {{/ui-annotation}}
+
+  {{/ui-example}}
+
+
+  {{#ui-example
+    header="Dynamic Example"
+    subHeader="Adding new sections"
+    as |showing copyCode setCopyCode|}}
+
+    {{#ui-html showing=showing copyCode=copyCode}}
+      {{#ui-accordion class="styled" as |execute|}}
+        <div class="title">
+          Semantic UI
+        </div>
+        <div class="content">
+          Accordion Component
+        </div>
+        <div class="title">
+          Accordion Two
+        </div>
+        <div class="content">
+          Content Two
+        </div>
+        {{#each sections as |section|}}
+          <div class="title">
+            Accordion Extra {{section}}
+          </div>
+          <div class="content">
+            Content Extra {{section}}
+          </div>
+        {{/each}}
+      {{/ui-accordion}}
+
+      <div class="ui basic segment">
+        <div class="ui button" {{action "change_sections" 1}}>
+          Add Extra Section
+        </div>
+
+        <div class="ui button {{unless total_sections "disabled"}}" {{action "change_sections" -1}}>
+          Remove Extra Section
+        </div>
+      </div>
+    {{/ui-html}}
+
+    {{#ui-annotation showing=showing setCopyCode=setCopyCode}}
+\{{#ui-accordion class="styled" as |execute|}}
+  <div class="title">
+    Semantic UI
+  </div>
+  <div class="content">
+    Accordion Component
+  </div>
+  <div class="title">
+    Accordion Two
+  </div>
+  <div class="content">
+    Content Two
+  </div>
+  \{{#each sections as |section|}}
+    <div class="title">
+      Accordion Extra \{{section}}
+    </div>
+    <div class="content">
+      Content Extra \{{section}}
+    </div>
+  \{{/each}}
+\{{/ui-accordion}}
+
+<div class="ui basic segment">
+  <div class="ui button" onclick="\{{action 'change_sections' 1}}">
+    Add Extra Section
+  </div>
+
+  <div class="ui button \{{unless total_sections 'disabled'}}" onclick="\{{action 'change_sections' -1}}">
+    Remove Extra Section
+  </div>
+</div>
     {{/ui-annotation}}
 
   {{/ui-example}}
