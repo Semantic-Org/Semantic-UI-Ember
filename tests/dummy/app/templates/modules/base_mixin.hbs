@@ -1,0 +1,302 @@
+<div class="ui masthead minimum vertical segment">
+  <div class="ui container">
+    <div class="introduction">
+
+      <h1 class="ui header">
+        Base Mixin
+        <div class="sub header">
+          The base mixin is the foundation for all of the Semantic-UI-Ember modules
+        </div>
+      </h1>
+
+    </div>
+
+  </div>
+</div>
+
+<div class="ui main container">
+
+
+  <h2 class="ui header">
+    Introduction
+  </h2>
+
+  <div class="no example">
+
+    <p>
+      This is a guide on changing one of the Semantic-UI-Ember components, or creating your own implementation.
+      If you don't plan on doing either of those things, you can skip this section unless you just want a further understanding of what the base mixin does.
+      The information below is a breakdown of the available overrides and requirements to implement the base mixin.
+    </p>
+
+  </div>
+
+  <h2 class="ui dividing header">
+    Requirements
+  </h2>
+
+  <div class="no example">
+
+    <p>
+      The actual requirements when implementing the base mixin on a new component are very minor.
+      The only required code for the entire module to work is the Semantic-UI module name.
+      Because of the Semantic-UI modules are structured the same way, we only need the name to initialize that module.
+    </p>
+
+    <p>
+      If Semantic-Ui came out with a new Calendar module for example, and there wasn't an Semantic-UI-Ember implementation yet,
+      you could easily create your own by doing the following.
+    </p>
+
+    {{#ui-annotation showing=true type="javascript"}}
+import Ember from 'ember';
+import Base from 'semantic-ui-ember/mixins/base';
+
+export default Ember.Component.extend(Base, {
+  module: 'calendar',
+  classNames: ['ui', 'calendar']
+});
+    {{/ui-annotation}}
+
+    <p>
+      You'll notice we added the classNames to the component also.
+      This is mainly so that every time you initialize this component in your templates, you don't have to specify the base class names that are required for this module.
+      The class names in the component aren't a requirement of the base mixin, but of Semantic-UI.
+    </p>
+
+    <p>
+      The last thing you would need to do is update the template to return yield the execute composable action and any other boiler plate HTML that module needed.
+      If you look through the Semantic-UI-Ember components templates, most of them are nothing but a yield statement.
+      A few have some extra html to make it easier (such as checkbox).
+    </p>
+
+    {{#ui-annotation showing=true}}
+\{{yield (action "execute")}}
+    {{/ui-annotation}}
+
+    <p>
+      If you do add additional template code, you'll want to make sure any variables are unbound and that they are updated through Semantic-UI.
+      Otherwise Ember will throw re-rending warnings.
+      If you're looking for an example, the checkbox source code is a good example of doing a more complex module.
+    </p>
+
+  </div>
+
+  <h2 class="ui dividing header">
+    Base Mixin's Methods
+  </h2>
+
+  <p>
+    We tried to structure the base mixin similar to Ember's, in that there are methods that are available to overwrite and hook into if you need to extend functionality.
+    The methods listed below will be listed in the order they are called within the Ember life cycle.
+  </p>
+
+  <h3 class="ui header">
+    General Methods
+    <div class="sub header">
+      The methods listed below shouldn't need to be modified unless you have a specific use case.
+      The methods were added mostly for separation, and should only be overwritten very carefully.
+    </div>
+  </h3>
+
+  {{#ui-annotation showing=true type="javascript"}}
+getSemanticScope() [jQuery Selector]
+
+// Description:
+//  This method allows you to return a custom selector to invoke the Semantic-UI module on.
+//  By default this method uses this.$() unless this.get('onElement') property is set.
+
+// Returns:
+//  Expects a jQuery Selector
+  {{/ui-annotation}}
+
+  <br/>
+
+  {{#ui-annotation showing=true type="javascript"}}
+getSemanticModuleName() String
+
+// Description:
+//  This method is called to return the name of the Semantic-UI module.
+//  By default it returns this.get('module') as seen in the requirements example
+
+// Returns:
+//  Expects a string of the module name
+  {{/ui-annotation}}
+
+  <br/>
+
+  {{#ui-annotation showing=true type="javascript"}}
+getSemanticModule() [Semantic-UI Module]
+
+// Description:
+//  This method uses the getSemanticModuleName and getSemanticScope to get the initialize
+//  method for a Semantic-UI module.
+
+// Returns:
+//  Expects the Sementic-UI Module initialization method
+  {{/ui-annotation}}
+
+  <br/>
+
+  {{#ui-annotation showing=true type="javascript"}}
+getSemanticModuleGlobal() [jQuery Semantic-UI Module]
+
+// Description:
+//  This method uses the getSemanticModuleName to get the global
+//  jQuery Semantic-UI module settings. This is how we know what attributes
+//  to pass into the module initialization
+
+// Returns:
+//  Expects the jQuery Sementic-UI Module global method
+  {{/ui-annotation}}
+
+  <br/>
+
+  {{#ui-annotation showing=true type="javascript"}}
+execute(arguments) [results]
+
+// Description:
+//  This method invokes a command directly against a Semantic-UI module instance.
+//  This is the method that the composable action calls in the template.
+
+// Params:
+//  This passes all arguments passed in directly to the module instance
+
+// Returns:
+//  Returns the results from the Semantic-UI module instance.
+  {{/ui-annotation}}
+
+  <h3 class="ui header">
+    Init
+    <div class="sub header">
+      It's recommended you don't overwrite this method and instead use properties to achieve the same result.
+    </div>
+  </h3>
+
+    {{#ui-annotation showing=true type="javascript"}}
+getSemanticIgnorableAttrs() Array
+
+// Description:
+//  This method is called to return an array of ignorable attritues.
+//  If an attribute is passed in to the component and isn't in the ignorable list,
+//  a debug message will be logged.
+//  By default this method combines a few internal collections with this.get('ignorableAttrs')
+//  It's recommend you add custom ignorable attributes through the ignorableAttrs property
+
+// Returns:
+//  Expects an array of attributes to ignore
+  {{/ui-annotation}}
+
+   <h3 class="ui header">
+    didInsertElement
+  </h3>
+
+  {{#ui-annotation showing=true type="javascript"}}
+initSemanticModule()
+
+// Description:
+//  This method gets the Semantic-UI module and initializes it with the passed in attributes to the component.
+//  If you need to modify the initialization process, it's recommend you use the methods below.
+  {{/ui-annotation}}
+
+  <br/>
+
+  {{#ui-annotation showing=true type="javascript"}}
+willInitSemantic(settings)
+
+// Description:
+//  This is the first main initialization hook.
+//  If you want to modify any settings (add / replace / remove) use this hook.
+//  After this method, the settings will be passed into the Semantic-UI module to be initialized.
+//  This method is empty on the mixin, but you should call this._super(...arguments) incase one of
+//  the inherited objects use it.
+
+// Params:
+//  settings: an object of values
+  {{/ui-annotation}}
+
+  <br/>
+
+  {{#ui-annotation showing=true type="javascript"}}
+didInitSemantic()
+
+// Description:
+//  After the Semantic-UI method has been initialized and didInsertElement is almost complete
+//  this method is called.
+//  If you need to perform any actions against an initialized Semantic-UI module, use this hook.
+//  This method is empty on the mixin, but you should call this._super(...arguments) incase one of
+//  the inherited objects use it.
+  {{/ui-annotation}}
+
+  <h3 class="ui header">
+    didUpdateAttrs
+    <div class="sub header">
+      When the attributes passed into your component change and you need to update the Semantic-UI module these hooks are available
+    </div>
+  </h3>
+
+  {{#ui-annotation showing=true type="javascript"}}
+getSemanticAttr(attrName) [Semantic-UI Module Result]
+
+// Description:
+//  This method retrieves the value from the Semantic-UI module instance.
+//  The reason it's an extension point, is some of the get and set methods
+//  on a Semantic-UI module aren't named the same.
+//  Through this method you can normalize those calls.
+//  For instance on checkbox, the call to determine if the module instance is checked,
+//  is called "is checked" instead of "get checked".
+//  Any attrNames you don't handle, you should call this._super(...arguments) to return
+//  the default value
+
+// Params:
+//  attrName: The attrName to retrieve from the Semantic-UI module instance
+
+// Returns:
+//  The result from invoking the Semantic-UI module instance
+  {{/ui-annotation}}
+
+  <br/>
+
+  {{#ui-annotation showing=true type="javascript"}}
+setSemanticAttr(attrName, attrValue) [Semantic-UI Module Result]
+
+// Description:
+//  This method sets the value passed in to the Semantic-UI module instance.
+//  The reason it's an extension point, is some of the get and set methods
+//  on a Semantic-UI module aren't named the same.
+//  Through this method you can normalize those calls.
+//  For instance on checkbox, the call to set check on the module instance,
+//  is called "set checked" and "set unchecked" instead of just "set checked".
+//  Any attrNames you don't handle, you should call this._super(...arguments) to set
+//  and return the default value
+
+// Params:
+//  attrName: The attrName to retrieve from the Semantic-UI module instance
+//  attrValue: The value of the attribute to set on the Semantic-UI module instance
+
+// Returns:
+//  The result from invoking the Semantic-UI module instance
+  {{/ui-annotation}}
+
+  <br/>
+
+  {{#ui-annotation showing=true type="javascript"}}
+areAttrValuesEqual(attrName, attrValue, moduleValue) Boolean
+
+// Description:
+//  This method is called determine if the attrValue and the moduleValue are equal
+//  This method is needed to ensure we don't create loops that constantly set and call
+//  same value and cause a stack overflow.
+//  Any attrNames you don't handle, you should call this._super(...arguments) to set
+//  and return the default value
+
+// Params:
+//  attrName: The attrName to retrieve from the Semantic-UI module instance
+//  attrValue: The value of the attribute passed into the component
+//  moduleValue: The value return from the Semantic-UI module
+
+// Returns:
+//  true if they are equal, and false if they aren't
+  {{/ui-annotation}}
+
+</div>
