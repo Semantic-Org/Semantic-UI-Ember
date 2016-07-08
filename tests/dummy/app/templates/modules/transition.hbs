@@ -30,10 +30,30 @@
 
 <div class="ui main container">
 
+  <p>
+   Because a transition happens on initialize, we are leaving transitions to be ran through your own actions for now.
+   That way they only happen in response to an event, instead on load.
+  </p>
+
   <div class="ui button" {{action 'transition'}}>
     Transition
   </div>
 
+  <br/><br/>
+
   <img class="ui small image" src="http://semantic-ui.com/images/avatar/large/steve.jpg">
 
+  <br/>
+
+  {{#ui-annotation showing=true type="javascript"}}
+import Ember from 'ember';
+
+export default Ember.Controller.extend({
+  actions: {
+    transition: function() {
+      $('img').transition('horizontal flip', '500ms');
+    }
+  }
+});
+  {{/ui-annotation}}
 </div>
