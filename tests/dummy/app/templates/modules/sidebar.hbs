@@ -30,24 +30,46 @@
 
 <div class="ui main container">
 
-  <div class="ui button" {{action 'toggle' 'main-sidebar'}}>
-    Toggle Main
-  </div>
+  {{#ui-example
+    header="Simple Example"
+    as |showing copyCode setCopyCode|}}
 
-  <div class="ui button" {{action 'toggle' 'sub-sidebar'}}>
-    Toggle Inner
-  </div>
-  <div class="ui pushable segment component context">
-    {{#ui-sidebar class="inverted menu left inline vertical" context=".component.context" id="sub-sidebar"}}
-      <a class="item">Item 1</a>
-      <a class="item">Item 2</a>
-      <a class="item">Item 3</a>
-    {{/ui-sidebar}}
-    <div class="pusher">
-      <div class="ui basic segment" style="min-height: 300px;">
-        Sub Content Here
+    {{#ui-html showing=showing copyCode=copyCode}}
+      <div class="ui button" {{action 'toggle' 'sub-sidebar'}}>
+        Toggle
       </div>
+      <div class="ui pushable segment component context">
+        {{#ui-sidebar class="inverted menu left inline vertical" context=".component.context" id="sub-sidebar"}}
+          <a class="item">Item 1</a>
+          <a class="item">Item 2</a>
+          <a class="item">Item 3</a>
+        {{/ui-sidebar}}
+        <div class="pusher">
+          <div class="ui basic segment" style="min-height: 300px;">
+            Sub Content Here
+          </div>
+        </div>
+      </div>
+    {{/ui-html}}
+
+    {{#ui-annotation showing=showing setCopyCode=setCopyCode}}
+<div class="ui button" onclick="\{{action 'toggle' 'sub-sidebar'}}">
+  Toggle
+</div>
+<div class="ui pushable segment component context">
+  \{{#ui-sidebar class="inverted menu left inline vertical" context=".component.context" id="sub-sidebar"}}
+    <a class="item">Item 1</a>
+    <a class="item">Item 2</a>
+    <a class="item">Item 3</a>
+  \{{/ui-sidebar}}
+  <div class="pusher">
+    <div class="ui basic segment" style="min-height: 300px;">
+      Sub Content Here
     </div>
   </div>
+</div>
+    {{/ui-annotation}}
+
+  {{/ui-example}}
 
 </div>
