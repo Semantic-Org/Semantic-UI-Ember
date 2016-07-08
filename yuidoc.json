@@ -1,7 +1,7 @@
 {
   "name": "semantic-ui-ember",
   "description": "Semantic UI for Ember applications",
-  "url": "http://github.com/Semantic-Org/semantic-ui-ember",
+  "url": "http://github.com/Semantic-Org/Semantic-UI-Ember",
   "version": "1.0.0",
   "options": {
     "enabledEnvironments": ["production"],

@@ -1,8 +1,8 @@
-[![Build Status](https://travis-ci.org/Aaron Hansen/semantic-ui-ember.svg)](https://travis-ci.org/Aaron Hansen/semantic-ui-ember)
+[![Build Status](https://travis-ci.org/Semantic-Org/Semantic-UI-Ember.svg)](https://travis-ci.org/Semantic-Org/Semantic-UI-Ember)
 [![npm version](https://badge.fury.io/js/semantic-ui-ember.svg)](http://badge.fury.io/js/semantic-ui-ember)
-[![Code Climate](https://codeclimate.com/github/Aaron Hansen/semantic-ui-ember/badges/gpa.svg)](https://codeclimate.com/github/Aaron Hansen/semantic-ui-ember)
-[![Test Coverage](https://codeclimate.com/github/Aaron Hansen/semantic-ui-ember/badges/coverage.svg)](https://codeclimate.com/github/Aaron Hansen/semantic-ui-ember/coverage)
-[![Dependency Status](https://david-dm.org/Aaron Hansen/semantic-ui-ember.svg)](https://david-dm.org/Aaron Hansen/semantic-ui-ember)
+[![Code Climate](https://codeclimate.com/github/Semantic-Org/Semantic-UI-Ember/badges/gpa.svg)](https://codeclimate.com/github/Semantic-Org/Semantic-UI-Ember)
+[![Test Coverage](https://codeclimate.com/github/Semantic-Org/Semantic-UI-Ember/badges/coverage.svg)](https://codeclimate.com/github/Semantic-Org/Semantic-UI-Ember/coverage)
+[![Dependency Status](https://david-dm.org/Semantic-Org/Semantic-UI-Ember.svg)](https://david-dm.org/Semantic-Org/Semantic-UI-Ember)
 
 ![Semantic](http://www.semantic-ui.com/images/logo.png)
 
@@ -27,6 +27,6 @@ ember generate semantic-ui-ember
 
 ## Documenation
 
-Detailed documentation on using Semantic-UI-Ember can be found [here](http://Semantic-UI.github.io/semantic-ui-ember).
+Detailed documentation on using Semantic-UI-Ember can be found [here](http://Semantic-Org.github.io/Semantic-UI-Ember).
 
 ### [Changelog](CHANGELOG.md)

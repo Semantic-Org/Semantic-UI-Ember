@@ -69,6 +69,6 @@
   },
   "ember-addon": {
     "configPath": "tests/dummy/config",
-    "demoURL": "http://Semantic-UI.github.io/semantic-ui-ember"
+    "demoURL": "http://Semantic-Org.github.io/Semantic-UI-Ember"
   }
 }
