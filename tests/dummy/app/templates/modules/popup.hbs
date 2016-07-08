@@ -30,34 +30,91 @@
 
 <div class="ui main container">
 
-  {{#ui-popup content="Add users to your feed"}}
-    <div class="ui icon button">
-      <i class="add icon"></i>
-    </div>
-  {{/ui-popup}}
+  {{#ui-example
+    header="Simple Example"
+    subHeader="Basic Popup"
+    as |showing copyCode setCopyCode|}}
 
-  <br>
+    {{#ui-html showing=showing copyCode=copyCode}}
+      {{#ui-popup content="Add users to your feed"}}
+        <div class="ui icon button">
+          <i class="add icon"></i>
+        </div>
+      {{/ui-popup}}
+    {{/ui-html}}
 
-  {{ui-popup tagName="i" class="info icon" content="The text you'd like to show"}}
-
-  <div class="ui header">
-    Updates with content change
+    {{#ui-annotation showing=showing setCopyCode=setCopyCode}}
+\{{#ui-popup content="Add users to your feed"}}
+  <div class="ui icon button">
+    <i class="add icon"></i>
   </div>
+\{{/ui-popup}}
+    {{/ui-annotation}}
 
-  <div class="ui input">
-    {{input value=popup_message}}
+  {{/ui-example}}
+
+  {{#ui-example
+    header="Simple Icon Example"
+    subHeader="Basic Popup"
+    as |showing copyCode setCopyCode|}}
+
+    {{#ui-html showing=showing copyCode=copyCode}}
+      {{ui-popup tagName="i" class="info icon" content="The text you'd like to show"}}
+    {{/ui-html}}
+
+    {{#ui-annotation showing=showing setCopyCode=setCopyCode}}
+\{{ui-popup tagName="i" class="info icon" content="The text you'd like to show"}}
+    {{/ui-annotation}}
+
+  {{/ui-example}}
+
+  {{#ui-example
+    header="Dynamic Text Example"
+    subHeader="Updates with content change"
+    as |showing copyCode setCopyCode|}}
+
+    {{#ui-html showing=showing copyCode=copyCode}}
+      <div class="ui input">
+        {{input value=popup_message}}
+      </div>
+
+      {{#ui-popup content=popup_message title="Dynamic content"}}
+        <div class="ui icon button">
+          <i class="help icon"></i>
+        </div>
+      {{/ui-popup}}
+    {{/ui-html}}
+
+    {{#ui-annotation showing=showing setCopyCode=setCopyCode}}
+<div class="ui input">
+  \{{input value=popup_message}}
+</div>
+
+\{{#ui-popup content=popup_message title="Dynamic content"}}
+  <div class="ui icon button">
+    <i class="help icon"></i>
   </div>
+\{{/ui-popup}}
+    {{/ui-annotation}}
 
-  {{#ui-popup content=popup_message title="Dynamic content"}}
-    <div class="ui icon button">
-      <i class="help icon"></i>
-    </div>
-  {{/ui-popup}}
+  {{/ui-example}}
 
-  <br>
+  {{#ui-example
+    header="Html Example"
+    as |showing copyCode setCopyCode|}}
 
-  {{#ui-popup html='<div class="ui red segment"> <div class="ui button">A button!</div> </div>'}}
-    <div class="ui label">Html Popup</div>
-  {{/ui-popup}}
+    {{#ui-html showing=showing copyCode=copyCode}}
+      {{#ui-popup html='<div class="ui red segment"> <div class="ui button">A button!</div> </div>'}}
+        <div class="ui label">Html Popup</div>
+      {{/ui-popup}}
+    {{/ui-html}}
+
+    {{#ui-annotation showing=showing setCopyCode=setCopyCode}}
+\{{#ui-popup html='<div class="ui red segment"> <div class="ui button">A button!</div> </div>'}}
+  <div class="ui label">Html Popup</div>
+\{{/ui-popup}}
+    {{/ui-annotation}}
+
+  {{/ui-example}}
 
 </div>
