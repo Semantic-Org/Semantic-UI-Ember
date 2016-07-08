@@ -30,80 +30,166 @@
 
 <div class="ui main container">
 
-  {{#ui-shape class="people" as |execute|}}
+  {{#ui-example
+    header="Simple Example"
+    subHeader="Using composable actions"
+    as |showing copyCode setCopyCode|}}
 
-    <div class="ui basic segment">
-      <div class="ui button" title="Flip Left" {{action execute 'flip left'}}>
-        <i class="left long arrow icon"></i>
-      </div>
-      <div class="ui button" title="Flip Up"  {{action execute 'flip up'}}>
-        <i class="up long arrow icon"></i>
-      </div>
-      <div class="ui icon button" title="Flip Down" {{action execute 'flip down'}}>
-        <i class="down long arrow icon"></i>
-      </div>
-      <div class="ui icon button" title="Flip Right"  {{action execute 'flip right'}}>
-        <i class="right long arrow icon"></i>
-      </div>
-      <div class="ui ignored icon direction buttons">
-        <div class="ui button" title="Flip Over"  {{action execute 'flip over'}}>
-          <i class="retweet icon"></i>
+    {{#ui-html showing=showing copyCode=copyCode}}
+      {{#ui-shape class="people" as |execute|}}
+
+        <div class="ui basic segment">
+          <div class="ui button" title="Flip Left" {{action execute 'flip left'}}>
+            <i class="left long arrow icon"></i>
+          </div>
+          <div class="ui button" title="Flip Up"  {{action execute 'flip up'}}>
+            <i class="up long arrow icon"></i>
+          </div>
+          <div class="ui icon button" title="Flip Down" {{action execute 'flip down'}}>
+            <i class="down long arrow icon"></i>
+          </div>
+          <div class="ui icon button" title="Flip Right"  {{action execute 'flip right'}}>
+            <i class="right long arrow icon"></i>
+          </div>
+          <div class="ui ignored icon direction buttons">
+            <div class="ui button" title="Flip Over"  {{action execute 'flip over'}}>
+              <i class="retweet icon"></i>
+            </div>
+            <div class="ui button" title="Flip Back"  {{action execute 'flip back'}}>
+              <i class="flipped retweet icon"></i>
+            </div>
+          </div>
         </div>
-        <div class="ui button" title="Flip Back"  {{action execute 'flip back'}}>
-          <i class="flipped retweet icon"></i>
+
+        <div class="sides">
+          <div class="active side">
+            <div class="ui card">
+              <div class="image">
+                <img src="http://semantic-ui.com/images/avatar/large/steve.jpg">
+              </div>
+              <div class="content">
+                <div class="header">Steve Jobes</div>
+                <div class="meta">
+                  <a>Acquaintances</a>
+                </div>
+                <div class="description">
+                  Steve Jobes is a fictional character designed to resemble someone familiar to readers.
+                </div>
+              </div>
+              <div class="extra content">
+                <span class="right floated">
+                  Joined in 2014
+                </span>
+                <span>
+                  <i class="user icon"></i>
+                  151 Friends
+                </span>
+              </div>
+            </div>
+          </div>
+          <div class="side">
+            <div class="ui card">
+              <div class="image">
+                <img src="http://semantic-ui.com/images/avatar/large/stevie.jpg">
+              </div>
+              <div class="content">
+                <a class="header">Stevie Feliciano</a>
+                <div class="meta">
+                  <span class="date">Joined in 2014</span>
+                </div>
+                <div class="description">
+                  Stevie Feliciano is a library scientist living in New York City. She likes to spend her time reading, running, and writing.
+                </div>
+              </div>
+              <div class="extra content">
+                <a>
+                  <i class="user icon"></i>
+                  22 Friends
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      {{/ui-shape}}
+    {{/ui-html}}
+
+    {{#ui-annotation showing=showing setCopyCode=setCopyCode}}
+\{{#ui-shape class="people" as |execute|}}
+  <div class="ui basic segment">
+    <div class="ui button" title="Flip Left" onclick="\{{action execute 'flip left'}}">
+      <i class="left long arrow icon"></i>
+    </div>
+    <div class="ui button" title="Flip Up"  onclick="\{{action execute 'flip up'}}">
+      <i class="up long arrow icon"></i>
+    </div>
+    <div class="ui icon button" title="Flip Down" onclick="\{{action execute 'flip down'}}">
+      <i class="down long arrow icon"></i>
+    </div>
+    <div class="ui icon button" title="Flip Right"  onclick="\{{action execute 'flip right'}}">
+      <i class="right long arrow icon"></i>
+    </div>
+    <div class="ui ignored icon direction buttons">
+      <div class="ui button" title="Flip Over"  onclick="\{{action execute 'flip over'}}">
+        <i class="retweet icon"></i>
+      </div>
+      <div class="ui button" title="Flip Back"  onclick="\{{action execute 'flip back'}}">
+        <i class="flipped retweet icon"></i>
+      </div>
+    </div>
+  </div>
+
+  <div class="sides">
+    <div class="active side">
+      <div class="ui card">
+        <div class="image">
+          <img src="http://semantic-ui.com/images/avatar/large/steve.jpg">
+        </div>
+        <div class="content">
+          <div class="header">Steve Jobes</div>
+          <div class="meta">
+            <a>Acquaintances</a>
+          </div>
+          <div class="description">
+            Steve Jobes is a fictional character designed to resemble someone familiar to readers.
+          </div>
+        </div>
+        <div class="extra content">
+          <span class="right floated">
+            Joined in 2014
+          </span>
+          <span>
+            <i class="user icon"></i>
+            151 Friends
+          </span>
         </div>
       </div>
     </div>
-
-    <div class="sides">
-      <div class="active side">
-        <div class="ui card">
-          <div class="image">
-            <img src="http://semantic-ui.com/images/avatar/large/steve.jpg">
+    <div class="side">
+      <div class="ui card">
+        <div class="image">
+          <img src="http://semantic-ui.com/images/avatar/large/stevie.jpg">
+        </div>
+        <div class="content">
+          <a class="header">Stevie Feliciano</a>
+          <div class="meta">
+            <span class="date">Joined in 2014</span>
           </div>
-          <div class="content">
-            <div class="header">Steve Jobes</div>
-            <div class="meta">
-              <a>Acquaintances</a>
-            </div>
-            <div class="description">
-              Steve Jobes is a fictional character designed to resemble someone familiar to readers.
-            </div>
-          </div>
-          <div class="extra content">
-            <span class="right floated">
-              Joined in 2014
-            </span>
-            <span>
-              <i class="user icon"></i>
-              151 Friends
-            </span>
+          <div class="description">
+            Stevie Feliciano is a library scientist living in New York City. She likes to spend her time reading, running, and writing.
           </div>
         </div>
-      </div>
-      <div class="side">
-        <div class="ui card">
-          <div class="image">
-            <img src="http://semantic-ui.com/images/avatar/large/stevie.jpg">
-          </div>
-          <div class="content">
-            <a class="header">Stevie Feliciano</a>
-            <div class="meta">
-              <span class="date">Joined in 2014</span>
-            </div>
-            <div class="description">
-              Stevie Feliciano is a library scientist living in New York City. She likes to spend her time reading, running, and writing.
-            </div>
-          </div>
-          <div class="extra content">
-            <a>
-              <i class="user icon"></i>
-              22 Friends
-            </a>
-          </div>
+        <div class="extra content">
+          <a>
+            <i class="user icon"></i>
+            22 Friends
+          </a>
         </div>
       </div>
     </div>
-  {{/ui-shape}}
+  </div>
+\{{/ui-shape}}
+    {{/ui-annotation}}
+
+  {{/ui-example}}
 
 </div>
