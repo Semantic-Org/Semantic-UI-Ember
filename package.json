@@ -34,10 +34,11 @@
   "license": "MIT",
   "devDependencies": {
     "broccoli-asset-rev": "^2.4.2",
-    "ember-addon-genie": "0.0.6",
+    "ember-addon-genie": "git://github.com/offirgolan/ember-addon-genie#08e361aff7545d2fd593b289d7aba380a2f5c2f3",
     "ember-ajax": "0.7.1",
     "ember-cli": "2.5.1",
     "ember-cli-app-version": "^1.0.0",
+    "ember-cli-babel": "^5.1.6",
     "ember-cli-blanket": "0.9.5",
     "ember-cli-clipboard": "0.3.2",
     "ember-cli-dependency-checker": "^1.2.0",
@@ -64,9 +65,6 @@
   "keywords": [
     "ember-addon"
   ],
-  "dependencies": {
-    "ember-cli-babel": "^5.1.6"
-  },
   "ember-addon": {
     "configPath": "tests/dummy/config",
     "demoURL": "http://Semantic-Org.github.io/Semantic-UI-Ember"

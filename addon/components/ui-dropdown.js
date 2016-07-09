@@ -52,7 +52,8 @@ export default Ember.Component.extend(Base, {
       if (this.execute('is multiple')) {
         let values = this.execute('get values');
         let returnValues = [];
-        for (let value of values) {
+        for (let i = 0; i < values.length; i++) {
+          let value = values[i];
           returnValues.push(this._getObjectOrValue(value));
         }
         return returnValues;
@@ -76,7 +77,8 @@ export default Ember.Component.extend(Base, {
         }
 
         value = [];
-        for (let item of attrValue) {
+        for (let i = 0; i < attrValue.length; i++) {
+          let item = attrValue[i];
           value.push(this._getObjectKeyByValue(item));
         }
       } else {
@@ -98,9 +100,11 @@ export default Ember.Component.extend(Base, {
       // all module values must equal the attrValues
       if (Ember.isArray(attrValue)) {
         // Loop through the collections and see if they are equal
-        for (let value of attrValue) {
+        for (let i = 0; i < attrValue.length; i++) {
+          let value = attrValue[i];
           let equal = false;
-          for (let module of moduleValue) {
+          for (let j = 0; j < moduleValue.length; j++) {
+            let module = moduleValue[j];
             if (this._super(attrName, value, module)) {
               equal = true;
               break;
@@ -111,7 +115,8 @@ export default Ember.Component.extend(Base, {
           }
         }
       } else if (Ember.isArray(moduleValue)) { // otherwise, just try to see one of the values in the module equals the attr value
-        for (let item of moduleValue) {
+        for (let i = 0; i < moduleValue.length; i++) {
+          let item = moduleValue[i];
           if (this._super(attrName, attrValue, item)) {
             return true; // We found a match
           }
@@ -128,7 +133,8 @@ export default Ember.Component.extend(Base, {
     if (this.execute('is multiple')) {
       let values = this.execute('get values');
       returnValue = [];
-      for (let item of values) {
+      for (let i = 0; i < values.length; i++) {
+        let item = values[i];
         returnValue.push(this._getObjectOrValue(item));
       }
     } else {

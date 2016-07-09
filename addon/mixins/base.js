@@ -53,14 +53,16 @@ Semantic.BaseMixin = Ember.Mixin.create({
 
   didUpdateAttrs() {
     this._super(...arguments);
-    for (let bindableAttr of this.get('_bindableAttrs')) {
+    for (let i = 0; i < this.get('_bindableAttrs').length; i++) {
+      let bindableAttr = this.get('_bindableAttrs')[i];
       let attrValue = this._getAttrValue(bindableAttr);
       let moduleValue = this.getSemanticAttr(bindableAttr);
       if (!this.areAttrValuesEqual(bindableAttr, attrValue, moduleValue)) {
         this.setSemanticAttr(bindableAttr, attrValue);
       }
     }
-    for (let settableAttr of this.get('_settableAttrs')) {
+    for (let i = 0; i < this.get('_settableAttrs').length; i++) {
+      let settableAttr = this.get('_settableAttrs')[i];
       let attrValue = this._getAttrValue(settableAttr);
       this.setSemanticAttr(settableAttr, attrValue);
     }
@@ -163,7 +165,7 @@ Semantic.BaseMixin = Ember.Mixin.create({
     // if its a mutable object, get the actual value
     if (typeof value === 'object') {
       let objectKeys = Ember.A(Object.keys(value));
-      if (objectKeys.any((objectkey) => objectkey.startsWith('MUTABLE_CELL') )) {
+      if (objectKeys.any((objectkey) => objectkey.indexOf('MUTABLE_CELL') === 0)) {
         value = value.value;
       }
     }
