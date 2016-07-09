@@ -49,9 +49,9 @@ Modified: onChange(checked [Boolean])
   {{#ui-example
     header="Simple Example"
     subHeader="Basic Checkbox"
-    as |showing copyCode setCopyCode|}}
+    as |showing setCopyCode|}}
 
-    {{#ui-html showing=showing copyCode=copyCode}}
+    {{#ui-html showing=showing}}
       {{ui-checkbox label="Click Me" checked=checked onChange=(action (mut checked))}}
       - {{if checked "Checked" "Not Checked"}}
     {{/ui-html}}
@@ -65,9 +65,9 @@ Modified: onChange(checked [Boolean])
   {{#ui-example
     header="Simple Example Prechecked"
     subHeader="Variable is already true"
-    as |showing copyCode setCopyCode|}}
+    as |showing setCopyCode|}}
 
-    {{#ui-html showing=showing copyCode=copyCode}}
+    {{#ui-html showing=showing}}
       {{ui-checkbox class="toggle" label="I start checked!" checked=pre_checked onChange=(action (mut pre_checked))}}
       - {{if pre_checked "Checked" "Not Checked"}}
     {{/ui-html}}
@@ -80,9 +80,9 @@ Modified: onChange(checked [Boolean])
 
   {{#ui-example
     header="Disabled Checkbox"
-    as |showing copyCode setCopyCode|}}
+    as |showing setCopyCode|}}
 
-    {{#ui-html showing=showing copyCode=copyCode}}
+    {{#ui-html showing=showing}}
       {{ui-checkbox label="Disabled checkbox (checked binding)" checked=disabled_checked disabled=true onChange=(action (mut disabled_checked))}}
       - {{if disabled_checked "Checked" "Not Checked"}}
     {{/ui-html}}
@@ -95,9 +95,9 @@ Modified: onChange(checked [Boolean])
 
   {{#ui-example
     header="Read-only Checkbox"
-    as |showing copyCode setCopyCode|}}
+    as |showing setCopyCode|}}
 
-    {{#ui-html showing=showing copyCode=copyCode}}
+    {{#ui-html showing=showing}}
       {{ui-checkbox label="Readonly checkbox (checked binding)" checked=readonly_checked readonly=true onChange=(action (mut readonly_checked))}}
       - {{if readonly_checked "Checked" "Not Checked"}}
     {{/ui-html}}

@@ -33,9 +33,9 @@
   {{#ui-example
     header="Simple Example"
     subHeader="Modal using an inline component"
-    as |showing copyCode setCopyCode|}}
+    as |showing setCopyCode|}}
 
-    {{#ui-html showing=showing copyCode=copyCode}}
+    {{#ui-html showing=showing}}
       <div class="ui button" {{action 'openModal' 'profile'}}>
         Open Profile
       </div>
@@ -129,9 +129,9 @@ export default Ember.Controller.extend({
   {{#ui-example
     header="Simple Example"
     subHeader="Modal using an inbox-modal component"
-    as |showing copyCode setCopyCode|}}
+    as |showing setCopyCode|}}
 
-    {{#ui-html showing=showing copyCode=copyCode}}
+    {{#ui-html showing=showing}}
       <div class="ui button" {{action 'openModal' 'inbox'}}>
         Open Inbox
       </div>

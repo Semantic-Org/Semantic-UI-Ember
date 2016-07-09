@@ -56,9 +56,9 @@ Modified: onChange(value [binded])
   {{#ui-example
     header="String Bound Dropdown Example"
     subHeader="A dropdown can be used to select between choices in a form"
-    as |showing copyCode setCopyCode|}}
+    as |showing setCopyCode|}}
 
-    {{#ui-html showing=showing copyCode=copyCode}}
+    {{#ui-html showing=showing}}
       <div class="ui two column grid">
         <div class="column">
           {{#ui-dropdown class="selection" selected=gender onChange=(action (mut gender))}}
@@ -103,9 +103,9 @@ Modified: onChange(value [binded])
   {{#ui-example
     header="Value Bound Dropdown Example"
     subHeader="Using the map-value helper and mapper action"
-    as |showing copyCode setCopyCode|}}
+    as |showing setCopyCode|}}
 
-    {{#ui-html showing=showing copyCode=copyCode}}
+    {{#ui-html showing=showing}}
       <div class="ui two column grid">
         <div class="column">
           {{#ui-dropdown class="selection" selected=selected_type onChange=(action (mut selected_type)) as |execute mapper|}}
@@ -152,9 +152,9 @@ Modified: onChange(value [binded])
   {{#ui-example
     header="Object Bound Dropdown Example"
     subHeader="Using the map-value helper and mapper action"
-    as |showing copyCode setCopyCode|}}
+    as |showing setCopyCode|}}
 
-    {{#ui-html showing=showing copyCode=copyCode}}
+    {{#ui-html showing=showing}}
       <div class="ui two column grid">
         <div class="column">
           {{#ui-dropdown class="selection" selected=gender2 onChange=(action (mut gender2)) as |execute mapper|}}
@@ -199,9 +199,9 @@ Modified: onChange(value [binded])
   {{#ui-example
     header="Value Bound Allowing Selections and Search Dropdown Example"
     subHeader="Type in the box to add it"
-    as |showing copyCode setCopyCode|}}
+    as |showing setCopyCode|}}
 
-    {{#ui-html showing=showing copyCode=copyCode}}
+    {{#ui-html showing=showing}}
       <div class="ui two column grid">
         <div class="column">
           {{#ui-dropdown class="search selection" allowAdditions=true selected=selected_type_addition onChange=(action (mut selected_type_addition)) as |execute mapper|}}
@@ -248,9 +248,9 @@ Modified: onChange(value [binded])
   {{#ui-example
     header="Multi Select Bound Dropdown Example"
     subHeader="A dropdown can be used to select between choices in a form"
-    as |showing copyCode setCopyCode|}}
+    as |showing setCopyCode|}}
 
-    {{#ui-html showing=showing copyCode=copyCode}}
+    {{#ui-html showing=showing}}
       <div class="ui two column grid">
         <div class="column">
           {{#ui-dropdown class="fluid multiple selection" selected=country onChange=(action (mut country))}}
@@ -297,9 +297,9 @@ Modified: onChange(value [binded])
   {{#ui-example
     header="Multi Select Binded Dropdown Example"
     subHeader="A dropdown can be used to select between choices in a form"
-    as |showing copyCode setCopyCode|}}
+    as |showing setCopyCode|}}
 
-    {{#ui-html showing=showing copyCode=copyCode}}
+    {{#ui-html showing=showing}}
       <div class="ui two column grid">
         <div class="eight wide column">
           {{#ui-dropdown class="fluid multiple selection" selected=country2 onChange=(action (mut country2)) as |execute mapper|}}

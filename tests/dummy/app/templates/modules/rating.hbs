@@ -33,9 +33,9 @@
   {{#ui-example
     header="Simple Example"
     subHeader="Rating with max"
-    as |showing copyCode setCopyCode|}}
+    as |showing setCopyCode|}}
 
-    {{#ui-html showing=showing copyCode=copyCode}}
+    {{#ui-html showing=showing}}
       {{ui-rating
         initialRating=rating
         rating=rating
@@ -56,9 +56,9 @@
   {{#ui-example
     header="Simple Example"
     subHeader="Styled Rating"
-    as |showing copyCode setCopyCode|}}
+    as |showing setCopyCode|}}
 
-    {{#ui-html showing=showing copyCode=copyCode}}
+    {{#ui-html showing=showing}}
       {{ui-rating
           class="heart"
           rating=heartRating

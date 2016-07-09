@@ -33,9 +33,9 @@
   {{#ui-example
     header="Simple Example"
     subHeader="Basic Popup"
-    as |showing copyCode setCopyCode|}}
+    as |showing setCopyCode|}}
 
-    {{#ui-html showing=showing copyCode=copyCode}}
+    {{#ui-html showing=showing}}
       {{#ui-popup content="Add users to your feed"}}
         <div class="ui icon button">
           <i class="add icon"></i>
@@ -56,9 +56,9 @@
   {{#ui-example
     header="Simple Icon Example"
     subHeader="Basic Popup"
-    as |showing copyCode setCopyCode|}}
+    as |showing setCopyCode|}}
 
-    {{#ui-html showing=showing copyCode=copyCode}}
+    {{#ui-html showing=showing}}
       {{ui-popup tagName="i" class="info icon" content="The text you'd like to show"}}
     {{/ui-html}}
 
@@ -71,9 +71,9 @@
   {{#ui-example
     header="Dynamic Text Example"
     subHeader="Updates with content change"
-    as |showing copyCode setCopyCode|}}
+    as |showing setCopyCode|}}
 
-    {{#ui-html showing=showing copyCode=copyCode}}
+    {{#ui-html showing=showing}}
       <div class="ui input">
         {{input value=popup_message}}
       </div>
@@ -101,9 +101,9 @@
 
   {{#ui-example
     header="Html Example"
-    as |showing copyCode setCopyCode|}}
+    as |showing setCopyCode|}}
 
-    {{#ui-html showing=showing copyCode=copyCode}}
+    {{#ui-html showing=showing}}
       {{#ui-popup html='<div class="ui red segment"> <div class="ui button">A button!</div> </div>'}}
         <div class="ui label">Html Popup</div>
       {{/ui-popup}}

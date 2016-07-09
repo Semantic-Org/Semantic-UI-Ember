@@ -44,9 +44,9 @@
   {{#ui-example
     header="Simple Example"
     subHeader="Search based on a list"
-    as |showing copyCode setCopyCode|}}
+    as |showing setCopyCode|}}
 
-    {{#ui-html showing=showing copyCode=copyCode}}
+    {{#ui-html showing=showing}}
       {{#ui-search source=commonPasswords onSearchQuery=(action (mut query)) onSelect=(action (mut selected))}}
         <input class="prompt" type="text" placeholder="Common passwords...">
         <div class="results"></div>

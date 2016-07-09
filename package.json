@@ -54,7 +54,7 @@
     "ember-cli-uglify": "^1.2.0",
     "ember-cli-yuidoc": "0.8.4",
     "ember-composable-helpers": "0.26.2",
-    "ember-data": "^2.5.0",
+    "ember-data": "2.5.3",
     "ember-disable-prototype-extensions": "^1.1.0",
     "ember-export-application-global": "^1.0.5",
     "ember-load-initializers": "^0.5.1",

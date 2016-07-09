@@ -33,9 +33,9 @@
   {{#ui-example
     header="Simple Example"
     subHeader="Dimmer selecting the .ui.segment as the element to dim"
-    as |showing copyCode setCopyCode|}}
+    as |showing setCopyCode|}}
 
-    {{#ui-html showing=showing copyCode=copyCode}}
+    {{#ui-html showing=showing}}
       {{#ui-dimmer onElement=".ui.segment" variation="inverted" duration=(hash show=1500) on="click" as |execute|}}
         <div class="ui show button" {{action execute 'show'}}><i class="plus icon"></i></div>
         <div class="ui hide button" {{action execute 'hide'}}><i class="minus icon"></i></div>
