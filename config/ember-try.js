@@ -14,7 +14,8 @@ module.exports = {
         "dependencies": {
           "ember": "~1.13.0",
           "ember-data": "~1.13.0",
-          "ember-cli-shims": "0.0.6"
+          "ember-cli-shims": "0.0.6",
+          "ember-hash-helper-polyfill", "0.1.1"
         }
       }
     },
