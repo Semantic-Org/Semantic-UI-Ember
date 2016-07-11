@@ -14,20 +14,29 @@ module.exports = {
         "dependencies": {
           "ember": "~1.13.0",
           "ember-data": "~1.13.0",
-          "ember-cli-shims": "0.0.6",
+          "ember-cli-shims": "0.0.6"
+        }
+      },
+      npm: {
+        dependencies: {
           "ember-hash-helper-polyfill": "0.1.1"
         }
       }
     },
     {
-    name: "ember-2.0",
-    bower: {
-      dependencies: {
-        ember: "~2.0.0",
-        "ember-data": "~2.0.0",
-        "ember-cli-shims": "0.0.6"
+      name: "ember-2.0",
+      bower: {
+        dependencies: {
+          ember: "~2.0.0",
+          "ember-data": "~2.0.0",
+          "ember-cli-shims": "0.0.6"
+        }
+      },
+      npm: {
+        dependencies: {
+          "ember-hash-helper-polyfill": "0.1.1"
+        }
       }
-    }
     },
     {
       name: "ember-2.1",
@@ -46,6 +55,11 @@ module.exports = {
           ember: "~2.2.0",
           "ember-data": "~2.2.0",
           "ember-cli-shims": "0.0.6"
+        }
+      },
+      npm: {
+        dependencies: {
+          "ember-hash-helper-polyfill": "0.1.1"
         }
       }
     },
