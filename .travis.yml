@@ -1,6 +1,6 @@
 language: node_js
 node_js:
-  - '0.12'
+  - "4"
 sudo: required
 cache:
   directories:
@@ -8,8 +8,6 @@ cache:
 env:
   - EMBER_TRY_SCENARIO=default
   - EMBER_TRY_SCENARIO=ember-1.13
-  - EMBER_TRY_SCENARIO=ember-2.2
-  - EMBER_TRY_SCENARIO=ember-2.3
   - EMBER_TRY_SCENARIO=ember-2.4
   - EMBER_TRY_SCENARIO=ember-2.5
   - EMBER_TRY_SCENARIO=ember-2.6

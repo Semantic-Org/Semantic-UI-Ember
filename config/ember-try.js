@@ -18,24 +18,6 @@ module.exports = {
       }
     },
     {
-      "name": "ember-2.2",
-      "bower": {
-        "dependencies": {
-          "ember": "~2.2.0",
-          "ember-data": "~2.2.0"
-        }
-      }
-    },
-    {
-      "name": "ember-2.3",
-      "bower": {
-        "dependencies": {
-          "ember": "~2.3.0",
-          "ember-data": "~2.3.0"
-        }
-      }
-    },
-    {
       "name": "ember-2.4",
       "bower": {
         "dependencies": {
