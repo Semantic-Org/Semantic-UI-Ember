@@ -3,7 +3,7 @@ import Base from '../mixins/base';
 
 const _proxyCallback = function(callbackName) {
   return function(value, text, $element) {
-    return this.attrs[callbackName](this._getObjectOrValue(value), text, $element, this);
+    return this.get(`attrs.${callbackName}`)(this._getObjectOrValue(value), text, $element, this);
   };
 };
 
@@ -27,13 +27,13 @@ export default Ember.Component.extend(Base, {
   willInitSemantic(settings) {
     this._super(...arguments);
     if (settings.onChange) {
-      settings.onChange = this._onChange;
+      settings.onChange = this.get('_onChange');
     }
     if (settings.onAdd) {
-      settings.onAdd = this._onAdd;
+      settings.onAdd = this.get('_onAdd');
     }
     if (settings.onRemove) {
-      settings.onRemove = this._onRemove;
+      settings.onRemove = this.get('_onRemove');
     }
   },
 
@@ -53,7 +53,7 @@ export default Ember.Component.extend(Base, {
         let keys = this.execute('get values');
         let returnValues = [];
         for (let i = 0; i < keys.length; i++) {
-          let key = keys[i];
+          let key = this._atIndex(keys, i);
           returnValues.push(this._getObjectOrValue(key));
         }
         return returnValues;
@@ -81,8 +81,8 @@ export default Ember.Component.extend(Base, {
         }
 
         key = [];
-        for (let i = 0; i < attrValue.length; i++) {
-          let item = attrValue[i];
+        for (let i = 0; i < Ember.get(attrValue, 'length'); i++) {
+          let item = this._atIndex(attrValue, i);
           key.push(this._getObjectKeyByValue(item));
         }
       } else {
@@ -100,11 +100,11 @@ export default Ember.Component.extend(Base, {
       // all module values must equal the attrValues
       if (Ember.isArray(attrValue)) {
         // Loop through the collections and see if they are equal
-        for (let i = 0; i < attrValue.length; i++) {
-          let value = attrValue[i];
+        for (let i = 0; i < Ember.get(attrValue, 'length'); i++) {
+          let value = this._atIndex(attrValue, i);
           let equal = false;
-          for (let j = 0; j < moduleValue.length; j++) {
-            let module = moduleValue[j];
+          for (let j = 0; j < Ember.get(moduleValue, 'length'); j++) {
+            let module = this._atIndex(moduleValue, j);
             if (this._super(attrName, value, module)) {
               equal = true;
               break;
@@ -115,8 +115,8 @@ export default Ember.Component.extend(Base, {
           }
         }
       } else if (Ember.isArray(moduleValue)) { // otherwise, just try to see one of the values in the module equals the attr value
-        for (let i = 0; i < moduleValue.length; i++) {
-          let item = moduleValue[i];
+        for (let i = 0; i < Ember.get(moduleValue, 'length'); i++) {
+          let item = this._atIndex(moduleValue, i);
           if (this._super(attrName, attrValue, item)) {
             return true; // We found a match
           }
@@ -128,13 +128,20 @@ export default Ember.Component.extend(Base, {
     return this._super(...arguments);
   },
 
+  _atIndex(collection, index) {
+    if (typeof collection.objectAt === 'function') {
+      return collection.objectAt(index);
+    }
+    return collection[index];
+  },
+
   _onChange(value, text, $element) {
     let returnValue;
     if (this.execute('is multiple')) {
       let values = this.execute('get values');
       returnValue = [];
-      for (let i = 0; i < values.length; i++) {
-        let item = values[i];
+      for (let i = 0; i < Ember.get(values, 'length'); i++) {
+        let item = this._atIndex(values, i);
         returnValue.push(this._getObjectOrValue(item));
       }
     } else {

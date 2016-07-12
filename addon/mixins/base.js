@@ -33,7 +33,7 @@ Semantic.BaseMixin = Ember.Mixin.create({
     let settableProperties = Ember.A(Object.keys(this.execute('internal', 'set')));
     let gettableProperties = Ember.A(Object.keys(this.execute('internal', 'get')));
 
-    for (let key in this.attrs) {
+    for (let key in this.get('attrs')) {
       // If it has a settable and gettable attribute, then its bindable
       if (settableProperties.contains(key) && gettableProperties.contains(key)) {
         this.get('_bindableAttrs').addObject(key);
@@ -156,7 +156,7 @@ Semantic.BaseMixin = Ember.Mixin.create({
 
   // Private Methods
   _getAttrValue(name) {
-    let value = this.attrs[name];
+    let value = this.get(`attrs.${name}`);
 
     if (Ember.isBlank(value)) {
       return value;
@@ -166,7 +166,7 @@ Semantic.BaseMixin = Ember.Mixin.create({
     if (typeof value === 'object') {
       let objectKeys = Ember.A(Object.keys(value));
       if (objectKeys.any((objectkey) => objectkey.indexOf('MUTABLE_CELL') === 0)) {
-        value = value.value;
+        value = Ember.get(value, 'value');
       }
     }
 
@@ -188,7 +188,7 @@ Semantic.BaseMixin = Ember.Mixin.create({
       verbose: Semantic.UI_VERBOSE
     };
 
-    for (let key in this.attrs) {
+    for (let key in this.get('attrs')) {
       let value = this._getAttrValue(key);
 
       if (!moduleGlobal.settings.hasOwnProperty(key)) {
