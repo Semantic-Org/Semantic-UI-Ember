@@ -50,16 +50,16 @@ export default Ember.Component.extend(Base, {
   getSemanticAttr(attrName) {
     if (attrName === 'selected') {
       if (this.execute('is multiple')) {
-        let values = this.execute('get values');
+        let keys = this.execute('get values');
         let returnValues = [];
-        for (let i = 0; i < values.length; i++) {
-          let value = values[i];
-          returnValues.push(this._getObjectOrValue(value));
+        for (let i = 0; i < keys.length; i++) {
+          let key = keys[i];
+          returnValues.push(this._getObjectOrValue(key));
         }
         return returnValues;
       } else {
-        let value = this.execute('get value');
-        return this._getObjectOrValue(value);
+        let key = this.execute('get value');
+        return this._getObjectOrValue(key);
       }
     }
     return this._super(...arguments);
@@ -68,7 +68,11 @@ export default Ember.Component.extend(Base, {
   setSemanticAttr(attrName, attrValue) {
     if (attrName === 'selected') {
 
-      let value;
+      if (Ember.isBlank(attrValue)) {
+        return this.execute('clear');
+      }
+
+      let key;
       if (Ember.isArray(attrValue)) {
 
         if (!this.execute('is multiple')) {
@@ -76,20 +80,16 @@ export default Ember.Component.extend(Base, {
           return;
         }
 
-        value = [];
+        key = [];
         for (let i = 0; i < attrValue.length; i++) {
           let item = attrValue[i];
-          value.push(this._getObjectKeyByValue(item));
+          key.push(this._getObjectKeyByValue(item));
         }
       } else {
-        value = this._getObjectKeyByValue(attrValue);
+        key = this._getObjectKeyByValue(attrValue);
       }
 
-      if (Ember.isBlank(value)) {
-        return this.execute('clear');
-      }
-
-      return this.execute('set selected', value);
+      return this.execute('set selected', key);
     }
     return this._super(...arguments);
   },
@@ -148,10 +148,7 @@ export default Ember.Component.extend(Base, {
   actions: {
     mapping(object) {
       let guid = Ember.guidFor(object);
-      if (this.get('objectMap').hasOwnProperty(guid)) {
-        Ember.Logger.warn('The dropdown already had a guid generated for the object passed in. Is it in the list twice?');
-        Ember.Logger.warn(object);
-      } else {
+      if (!this.get('objectMap').hasOwnProperty(guid)) {
         this.get('objectMap')[guid] = object;
       }
       return guid;

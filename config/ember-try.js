@@ -137,6 +137,48 @@ module.exports = {
           "ember-data": "canary"
         }
       }
+    },
+    {
+      "name": "semantic-2.1.8",
+      "bower": {
+        "dependencies": {
+          "ember": "components/ember#release",
+          "ember-data": "components/ember-data#release",
+          "semantic-ui": "2.1.8"
+        },
+        "resolutions": {
+          "ember": "release",
+          "ember-data": "release"
+        }
+      }
+    },
+    {
+      "name": "semantic-2.2.2",
+      "bower": {
+        "dependencies": {
+          "ember": "components/ember#release",
+          "ember-data": "components/ember-data#release",
+          "semantic-ui": "2.2.2"
+        },
+        "resolutions": {
+          "ember": "release",
+          "ember-data": "release"
+        }
+      }
+    },
+    {
+      "name": "semantic-latest",
+      "bower": {
+        "dependencies": {
+          "ember": "components/ember#release",
+          "ember-data": "components/ember-data#release",
+          "semantic-ui": "latest"
+        },
+        "resolutions": {
+          "ember": "release",
+          "ember-data": "release"
+        }
+      }
     }
   ]
 };
