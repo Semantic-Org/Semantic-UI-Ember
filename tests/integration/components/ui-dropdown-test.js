@@ -191,7 +191,7 @@ test('it can set the selected value without binding for full DDAU', function(ass
 });
 
 test('it renders and clears the value if it changes and isnt found', function(assert) {
-  assert.expect(7);
+  assert.expect(10);
 
   this.set('people', Ember.A([
     { id: 1, name: "Sherlock Homes" },
@@ -200,6 +200,8 @@ test('it renders and clears the value if it changes and isnt found', function(as
 
   this.render(hbs`
     {{#ui-dropdown selected=selected.id onChange=(action (mut selected.id))}}
+      <i class="dropdown icon"></i>
+      <div class="default text"></div>
       <div class='menu'>
       {{#each people as |person|}}
         <div class='item' data-value={{person.id}}>{{person.name}}</div>
@@ -210,9 +212,11 @@ test('it renders and clears the value if it changes and isnt found', function(as
 
   assert.equal(this.$('.item').length, 2, "Right number of items");
   assert.equal(this.get('selected'), undefined, "Nothing is selected");
+  assert.equal(this.$('.ui.dropdown > .text').text(), '', "Default text isn't blank");
 
   this.set('selected', this.get('people').objectAt(1));
   assert.equal(this.$('.item.active').text(), "Patrick Bateman");
+  assert.equal(this.$('.ui.dropdown > .text').text(), 'Patrick Bateman', "Default text isn't correct");
 
   this.$(".menu .item[data-value=1]").click();
   assert.equal(this.get('selected.id'), "1", "Sherlock has been selected");
@@ -222,6 +226,7 @@ test('it renders and clears the value if it changes and isnt found', function(as
 
   assert.equal(this.$('.item').length, 2, "Right number of items");
   assert.equal(this.$('.item.active').length, 0);
+  assert.equal(this.$('.ui.dropdown > .text').text(), '', "Default text isn't blank");
   assert.equal(this.get('selected'), undefined, "Nothing is selected");
 });
 
@@ -311,7 +316,7 @@ test('it renders from a mapper and selects the right value if late', function(as
 });
 
 test('it renders from a mapper and clears the value if it changes and isnt found', function(assert) {
-  assert.expect(7);
+  assert.expect(10);
 
   this.set('people', Ember.A([
     { id: 1, name: "Sherlock Homes" },
@@ -320,6 +325,8 @@ test('it renders from a mapper and clears the value if it changes and isnt found
 
   this.render(hbs`
     {{#ui-dropdown selected=selected onChange=(action (mut selected)) as |execute mapper|}}
+      <i class="dropdown icon"></i>
+      <div class="default text"></div>
       <div class='menu'>
       {{#each people as |person|}}
         <div class='item' data-value={{map-value mapper person}} data-id={{person.id}}>{{person.name}}</div>
@@ -330,9 +337,11 @@ test('it renders from a mapper and clears the value if it changes and isnt found
 
   assert.equal(this.$('.item').length, 2, "Right number of items");
   assert.equal(this.get('selected'), undefined, "Nothing is selected");
+  assert.equal(this.$('.ui.dropdown > .text').text(), '', "Default text isn't blank");
 
   this.set('selected', this.get('people').objectAt(1));
   assert.equal(this.$('.item.active').text(), "Patrick Bateman");
+  assert.equal(this.$('.ui.dropdown > .text').text(), 'Patrick Bateman', "Default text isn't correct");
 
   this.$(".menu .item[data-id=1]").click();
   assert.equal(this.get('selected.id'), "1", "Sherlock has been selected");
@@ -342,6 +351,7 @@ test('it renders from a mapper and clears the value if it changes and isnt found
 
   assert.equal(this.$('.item').length, 2, "Right number of items");
   assert.equal(this.$('.item.active').length, 0);
+  assert.equal(this.$('.ui.dropdown > .text').text(), '', "Default text isn't blank");
   assert.equal(this.get('selected'), undefined, "Nothing is selected");
 });
 
