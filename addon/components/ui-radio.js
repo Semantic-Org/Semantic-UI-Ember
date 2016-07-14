@@ -36,7 +36,7 @@ export default Ember.Component.extend(CheckboxMixin, {
     return this._super(...arguments);
   },
 
-  areAttrValuesEqual(attrName, attrValue, moduleValue) {
+  areAttrValuesEqual(attrName) {
     // Special check for value being updated
     if (attrName === 'value') {
       let isChecked = this.execute('is checked');
