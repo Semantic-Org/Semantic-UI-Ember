@@ -26,5 +26,40 @@ export default Ember.Component.extend(CheckboxMixin, {
     if (this.areAttrValuesEqual('checked', this.get('value'), this.get('current'))) {
       this.execute('set checked');
     }
+    this.get('_bindableAttrs').addObject('value');
+  },
+
+  getSemanticAttr(attrName) {
+    if (attrName === 'value') {
+      return this.get('value');
+    }
+    return this._super(...arguments);
+  },
+
+  areAttrValuesEqual(attrName, attrValue, moduleValue) {
+    // Special check for value being updated
+    if (attrName === 'value') {
+      let isChecked = this.execute('is checked');
+      if (this._super('checked', this.get('value'), this.get('current'))) {
+        // Value and current match, but radio isn't checked, return false
+        if (!isChecked) {
+          return false;
+        }
+      } else {
+        // Value and current don't match and radio is checked, return false
+        if (isChecked) {
+          return false;
+        }
+      }
+      return true;
+    }
+    return this._super(...arguments);
+  },
+
+  setSemanticAttr(attrName, attrValue) {
+    if (attrName === 'value') {
+      return this._super('checked', attrValue);
+    }
+    return this._super(...arguments);
   }
 });
