@@ -1,7 +1,7 @@
 import Ember from 'ember';
-import CheckboxMixin from '../mixins/checkbox-mixin';
+import Checkbox from '../mixins/checkbox';
 
-export default Ember.Component.extend(CheckboxMixin, {
+export default Ember.Component.extend(Checkbox, {
   type: 'radio',
   classNames: ['radio'],
   ignorableAttrs: ['checked', 'label', 'disabled', 'value', 'current'],
