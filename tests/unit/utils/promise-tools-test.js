@@ -88,7 +88,7 @@ test('Duck typed promise is detected', function(assert) {
 
 test('Duck typed promise cant detect fulfilled', function(assert) {
   let promise = {
-    then() { this.done = true },
+    then() { this.done = true; },
     catch() {},
     done: false
   };
@@ -106,7 +106,7 @@ test('Duck typed promise cant detect fulfilled', function(assert) {
 test('Duck typed promise cant get fulfilled content', function(assert) {
   let promise = {
     then(result) {
-      this.done = true
+      this.done = true;
       this.result = result;
     },
     catch() {},

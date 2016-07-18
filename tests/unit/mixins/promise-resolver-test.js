@@ -41,8 +41,6 @@ test('resolves null until the promise is rejected', function (assert) {
   let resultDelayed = null;
   assert.equal(subject.resolvePromise(deferred.promise, (resolved) => resultImmediate = resolved, (resolved) => resultDelayed = resolved), null);
 
-  const text = 'yass!';
-
   deferred.reject(new Error('oops'));
 
   return deferred.promise.catch(() => {
