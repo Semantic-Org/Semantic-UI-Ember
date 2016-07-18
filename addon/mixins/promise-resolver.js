@@ -26,7 +26,7 @@ export default Ember.Mixin.create({
           this._promiseWasSettled = true;
           this._promiseValue = value;
           // This will recompue the value and fire the _wasSettled check above
-          return delayedResolve.call(this, value);
+          return (delayedResolve || immediateResolve).call(this, value);
         }
       }).catch((error) => {
         Ember.Logger.error('Promise died in Semantic-UI-Ember promise-resolver');

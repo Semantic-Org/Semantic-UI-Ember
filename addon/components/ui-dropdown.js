@@ -1,5 +1,6 @@
 import Ember from 'ember';
 import Base from '../mixins/base';
+import PromiseResolver from '../mixins/promise-resolver';
 
 const _proxyCallback = function(callbackName) {
   return function(value, text, $element) {
@@ -7,7 +8,7 @@ const _proxyCallback = function(callbackName) {
   };
 };
 
-export default Ember.Component.extend(Base, {
+export default Ember.Component.extend(Base, PromiseResolver, {
   module: 'dropdown',
   classNames: ['ui', 'dropdown'],
   ignorableAttrs: ['selected'],
