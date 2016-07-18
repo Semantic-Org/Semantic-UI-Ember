@@ -41,6 +41,6 @@ export default Ember.Mixin.create({
     this._promiseWasSettled = false;
     this._currentPromise = promise;
 
-    callback.call(this, Ember.Promise.resolve(promise));
+    callback.call(this, Ember.RSVP.Promise.resolve(promise));
   }
 });
