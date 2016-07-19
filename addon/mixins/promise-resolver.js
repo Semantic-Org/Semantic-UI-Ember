@@ -16,8 +16,11 @@ export default Ember.Mixin.create({
     }
 
     // If the type wasn't a PromiseProxy or RSVP, check if we resolved for .then
-    if (this._promiseWasSettled && maybePromise === this._currentPromise) {
-      return immediateResolve.call(this, this._promiseValue);
+    if (maybePromise === this._currentPromise) {
+      if (this._promiseWasSettled) {
+        return immediateResolve.call(this, this._promiseValue);
+      }
+      return null; // Return we don't need to check the latest again
     }
 
     this.ensureLatestPromise(maybePromise, (promise) => {
