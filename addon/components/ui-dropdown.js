@@ -60,9 +60,7 @@ export default Ember.Component.extend(Base, PromiseResolver, {
       if (!this.get('objectMap').hasOwnProperty(guid)) {
         this.get('objectMap')[guid] = object;
       }
-      // If selected is already resolved and we have a value now,
-      // Select it after render
-      // TODO: HERE
+      Ember.run.scheduleOnce('afterRender', this, this._inspectSelected);
       return guid;
     }
   },

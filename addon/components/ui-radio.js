@@ -42,6 +42,9 @@ export default Ember.Component.extend(Checkbox, PromiseResolver, {
     // Or wait for them to resolve
     if (isPromise(value) || isPromise(current)) {
 
+      // This code is probably overkill, but i wanted to ensure that
+      // if the promises are resolved we render as soon as possible instead of waiting
+      // for the hash to resolve each time
       if (isPromise(value)) {
         if (!isFulfilled(value)) {
           return this.resolvePromise(Ember.RSVP.hash({ value, current }), this._checkValueAndCurrent);

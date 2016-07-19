@@ -1,6 +1,7 @@
 import Ember from 'ember';
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
+import afterRender from 'dummy/tests/helpers/after-render';
 
 moduleForComponent('ui-dropdown', 'Integration | Component | ui dropdown', {
   integration: true
@@ -846,3 +847,272 @@ test('The correct number of items get selected when array bindings is modified',
   assert.equal(this.get('selected').join(','), [numbers[1], numbers[3]].join(','));
   assert.equal(count, 0, 'onChange should not have been called');
 });
+
+// Add selected deferred test
+test('it renders and selects the correct item after promise resolves', function(assert) {
+  assert.expect(5);
+
+  let count = 0;
+  this.set('changed', (value) => {
+    this.set('selected', value);
+    count++;
+  });
+
+  let deferred = Ember.RSVP.defer();
+
+  this.set('selected', deferred.promise);
+
+  this.set('people', [ "Sherlock Homes", "Patrick Bateman" ]);
+  this.render(hbs`
+    {{#ui-dropdown selected=selected onChange=(action changed)}}
+      <div class='menu'>
+      {{#each people as |person|}}
+        <div class='item' data-value={{person}}>{{person}}</div>
+      {{/each}}
+      </div>
+    {{/ui-dropdown}}
+  `);
+
+  assert.equal(this.$('.item').length, 2);
+  assert.equal(this.$('.item.active').length, 0);
+
+  deferred.resolve('Patrick Bateman');
+
+  return afterRender(deferred.promise).then(() => {
+    assert.equal(this.$('.item.active').length, 1);
+    assert.equal(this.$('.item.active').text(), 'Patrick Bateman');
+    assert.equal(count, 0, 'onChange should not have been called');
+  });
+});
+
+// Add selected deferred test
+test('it renders and selects the correct item from resolved promise', function(assert) {
+  assert.expect(4);
+
+  let count = 0;
+  this.set('changed', (value) => {
+    this.set('selected', value);
+    count++;
+  });
+
+  let deferred = Ember.RSVP.defer();
+
+  deferred.resolve('Patrick Bateman');
+
+  this.set('selected', deferred.promise);
+
+  this.set('people', [ "Sherlock Homes", "Patrick Bateman" ]);
+  this.render(hbs`
+    {{#ui-dropdown selected=selected onChange=(action changed)}}
+      <div class='menu'>
+      {{#each people as |person|}}
+        <div class='item' data-value={{person}}>{{person}}</div>
+      {{/each}}
+      </div>
+    {{/ui-dropdown}}
+  `);
+
+  assert.equal(this.$('.item').length, 2);
+  assert.equal(this.$('.item.active').length, 1);
+  assert.equal(this.$('.item.active').text(), 'Patrick Bateman');
+  assert.equal(count, 0, 'onChange should not have been called');
+});
+
+// Add map-value promise deferred binding test
+test('it renders from a mapper with a promise', function(assert) {
+  assert.expect(5);
+
+  let count = 0;
+  this.set('changed', (value) => {
+    this.set('selected', value);
+    count++;
+  });
+
+  let deferred = Ember.RSVP.defer();
+
+  let ObjectPromiseProxy = Ember.ObjectProxy.extend(Ember.PromiseProxyMixin);
+  let proxy = ObjectPromiseProxy.create({
+    promise: deferred.promise
+  });
+
+  this.set('people', Ember.A([
+    { id: 1, name: "Sherlock Homes" },
+    proxy
+  ]));
+
+  this.set('selected', 'Patrick Bateman');
+
+  this.render(hbs`
+    {{#ui-dropdown selected=selected onChange=(action changed) as |execute mapper|}}
+      <div class='menu'>
+      {{#each people as |person|}}
+        <div class='item' data-value={{map-value mapper person}} data-id={{person.id}}>{{person.name}}</div>
+      {{/each}}
+      </div>
+    {{/ui-dropdown}}
+  `);
+
+  assert.equal(this.$('.item').length, 2, "Right number of items");
+  assert.equal(this.$('.item.active').length, 0, "Right number of items active");
+
+  let deferredValue = { id: 2, name: "Patrick Bateman" };
+  deferred.resolve(deferredValue);
+
+  return afterRender(deferred.promise).then(() => {
+    assert.equal(this.$('.item.active').length, 1);
+    assert.equal(this.$('.item.active').text(), 'Patrick Bateman');
+    assert.equal(count, 0, 'onChange should not have been called');
+  });
+});
+
+test('it renders from a mapper with a promise already completed', function(assert) {
+  assert.expect(4);
+
+  let count = 0;
+  this.set('changed', (value) => {
+    this.set('selected', value);
+    count++;
+  });
+
+  let deferred = Ember.RSVP.defer();
+
+  let ObjectPromiseProxy = Ember.ObjectProxy.extend(Ember.PromiseProxyMixin);
+  let proxy = ObjectPromiseProxy.create({
+    promise: deferred.promise
+  });
+
+  let deferredValue = { id: 2, name: "Patrick Bateman" };
+  deferred.resolve(deferredValue);
+
+  this.set('people', Ember.A([
+    { id: 1, name: "Sherlock Homes" },
+    proxy
+  ]));
+
+  this.set('selected', 'Patrick Bateman');
+
+  this.render(hbs`
+    {{#ui-dropdown selected=selected onChange=(action changed) as |execute mapper|}}
+      <div class='menu'>
+      {{#each people as |person|}}
+        <div class='item' data-value={{map-value mapper person}} data-id={{person.id}}>{{person.name}}</div>
+      {{/each}}
+      </div>
+    {{/ui-dropdown}}
+  `);
+
+  assert.equal(this.$('.item').length, 2, "Right number of items");
+  return afterRender(deferred.promise).then(() => {
+    assert.equal(this.$('.item.active').length, 1, "Right number of items active");
+    assert.equal(this.$('.item.active').text(), 'Patrick Bateman');
+    assert.equal(count, 0, 'onChange should not have been called');
+  });
+});
+
+test('it renders from a mapper with a promise and select with a promise, select resolving first', function(assert) {
+  assert.expect(6);
+
+  let count = 0;
+  this.set('changed', (value) => {
+    this.set('selected', value);
+    count++;
+  });
+
+  let deferredMap = Ember.RSVP.defer();
+  let deferredSelect = Ember.RSVP.defer();
+
+  let ObjectPromiseProxy = Ember.ObjectProxy.extend(Ember.PromiseProxyMixin);
+  let proxy = ObjectPromiseProxy.create({
+    promise: deferredMap.promise
+  });
+
+  this.set('people', Ember.A([
+    { id: 1, name: "Sherlock Homes" },
+    proxy
+  ]));
+
+  this.set('selected', deferredSelect.promise);
+
+  this.render(hbs`
+    {{#ui-dropdown selected=selected onChange=(action changed) as |execute mapper|}}
+      <div class='menu'>
+      {{#each people as |person|}}
+        <div class='item' data-value={{map-value mapper person}} data-id={{person.id}}>{{person.name}}</div>
+      {{/each}}
+      </div>
+    {{/ui-dropdown}}
+  `);
+
+  assert.equal(this.$('.item').length, 2, "Right number of items");
+  assert.equal(this.$('.item.active').length, 0, "Right number of items active");
+
+  deferredSelect.resolve('Patrick Bateman');
+
+  return afterRender(deferredSelect.promise).then(() => {
+    assert.equal(this.$('.item.active').length, 0, "Right number of items active");
+
+    let deferredValue = { id: 2, name: "Patrick Bateman" };
+    deferredMap.resolve(deferredValue);
+
+    return afterRender(deferredMap.promise);
+  }).then(() => {
+    assert.equal(this.$('.item.active').length, 1, "Right number of items active");
+    assert.equal(this.$('.item.active').text(), 'Patrick Bateman');
+    assert.equal(count, 0, 'onChange should not have been called');
+  });
+});
+
+test('it renders from a mapper with a promise and select with a promise, mapper resolving first', function(assert) {
+  assert.expect(6);
+
+  let count = 0;
+  this.set('changed', (value) => {
+    this.set('selected', value);
+    count++;
+  });
+
+  let deferredMap = Ember.RSVP.defer();
+  let deferredSelect = Ember.RSVP.defer();
+
+  let ObjectPromiseProxy = Ember.ObjectProxy.extend(Ember.PromiseProxyMixin);
+  let proxy = ObjectPromiseProxy.create({
+    promise: deferredMap.promise
+  });
+
+  this.set('people', Ember.A([
+    { id: 1, name: "Sherlock Homes" },
+    proxy
+  ]));
+
+  this.set('selected', deferredSelect.promise);
+
+  this.render(hbs`
+    {{#ui-dropdown selected=selected onChange=(action changed) as |execute mapper|}}
+      <div class='menu'>
+      {{#each people as |person|}}
+        <div class='item' data-value={{map-value mapper person}} data-id={{person.id}}>{{person.name}}</div>
+      {{/each}}
+      </div>
+    {{/ui-dropdown}}
+  `);
+
+  assert.equal(this.$('.item').length, 2, "Right number of items");
+  assert.equal(this.$('.item.active').length, 0, "Right number of items active");
+
+  let deferredValue = { id: 2, name: "Patrick Bateman" };
+  deferredMap.resolve(deferredValue);
+
+  return afterRender(deferredMap.promise).then(() => {
+    assert.equal(this.$('.item.active').length, 0, "Right number of items active");
+
+    deferredSelect.resolve('Patrick Bateman');
+
+    return afterRender(deferredSelect.promise);
+  }).then(() => {
+    assert.equal(this.$('.item.active').length, 1, "Right number of items active");
+    assert.equal(this.$('.item.active').text(), 'Patrick Bateman');
+    assert.equal(count, 0, 'onChange should not have been called');
+  });
+});
+
+
