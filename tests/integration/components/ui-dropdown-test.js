@@ -427,4 +427,120 @@ test('it renders from a mapper and binds to value', function(assert) {
   assert.equal(this.get('selected'), null, "Nothing is selected");
 });
 
-// TODO: Add dropdown multiple binded tests
+test('The correct number of items are pre selected on selected array', function(assert) {
+  assert.expect(4);
+
+  this.set('numbers', Ember.A([
+    '1',
+    '2',
+    '3',
+    '4',
+    '5'
+  ]));
+
+  this.set('selected', ['2', '4']);
+
+  this.render(hbs`
+    {{#ui-dropdown class="multiple" selected=selected onChange=(action (mut selected)) as |execute mapper|}}
+      <div class='menu'>
+      {{#each numbers as |number|}}
+        <div class='item' data-value={{number}} data-id={{number}}>{{number}}</div>
+      {{/each}}
+      </div>
+    {{/ui-dropdown}}
+  `);
+
+  assert.equal(this.$('.item').length, 5, "Right number of items");
+  assert.equal(this.$('.item.active').length, 2, "Pre selected count");
+  assert.ok(this.$('.item[data-id=2]').hasClass('active'));
+  assert.ok(this.$('.item[data-id=4]').hasClass('active'));
+});
+
+test('The correct number of items are pre selected on selected item', function(assert) {
+  assert.expect(3);
+
+  this.set('numbers', Ember.A([
+    '1',
+    '2',
+    '3',
+    '4',
+    '5'
+  ]));
+
+  this.set('selected', '2');
+
+  this.render(hbs`
+    {{#ui-dropdown class="multiple" selected=selected onChange=(action (mut selected)) as |execute mapper|}}
+      <div class='menu'>
+      {{#each numbers as |number|}}
+        <div class='item' data-value={{number}} data-id={{number}}>{{number}}</div>
+      {{/each}}
+      </div>
+    {{/ui-dropdown}}
+  `);
+
+  assert.equal(this.$('.item').length, 5, "Right number of items");
+  assert.equal(this.$('.item.active').length, 1, "Pre selected count");
+  assert.ok(this.$('.item[data-id=2]').hasClass('active'));
+});
+
+test('The correct number of items are pre selected on selected object array', function(assert) {
+  assert.expect(4);
+
+  let numbers = Ember.A([
+    { item: 1, name: 'One' },
+    { item: 2, name: 'Two' },
+    { item: 3, name: 'Three' },
+    { item: 4, name: 'Four' },
+    { item: 5, name: 'Five' }
+  ]);
+
+  this.set('numbers', numbers);
+
+  this.set('selected', [numbers[1], numbers[3]]);
+
+  this.render(hbs`
+    {{#ui-dropdown class="multiple" selected=selected onChange=(action (mut selected)) as |execute mapper|}}
+      <div class='menu'>
+      {{#each numbers as |number|}}
+        <div class='item' data-value={{map-value mapper number}} data-id={{number.item}}>{{number.name}}</div>
+      {{/each}}
+      </div>
+    {{/ui-dropdown}}
+  `);
+
+  assert.equal(this.$('.item').length, 5, "Right number of items");
+  assert.equal(this.$('.item.active').length, 2, "Pre selected count");
+  assert.ok(this.$('.item[data-id=2]').hasClass('active'));
+  assert.ok(this.$('.item[data-id=4]').hasClass('active'));
+});
+
+test('The correct number of items are pre selected on selected object item', function(assert) {
+  assert.expect(3);
+
+  let numbers = Ember.A([
+    { item: 1, name: 'One' },
+    { item: 2, name: 'Two' },
+    { item: 3, name: 'Three' },
+    { item: 4, name: 'Four' },
+    { item: 5, name: 'Five' }
+  ]);
+
+  this.set('numbers', numbers);
+
+  this.set('selected', numbers[1]);
+
+  this.render(hbs`
+    {{#ui-dropdown class="multiple" selected=selected onChange=(action (mut selected)) as |execute mapper|}}
+      <div class='menu'>
+      {{#each numbers as |number|}}
+        <div class='item' data-value={{map-value mapper number}} data-id={{number.item}}>{{number.name}}</div>
+      {{/each}}
+      </div>
+    {{/ui-dropdown}}
+  `);
+
+  assert.equal(this.$('.item').length, 5, "Right number of items");
+  assert.equal(this.$('.item.active').length, 1, "Pre selected count");
+  assert.ok(this.$('.item[data-id=2]').hasClass('active'));
+});
