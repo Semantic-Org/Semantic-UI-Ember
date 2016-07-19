@@ -69,6 +69,12 @@ export default Ember.Component.extend(Base, PromiseResolver, {
 
   // Method proxies
   _onChange(value, text, $element) {
+    // Semantic calls the events on any 'set {action}'
+    // Because of that we want to ignore calls when we are
+    // Specifically setting the value
+    if (this.get('_isSettingSelect')) {
+      return;
+    }
     let returnValue;
     if (this.execute('is multiple')) {
       let values = this.execute('get values');
@@ -80,6 +86,7 @@ export default Ember.Component.extend(Base, PromiseResolver, {
     } else {
       returnValue = this._getObjectOrValue(value);
     }
+
     return this.attrs.onChange(returnValue, text, $element, this);
   },
   _onAdd: _proxyCallback('onAdd'),
@@ -113,7 +120,9 @@ export default Ember.Component.extend(Base, PromiseResolver, {
     let moduleSelected = this._getCurrentSelected(isMultiple);
 
     if (!this._areSelectedEqual(selectedValue, moduleSelected, isMultiple)) {
+      this.set('_isSettingSelect', true);
       this._setCurrentSelected(selectedValue, moduleSelected, isMultiple);
+      this.set('_isSettingSelect', false);
     }
   },
 
