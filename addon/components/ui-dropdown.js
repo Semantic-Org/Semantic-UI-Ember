@@ -40,102 +40,30 @@ export default Ember.Component.extend(Base, PromiseResolver, {
 
   didInitSemantic() {
     this._super(...arguments);
-    this._swapAttrs('selected');
-
-    var selected = this.get('selected');
-    if (Ember.isPresent(selected)) {
-      this.setSemanticAttr('selected', selected);
-    }
+    // We want to handle this outside of the standard process
+    this.get('_settableAttrs').removeObject('selected');
+    this._inspectSelected();
   },
 
-  getSemanticAttr(attrName) {
-    if (attrName === 'selected') {
-      if (this.execute('is multiple')) {
-        let keys = this.execute('get values');
-        let returnValues = [];
-        for (let i = 0; i < keys.length; i++) {
-          let key = this._atIndex(keys, i);
-          returnValues.push(this._getObjectOrValue(key));
-        }
-        return returnValues;
-      } else {
-        let key = this.execute('get value');
-        return this._getObjectOrValue(key);
+  didUpdateAttrs() {
+    this._super(...arguments);
+    this._inspectSelected();
+  },
+
+  actions: {
+    mapping(object) {
+      let guid = Ember.guidFor(object);
+      if (!this.get('objectMap').hasOwnProperty(guid)) {
+        this.get('objectMap')[guid] = object;
       }
+      // If selected is already resolved and we have a value now,
+      // Select it after render
+      // TODO: HERE
+      return guid;
     }
-    return this._super(...arguments);
   },
 
-  setSemanticAttr(attrName, attrValue) {
-    if (attrName === 'selected') {
-
-      if (Ember.isBlank(attrValue)) {
-        return this.execute('clear');
-      }
-
-      let key;
-      if (Ember.isArray(attrValue)) {
-
-        if (!this.execute('is multiple')) {
-          Ember.Logger.error("Selected is an array of values, but the dropdown doesn't have the class 'multiple'");
-          return;
-        }
-
-        key = [];
-        for (let i = 0; i < Ember.get(attrValue, 'length'); i++) {
-          let item = this._atIndex(attrValue, i);
-          key.push(this._getObjectKeyByValue(item));
-        }
-      } else {
-        key = this._getObjectKeyByValue(attrValue);
-      }
-
-      return this.execute('set selected', key);
-    }
-    return this._super(...arguments);
-  },
-
-  areAttrValuesEqual(attrName, attrValue, moduleValue) {
-    if (this.execute('is multiple')) {
-      // If attr passed in is an array, we are assuming that its the collection getting updated and that
-      // all module values must equal the attrValues
-      if (Ember.isArray(attrValue)) {
-        // Loop through the collections and see if they are equal
-        for (let i = 0; i < Ember.get(attrValue, 'length'); i++) {
-          let value = this._atIndex(attrValue, i);
-          let equal = false;
-          for (let j = 0; j < Ember.get(moduleValue, 'length'); j++) {
-            let module = this._atIndex(moduleValue, j);
-            if (this._super(attrName, value, module)) {
-              equal = true;
-              break;
-            }
-          }
-          if (!equal) {
-            return false;
-          }
-        }
-      } else if (Ember.isArray(moduleValue)) { // otherwise, just try to see one of the values in the module equals the attr value
-        for (let i = 0; i < Ember.get(moduleValue, 'length'); i++) {
-          let item = this._atIndex(moduleValue, i);
-          if (this._super(attrName, attrValue, item)) {
-            return true; // We found a match
-          }
-        }
-        return false;
-      }
-    }
-    // If its not multiple then default to base
-    return this._super(...arguments);
-  },
-
-  _atIndex(collection, index) {
-    if (typeof collection.objectAt === 'function') {
-      return collection.objectAt(index);
-    }
-    return collection[index];
-  },
-
+  // Method proxies
   _onChange(value, text, $element) {
     let returnValue;
     if (this.execute('is multiple')) {
@@ -153,14 +81,12 @@ export default Ember.Component.extend(Base, PromiseResolver, {
   _onAdd: _proxyCallback('onAdd'),
   _onRemove: _proxyCallback('onRemove'),
 
-  actions: {
-    mapping(object) {
-      let guid = Ember.guidFor(object);
-      if (!this.get('objectMap').hasOwnProperty(guid)) {
-        this.get('objectMap')[guid] = object;
-      }
-      return guid;
+  // Private methods
+  _atIndex(collection, index) {
+    if (typeof collection.objectAt === 'function') {
+      return collection.objectAt(index);
     }
+    return collection[index];
   },
 
   _getObjectOrValue(value) {
@@ -171,6 +97,98 @@ export default Ember.Component.extend(Base, PromiseResolver, {
       return null;
     }
     return value;
+  },
+
+  _inspectSelected() {
+    let selected = this.get('selected');
+    return this.resolvePromise(selected, this._checkSelected);
+  },
+
+  _checkSelected(selectedValue) {
+    let isMultiple = this.execute('is multiple');
+    let moduleSelected = this._getCurrentSelected(isMultiple);
+
+    if (!this._areSelectedEqual(selectedValue, moduleSelected, isMultiple)) {
+      this._setCurrentSelected(selectedValue, isMultiple);
+    }
+  },
+
+  _getCurrentSelected(isMultiple) {
+    if (isMultiple) {
+      let keys = this.execute('get values');
+      let returnValues = [];
+      for (let i = 0; i < keys.length; i++) {
+        let key = this._atIndex(keys, i);
+        returnValues.push(this._getObjectOrValue(key));
+      }
+      return returnValues;
+    }
+
+    let key = this.execute('get value');
+    return this._getObjectOrValue(key);
+  },
+
+  _setCurrentSelected(selectedValue, isMultiple) {
+    if (Ember.isBlank(selectedValue)) {
+      return this.execute('clear');
+    }
+
+    let key;
+    if (Ember.isArray(selectedValue)) {
+
+      if (!isMultiple) {
+        Ember.Logger.error("Selected is an array of values, but the dropdown doesn't have the class 'multiple'");
+        return;
+      }
+
+      key = [];
+      for (let i = 0; i < Ember.get(selectedValue, 'length'); i++) {
+        let item = this._atIndex(selectedValue, i);
+        key.push(this._getObjectKeyByValue(item));
+      }
+    } else {
+      key = this._getObjectKeyByValue(selectedValue);
+    }
+
+    return this.execute('set selected', key);
+  },
+
+  _areSelectedEqual(selectedValue, moduleValue, isMultiple) {
+    if (isMultiple) {
+      // If selectedValue passed in is an array, we are assuming that its the collection getting updated and that
+      // all module values must equal the attrValues
+      if (Ember.isArray(selectedValue)) {
+        if (Ember.get(selectedValue, 'length') !== Ember.get(moduleValue, 'length')) {
+          return false;
+        }
+
+        // Loop through the collections and see if they are equal
+        for (let i = 0; i < Ember.get(selectedValue, 'length'); i++) {
+          let value = this._atIndex(selectedValue, i);
+          let equal = false;
+          for (let j = 0; j < Ember.get(moduleValue, 'length'); j++) {
+            let module = this._atIndex(moduleValue, j);
+            if (this.areAttrValuesEqual('selected', value, module)) {
+              equal = true;
+              break;
+            }
+          }
+          if (!equal) {
+            return false;
+          }
+        }
+      } // otherwise, just try to see one of the values in the module equals the attr value
+      else if (Ember.isArray(moduleValue)) {
+        for (let i = 0; i < Ember.get(moduleValue, 'length'); i++) {
+          let item = this._atIndex(moduleValue, i);
+          if (this.areAttrValuesEqual('selected', selectedValue, item)) {
+            return true; // We found a match
+          }
+        }
+        return false;
+      }
+    }
+    return this.areAttrValuesEqual('selected', selectedValue, moduleValue);
   },
 
   _getObjectKeyByValue(value) {
@@ -187,4 +205,5 @@ export default Ember.Component.extend(Base, PromiseResolver, {
     }
     return value.toString();
   }
+
 });

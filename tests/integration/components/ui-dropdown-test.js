@@ -183,7 +183,7 @@ test('it can set the selected value without binding for full DDAU', function(ass
   `);
 
   assert.equal(this.$('.item').length, 2);
-  assert.equal(this.$('.item.selected').data('value'), 2);
+  assert.equal(this.$('.item.selected').length, 0);
 
   $(this.$('.item')[0]).click();
   assert.equal(this.$('.item.selected').data('value'), 1);
