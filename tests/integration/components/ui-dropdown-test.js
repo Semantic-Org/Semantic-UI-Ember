@@ -7,11 +7,17 @@ moduleForComponent('ui-dropdown', 'Integration | Component | ui dropdown', {
 });
 
 test('it renders from an array', function(assert) {
-  assert.expect(3);
+  assert.expect(4);
+
+  let count = 0;
+  this.set('changed', (value) => {
+    this.set('selected', value);
+    count++;
+  });
 
   this.set('people', [ "Sherlock Homes", "Patrick Bateman" ]);
   this.render(hbs`
-    {{#ui-dropdown selected=selected onChange=(action (mut selected))}}
+    {{#ui-dropdown selected=selected onChange=(action changed)}}
       <div class='menu'>
       {{#each people as |person|}}
         <div class='item' data-value={{person}}>{{person}}</div>
@@ -25,10 +31,17 @@ test('it renders from an array', function(assert) {
 
   this.$(".menu .item[data-value='Sherlock Homes']").click();
   assert.equal(this.get('selected'), 'Sherlock Homes');
+  assert.equal(count, 1, 'onChange should have been called only once');
 });
 
 test('it renders from an object array', function(assert) {
-  assert.expect(3);
+  assert.expect(4);
+
+  let count = 0;
+  this.set('changed', (value) => {
+    this.set('selected', value);
+    count++;
+  });
 
   this.set('people', [
     { id: 1, name: "Sherlock Homes" },
@@ -36,7 +49,7 @@ test('it renders from an object array', function(assert) {
   ]);
 
   this.render(hbs`
-    {{#ui-dropdown selected=selected onChange=(action (mut selected))}}
+    {{#ui-dropdown selected=selected onChange=(action changed)}}
       <div class='menu'>
       {{#each people as |person|}}
         <div class='item' data-value={{person.id}}>{{person.name}}</div>
@@ -50,10 +63,17 @@ test('it renders from an object array', function(assert) {
 
   this.$(".menu .item[data-value=1]").click();
   assert.equal(this.get('selected'), 1);
+  assert.equal(count, 1, 'onChange should have been called only once');
 });
 
 test('it renders with an option selected', function(assert) {
-  assert.expect(3);
+  assert.expect(4);
+
+  let count = 0;
+  this.set('changed', (value) => {
+    this.set('selected', value);
+    count++;
+  });
 
   this.set('people', [
     { id: 1, name: "Sherlock Homes" },
@@ -62,7 +82,7 @@ test('it renders with an option selected', function(assert) {
 
   this.set('selected', 2);
   this.render(hbs`
-    {{#ui-dropdown selected=selected onChange=(action (mut selected))}}
+    {{#ui-dropdown selected=selected onChange=(action changed)}}
       <div class='menu'>
       {{#each people as |person|}}
         <div class='item' data-value={{person.id}}>{{person.name}}</div>
@@ -76,10 +96,17 @@ test('it renders with an option selected', function(assert) {
 
   this.$(".menu .item[data-value=1]").click();
   assert.equal(this.get('selected'), 1);
+  assert.equal(count, 1, 'onChange should have been called only once');
 });
 
 test('it renders multiple', function(assert) {
-  assert.expect(3);
+  assert.expect(4);
+
+  let count = 0;
+  this.set('changed', (value) => {
+    this.set('selected', value);
+    count++;
+  });
 
   this.set('people', [
     { id: 1, name: "Sherlock Homes" },
@@ -87,7 +114,7 @@ test('it renders multiple', function(assert) {
   ]);
 
   this.render(hbs`
-    {{#ui-dropdown class='multiple' selected=selected onChange=(action (mut selected))}}
+    {{#ui-dropdown class='multiple' selected=selected onChange=(action changed)}}
       <div class='menu'>
       {{#each people as |person|}}
         <div class='item' data-value={{person.id}}>{{person.name}}</div>
@@ -102,10 +129,17 @@ test('it renders multiple', function(assert) {
   this.$(".menu .item[data-value=1]").click();
   this.$(".menu .item[data-value=2]").click();
   assert.equal(this.get('selected'), '1,2');
+  assert.equal(count, 2, 'onChange should have been called only once');
 });
 
 test('it sets the value from the binding', function(assert) {
-  assert.expect(3);
+  assert.expect(4);
+
+  let count = 0;
+  this.set('changed', (value) => {
+    this.set('selected', value);
+    count++;
+  });
 
   this.set('people_id', 2);
   this.set('people', [
@@ -114,7 +148,7 @@ test('it sets the value from the binding', function(assert) {
   ]);
 
   this.render(hbs`
-    {{#ui-dropdown selected=people_id onChange=(action (mut selected))}}
+    {{#ui-dropdown selected=people_id onChange=(action changed)}}
       <div class='menu'>
       {{#each people as |person|}}
         <div class="item" data-value="{{person.id}}">
@@ -128,10 +162,17 @@ test('it sets the value from the binding', function(assert) {
   assert.equal(this.$('.item').length, 2);
   assert.equal(this.$('.item.selected').length, 1);
   assert.equal(this.$('.item.selected').data('value'), 2);
+  assert.equal(count, 0, 'onChange should have not been called');
 });
 
 test('it updates the value if updated from the binding', function(assert) {
-  assert.expect(3);
+  assert.expect(4);
+
+  let count = 0;
+  this.set('changed', (value) => {
+    this.set('selected', value);
+    count++;
+  });
 
   this.set('people_id', 2);
   this.set('people', [
@@ -140,7 +181,7 @@ test('it updates the value if updated from the binding', function(assert) {
   ]);
 
   this.render(hbs`
-    {{#ui-dropdown selected=people_id onChange=(action (mut selected))}}
+    {{#ui-dropdown selected=people_id onChange=(action changed)}}
       <div class='menu'>
       {{#each people as |person|}}
         <div class="item" data-value="{{person.id}}">
@@ -158,10 +199,17 @@ test('it updates the value if updated from the binding', function(assert) {
 
   $(this.$('.item')[0]).click();
   assert.equal(this.get('people_id'), 1);
+  assert.equal(count, 2, 'onChange should have been called only once');
 });
 
 test('it can set the selected value without binding for full DDAU', function(assert) {
-  assert.expect(4);
+  assert.expect(5);
+
+  let count = 0;
+  this.set('changed', (value) => {
+    this.set('people_id', value);
+    count++;
+  });
 
   this.set('people_id', 2);
   this.set('people', [
@@ -170,7 +218,7 @@ test('it can set the selected value without binding for full DDAU', function(ass
   ]);
 
   this.render(hbs`
-    {{#ui-dropdown onChange=(action (mut people_id))}}
+    {{#ui-dropdown onChange=(action changed)}}
       <input type="hidden" name="person" value="{{people_id}}" />
       <div class='menu'>
       {{#each people as |person|}}
@@ -188,10 +236,25 @@ test('it can set the selected value without binding for full DDAU', function(ass
   $(this.$('.item')[0]).click();
   assert.equal(this.$('.item.selected').data('value'), 1);
   assert.equal(this.get('people_id'), 1);
+  assert.equal(count, 1, 'onChange should have been called only once');
 });
 
 test('it renders and clears the value if it changes and isnt found', function(assert) {
-  assert.expect(10);
+  assert.expect(11);
+
+  let count = 0;
+  this.set('changed', (value) => {
+    if (Ember.isBlank(this.get('selected'))) {
+      if (Ember.isBlank(value)) {
+        this.set('selected', value);
+      } else {
+        this.set('selected', { id: value });
+      }
+    } else {
+      this.set('selected.id', value);
+    }
+    count++;
+  });
 
   this.set('people', Ember.A([
     { id: 1, name: "Sherlock Homes" },
@@ -199,7 +262,7 @@ test('it renders and clears the value if it changes and isnt found', function(as
   ]));
 
   this.render(hbs`
-    {{#ui-dropdown selected=selected.id onChange=(action (mut selected.id))}}
+    {{#ui-dropdown selected=selected.id onChange=(action changed)}}
       <i class="dropdown icon"></i>
       <div class="default text"></div>
       <div class='menu'>
@@ -228,6 +291,7 @@ test('it renders and clears the value if it changes and isnt found', function(as
   assert.equal(this.$('.item.active').length, 0);
   assert.equal(this.$('.ui.dropdown > .text').text(), '', "Default text isn't blank");
   assert.equal(this.get('selected'), undefined, "Nothing is selected");
+  assert.equal(count, 3, 'onChange should have been called only once');
 });
 
 
@@ -235,7 +299,13 @@ test('it renders and clears the value if it changes and isnt found', function(as
 // Object mapping
 ///
 test('it renders from a mapper', function(assert) {
-  assert.expect(3);
+  assert.expect(4);
+
+  let count = 0;
+  this.set('changed', (value) => {
+    this.set('selected', value);
+    count++;
+  });
 
   this.set('people', Ember.A([
     { id: 1, name: "Sherlock Homes" },
@@ -243,7 +313,7 @@ test('it renders from a mapper', function(assert) {
   ]));
 
   this.render(hbs`
-    {{#ui-dropdown selected=selected onChange=(action (mut selected)) as |execute mapper|}}
+    {{#ui-dropdown selected=selected onChange=(action changed) as |execute mapper|}}
       <div class='menu'>
       {{#each people as |person|}}
         <div class='item' data-value={{map-value mapper person}} data-id={{person.id}}>{{person.name}}</div>
@@ -257,11 +327,18 @@ test('it renders from a mapper', function(assert) {
 
   this.$(".menu .item[data-id=1]").click();
   assert.equal(this.get('selected.id'), "1", "Sherlock has been selected");
+  assert.equal(count, 1, 'onChange should have been called only once');
 });
 
 
 test('it renders from a mapper and preselects the right value', function(assert) {
-  assert.expect(3);
+  assert.expect(4);
+
+  let count = 0;
+  this.set('changed', (value) => {
+    this.set('selected', value);
+    count++;
+  });
 
   this.set('people', Ember.A([
     { id: 1, name: "Sherlock Homes" },
@@ -271,7 +348,7 @@ test('it renders from a mapper and preselects the right value', function(assert)
   this.set('selected', this.get('people').objectAt(1));
 
   this.render(hbs`
-    {{#ui-dropdown selected=selected onChange=(action (mut selected)) as |execute mapper|}}
+    {{#ui-dropdown selected=selected onChange=(action changed) as |execute mapper|}}
       <div class='menu'>
       {{#each people as |person|}}
         <div class='item' data-value={{map-value mapper person}} data-id={{person.id}}>{{person.name}}</div>
@@ -285,10 +362,17 @@ test('it renders from a mapper and preselects the right value', function(assert)
 
   this.$(".menu .item[data-id=1]").click();
   assert.equal(this.get('selected.id'), "1", "Sherlock has been selected");
+  assert.equal(count, 1, 'onChange should have been called only once');
 });
 
 test('it renders from a mapper and selects the right value if late', function(assert) {
-  assert.expect(4);
+  assert.expect(5);
+
+  let count = 0;
+  this.set('changed', (value) => {
+    this.set('selected', value);
+    count++;
+  });
 
   this.set('people', Ember.A([
     { id: 1, name: "Sherlock Homes" },
@@ -296,7 +380,7 @@ test('it renders from a mapper and selects the right value if late', function(as
   ]));
 
   this.render(hbs`
-    {{#ui-dropdown selected=selected onChange=(action (mut selected)) as |execute mapper|}}
+    {{#ui-dropdown selected=selected onChange=(action changed) as |execute mapper|}}
       <div class='menu'>
       {{#each people as |person|}}
         <div class='item' data-value={{map-value mapper person}} data-id={{person.id}}>{{person.name}}</div>
@@ -313,10 +397,17 @@ test('it renders from a mapper and selects the right value if late', function(as
 
   this.$(".menu .item[data-id=1]").click();
   assert.equal(this.get('selected.id'), "1", "Sherlock has been selected");
+  assert.equal(count, 2, 'onChange should have been called only once');
 });
 
 test('it renders from a mapper and clears the value if it changes and isnt found', function(assert) {
-  assert.expect(10);
+  assert.expect(11);
+
+  let count = 0;
+  this.set('changed', (value) => {
+    this.set('selected', value);
+    count++;
+  });
 
   this.set('people', Ember.A([
     { id: 1, name: "Sherlock Homes" },
@@ -324,7 +415,7 @@ test('it renders from a mapper and clears the value if it changes and isnt found
   ]));
 
   this.render(hbs`
-    {{#ui-dropdown selected=selected onChange=(action (mut selected)) as |execute mapper|}}
+    {{#ui-dropdown selected=selected onChange=(action changed) as |execute mapper|}}
       <i class="dropdown icon"></i>
       <div class="default text"></div>
       <div class='menu'>
@@ -353,10 +444,17 @@ test('it renders from a mapper and clears the value if it changes and isnt found
   assert.equal(this.$('.item.active').length, 0);
   assert.equal(this.$('.ui.dropdown > .text').text(), '', "Default text isn't blank");
   assert.equal(this.get('selected'), undefined, "Nothing is selected");
+  assert.equal(count, 3, 'onChange should have been called only once');
 });
 
 test('it renders from a mapper and clears the value if it changes and isnt found on sub property', function(assert) {
-  assert.expect(7);
+  assert.expect(8);
+
+  let count = 0;
+  this.set('changed', (value) => {
+    this.set('selected.sub', value);
+    count++;
+  });
 
   this.set('people', Ember.A([
     { id: 1, name: "Sherlock Homes" },
@@ -364,7 +462,7 @@ test('it renders from a mapper and clears the value if it changes and isnt found
   ]));
 
   this.render(hbs`
-    {{#ui-dropdown selected=selected.sub onChange=(action (mut selected.sub)) as |execute mapper|}}
+    {{#ui-dropdown selected=selected.sub onChange=(action changed) as |execute mapper|}}
       <div class='menu'>
       {{#each people as |person|}}
         <div class='item' data-value={{map-value mapper person}} data-id={{person.id}}>{{person.name}}</div>
@@ -390,10 +488,17 @@ test('it renders from a mapper and clears the value if it changes and isnt found
   assert.equal(this.$('.item').length, 2, "Right number of items");
   assert.equal(this.$('.item.active').length, 0);
   assert.equal(this.get('selected.sub'), undefined, "Nothing is selected");
+  assert.equal(count, 3, 'onChange should have been called only once');
 });
 
 test('it renders from a mapper and binds to value', function(assert) {
-  assert.expect(7);
+  assert.expect(8);
+
+  let count = 0;
+  this.set('changed', (value) => {
+    this.set('selected', value);
+    count++;
+  });
 
   this.set('numbers', Ember.A([
     1,
@@ -401,7 +506,7 @@ test('it renders from a mapper and binds to value', function(assert) {
   ]));
 
   this.render(hbs`
-    {{#ui-dropdown selected=selected onChange=(action (mut selected)) as |execute mapper|}}
+    {{#ui-dropdown selected=selected onChange=(action changed) as |execute mapper|}}
       <div class='menu'>
       {{#each numbers as |number|}}
         <div class='item' data-value={{map-value mapper number}} data-id={{number}}>{{number}}</div>
@@ -425,10 +530,17 @@ test('it renders from a mapper and binds to value', function(assert) {
   assert.equal(this.$('.item').length, 2, "Right number of items");
   assert.equal(this.$('.item.active').length, 0);
   assert.equal(this.get('selected'), null, "Nothing is selected");
+  assert.equal(count, 3, 'onChange should have been called only once');
 });
 
 test('The correct number of items are pre selected on selected array', function(assert) {
-  assert.expect(4);
+  assert.expect(5);
+
+  let count = 0;
+  this.set('changed', (value) => {
+    this.set('selected', value);
+    count++;
+  });
 
   this.set('numbers', Ember.A([
     '1',
@@ -441,7 +553,7 @@ test('The correct number of items are pre selected on selected array', function(
   this.set('selected', ['2', '4']);
 
   this.render(hbs`
-    {{#ui-dropdown class="multiple" selected=selected onChange=(action (mut selected)) as |execute mapper|}}
+    {{#ui-dropdown class="multiple" selected=selected onChange=(action changed) as |execute mapper|}}
       <div class='menu'>
       {{#each numbers as |number|}}
         <div class='item' data-value={{number}} data-id={{number}}>{{number}}</div>
@@ -454,10 +566,17 @@ test('The correct number of items are pre selected on selected array', function(
   assert.equal(this.$('.item.active').length, 2, "Pre selected count");
   assert.ok(this.$('.item[data-id=2]').hasClass('active'));
   assert.ok(this.$('.item[data-id=4]').hasClass('active'));
+  assert.equal(count, 0, 'onChange should not have been called');
 });
 
 test('The correct number of items are pre selected on selected item', function(assert) {
-  assert.expect(3);
+  assert.expect(4);
+
+  let count = 0;
+  this.set('changed', (value) => {
+    this.set('selected', value);
+    count++;
+  });
 
   this.set('numbers', Ember.A([
     '1',
@@ -470,7 +589,7 @@ test('The correct number of items are pre selected on selected item', function(a
   this.set('selected', '2');
 
   this.render(hbs`
-    {{#ui-dropdown class="multiple" selected=selected onChange=(action (mut selected)) as |execute mapper|}}
+    {{#ui-dropdown class="multiple" selected=selected onChange=(action changed) as |execute mapper|}}
       <div class='menu'>
       {{#each numbers as |number|}}
         <div class='item' data-value={{number}} data-id={{number}}>{{number}}</div>
@@ -482,10 +601,17 @@ test('The correct number of items are pre selected on selected item', function(a
   assert.equal(this.$('.item').length, 5, "Right number of items");
   assert.equal(this.$('.item.active').length, 1, "Pre selected count");
   assert.ok(this.$('.item[data-id=2]').hasClass('active'));
+  assert.equal(count, 0, 'onChange should not have been called');
 });
 
 test('The correct number of items are pre selected on selected object array', function(assert) {
-  assert.expect(4);
+  assert.expect(5);
+
+  let count = 0;
+  this.set('changed', (value) => {
+    this.set('selected', value);
+    count++;
+  });
 
   let numbers = Ember.A([
     { item: 1, name: 'One' },
@@ -500,7 +626,7 @@ test('The correct number of items are pre selected on selected object array', fu
   this.set('selected', [numbers[1], numbers[3]]);
 
   this.render(hbs`
-    {{#ui-dropdown class="multiple" selected=selected onChange=(action (mut selected)) as |execute mapper|}}
+    {{#ui-dropdown class="multiple" selected=selected onChange=(action changed) as |execute mapper|}}
       <div class='menu'>
       {{#each numbers as |number|}}
         <div class='item' data-value={{map-value mapper number}} data-id={{number.item}}>{{number.name}}</div>
@@ -513,10 +639,17 @@ test('The correct number of items are pre selected on selected object array', fu
   assert.equal(this.$('.item.active').length, 2, "Pre selected count");
   assert.ok(this.$('.item[data-id=2]').hasClass('active'));
   assert.ok(this.$('.item[data-id=4]').hasClass('active'));
+  assert.equal(count, 0, 'onChange should not have been called');
 });
 
 test('The correct number of items are pre selected on selected object item', function(assert) {
-  assert.expect(3);
+  assert.expect(4);
+
+  let count = 0;
+  this.set('changed', (value) => {
+    this.set('selected', value);
+    count++;
+  });
 
   let numbers = Ember.A([
     { item: 1, name: 'One' },
@@ -531,7 +664,7 @@ test('The correct number of items are pre selected on selected object item', fun
   this.set('selected', numbers[1]);
 
   this.render(hbs`
-    {{#ui-dropdown class="multiple" selected=selected onChange=(action (mut selected)) as |execute mapper|}}
+    {{#ui-dropdown class="multiple" selected=selected onChange=(action changed) as |execute mapper|}}
       <div class='menu'>
       {{#each numbers as |number|}}
         <div class='item' data-value={{map-value mapper number}} data-id={{number.item}}>{{number.name}}</div>
@@ -543,4 +676,5 @@ test('The correct number of items are pre selected on selected object item', fun
   assert.equal(this.$('.item').length, 5, "Right number of items");
   assert.equal(this.$('.item.active').length, 1, "Pre selected count");
   assert.ok(this.$('.item[data-id=2]').hasClass('active'));
+  assert.equal(count, 0, 'onChange should not have been called');
 });
