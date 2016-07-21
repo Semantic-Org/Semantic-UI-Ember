@@ -106,37 +106,6 @@ export default Ember.Controller.extend({
 {{ui-checkbox checked=havingFun}}
 ```
 
-## Radio
-
-* **Class**: `ui radio`
-* **Component**: `ui-radio`
-
-Replace `<div class="ui radio">` with `{{ui-radio}}` and bind to a property on your model/controller/component.
-
-### Controller
-```javascript
-export default Ember.Controller.extend({
-  fruit: null
-});
-```
-
-### Template
-```handlebars
-<div class="ui form">
-  <div class="grouped inline fields">
-    <div class="field">
-      {{ui-radio name="fruit" label="Once a week" value="apple" current=fruit}}
-    </div>
-    <div class="field">
-      {{ui-radio name="fruit" label="2-3 times a week" value="orange" current=fruit}}
-    </div>
-    <div class="field">
-      {{ui-radio name="fruit" label="Once a day" value="grape" current=fruit}}
-    </div>
-  </div>
-</div>
-```
-
 ## Dimmer
 
  * **Documentation**: [Official Documentation](http://semantic-ui.com/modules/dimmer.html)
@@ -301,6 +270,37 @@ You can also create an icon version by specifying the tagName
 {{/ui-progress}}
 ```
 
+## Radio
+
+* **Class**: `ui radio`
+* **Component**: `ui-radio`
+
+Replace `<div class="ui radio">` with `{{ui-radio}}` and bind to a property on your model/controller/component.
+
+### Controller
+```javascript
+export default Ember.Controller.extend({
+  fruit: null
+});
+```
+
+### Template
+```handlebars
+<div class="ui form">
+  <div class="grouped inline fields">
+    <div class="field">
+      {{ui-radio name="fruit" label="Once a week" value="apple" current=fruit}}
+    </div>
+    <div class="field">
+      {{ui-radio name="fruit" label="2-3 times a week" value="orange" current=fruit}}
+    </div>
+    <div class="field">
+      {{ui-radio name="fruit" label="Once a day" value="grape" current=fruit}}
+    </div>
+  </div>
+</div>
+```
+
 ## Rating
 
  * **Documentation**: [Official Documentation](http://semantic-ui.com/modules/rating.html)
@@ -419,6 +419,25 @@ export default Ember.Controller.extend(Ember.Evented, {
     }
   }
 });
+```
+
+## Sticky
+
+ * **Documentation**: [Official Documentation](http://semantic-ui.com/modules/sticky.html)
+ * **Class**: `ui sticky`
+
+### Template
+```handlebars
+{{#ui-sticky}}
+  <div class="ui three item menu">
+    <a class="active item">Editorials</a>
+    <a class="item">Reviews</a>
+    <a class="item">Upcoming Events</a>
+  </div>
+{{/ui-sticky}}
+<div>
+<!-- Any arbitary content -->
+</div>
 ```
 
 ## Tab
