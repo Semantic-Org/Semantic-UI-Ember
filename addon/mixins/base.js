@@ -134,9 +134,7 @@ Semantic.BaseMixin = Ember.Mixin.create({
 
   areAttrValuesEqual(attrName, attrValue, moduleValue) {
     return attrValue === moduleValue ||
-           this._stringCompare(attrValue) === moduleValue ||
-           attrValue === this._stringCompare(moduleValue) ||
-           this._stringCompare(attrValue) === this._stringCompare(moduleValue) ||
+           this._stringCompareIfPossible(attrValue) === this._stringCompareIfPossible(moduleValue) ||
            Ember.isEqual(attrValue, moduleValue);
   },
 
@@ -146,6 +144,7 @@ Semantic.BaseMixin = Ember.Mixin.create({
     if (module) {
       return module.apply(this.getSemanticScope(), arguments);
     }
+    Ember.Logger.warn("The execute method was called, but the Semantic-UI module didn't exist.");
   },
 
   actions: {
@@ -230,10 +229,12 @@ Semantic.BaseMixin = Ember.Mixin.create({
     };
   },
 
-  _stringCompare(value) {
+  _stringCompareIfPossible(value) {
+    // If its undefined or null, compare on null
     if (value == null) {
       return null;
     }
+    // We should only compare string values on primitive types
     switch (typeof value) {
       case "string":
         return value;
@@ -241,6 +242,7 @@ Semantic.BaseMixin = Ember.Mixin.create({
       case "number":
         return value.toString();
       default:
+        // Don't convert to string, otherwise it would be "[Object]"
         return value;
     }
   },

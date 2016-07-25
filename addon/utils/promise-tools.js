@@ -1,15 +1,7 @@
 import Ember from 'ember';
 
 const isPromise = function(maybePromise) {
-  if (Ember.PromiseProxyMixin.detect(maybePromise)) {
-    return true;
-  }
-
-  if (maybePromise instanceof Ember.RSVP.Promise) {
-    return true;
-  }
-
-  if (maybePromise != null && typeof maybePromise.then === 'function') {
+ if (maybePromise != null && typeof maybePromise.then === 'function') {
     return true;
   }
   return false;

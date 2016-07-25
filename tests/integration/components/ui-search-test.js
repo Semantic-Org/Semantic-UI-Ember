@@ -9,7 +9,7 @@ test('it renders', function(assert) {
   assert.expect(1);
 
   this.render(hbs`
-    {{#ui-search url="/search"}}
+    {{#ui-search apiSettings=(hash url="/search")}}
       <input class="prompt" type="text" placeholder="Common passwords...">
       <div class="results"></div>
     {{/ui-search}}
