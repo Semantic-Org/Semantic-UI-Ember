@@ -1,4 +1,3 @@
-/* global stop, start */
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 
@@ -39,12 +38,13 @@ test('it will only show once', function(assert) {
   assert.equal(this.$('.ui.nag').css('display'), 'block');
   this.$('.ui.nag .close').click();
 
-  stop();
-  setTimeout(() => {
-    start();
+  let done = assert.async();
 
+  setTimeout(() => {
     assert.equal(this.$('.ui.nag').css('display'), 'none');
     this.$('.ui.nag').nag('show');
     assert.equal(this.$('.ui.nag').css('display'), 'block');
+
+    done();
   }, 1000);
 });

@@ -1,25 +1,120 @@
-<h2 id='title'>Popup</h2>
+<div class="ui masthead vertical segment">
+  <div class="ui container">
+    <div class="introduction">
 
-{{#ui-popup content="Add users to your feed"}}
+      <h1 class="ui header">
+        Popup
+
+        <div class="sub header">
+          A popup displays additional information on top of a page
+        </div>
+      </h1>
+
+      <div class="ui hidden divider"></div>
+
+      <p>
+        For additional documentation on how to configure this module, please refer to the <a href="/">Getting Started</a> section and Semantic UI's module specific external documentation links below.
+      </p>
+
+      <div class="ui four item stackable tabs menu">
+        <a class="item" href="http://semantic-ui.com/modules/popup.html" target="_blank">Definition</a>
+        <a class="item" href="http://semantic-ui.com/modules/popup.html#/examples" target="_blank">Examples</a>
+        <a class="item" href="http://semantic-ui.com/modules/popup.html#/usage" target="_blank">Usage</a>
+        <a class="item" href="http://semantic-ui.com/modules/popup.html#/settings" target="_blank">Settings</a>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+<div class="ui main container">
+
+  {{#ui-example
+    header="Simple Example"
+    subHeader="Basic Popup"
+    as |showing setCopyCode|}}
+
+    {{#ui-html showing=showing}}
+      {{#ui-popup content="Add users to your feed"}}
+        <div class="ui icon button">
+          <i class="add icon"></i>
+        </div>
+      {{/ui-popup}}
+    {{/ui-html}}
+
+    {{#ui-annotation showing=showing setCopyCode=setCopyCode}}
+\{{#ui-popup content="Add users to your feed"}}
   <div class="ui icon button">
     <i class="add icon"></i>
   </div>
-{{/ui-popup}}
+\{{/ui-popup}}
+    {{/ui-annotation}}
 
-<br>
+  {{/ui-example}}
 
-{{ui-popup tagName="i" class="info icon" content="The text you'd like to show"}}
+  {{#ui-example
+    header="Simple Icon Example"
+    subHeader="Basic Popup"
+    as |showing setCopyCode|}}
 
-<div class="ui header">
-  Updates with content change
-</div>
+    {{#ui-html showing=showing}}
+      {{ui-popup tagName="i" class="info icon" content="The text you'd like to show"}}
+    {{/ui-html}}
 
+    {{#ui-annotation showing=showing setCopyCode=setCopyCode}}
+\{{ui-popup tagName="i" class="info icon" content="The text you'd like to show"}}
+    {{/ui-annotation}}
+
+  {{/ui-example}}
+
+  {{#ui-example
+    header="Dynamic Text Example"
+    subHeader="Updates with content change"
+    as |showing setCopyCode|}}
+
+    {{#ui-html showing=showing}}
+      <div class="ui input">
+        {{input value=popup_message}}
+      </div>
+
+      {{#ui-popup content=popup_message title="Dynamic content"}}
+        <div class="ui icon button">
+          <i class="help icon"></i>
+        </div>
+      {{/ui-popup}}
+    {{/ui-html}}
+
+    {{#ui-annotation showing=showing setCopyCode=setCopyCode}}
 <div class="ui input">
-  {{input value=popup_message}}
+  \{{input value=popup_message}}
 </div>
 
-{{#ui-popup content=popup_message}}
+\{{#ui-popup content=popup_message title="Dynamic content"}}
   <div class="ui icon button">
     <i class="help icon"></i>
   </div>
-{{/ui-popup}}
+\{{/ui-popup}}
+    {{/ui-annotation}}
+
+  {{/ui-example}}
+
+  {{#ui-example
+    header="Html Example"
+    as |showing setCopyCode|}}
+
+    {{#ui-html showing=showing}}
+      {{#ui-popup html='<div class="ui red segment"> <div class="ui button">A button!</div> </div>'}}
+        <div class="ui label">Html Popup</div>
+      {{/ui-popup}}
+    {{/ui-html}}
+
+    {{#ui-annotation showing=showing setCopyCode=setCopyCode}}
+\{{#ui-popup html='<div class="ui red segment"> <div class="ui button">A button!</div> </div>'}}
+  <div class="ui label">Html Popup</div>
+\{{/ui-popup}}
+    {{/ui-annotation}}
+
+  {{/ui-example}}
+
+</div>

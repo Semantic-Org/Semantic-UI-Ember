@@ -1,138 +1,258 @@
 import Ember from 'ember';
 import Semantic from '../semantic';
 
-// Static properties to ignore
-const DEBUG = ['debug', 'performance', 'verbose'];
-const STANDARD = ['name', 'namespace', 'className', 'metadata', 'selector'];
-const EMBER = ['context', 'on', 'template', 'execute'];
+const EMBER_ATTRS = ['class', 'classNameBindings', 'classNames', 'tagName'];
+const HTML_ATTRS = ['id', 'name', 'readonly', 'tabindex'];
+const CUSTOM_ATTRS = ['onElement'];
 
 Semantic.BaseMixin = Ember.Mixin.create({
+  /// Internal Variables
+  _initialized: false,
+  _bindableAttrs: null,
+  _settableAttrs: null,
+  _ignorableAttrs: null,
+
+  /// EMBER HOOKS
   init() {
     this._super(...arguments);
 
-    if (!this.get('module')) {
-      return Ember.Logger.error('Module was not declared on semantic extended type');
+    if (Ember.isBlank(this.getSemanticModuleName())) {
+      return Ember.Logger.error('A module was not declared on semantic extended type');
+    }
+    this.set('_initialized', false);
+    this.set('_bindableAttrs', Ember.A());
+    this.set('_settableAttrs', Ember.A());
+    this.set('_ignorableAttrs', this.getSemanticIgnorableAttrs());
+  },
+
+  didInsertElement() {
+    this._super(...arguments);
+    this.initSemanticModule();
+
+    // Get the modules settable and gettable properties.
+    let settableProperties = Ember.A(Object.keys(this.execute('internal', 'set')));
+    let gettableProperties = Ember.A(Object.keys(this.execute('internal', 'get')));
+
+    for (let key in this.get('attrs')) {
+      // If it has a settable and gettable attribute, then its bindable
+      if (settableProperties.contains(key) && gettableProperties.contains(key)) {
+        this.get('_bindableAttrs').addObject(key);
+      } else if (settableProperties.contains(key)) {
+        // otherwise, its settable only
+        this.get('_settableAttrs').addObject(key);
+      }
+    }
+    this.didInitSemantic();
+    this.set('_initialized', true);
+  },
+
+  willDestroyElement() {
+    this._super(...arguments);
+    this.execute('destroy');
+  },
+
+  didUpdateAttrs() {
+    this._super(...arguments);
+    for (let i = 0; i < this.get('_bindableAttrs').length; i++) {
+      let bindableAttr = this.get('_bindableAttrs')[i];
+      let attrValue = this._getAttrValue(bindableAttr);
+      let moduleValue = this.getSemanticAttr(bindableAttr);
+      if (!this.areAttrValuesEqual(bindableAttr, attrValue, moduleValue)) {
+        this.setSemanticAttr(bindableAttr, attrValue);
+      }
+    }
+    for (let i = 0; i < this.get('_settableAttrs').length; i++) {
+      let settableAttr = this.get('_settableAttrs')[i];
+      let attrValue = this._getAttrValue(settableAttr);
+      this.setSemanticAttr(settableAttr, attrValue);
     }
   },
 
-  settings(module) {
-    var component, custom, key, prop, value;
+  /// Semantic Hooks
+  getSemanticIgnorableAttrs() {
+    let ignorableAttrs = [];
+    if (Ember.isPresent(this.get('ignorableAttrs'))) {
+      ignorableAttrs = ignorableAttrs.concat(this.get('ignorableAttrs'));
+    }
+    ignorableAttrs = ignorableAttrs.concat(EMBER_ATTRS);
+    ignorableAttrs = ignorableAttrs.concat(HTML_ATTRS);
+    ignorableAttrs = ignorableAttrs.concat(CUSTOM_ATTRS);
+    return Ember.A(ignorableAttrs);
+  },
 
-    component = window.$.fn[module];
-    if (!component) {
-      throw "Unable to find semantic module: " + module;
+  getSemanticScope() {
+    if (Ember.isPresent(this.get('onElement'))) {
+      return this.$(this.get('onElement'));
+    }
+    return this.$();
+  },
+
+  getSemanticModuleName() {
+    return this.get('module');
+  },
+
+  getSemanticModule() {
+    let selector = this.getSemanticScope();
+    if (selector != null) {
+      let module = selector[this.getSemanticModuleName()];
+      if (typeof module === 'function') {
+        return module;
+      }
+    }
+    return null;
+  },
+
+  getSemanticModuleGlobal() {
+    let moduleName = this.getSemanticModuleName();
+    return window.$.fn[moduleName];
+  },
+
+  willInitSemantic(settings) { // jshint ignore:line
+    // Use this method to modify the settings object on inherited components, before module initialization
+  },
+
+  initSemanticModule() {
+    let module = this.getSemanticModule();
+    if (module) {
+      module.call(this.getSemanticScope(), this._settings());
+    } else {
+      Ember.Logger.error(`The Semantic UI module ${this.getSemanticModuleName()} was not found and did not initialize`);
+    }
+  },
+
+  didInitSemantic() {
+    // Use this method after the module is initialized to do post initialized changes
+  },
+
+  getSemanticAttr(attrName) {
+    return this.execute(`get ${attrName}`);
+  },
+
+  setSemanticAttr(attrName, attrValue) {
+    return this.execute(`set ${attrName}`, attrValue);
+  },
+
+  areAttrValuesEqual(attrName, attrValue, moduleValue) {
+    return attrValue === moduleValue ||
+           this._stringCompareIfPossible(attrValue) === this._stringCompareIfPossible(moduleValue) ||
+           Ember.isEqual(attrValue, moduleValue);
+  },
+
+  // Semantic Helper Methods
+  execute() {
+    let module = this.getSemanticModule();
+    if (module) {
+      return module.apply(this.getSemanticScope(), arguments);
+    }
+    Ember.Logger.warn("The execute method was called, but the Semantic-UI module didn't exist.");
+  },
+
+  actions: {
+    execute() {
+      return this.execute(...arguments);
+    }
+  },
+
+  // Private Methods
+  _getAttrValue(name) {
+    let value = this.get(`attrs.${name}`);
+
+    if (Ember.isBlank(value)) {
+      return value;
     }
 
-    custom = {
+    // if its a mutable object, get the actual value
+    if (typeof value === 'object') {
+      let objectKeys = Ember.A(Object.keys(value));
+      if (objectKeys.any((objectkey) => objectkey.indexOf('MUTABLE_CELL') === 0)) {
+        value = Ember.get(value, 'value');
+      }
+    }
+
+    return value;
+  },
+
+  _settings() {
+    let moduleName = this.getSemanticModuleName();
+
+    let moduleGlobal = this.getSemanticModuleGlobal();
+    if (!moduleGlobal) {
+      Ember.Logger.error(`Unable to find jQuery Semantic UI module: ${moduleName}`);
+      return;
+    }
+
+    let custom = {
       debug: Semantic.UI_DEBUG,
       performance: Semantic.UI_PERFORMANCE,
       verbose: Semantic.UI_VERBOSE
     };
 
-    for (key in component.settings) {
-      prop = component.settings[key];
-      if (window.$.inArray(key, DEBUG) >= 0) {
-        continue;
-      }
+    for (let key in this.get('attrs')) {
+      let value = this._getAttrValue(key);
 
-      if (window.$.inArray(key, STANDARD) >= 0) {
-        continue;
-      }
-
-      if (typeof prop === 'function' && typeof (this.get(key) || this.get(`_${key}`)) !== 'function') {
-        continue;
-      }
-
-      if (window.$.inArray(key, EMBER) >= 0) {
-        value = this.get(`ui_${key}`);
-      } else {
-        if (typeof this.get(key) !== 'undefined') {
-          value = this.get(key);
-        } else {
-          value = this.get(`_${key}`);
+      if (!moduleGlobal.settings.hasOwnProperty(key)) {
+        if (!this.get('_ignorableAttrs').contains(key) && !this.get('_ignorableAttrs').contains(Ember.String.camelize(key))) {
+          // TODO: Add better ember keys here
+          Ember.Logger.debug(`You passed in the property '${key}', but a setting doesn't exist on the Semantic UI module: ${moduleName}`);
         }
+        continue;
       }
 
       if (value != null) {
-        if (typeof value === 'function') {
-          custom[key] = Ember.run.bind(this, this.updateFunctionWithParameters(key, value));
-        } else {
-          custom[key] = value;
-        }
+        custom[key] = value;
+      }
+    }
+
+    // Init, and allow any overrides
+    this.willInitSemantic(custom);
+
+    // Late bind any functions over to use the right scope
+    for (let key in custom) {
+      let value = custom[key];
+      if (typeof value === 'function') {
+        custom[key] = Ember.run.bind(this, this._updateFunctionWithParameters(key, value));
       }
     }
 
     return custom;
   },
 
-  updateProperty(property) {
-    return function() {
-      this.execute('set ' + property, this.get(property));
-    };
-  },
-
-  updateFunctionWithParameters(key, fn) {
+  _updateFunctionWithParameters(key, fn) {
     return function() {
       var args = [].splice.call(arguments, 0);
-      var internal = this.get(`_${key}`);
+      // always add component instance as the last parameter incase they need access to it
+      args.push(this);
 
-      if (internal) {
-        internal.apply(this, args);
+      if (this.get('_initialized')) {
+        return fn.apply(this, args);
       }
-
-      if (internal !== fn) {
-        return fn.apply(this, [this].concat(args));
-      }
-
-      return true;
     };
   },
 
-  initializeModule() {
-    this.$()[this.get("module")](this.settings(this.get("module")));
-  },
-
-  didInsertElement() {
-    this._super(...arguments);
-    this.initializeModule();
-
-    var _this = this;
-    var properties = {};
-
-    // Modules without setable properties
-    properties = this.execute('internal', 'set');
-    var property;
-
-    if (typeof properties === "object" && !Ember.isArray(properties)) {
-      for(property in properties) {
-        if (!properties.hasOwnProperty(property)) {
-          continue;
-        }
-
-        if (this.hasOwnProperty(property)) {
-          _this.addObserver(property, _this, _this.updateProperty(property));
-        }
-      }
+  _stringCompareIfPossible(value) {
+    // If its undefined or null, compare on null
+    if (value == null) {
+      return null;
+    }
+    // We should only compare string values on primitive types
+    switch (typeof value) {
+      case "string":
+        return value;
+      case "boolean":
+      case "number":
+        return value.toString();
+      default:
+        // Don't convert to string, otherwise it would be "[Object]"
+        return value;
     }
   },
 
-  willDestroyElement() {
-    var name, selector;
-    if ((selector = this.$()) != null) {
-      if (typeof selector[name = this.get("module")] === "function") {
-        return selector[name]('destroy');
-      }
+  _swapAttrs(attrName) {
+    if (this.get('_settableAttrs').contains(attrName)) {
+      this.get('_settableAttrs').removeObject(attrName);
+      this.get('_bindableAttrs').addObject(attrName);
     }
   },
-
-  execute() {
-    var selector, module;
-    if ((selector = this.$()) != null) {
-      if ((module = selector[this.get('module')]) != null) {
-        return module.apply(this.$(), arguments);
-      }
-    }
-  }
 });
 
 export default Semantic.BaseMixin;

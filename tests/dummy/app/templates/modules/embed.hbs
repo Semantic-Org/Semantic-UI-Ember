@@ -1,7 +1,61 @@
-<h2 id='title'>Embed</h2>
+<div class="ui masthead vertical segment">
+  <div class="ui container">
+    <div class="introduction">
 
-<h3>Using data-url (with placeholder)</h3>
-{{ui-embed data-url="https://www.youtube.com/embed/pfdu_gTry8E" data-placeholder="http://semantic-ui.com/images/image-16by9.png"}}
+      <h1 class="ui header">
+        Embed
 
-<h3>Using data-id (no placeholder)</h3>
-{{ui-embed data-source="youtube" data-id="pfdu_gTry8E"}}
+        <div class="sub header">
+          An embed displays content from other websites like YouTube videos or Google Maps
+        </div>
+      </h1>
+
+      <div class="ui hidden divider"></div>
+
+      <p>
+        For additional documentation on how to configure this module, please refer to the <a href="/">Getting Started</a> section and Semantic UI's module specific external documentation links below.
+      </p>
+
+      <div class="ui four item stackable tabs menu">
+        <a class="item" href="http://semantic-ui.com/modules/embed.html" target="_blank">Definition</a>
+        <a class="item" href="http://semantic-ui.com/modules/embed.html#/examples" target="_blank">Examples</a>
+        <a class="item" href="http://semantic-ui.com/modules/embed.html#/usage" target="_blank">Usage</a>
+        <a class="item" href="http://semantic-ui.com/modules/embed.html#/settings" target="_blank">Settings</a>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+<div class="ui main container">
+
+  {{#ui-example
+    header="Placeholder Example"
+    as |showing setCopyCode|}}
+
+    {{#ui-html showing=showing}}
+      {{ui-embed data-url="https://www.youtube.com/embed/o12-90Dm-Qs" data-placeholder="http://semantic-ui.com/images/image-16by9.png"}}
+    {{/ui-html}}
+
+    {{#ui-annotation showing=showing setCopyCode=setCopyCode}}
+\{{ui-embed data-url="https://www.youtube.com/embed/o12-90Dm-Qs" data-placeholder="http://semantic-ui.com/images/image-16by9.png"}}
+    {{/ui-annotation}}
+
+  {{/ui-example}}
+
+  {{#ui-example
+    header="Parameter Example"
+    as |showing setCopyCode|}}
+
+    {{#ui-html showing=showing}}
+      {{ui-embed source="youtube" id="1YLT-ZlPH-0"}}
+    {{/ui-html}}
+
+    {{#ui-annotation showing=showing setCopyCode=setCopyCode}}
+\{{ui-embed source="youtube" id="1YLT-ZlPH-0"}}
+    {{/ui-annotation}}
+
+  {{/ui-example}}
+
+</div>

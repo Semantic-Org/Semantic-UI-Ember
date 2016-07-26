@@ -1,0 +1,204 @@
+<div class="ui masthead minimum vertical segment">
+  <div class="ui container">
+    <div class="introduction">
+
+      <h1 class="ui header">
+        Upgrading from Semantic-UI-Ember 1.0
+        <div class="sub header">
+          This is a quick overview of specific changes and a few new features available in 2.0.
+        </div>
+      </h1>
+
+    </div>
+
+  </div>
+</div>
+
+<div class="ui main container">
+
+
+  <h2 class="ui header">
+    Data Mutation
+  </h2>
+
+  <div class="no example">
+
+    <p>
+      The biggest change in upgrading from Semantic-UI-Ember 1.0 is that values are no longer two way bound.
+      All values passed in are considered read-only and are only updated through a Semantic-UI module event.
+      For a sample of the Ember usage on these individual modules, you can view them in the sidebar on the left.
+      For the full documentation of what is available, please refer back to the individual modules documentation on
+      <a href="http://semantic-ui.com" target="_blank">Semantic-UI</a>.
+      If you are unsure how the Semantic-UI's documentation relates back to Ember,
+      please review the {{#link-to 'modules.usage' class='item'}}Usage{{/link-to}} documentation.
+    </p>
+
+    <p>
+      The change to upgrade from Semantic-UI-Ember 1.0 for most modules is pretty minor or no changes required at all.
+      Here is an example of rating in Semantic-UI-Ember 1.0
+    </p>
+
+    {{#ui-annotation showing=true}}
+\{{! when rating is set to 5}}
+\{{ui-rating rating=rating}}
+    {{/ui-annotation}}
+
+    <p>
+      And this would be the required change to move to Semantic-UI-Ember 2.0
+    </p>
+
+    {{#ui-annotation showing=true}}
+\{{! when rating is set to 5}}
+\{{ui-rating rating=rating onRate=(action (mut rating))}}
+    {{/ui-annotation}}
+
+    <p>
+      As you can see, the changes between the two are minor.
+      All you need to do is update the existing compoment with the correct Semantic-UI module event to properly mutate the value you would like.
+      The main methods will be listed in the Ember module examples in the sidebar, but Semantic-UI's documentation will have a full list of available events and properties.
+    </p>
+
+  </div>
+
+  <h2 class="ui dividing header">
+    Dropdown
+  </h2>
+
+  <div class="no example">
+    <p>
+      Dropdown had the largest changes out of all the modules. Because of this we created its own section to help better understand how to migrate your app.
+    </p>
+
+    <p>
+      The first change is that ui-dropdown-array component no longer exists.
+      If you are using the ui-dropdown-array today, just rename all of the components to ui-dropdown.
+      Since ui-dropdown-array was binded to values, instead of strings, to migrate follow the same pattern above using actions to mutate the correct value.
+    </p>
+
+    <p>
+      The second change you'll need to do when migrating ui-dropdown-array is to add back in value bindings so that when the actions are fired, you receive the correct data.
+      If you had a ui-dropdown-array in Semantic-UI-Ember 1.0 it would like this:
+    </p>
+
+    {{#ui-annotation showing=true}}
+\{{! content is an array of objects }}
+\{{! selected is your selected object in that array }}
+\{{#ui-dropdown-array content=people selected=selected}}
+  <div class='menu'>
+  \{{#each people as |person|}}
+  \{{! It is assumed that your collection objects have an id and thats why person.id is set to the data-value }}
+    <div class='item' data-value="\{{person.id}}">\{{person.name}}</div>
+  \{{/each}}
+  </div>
+\{{/ui-dropdown-array}}
+    {{/ui-annotation}}
+
+    <p>
+      In Semantic-UI-Ember 2.0, ui-dropdown is slightly modified to have a value binded dropdown
+    </p>
+
+    {{#ui-annotation showing=true}}
+\{{! ui-dropdown no longer needs to know about content }}
+\{{! selected is your selected object in that array }}
+\{{#ui-dropdown-array selected=selected onChange=(action (mut selected)) as |execute mapper|}}
+  <div class='menu'>
+  \{{#each people as |person|}}
+  \{{! We use composable actions and a new helper to generate a value binding dictionary }}
+    <div class='item' data-value="\{{map-value mapper person}}">\{{person.name}}</div>
+  \{{/each}}
+  </div>
+\{{/ui-dropdown-array}}
+    {{/ui-annotation}}
+
+    <p>
+      If you want to still bind strings, you don't need to change anything on your current ui-dropdown,
+      but if you want any value binding (Boolean, Integer, Objects), you'll need to use the map-value helper.
+      It's a small inconvenience, but allows a lot of flexibility in binding whatever you want, even mixed lists of values.
+    </p>
+
+  </div>
+
+  <h2 class="ui dividing header">
+    ui_ Prefix Properties
+  </h2>
+
+  <div class="no example">
+
+    <p>
+      In order to properly deal with knowing what properties were passed into the component and what properties already existed as part of the base Ember class,
+      we added a hack to prefix specific properties with "ui_" and then the property name.
+      In Semantic-Ember-UI 2.0 this hack as been completely removed.
+    </p>
+
+    <p>
+      Thanks to Ember's 1.13 update to expose passed through attributes as
+      this.attrs, we no longer need this hack.
+      Any property that is passed through can match the Semantic-UI modules documentation name.
+      To upgrade, just find any ui_ properties and rename them removing the ui_ prefix.
+    </p>
+
+  </div>
+
+  <h2 class="ui dividing header">
+    Composable Actions
+  </h2>
+
+  <div class="no example">
+
+    <p>
+      One of the new features that was added in 2.0 was the ability to interact with the Semantic module through a composable action.
+      This allows you to perform simple tasks directly in the template without having to create a custom component.
+      You could even pass the composable action into another custom component.
+    </p>
+
+    <p>
+      All of the components in Semantic-UI-Ember 2.0 pass through as its first block parameter a composable action.
+      In the examples it is named "execute", since it is a simple wrapper for calling the execute method on the base mixin.
+      A simple example of using this execute method can be found in accordion.
+    </p>
+
+    {{#ui-annotation showing=true}}
+\{{#ui-accordion class="styled" as |execute|}}
+  <div class="title">
+    Section Title One (Index 0)
+  </div>
+  <div class="content">
+    Section Content One (Index 0)
+
+    <div class="ui basic segment">
+      <div class="ui button" onclick="\{{action execute 'close' 0}}">Close This Section</div>
+      <div class="ui button" onclick="\{{action execute 'open' 1}}">Open Section Two</div>
+    </div>
+  </div>
+  <div class="title">
+    Section Title Two (Index 1)
+  </div>
+  <div class="content">
+    Section Content Two (Index 1)
+  </div>
+\{{/ui-accordion}}
+    {{/ui-annotation}}
+
+    <p>
+      In the example above, you would be directly calling the Accordion modules close and open method with the value passed in.
+      This allows you to look at Semantic-UI's module documentation and then perform actions from within the template.
+    </p>
+
+  </div>
+
+  <h2 class="ui dividing header">
+    Finishing Up
+  </h2>
+
+  <div class="no example">
+
+    <p>
+      In the transition to 2.0, we tried to keep the changes to a minimum, while enhancing the feature set as much as possible.
+      In general components should no longer re-render when passed in attrs change, preparing the code for feature Ember changes.
+      Please ensure you fully understand the {{#link-to 'modules.usage' class='item'}}Usage{{/link-to}} documentation to take full
+      advantage of all of the Semantic-UI-Ember capabilities.
+    </p>
+
+  </div>
+
+</div>

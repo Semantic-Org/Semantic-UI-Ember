@@ -1,0 +1,234 @@
+<div class="ui masthead minimum vertical segment">
+  <div class="ui container">
+    <div class="introduction">
+
+      <h1 class="ui header">
+        Semantic-UI-Ember Usage
+        <div class="sub header">
+          It it absolutely critical that you read and understand this page to fully utilize this library.
+        </div>
+      </h1>
+
+    </div>
+
+  </div>
+</div>
+
+<div class="ui main container">
+
+
+  <h2 class="ui header">
+    One Mixin to Rule Them All
+  </h2>
+
+  <div class="no example">
+
+    <p>
+      The first critical concept to understand with this library is we aren't re-writing all of the Semantic modules into Ember.
+      We are merely providing an interface to seamlessly interact with Semantic-UI in an easy Ember way.
+      By doing it this way, the Semantic-UI modules are decoupled from the Semantic-UI-Ember library.
+      This means you can upgrade Semantic-UI at anytime and not have to worry if this library is up to date.
+    </p>
+
+    <p>
+      The <a href="https://github.com/Semantic-Org/Semantic-UI-Ember/blob/master/addon/mixins/base.js" target="_blank">base mixin</a>
+      is the main entry point and interface for all of the Semantic-UI-Ember interactions.
+      If you need to create a custom Semantic Ember module or want to extend one of the components functionalities, look at documentation for the {{#link-to 'modules.base_mixin'}}Base Mixin{{/link-to}}.
+    </p>
+
+    <p>
+      If you look at the actual components source code, you might be surprised that the actual code is very sparse.
+      The <a href="https://github.com/Semantic-Org/Semantic-UI-Ember/blob/master/addon/components/ui-accordion.js" target="_blank">accordion</a> is only 2 lines of code.
+      The base mixin is where all the interface interactions happen. In the accordion the only thing that needs to be declared is the name of the module and any default class names.
+    </p>
+
+    <p>
+      Because of the base mixin, any property that can be set on a Semantic-UI module can be set on the Semantic-UI-Ember component and it will be proxied through.
+      To add a property, all you need to do is add as a parameter on the component in the template and it will be proxied through.
+    </p>
+
+    <p>
+      If you look at any of the Semantic-UI-Ember module documentation, you'll notice the same four tabs at the top.
+      They are: <b>Definition</b>, <b>Examples</b>, <b>Usage</b>, and <b>Settings</b>.
+      Definition and Examples give you a good idea of what can be done with that module,
+      but Usage and Settings is what you'll want to look at to know what settings can be passed through to the Ember component.
+    </p>
+
+    <p>
+      In a few of the Semantic-Ember-UI modules we may enhance the original Semantic-UI modules capabilities.
+      For example on the ui-checkbox component, on the onChange event we pass through a boolean if it's checked or not, since the original event didn't provide that information.
+      This allows you to properly update your values based on the state of the checkbox, but everything else on checkbox remains the same.
+    </p>
+
+  </div>
+
+  <h2 class="ui dividing header">
+    An Example
+  </h2>
+
+  <div class="no example">
+    <p>
+      To give you an idea of how to apply Semantic-UI's documentation to a Semantic-UI-Ember component we are going to run through some examples using the accordion module.
+    </p>
+
+    <h3 class="ui header">
+      Interacting with a Module
+    </h3>
+
+    <p>
+      If you go to the <a href="http://semantic-ui.com/modules/accordion.html#/usage" target="_blank">accordions usage</a> documentation on Semantic-UI site,
+      at the bottom you'll see a header for <b>Behaviors</b> and a list of commands that can be executed on the accordion.
+      Through the use of a composable action, you can call any of those commands listed on that page.
+      For example, if you wanted to open another tab it would be possible through a composable action like this:
+    </p>
+
+    {{#ui-annotation showing=true}}
+\{{#ui-accordion as |execute|}}
+  <div class="title">
+    Semantic UI
+  </div>
+  <div class="content">
+    Be sure to check out <div class="ui button" onclick="\{{action (execute 'open' 1)}}">the example</div>
+  </div>
+  <div class="title">
+    Example
+  </div>
+  <div class="content">
+    This is a great example!
+  </div>
+\{{/ui-accordion}}
+    {{/ui-annotation}}
+
+    <p>
+      As you can see on the accordions behavior page, you can "open" another tab by passing in the index.
+      The composable "execute" action allows you to call a behavior.
+    </p>
+
+    <p>
+      One thing to note, when executing behaviors, you need to keep the full command together when executing.
+      For example, if you would like to call the <u>set enabled</u> command which is defined in Semantic UI's documention as a single string of <b>set enabled</b> then you would
+      pass the arguments like this:
+    </p>
+
+    {{#ui-annotation showing=true}}
+\{{#ui-checkbox label="Some Label" checked=checked onChange=(action (mut checked)) as |execute|}}
+    <div class="ui button" onclick="\{{action (execute 'set enabled')}}">Enable Checkbox (correct passed as one argument)</div>
+\{{/ui-checkbox}}
+    {{/ui-annotation}}
+
+    <p>Refer to the usage section on Semantic UI's site for more information.</p>
+
+    <h3 class="ui header">
+      Module Settings
+    </h3>
+
+    <p>
+      On the settings page for each of the modules, there is a list of settings that are available for that module.
+      Some of those settings are bindable, meaning if you update it after the initialization, it will update the setting, some are initialization only settings.
+      To know which are bindable and which are only initialized, look at the behaviors page.
+      Usually bindable settings have the same name but with a set in front ("set {property}") on the behaviors page.
+    </p>
+
+    <p>
+      To pass any of the settings to a Semantic-UI-Ember component,
+      just add it as a property on the component declaration and it will be passed through to Semantic-UI if it exists in the modules setting.
+      For example, if we look at the <a href="http://semantic-ui.com/modules/accordion.html#/settings" target="_blank">accordions settings</a>,
+      you'll notice that there are some defaults, but we could change those on our accordion by just passing them through.
+      Lets pass through exclusive, collapsible, and duration as a different configuration.
+    </p>
+
+    {{#ui-annotation showing=true}}
+\{{#ui-accordion exclusive=false collapsible=false duration=100}}
+  <div class="title">
+    Semantic UI
+  </div>
+  <div class="content">
+    Is amazing!
+  </div>
+\{{/ui-accordion}}
+    {{/ui-annotation}}
+
+    <p>
+      If the property passed through bindable to Semantic-UI, when you're property updates, the Semantic-UI-Ember component will detect the change and
+      update the Semantic-UI module automatically.
+    </p>
+
+    <h3 class="ui header">
+      Module Callbacks
+    </h3>
+
+    <p>
+      The last concept to understand is that any callback listed on Semantic-UI's module documentation can be tied into with an Ember action.
+      The base mixin will automatically detect that an action was passed through and that a callback exists for Semantic-UI and wire the two together.
+      For example, we could bind to the accordions opened callback and increment a counter.
+    </p>
+
+    {{#ui-annotation showing=true}}
+\{{#ui-accordion onOpen=(action 'timesOpened')}}
+  <div class="title">
+    Semantic UI
+  </div>
+  <div class="content">
+    Dynamic callbacks!
+  </div>
+\{{/ui-accordion}}
+    {{/ui-annotation}}
+
+    <p>
+      It's also possibly to mutate a value directly through a composable helper from the Semantic-UI callback.
+      This allows you to have simple value binding in your templates without having to create actions on a component or controller.
+      Let's use the rating module as an example.
+    </p>
+
+    {{#ui-annotation showing=true}}
+\{{ui-rating rating=internalRating onRate=(action (mut internalRating))}}
+    {{/ui-annotation}}
+
+    <p>
+      When hooking into a Semantic-UI callback, all of the parameters are passed through in the same order as Semantic UI would,
+      but there is one additional parameter at the end that is passed in you have access to.
+      The last parameter always passed in will be the component instance.
+      That way if you need access to the component or need to identify which component called the action, you have the ability to do that through the last parameter.
+    </p>
+
+    <p>
+      One last thing, a few of the Semantic-Ember-UI callbacks are modified slightly to accommodate data binding better.
+      These modified callbacks will be declared at the top of the Semantic-UI-Ember's documentation for the specific components if a change exists.
+    </p>
+
+  </div>
+
+  <h2 class="ui dividing header">
+    Bugs and Fixes
+  </h2>
+
+  <div class="no example">
+    <p>
+      If you've read through this code and believe you've found a bug, please let us know, but first run through these steps.
+
+      <ol>
+        <li>Try to replicate it with Semantic-UI only. If the bug is still occurring then please report it <a href="https://github.com/Semantic-Org/Semantic-UI/issues">to the main repository</a></li>
+        <li>Try to review the documentation on how each module should work within ember. Many issues opened have been because of a misunderstanding of how this library is meant to work</li>
+        <li>If you've done all of that and it still looks like a problem then put together an isolated replication of the it and <a href="https://github.com/Semantic-Org/Semantic-UI-Ember/issues">submit an issue</a></li>
+      </ol>
+    </p>
+
+    <p>
+      We plan on having the Semantic-UI-Ember documentation to show a basic example of what to do, but not show every Semantic-UI feature, property, or callback.
+      We want and encourage individuals to use Semantic-UI's documentation over ours. Semantic-UI-Ember's documentation should be a stepping stone to understanding how the interaction works,
+      and then the rest of the information should be found in the main Semantic-UI documentation.
+    </p>
+
+    <p>
+      If you would like to contribute to this project, please add a description to the pull request, the fix in the code, and a test to cover the fix.
+      <em>We won't except any pull requests that don't have those pieces.</em>
+    </p>
+
+    <p>
+      If you find documentation or examples that aren't correct, please submit a pull request with a description as to why it is incorrect and the fix.
+    </p>
+
+  </div>
+
+
+</div>

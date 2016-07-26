@@ -5,12 +5,12 @@ moduleForComponent('ui-sidebar', 'Integration | Component | ui sidebar', {
   integration: true
 });
 
-test('it renders', function(assert) {
+test('it renders as sub context', function(assert) {
   assert.expect(2);
 
   this.render(hbs`
     <div class="component context">
-      {{#ui-sidebar ui_context=".component.context"}}
+      {{#ui-sidebar context=".component.context"}}
         <a class="item">1</a>
         <a class="item">2</a>
         <a class="item">3</a>

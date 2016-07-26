@@ -1,0 +1,1312 @@
+/*******************************
+             Global
+ Many of the styles are copied from semantic-ui.com
+*******************************/
+
+
+/*--------------
+     Page
+---------------*/
+
+ul.list {
+  list-style-type: disc;
+}
+ul.list li {
+  list-style-position: outside;
+}
+
+p {
+  margin: 1em 0em;
+}
+p:first-child {
+  margin-top: 0em;
+}
+p:last-child {
+  margin-bottom: 0em;
+}
+
+
+/*--------------
+     Code
+---------------*/
+
+.hljs::selection,
+.hljs span::selection {
+  background: #cce2ff;
+}
+
+.hljs {
+  color: #737373;
+}
+
+/* Inline Code */
+/*pre {
+  white-space: pre-wrap;
+  white-space: -moz-pre-wrap;
+  white-space: -pre-wrap;
+  white-space: -o-pre-wrap;
+  word-wrap: break-word;
+}
+pre {
+  background-color: #FFFFFF;
+  text-align: left;
+}*/
+
+
+/*rtl:ignore*/
+/*pre.console {
+  background-color: transparent;
+  line-height: 1.6;
+  font-family:  'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'source-code-pro', monospace;
+  height: 300px;
+  overflow: auto;
+  direction:ltr;
+}
+code {
+  background-color: rgba(0, 0, 0, 0.08);
+  border-radius: 3px;
+  display: inline-block;
+  font-family: "Monaco","Menlo","Ubuntu Mono","Consolas","source-code-pro",monospace;
+  font-size: 0.875em;
+  font-weight: bold;
+  padding: 1px 6px;
+  vertical-align: baseline;
+}
+pre code {
+  border: none;
+  padding: 0px;
+  font-size: 1em;
+}
+
+blockquote {
+  border-left: 4px solid #777777;
+  font-size: 16px;
+  line-height: 1.5;
+  padding: 0em 2em;
+  margin: 1em 0em 2em;
+}
+blockquote p {
+  line-height: inherit;
+}
+blockquote .author {
+  display: block;
+  margin: 1em 0em 0em;
+  font-weight: bold;
+}*/
+
+/* Code Inside Message */
+/*.ui.message > p > code,
+.ui.message > code {
+  background-color: rgba(0, 0, 0, 0.06);
+  line-height: 1;
+  padding: 3px 4px;
+}
+*/
+
+/*--------------
+   Page Headers
+---------------*/
+
+#example .masthead.segment {
+  position: relative;
+  z-index: 1;
+  margin: 0em;
+  min-height: 185px;
+  padding: 3em 0em;
+  background-color: #FFFFFF;
+  border-bottom: 1px solid #DDDDDD;
+  box-shadow: none;
+}
+
+#example .masthead.segment.minimum {
+  min-height: 100px;
+}
+
+#example .masthead .introduction {
+  display: block;
+}
+#example .masthead .introduction:after {
+  content: ".";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+}
+
+#example .masthead.segment h1 {
+  margin: 0em;
+}
+
+#example .masthead iframe {
+  margin-left: 5px;
+  width: 101px !important;
+  float: right;
+}
+
+/* Align with buttons */
+#example .masthead .main.menu {
+  margin-top: -2px;
+  min-height: 0em;
+}
+#example .masthead .main.menu > .item {
+  padding-top: 0.785714em;
+  padding-bottom: 0.785714em;
+}
+
+
+/*--------------
+    Docs Icon
+---------------*/
+
+
+/* Replace Code Icon */
+@font-face {
+  font-family: 'Docs';
+  src:
+    url(data:application/x-font-ttf;charset=utf-8;base64,AAEAAAALAIAAAwAwT1MvMggi/LYAAAC8AAAAYGNtYXAaVcxXAAABHAAAAExnYXNwAAAAEAAAAWgAAAAIZ2x5Zl4DICgAAAFwAAAAeGhlYWQCOGXvAAAB6AAAADZoaGVhA6IB5gAAAiAAAAAkaG10eALAAAAAAAJEAAAAFGxvY2EAKABQAAACWAAAAAxtYXhwAAgAEAAAAmQAAAAgbmFtZVcZpu4AAAKEAAABRXBvc3QAAwAAAAADzAAAACAAAwIAAZAABQAAAUwBZgAAAEcBTAFmAAAA9QAZAIQAAAAAAAAAAAAAAAAAAAABEAAAAAAAAAAAAAAAAAAAAABAAADmAAHg/+D/4AHgACAAAAABAAAAAAAAAAAAAAAgAAAAAAACAAAAAwAAABQAAwABAAAAFAAEADgAAAAKAAgAAgACAAEAIOYA//3//wAAAAAAIOYA//3//wAB/+MaBAADAAEAAAAAAAAAAAAAAAEAAf//AA8AAQAAAAAAAAAAAAIAADc5AQAAAAABAAAAAAAAAAAAAgAANzkBAAAAAAEAAAAAAAAAAAACAAA3OQEAAAAAAgAAAEABwAGAAAYADQAAAQcXBxc3JyMHFzcnNycBMDBwcDCQkKCQkDBwcDABgDBwcDCgoKCgMHBwMAAAAQAAAAEAAH1wL6hfDzz1AAsCAAAAAADQrRK5AAAAANCtErkAAAAAAcABgAAAAAgAAgAAAAAAAAABAAAB4P/gAAACAAAAAAABwAABAAAAAAAAAAAAAAAAAAAABQAAAAAAAAAAAAAAAAEAAAABwAAAAAAAAAAKABQAHgA8AAEAAAAFAA4AAgAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAOAK4AAQAAAAAAAQAOAAAAAQAAAAAAAgAOAEcAAQAAAAAAAwAOACQAAQAAAAAABAAOAFUAAQAAAAAABQAWAA4AAQAAAAAABgAHADIAAQAAAAAACgA0AGMAAwABBAkAAQAOAAAAAwABBAkAAgAOAEcAAwABBAkAAwAOACQAAwABBAkABAAOAFUAAwABBAkABQAWAA4AAwABBAkABgAOADkAAwABBAkACgA0AGMAaQBjAG8AbQBvAG8AbgBWAGUAcgBzAGkAbwBuACAAMQAuADAAaQBjAG8AbQBvAG8Abmljb21vb24AaQBjAG8AbQBvAG8AbgBSAGUAZwB1AGwAYQByAGkAYwBvAG0AbwBvAG4ARgBvAG4AdAAgAGcAZQBuAGUAcgBhAHQAZQBkACAAYgB5ACAASQBjAG8ATQBvAG8AbgAuAAAAAAMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=) format('truetype'),
+    url(data:application/font-woff;charset=utf-8;base64,d09GRgABAAAAAAQ4AAsAAAAAA+wAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAABPUy8yAAABCAAAAGAAAABgCCL8tmNtYXAAAAFoAAAATAAAAEwaVcxXZ2FzcAAAAbQAAAAIAAAACAAAABBnbHlmAAABvAAAAHgAAAB4XgMgKGhlYWQAAAI0AAAANgAAADYCOGXvaGhlYQAAAmwAAAAkAAAAJAOiAeZobXR4AAACkAAAABQAAAAUAsAAAGxvY2EAAAKkAAAADAAAAAwAKABQbWF4cAAAArAAAAAgAAAAIAAIABBuYW1lAAAC0AAAAUUAAAFFVxmm7nBvc3QAAAQYAAAAIAAAACAAAwAAAAMCAAGQAAUAAAFMAWYAAABHAUwBZgAAAPUAGQCEAAAAAAAAAAAAAAAAAAAAARAAAAAAAAAAAAAAAAAAAAAAQAAA5gAB4P/g/+AB4AAgAAAAAQAAAAAAAAAAAAAAIAAAAAAAAgAAAAMAAAAUAAMAAQAAABQABAA4AAAACgAIAAIAAgABACDmAP/9//8AAAAAACDmAP/9//8AAf/jGgQAAwABAAAAAAAAAAAAAAABAAH//wAPAAEAAAAAAAAAAAACAAA3OQEAAAAAAQAAAAAAAAAAAAIAADc5AQAAAAABAAAAAAAAAAAAAgAANzkBAAAAAAIAAABAAcABgAAGAA0AAAEHFwcXNycjBxc3JzcnATAwcHAwkJCgkJAwcHAwAYAwcHAwoKCgoDBwcDAAAAEAAAABAAB9cC+oXw889QALAgAAAAAA0K0SuQAAAADQrRK5AAAAAAHAAYAAAAAIAAIAAAAAAAAAAQAAAeD/4AAAAgAAAAAAAcAAAQAAAAAAAAAAAAAAAAAAAAUAAAAAAAAAAAAAAAABAAAAAcAAAAAAAAAACgAUAB4APAABAAAABQAOAAIAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAADgCuAAEAAAAAAAEADgAAAAEAAAAAAAIADgBHAAEAAAAAAAMADgAkAAEAAAAAAAQADgBVAAEAAAAAAAUAFgAOAAEAAAAAAAYABwAyAAEAAAAAAAoANABjAAMAAQQJAAEADgAAAAMAAQQJAAIADgBHAAMAAQQJAAMADgAkAAMAAQQJAAQADgBVAAMAAQQJAAUAFgAOAAMAAQQJAAYADgA5AAMAAQQJAAoANABjAGkAYwBvAG0AbwBvAG4AVgBlAHIAcwBpAG8AbgAgADEALgAwAGkAYwBvAG0AbwBvAG5pY29tb29uAGkAYwBvAG0AbwBvAG4AUgBlAGcAdQBsAGEAcgBpAGMAbwBtAG8AbwBuAEYAbwBuAHQAIABnAGUAbgBlAHIAYQB0AGUAZAAgAGIAeQAgAEkAYwBvAE0AbwBvAG4ALgAAAAADAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA) format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.docs.code.icon:before {
+  font-family: 'Docs';
+  content: "\e600";
+  vertical-align: top;
+}
+
+
+/*--------------
+     Sidebar
+---------------*/
+
+#example .sidebar.menu .logo.image,
+#example .sticky.menu .logo.image {
+  width: 35px;
+  margin-right: 1em;
+}
+
+#example {
+  height: 100%;
+  width: 100%;
+}
+
+#example > .full.height {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  height: 100%;
+  width: 100%;
+}
+#example:not(.site) > .full.height {
+  background-color: #FFFFFF;
+}
+
+/* page layout */
+#example .full.height > .toc {
+  position: relative;
+  z-index: 1;
+  background-color: #1b1c1d;
+  width: 250px;
+  -webkit-box-flex: 0;
+  -webkit-flex: 0 0 auto;
+      -ms-flex: 0 0 auto;
+          flex: 0 0 auto;
+}
+#example .full.height > .toc .ui.menu {
+  border-radius: 0;
+  border-width: 0 1px 0 0;
+  box-shadow: none;
+  margin: 0;
+  width: inherit;
+  overflow: hidden;
+  will-change: transform;
+}
+#example .article {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1 1 auto;
+      -ms-flex: 1 1 auto;
+          flex: 1 1 auto;
+  min-width: 0px;
+}
+
+
+/*----------------
+   Basic Layout
+-----------------*/
+
+#example.basic .fixed.menu > .container,
+#example.basic .main.container,
+#example.basic .masthead > .container {
+  position: relative;
+  width: 700px !important;
+  left: 0px;
+  margin-right: 4em !important;
+}
+
+#example .main.container {
+  padding: 2em 0em 7em;
+}
+
+#example.basic .main.container > .rail,
+#example.basic .main.container > .tab > .rail {
+  display: none !important;
+}
+#example .main.container .introduction p,
+#example .main.container .tab > p,
+#example .main.container .example > p,
+#example .main.container > p {
+  font-size: 16px;
+  line-height: 1.5;
+  color: rgba(0, 0, 0, 0.8);
+}
+
+/* Link Styles */
+#example .main.container > p a,
+#example .main.container > .tab > p a,
+#example .main.container .example > .ignored a,
+#example .main.container .example > p a  {
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+  vertical-align: top;
+  z-index: 0;
+  -webkit-transition: color 0.2s;
+  transition: color 0.2s;
+  outline: none;
+}
+#example .main.container > p a > code,
+#example .main.container > .tab > p a > code,
+#example .main.container .example > .ignored a > code,
+#example .main.container .example > p a > code {
+  background-color: rgba(0, 50, 100, 0.08);
+}
+#example .main.container > p a:before,
+#example .main.container > .tab > p a:before,
+#example .main.container .example > .ignored a:before,
+#example .main.container .example > p a:before,
+#example .main.container .code .value a:before {
+  position: absolute;
+  top: auto;
+  bottom: 1px;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background-color: #4183C4;
+  content: '';
+  -webkit-transition: all 0.2s;
+  -webkit-backface-visibility: hidden;
+  transition: all 0.2s;
+  backface-visibility: hidden;
+  -webkit-transform: scaleX(0);
+  transform: scaleX(0);
+}
+
+/* Not on UI */
+#example .main.container .example > .ignored a.ui:before {
+  display: none;
+}
+
+/* Hover */
+#example .main.container > p a:hover > code,
+#example .main.container > .tab > p a:hover > code,
+#example .main.container .example > .ignored a:hover > code,
+#example .main.container .example > p a:hover > code {
+  background-color: rgba(0, 50, 100, 0.12);
+}
+#example .main.container > p a:hover:before,
+#example .main.container > p a:focus:before,
+#example .main.container > .tab > p a:hover:before,
+#example .main.container > .tab > p a:focus:before,
+#example .main.container .example > .ignored a:hover:before,
+#example .main.container .example > .ignored a:focus:before,
+#example .main.container .example > p a:hover:before,
+#example .main.container .example > p a:focus:before,
+#example .main.container .code .value a:hover:before  {
+  background-color: #2C76BF;
+  -webkit-transform: scaleX(1);
+  transform: scaleX(1);
+}
+
+#example .ui.ad {
+  max-width: 100%;
+}
+
+
+/*----------------
+   Code Samples
+-----------------*/
+
+#example .segment pre {
+  background-color: transparent;
+  margin: 0em;
+  padding: 0em;
+}
+#example .segment pre .code {
+  margin: 0em;
+  padding: 0em;
+  max-height: 610px;
+  font-weight: normal;
+  transform: rotateZ(0deg);
+  -ms-transform: none !important;
+  font-family:  'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'source-code-pro', monospace;
+}
+
+#example table .instructive.segment {
+  background-color: transparent;
+  border: 0px;
+  box-shadow: none;
+  padding: 0em;
+}
+
+#example .ui.label + .instructive.segment {
+  margin-top: 0em;
+}
+#example .instructive.segment:after {
+  display: none;
+}
+#example .existing.segment em,
+#example .instructive.segment em {
+  font-style: normal;
+  color: rgba(0, 0, 0, 0.4);
+}
+#example .existing.segment .title + em,
+#example .instructive.segment .title + em {
+  position: absolute;
+  right: 1em;
+}
+#example .label + .code {
+  margin-top: 1.5em;
+}
+
+
+/*----------------
+     Examples
+-----------------*/
+
+#example .example {
+  margin: 2em 0em;
+  padding: 2em 0em;
+  position: relative;
+  -webkit-tap-highlight-color: transparent;
+}
+#example .example > .ignored.message,
+#example .example > .ignore.message,
+#example .example > p {
+  /*max-width: 700px;*/
+}
+
+#example .example:last-child {
+  margin-bottom: none;
+}
+
+/* Header */
+#example .example > h4:first-child {
+  font-size: 18px;
+  margin: 0em 0em 0em;
+}
+
+/* Wireframe Image */
+#example .example .wireframe.image {
+  opacity: 0.5;
+}
+#example .example .accordion .content > .wireframe.image {
+  opacity: 0.5 !important;
+}
+#example .example :not(.images) > .wireframe.image {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+#example .example :not(.images) > .wireframe.image:first-child {
+  margin-top: 0em;
+}
+#example .example :not(.images) > .wireframe.image:last-child {
+  margin-bottom: 0em;
+}
+
+/* Description */
+#example .example .icon.code + p {
+  margin-top: 0;
+  padding-bottom: 1em;
+}
+#example .no.example .icon.code + p {
+  margin: 0em 0px 1em;
+  padding-bottom: 0em;
+}
+#example .example > p {
+  color: rgba(0, 0, 0, 0.8);
+}
+
+/* Message */
+#example .example .icon.code + p + .ignored.message:not(.attached),
+#example .example .icon.code + p + .ignored.message + .ignored.message:not(.attached) {
+  margin: 0em 0 2em;
+}
+
+#example .pushing.example .rail .sticky {
+  margin: 2em 0em;
+}
+
+#example .inline.example > .segment > .sticky.fixed {
+  background-color: #FFFFFF;
+}
+#example .inline.example > .segment > .sticky.fixed + * {
+  margin-top: 39px;
+}
+
+/* Another */
+#example .another.example {
+  margin-top: 0em;
+  padding-top: 2em;
+}
+
+/* Spaced */
+#example .spaced.example .buttons,
+#example .spaced.example .button {
+  margin-bottom: 0.75em;
+}
+#example .spaced.example .buttons .button {
+  margin-bottom: 0em;
+}
+#example .example .toggle.button {
+  min-width: 100px;
+}
+
+/* Examples Tab */
+#example .tab[data-tab*="examples"] .example > p,
+#example .examples.tab .example > p {
+  margin: 1em 0em;
+}
+#example .tab[data-tab*="examples"] .example .icon.code + p,
+#example .examples.tab .example .icon.code + p {
+  padding: 0em;
+}
+
+/* Intro Tab */
+#example .intro > h3.ui.header {
+  margin-top: 4em;
+}
+#example .intro .example .icon.code + p {
+  margin-top: 0.5em;
+}
+#example .intro .example > p {
+  color: rgba(0, 0, 0, 0.8);
+}
+
+
+#example .existing.segment:after,
+#example .instructive.segment:after {
+  display: none;
+}
+
+/*----------------
+  Example Types
+-----------------*/
+
+/* No Example */
+#example .no.example i.code {
+  display: none;
+}
+
+#example .fixed.example iframe {
+  border: none;
+  width: 100%;
+  height: 350px;
+}
+/* Stretched Example */
+
+#example .stretched.example .column img {
+  /* This is only necessary for IE which doesnt respect img intrinsic aspect ratios */
+  max-height: 225px;
+}
+
+#example .clear.dropdown .dropdown {
+  vertical-align: middle;
+}
+
+
+/* Requires Clear */
+#example .clearing.example {
+  overflow: hidden;
+  clear: both;
+  padding-left: 1px;
+  padding-right: 1px;
+  padding-bottom: 1px;
+}
+#example .piled.example {
+  position: relative;
+  z-index: 1;
+}
+#example .main.container:after {
+  content: '';
+  display: block;
+  height: 0px;
+  clear: both;
+  visibility: hidden;
+}
+#example .example-group {
+  position: relative;
+}
+#example .main.container > .tab {
+  position: relative;
+}
+
+#example .main.container .examples > h2,
+#example .main.container > h2,
+#example .main.container > .tab > h2{
+  position: relative;
+  margin: 3rem 0rem 1rem;
+}
+#example .main.container .examples > h3,
+#example .main.container > h3,
+#example .main.container > .tab > h3{
+  position: relative;
+  margin: 3rem 0rem 2rem;
+}
+#example .main.container .examples > .rail + h2,
+#example .main.container > .rail + h2,
+#example .main.container > .tab > .rail + h2,
+#example .main.container .examples > h2:first-child,
+#example .main.container > h2:first-child,
+#example .main.container > .tab > h2:first-child {
+  margin-top: 0em;
+}
+
+/* After Section Header */
+#example .example:first-child,
+#example h2 + .example,
+#example h3 + .example,
+#example h4 + .example {
+  margin-top: 0px;
+}
+#example .example:first-child i.code,
+#example h2 + .example i.code,
+#example h3 + .example i.code,
+#example h4 + .example i.code {
+  top: 0.75em;
+}
+#example .another.example i.code {
+  top: -0.5em;
+}
+
+/* Spaced */
+#example .spaced.example .buttons,
+#example .spaced.example .button {
+  margin-bottom: 0.75em;
+}
+#example .spaced.example .buttons .button {
+  margin-bottom: 0em;
+}
+#example .example .toggle.button {
+  min-width: 200px;
+}
+
+/* Code Language */
+#example .example .language.label {
+  margin: 1em 0em 0.75em;
+}
+
+
+/*--------------
+   Code Button
+---------------*/
+
+#example .example i.code {
+  cursor: pointer;
+  position: absolute;
+
+  top: 2rem;
+  right: 0rem;
+  margin: 0;
+  opacity: 0.5;
+
+  font-size: 20px;
+  color: #000000;
+
+  -webkit-transition: opacity 0.3s ease-out;
+  -moz-transition: opacity 0.3s ease-out;
+  -o-transition: opacity 0.3s ease-out;
+  -ms-transition: opacity 0.3s ease-out;
+  transition: opacity 0.3s ease-out;
+}
+
+#example .example i.code:before {
+  font-family: 'Docs';
+  content: "\e600";
+}
+#example .example:hover i.code {
+  opacity: 0.85;
+}
+#example .example:hover i.code:hover {
+  opacity: 1;
+}
+#example .example .grid i.code {
+  right: 25%;
+}
+
+#example .pointing.label + .existing.segment {
+  margin-top: 0em;
+}
+#example .existing.code {
+  display: none;
+}
+
+/* Code Annotation */
+#example .example .annotation {
+  margin: 0em;
+}
+#example .annotation pre code {
+  min-width: 500px;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+
+#example .transition.example .ui.button {
+  margin-bottom: 0.5em;
+}
+
+/* HTML Wrapper */
+#example .example > .html {
+  padding: 0em;
+  transition:
+    box-shadow 0.2s ease,
+    padding 0.2s ease
+  ;
+  box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0);
+}
+#example .example > .html .copy-btn {
+  visibility: hidden;
+}
+#example .example > .html .copy-btn i.icon {
+  visibility: visible;
+}
+#example .example > .html > .top.attached.label {
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+  display: none;
+  background-color: #F8F8F8;
+  box-shadow: 0px 0px 0px 1px #DDDDDD;
+}
+#example .example > .html > .top.attached.label .copy {
+  position: absolute;
+  top: 9px;
+  right: 8px;
+  color: #AAAAAA;
+}
+#example .example > .html > .top.attached.label .copy:hover {
+  color: #666666;
+}
+#example .example > .empty.html.segment {
+  padding: 1.15em 1em 1em;
+}
+#example .example > .html.segment:after {
+  content: '';
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+}
+#example .example > .html.segment > .attached.label {
+  display: block;
+}
+#example .example > .html.segment > .attached.label .copy {
+  float: right;
+}
+#example .example > .html.segment {
+  padding: 3.5em 1em 1em;
+}
+#example .example .instructive.segment {
+  margin-top: -1px;
+}
+
+/* Fixes for UI */
+#example .segment > .dimmer {
+  z-index: 800;
+}
+#example .code .active.ui.modal {
+  display: none !important;
+}
+#example .example .circular.segment {
+  width: 175px;
+  height: 175px;
+}
+
+
+/*******************************
+         Code Samples
+*******************************/
+
+
+/*code.code {
+  display: block;
+  overflow-x: auto;
+  padding: 0em;
+  color: #666;
+  background-color: transparent;
+  -webkit-text-size-adjust: none;
+}
+*/
+/*--------------
+   Hover Only
+---------------*/
+
+/*code.code,
+code.code span {
+  -moz-transition: 0.5s color ease;
+  -webkit-transition: 0.5s color ease;
+  -ms-transition: 0.5s color ease;
+  transition: 0.5s color ease;
+}
+code.code {
+  color: #333333;
+}
+
+code.code.xml {
+  color: #555555;
+}
+code.code.xml:hover {
+  color: #333333;
+}
+*/
+/* Class Name */
+/*code .string,
+code .tag .value,
+code .phpdoc,
+code .dartdoc,
+code .tex .formula {
+  color: #008C79;
+}
+code:hover .string,
+code:hover .tag .value,
+code:hover .phpdoc,
+code:hover .dartdoc,
+code:hover .tex .formula {
+  color: #007b6b;
+}*/
+
+/* Comment */
+/*code .comment,
+code .template_comment,
+code .diff .header,
+code .javadoc {
+  color: #AAAAAA;
+  font-style: italic;
+}*/
+
+
+/* Properties */
+/*code .tag,
+code .rules .property,
+code .django .tag .keyword {
+  color: #858188;
+  font-weight: normal;
+}
+
+code:hover .tag,
+code:hover .rules .property,
+code:hover .django .tag .keyword {
+  color: #892A6F;
+  font-weight: normal;
+}*/
+
+/* HTML Tag */
+/*code .tag .title {
+  color: #858188;
+  font-weight: normal;
+}
+code:hover .tag .title {
+  color: #892A6F;
+}*/
+
+/* Attribute */
+/*code .attribute,
+code .variable,
+code .lisp .body {
+  color: #8D8A8A;
+  transition: color 0.3s;
+}
+code:hover .attribute,
+code:hover .variable,
+code:hover .lisp .body {
+  color: #934E4E;
+}*/
+
+/* CSS ID */
+/*code .title,
+code .id,
+code .scss .preprocessor {
+  color: #9C989F;
+  font-weight: bold;
+}*/
+
+/* CSS Attribute */
+/*code .rule .attribute {
+  color: #892A6F;
+}
+code:hover .rule .attribute {
+  color: #892A6F;
+}*/
+
+/* CSS Value */
+/*code .number,
+code .hexcolor,
+code .ruby .constant {
+  color: #666666;
+}
+
+code:hover .number,
+code:hover .hexcolor,
+code:hover .ruby .constant {
+  color: #333333;
+}*/
+
+/* LESS */
+/*code.less .number,
+code.less .hexcolor,
+code.less .ruby .constant {
+  color: #005FAA;
+}
+code.less:hover .number,
+code.less:hover .hexcolor,
+code.less:hover .ruby .constant {
+  color: #005FAA;
+}*/
+/* LESS Variable */
+/*code.less .attribute,
+code.less .variable,
+code.less .lisp .body {
+  color: #333333;
+  transition: color 0.3s;
+}
+code.less:hover .attribute,
+code.less:hover .variable,
+code.less:hover .lisp .body {
+  color: #333333;
+}*/
+
+/* Emphasized Value */
+/*code.code .class {
+  color: #008C79;
+}
+code.code .class b {
+  font-weight: normal;
+  background-color: rgba(90, 90, 90, 0);
+  border-radius: 5px;
+  line-height: 1;
+  vertical-align: baseline;
+  display: inline-block;
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+  margin: 0px -4px;
+  padding: 1px 4px;
+}
+code.code .class b {
+  background-color: rgba(218, 189, 40, 0.15);
+  color: #9E6C00;
+}*/
+
+/*
+code.code:hover .class.string b,
+code.code:hover .class.value b {
+  background-color: rgba(218, 189, 40, 0.1);
+  color: inherit;
+}
+*/
+
+
+/* Linked UI */
+/*code .tag .value a {
+  position: relative;
+  border-radius: 5px;
+  line-height: 1;
+  color: inherit;
+  margin: 0px -2px;
+  padding: 1px 4px;
+  background-color: rgba(150, 150, 150, 0.1);
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+code .tag .value a b {
+  border-radius: 0px;
+}
+code .tag .value a:hover {
+  background-color: rgba(40, 150, 218, 0.2);
+  color: #00689E;
+}
+code .tag .value a:hover b {
+  background-color: transparent;
+  color: inherit;
+}*/
+
+
+
+/*--------------
+      Normal
+---------------*/
+
+/*code .keyword,
+code .css .rule .keyword,
+code .winutils,
+code .javascript .title,
+code .nginx .title,
+code .subst,
+code .request,
+code .status {
+  color: #333;
+  font-weight: bold;
+}
+
+code .javascript .title,
+code .list .keyword,
+code .subst {
+  font-weight: normal;
+}
+
+code .class .title,
+code .type,
+code .vhdl .literal,
+code .tex .command {
+  color: #458;
+  font-weight: bold;
+}
+
+
+code .regexp {
+  color: #009926;
+}
+
+code .built_in {
+  color: #0086b3;
+}
+
+code .preprocessor,
+code .pragma,
+code .pi,
+code .doctype,
+code .shebang,
+code .cdata {
+  color: #999;
+  font-weight: bold;
+}
+
+code .deletion {
+  background: #fdd;
+}
+
+code .addition {
+  background: #dfd;
+}
+
+code .diff .change {
+  background: #0086b3;
+}
+
+code .chunk {
+  color: #aaa;
+}*/
+
+#example .masthead > .container,
+#example .main.container,
+#example .fixed.menu > .container {
+  margin-left: 3em !important;
+  margin-right: 3em !important;
+  width: auto !important;
+  max-width: 960px !important;
+}
+
+/* Rail Default */
+#example .main.container > .right.rail,
+#example .main.container > .tab > .examples > .right.rail,
+#example .main.container > .tab > .right.rail {
+  margin-left: 3em;
+  padding-top: 2em;
+  width: 319px;
+}
+
+#example .masthead .advertisement {
+  margin-left: 3em;
+  padding: 0em 1.25em;
+  width: 342px;
+}
+
+/* Absolute Ad */
+#example .masthead .introduction {
+  display: block;
+}
+#example .masthead .advertisement {
+  position: absolute;
+  left: 100%;
+  bottom: -2px;
+}
+
+/* Remove Overview from pages with Examples */
+@media only screen and (max-width: 1500px) {
+
+  #example .fixed.column {
+    right: auto;
+    left: 100%;
+    margin-left: 4.5em;
+    width: 300px;
+  }
+  #example .fixed.column + .examples {
+    margin-right: 0px;
+  }
+  #example .fixed.column + .examples .right.rail {
+    display: none;
+  }
+
+}
+
+
+/* Table Ad */
+@media only screen and (max-width: 1272px) {
+
+  #example .masthead > .container {
+    margin-right: 2em !important;
+    max-width: none !important;
+  }
+  #example .masthead .introduction {
+    /*display: table-cell;
+    vertical-align: top;*/
+    width: 100%;
+  }
+  #example .masthead .advertisement {
+    position: static;
+    float: none;
+    display: table-cell;
+    vertical-align: bottom;
+    padding-left: 3em;
+    padding-right: 0em;
+  }
+}
+
+/* Squish Content (Just For Small Computers) */
+@media only screen and (max-width: 1272px) {
+
+  /* Resize Main Container */
+  #example .main.container {
+    /*margin-right: 318px !important;*/
+  }
+
+  /* Resize TOC  */
+  #example .full.height > .toc {
+    width: 200px;
+  }
+
+  /* Resize Rail */
+  #example .main.container > .right.rail,
+  #example .main.container > .tab > .examples > .right.rail,
+  #example .main.container > .tab > .right.rail {
+    padding-left: 1.5em;
+    width: 260px;
+  }
+
+  #example .fixed.column {
+    width: 250px;
+    margin-left: 2.5em;
+  }
+
+}
+
+/* Hide Top Bar */
+@media only screen and (min-width: 1145px) {
+  #example .fixed.main.menu {
+    display: none;
+  }
+}
+
+/* Remove Fixed Sidebar /  Show Top Bar */
+@media only screen and (max-width: 1144px) {
+
+  /* Hide Fixed Sidebar */
+  #example .full.height > .toc {
+    /*display: none;*/
+  }
+
+  /* Hide Fixed Launch Button */
+  #example .fixed.launch.button {
+    display: none !important;
+  }
+
+  /* Additional Padding for Fixed Menu */
+  #example .masthead.segment {
+    padding-top: 5em;
+  }
+
+  /* Hide GitHub Stars in Intro */
+  #example .masthead iframe {
+    display: none;
+  }
+
+  /* Less Left Padding */
+  #example .masthead > .container,
+  #example .main.container,
+  #example .fixed.menu > .container {
+    margin-left: 2em !important;
+  }
+
+  /* Padding Above Rail */
+  #example .main.container > .right.rail .sticky,
+  #example .main.container > .tab > .examples > .right.rail .sticky,
+  #example .main.container > .tab > .right.rail .sticky {
+    padding-top: 2.5em;
+  }
+
+  /* 100% Menu Width */
+  #example .fixed.menu > .container {
+    margin-left: 0em !important;
+    margin-right: 0em !important;
+    width: 100% !important;
+    max-width: none !important;
+  }
+
+  /* Remove Bug Reports */
+  #example .main.menu .bug.item {
+    display: none;
+  }
+
+  /* Hide Music *]/
+  #example .main.menu .music.item {
+    display: none;
+  }
+
+  /* Space For Header Over Examples */
+  #example .fixed.column .sticky {
+    padding-top: 2em;
+  }
+
+}
+
+/* Remove Rail */
+@media only screen and (max-width: 992px) {
+
+  /* Remove Rail */
+  #example .main.container > .right.rail,
+  #example .main.container > .tab > .examples > .right.rail,
+  #example .main.container > .tab > .right.rail {
+    display: none;
+  }
+
+  /* Fluid Containers */
+  #example .masthead > .container,
+  #example .main.container,
+  #example .fixed.menu > .container {
+    /*margin-left: 1em !important;
+    margin-right: 1em !important;*/
+    max-width: none !important;
+  }
+
+  /* Still 100% Fixed Menu */
+  #example .fixed.menu > .container {
+    margin-left: 0em !important;
+    margin-right: 0em !important;
+    width: 100% !important;
+    max-width: none !important;
+  }
+
+  /* Remove Padding on Ad */
+  #example .masthead .advertisement {
+    padding-right: 0em !important;
+  }
+
+
+}
+
+
+@media only screen and (max-width: 820px) {
+
+  /* Ad Takes Full Width */
+  #example .masthead .introduction {
+    display: block;
+  }
+  #example .masthead .advertisement {
+    display: block;
+    float: none;
+    margin: 2em 0em 0em;
+    padding-left: 0em;
+    width: auto;
+  }
+  #example .masthead .advertisement #carbonads > span {
+    position: relative;
+    display: block;
+    max-width: 300px;
+  }
+
+}
+
+@media only screen and (max-width: 768px) {
+
+  /* Hide Some Fixed Menu Content (Pagination, Search) */
+  #example .fixed.menu > .container > .section.item {
+    display: none;
+  }
+
+  /* Add Sticky Footers */
+  body.pushable > .pusher {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  }
+  body.pushable > .pusher > .full.height {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1 0 auto;
+      -ms-flex: 1 0 auto;
+          flex: 1 0 auto;
+  }
+
+  /* Let Buttons Vertically Stack */
+  #example .masthead .button {
+    margin-bottom: 0.75em;
+  }
+
+  #example .masthead .main.menu {
+    display: none;
+  }
+  #example .masthead .main.menu + .main.menu {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+  }
+
+  /* No Download Button */
+  #example .masthead .download.button {
+    display: none;
+  }
+
+  /* Hide Sitemap */
+  #example .pusher > .footer .grid .three.column {
+    display: none !important;
+  }
+}
+
+/* Small Phone */
+@media only screen and (max-width: 500px) {
+
+  /* Stack Advert */
+  #example .masthead .advertisement #carbonads > span {
+    max-width: none;
+  }
+  #example .advertisement .carbon-wrap {
+  -webkit-flex-direction: column-reverse;
+      -ms-flex-direction: column-reverse;
+          flex-direction: column-reverse;
+
+    text-align: center;
+    align-items: center;
+  }
+  #example .carbon-poweredby {
+    display: none;
+  }
+
+}

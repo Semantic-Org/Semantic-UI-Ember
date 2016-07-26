@@ -1,71 +1,111 @@
-<h2 id='title'>Checkbox</h2>
+<div class="ui masthead vertical segment">
+  <div class="ui container">
+    <div class="introduction">
 
-<div class="ui form">
-  <div class="field">
-    {{ui-checkbox label="Make my profile visible (checked binding)" checked=checked}}
-    - {{if checked "Checked" "Not Checked"}}
-  </div>
+      <h1 class="ui header">
+        Checkbox
 
-  <div class="field">
-    {{ui-checkbox label="Make my profile visible (pre checked binding)" checked=pre_checked}}
-    - {{if pre_checked "Checked" "Not Checked"}}
-  </div>
+        <div class="sub header">
+          A checkbox allows a user to toggle a binary value
+        </div>
+      </h1>
 
-  <div class="field">
-    {{ui-checkbox label="Make my profile visible (onChange action)" checked=action_checked onChange=(action 'set_checked')}}
-    - {{if action_checked "Checked" "Not Checked"}}
-  </div>
+      <div class="ui hidden divider"></div>
 
-  <div class="field">
-    {{ui-checkbox label="Disabled checkbox (checked binding)" checked=disabled_checked disable=true}}
-    - {{if disabled_checked "Checked" "Not Checked"}}
-  </div>
-</div>
+      <p>
+        For additional documentation on how to configure this module, please refer to the <a href="/">Getting Started</a> section and Semantic UI's module specific external documentation links below.
+      </p>
 
-<h4 class="ui header">
-  Radio Box
-  <div class="sub header">A checkbox can be formatted as a radio element. This means it is an exclusive option.</div>
-</h4>
+      <div class="ui four item stackable tabs menu">
+        <a class="item" href="http://semantic-ui.com/modules/checkbox.html" target="_blank">Definition</a>
+        <a class="item" href="http://semantic-ui.com/modules/checkbox.html#/examples" target="_blank">Examples</a>
+        <a class="item" href="http://semantic-ui.com/modules/checkbox.html#/usage" target="_blank">Usage</a>
+        <a class="item" href="http://semantic-ui.com/modules/checkbox.html#/settings" target="_blank">Settings</a>
+      </div>
 
-<div class="ui form">
-  <div class="grouped inline fields">
-    <div class="field">
-      {{ui-radio name="fruit" label="Once a week" value="once-a-week" current=fruit}}
     </div>
-    <div class="field">
-      {{ui-radio name="fruit" label="2-3 times a week" value="few-times-a-week" current=fruit}}
-    </div>
-    <div class="field">
-      {{ui-radio name="fruit" label="Once a day" value="once-a-day" current=fruit}}
-    </div>
+
   </div>
 </div>
 
-<div class="ui label">
-  Current fruit - {{fruit}}
-</div>
+<div class="ui main container">
 
-<h4 class="ui header">
-  Radio Box (Pre-selected)
-</h4>
-
-<div class="ui form">
-  <div class="grouped inline fields">
-    <div class="field">
-      {{ui-radio name="color" label="Red" value="red" current=color}}
-    </div>
-    <div class="field">
-      {{ui-radio name="color" label="Yellow" value="yellow" current=color}}
-    </div>
-    <div class="field">
-      {{ui-radio name="color" label="Blue" value="blue" current=color}}
-    </div>
-    <div class="field">
-      {{ui-radio name="color" label="Disabled" value="disabled" current=color disable=true}}
-    </div>
+  <div class="ui yellow message">
+    There are API module differences for checkbox.
   </div>
-</div>
 
-<div class="ui label">
-  Current Color - {{color}}
+  {{#ui-annotation showing=true type="javascript"}}
+Original: onChange()
+Modified: onChange(checked [Boolean])
+
+// Description:
+//  The onChange event has been modify to include a checked boolean so that properties
+//  can be mutated directly on the event instead of having to wire up both onChecked
+//  and onUnchecked to mutate the checked variable
+  {{/ui-annotation}}
+
+  <div class="ui divider"></div>
+
+  {{#ui-example
+    header="Simple Example"
+    subHeader="Basic Checkbox"
+    as |showing setCopyCode|}}
+
+    {{#ui-html showing=showing}}
+      {{ui-checkbox label="Click Me" checked=checked onChange=(action (mut checked))}}
+      - {{if checked "Checked" "Not Checked"}}
+    {{/ui-html}}
+
+    {{#ui-annotation showing=showing setCopyCode=setCopyCode}}
+\{{ui-checkbox label="Click Me" checked=checked onChange=(action (mut checked))}}
+    {{/ui-annotation}}
+
+  {{/ui-example}}
+
+  {{#ui-example
+    header="Simple Example Prechecked"
+    subHeader="Variable is already true"
+    as |showing setCopyCode|}}
+
+    {{#ui-html showing=showing}}
+      {{ui-checkbox class="toggle" label="I start checked!" checked=pre_checked onChange=(action (mut pre_checked))}}
+      - {{if pre_checked "Checked" "Not Checked"}}
+    {{/ui-html}}
+
+    {{#ui-annotation showing=showing setCopyCode=setCopyCode}}
+\{{ui-checkbox class="toggle" label="I start checked!" checked=pre_checked onChange=(action (mut pre_checked))}}
+    {{/ui-annotation}}
+
+  {{/ui-example}}
+
+  {{#ui-example
+    header="Disabled Checkbox"
+    as |showing setCopyCode|}}
+
+    {{#ui-html showing=showing}}
+      {{ui-checkbox label="Disabled checkbox (checked binding)" checked=disabled_checked disabled=true onChange=(action (mut disabled_checked))}}
+      - {{if disabled_checked "Checked" "Not Checked"}}
+    {{/ui-html}}
+
+    {{#ui-annotation showing=showing setCopyCode=setCopyCode}}
+\{{ui-checkbox label="Disabled checkbox (checked binding)" checked=disabled_checked disabled=true onChange=(action (mut disabled_checked))}}
+    {{/ui-annotation}}
+
+  {{/ui-example}}
+
+  {{#ui-example
+    header="Read-only Checkbox"
+    as |showing setCopyCode|}}
+
+    {{#ui-html showing=showing}}
+      {{ui-checkbox label="Readonly checkbox (checked binding)" checked=readonly_checked readonly=true onChange=(action (mut readonly_checked))}}
+      - {{if readonly_checked "Checked" "Not Checked"}}
+    {{/ui-html}}
+
+    {{#ui-annotation showing=showing setCopyCode=setCopyCode}}
+\{{ui-checkbox label="Readonly checkbox (checked binding)" checked=readonly_checked readonly=true onChange=(action (mut readonly_checked))}}
+    {{/ui-annotation}}
+
+  {{/ui-example}}
+
 </div>

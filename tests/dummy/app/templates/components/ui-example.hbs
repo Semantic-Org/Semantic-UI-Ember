@@ -1,0 +1,13 @@
+<div class="{{unless header "another"}} standard example">
+  {{#if header}}
+    <h4 class="ui header">
+      {{header}}
+    </h4>
+  {{/if}}
+  <i class="icon code" {{action "toggle" "showing"}}></i>
+  {{#if subHeader}}
+    <p>{{subHeader}}</p>
+  {{/if}}
+
+  {{yield showing (action 'setCopyCode')}}
+</div>

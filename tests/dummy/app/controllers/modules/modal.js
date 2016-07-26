@@ -7,13 +7,13 @@ export default Ember.Controller.extend({
       $('.ui.' + name + '.modal').modal('show');
     },
 
-    approveModal: function(name) {
-      alert('approve ' + name);
+    approveModal: function(element, component) {
+      alert('approve ' + component.get('name'));
       return false;
     },
 
-    denyModal: function(name) {
-      alert('deny ' + name);
+    denyModal: function(element, component) {
+      alert('deny ' + component.get('name'));
       return true;
     }
   }

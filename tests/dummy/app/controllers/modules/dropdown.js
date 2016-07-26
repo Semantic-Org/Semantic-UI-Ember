@@ -7,6 +7,18 @@ export default Ember.Controller.extend({
     'Bedroom'
   ],
 
+  types: [
+    2,
+    3,
+    true,
+    false,
+    3.3,
+    5.5,
+    "string"
+  ],
+
+  selected_type: 5.5,
+
   gender: 0,
   genders: Ember.A([
     { id: 1, text: 'Male' },
@@ -14,24 +26,16 @@ export default Ember.Controller.extend({
   ]),
 
   country: null,
+  country2: null,
   countries: [
     { iso2: 'us', name: 'United States' },
     { iso2: 'ca', name: 'Canada' },
     { iso2: 'mx', name: 'Mexico' }
   ],
 
-  initialize: Ember.on('init', function() {
+  init() {
+    this._super(...arguments);
     this.set('gender2', this.get('genders.firstObject'));
-  }),
-
-  actions: {
-    set_active: function() {
-      this.set('dropdown_active', true);
-    },
-
-    update_gender: function(component, id /*, value*/) {
-      this.set('gender', id);
-      return true;
-    }
+    this.set('country2', Ember.A([]).pushObjects(this.get('countries')));
   }
 });
