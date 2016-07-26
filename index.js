@@ -8,13 +8,13 @@ var defaults = {
   images: true
 };
 
-var getWithDefault = function(property, default_property) {
+const getWithDefault = function(property, default_property) {
   if (property === null || property === undefined) {
     return default_property;
   }
 
   return property;
-}
+};
 
 module.exports = {
   name: 'semantic-ui-ember',

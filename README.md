@@ -27,6 +27,6 @@ ember generate semantic-ui-ember
 
 ## Documenation
 
-Detailed documentation on using Semantic-UI-Ember can be found [here](http://Semantic-Org.github.io/Semantic-UI-Ember).
+### [Detailed documentation on using Semantic-UI-Ember](http://Semantic-Org.github.io/Semantic-UI-Ember).
 
 ### [Changelog](CHANGELOG.md)
