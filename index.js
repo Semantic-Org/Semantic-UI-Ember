@@ -8,7 +8,7 @@ var defaults = {
   images: true
 };
 
-const getWithDefault = function(property, default_property) {
+var getWithDefault = function(property, default_property) {
   if (property === null || property === undefined) {
     return default_property;
   }
