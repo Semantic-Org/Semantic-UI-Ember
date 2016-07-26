@@ -16,7 +16,7 @@ Install this add-on through Ember CLI. We support Ember versions 1.13 latest - 2
 
 
 ```
-ember install semantic-ui-ember
+ember install semantic-ui-ember@beta
 ```
 
 Run the library's blueprint to pull in its Bower dependencies. This only needs to be done once.
