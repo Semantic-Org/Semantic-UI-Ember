@@ -35,9 +35,9 @@ Semantic.BaseMixin = Ember.Mixin.create({
 
     for (let key in this.get('attrs')) {
       // If it has a settable and gettable attribute, then its bindable
-      if (settableProperties.contains(key) && gettableProperties.contains(key)) {
+      if (settableProperties.includes(key) && gettableProperties.includes(key)) {
         this.get('_bindableAttrs').addObject(key);
-      } else if (settableProperties.contains(key)) {
+      } else if (settableProperties.includes(key)) {
         // otherwise, its settable only
         this.get('_settableAttrs').addObject(key);
       }
@@ -191,7 +191,7 @@ Semantic.BaseMixin = Ember.Mixin.create({
       let value = this._getAttrValue(key);
 
       if (!moduleGlobal.settings.hasOwnProperty(key)) {
-        if (!this.get('_ignorableAttrs').contains(key) && !this.get('_ignorableAttrs').contains(Ember.String.camelize(key))) {
+        if (!this.get('_ignorableAttrs').includes(key) && !this.get('_ignorableAttrs').includes(Ember.String.camelize(key))) {
           // TODO: Add better ember keys here
           Ember.Logger.debug(`You passed in the property '${key}', but a setting doesn't exist on the Semantic UI module: ${moduleName}`);
         }
@@ -248,7 +248,7 @@ Semantic.BaseMixin = Ember.Mixin.create({
   },
 
   _swapAttrs(attrName) {
-    if (this.get('_settableAttrs').contains(attrName)) {
+    if (this.get('_settableAttrs').includes(attrName)) {
       this.get('_settableAttrs').removeObject(attrName);
       this.get('_bindableAttrs').addObject(attrName);
     }
