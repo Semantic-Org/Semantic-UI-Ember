@@ -1,6 +1,6 @@
 import Ember from 'ember';
 import Base from '../mixins/base';
-import PromiseResolver from '../mixins/promise-resolver';
+import PromiseResolver from 'ember-promise-tools/mixins/promise-resolver';
 
 const _proxyCallback = function(callbackName) {
   return function(value, text, $element) {

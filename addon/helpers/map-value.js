@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import PromiseResolver from '../mixins/promise-resolver';
+import PromiseResolver from 'ember-promise-tools/mixins/promise-resolver';
 
 export default Ember.Helper.extend(PromiseResolver, {
   compute([action, maybePromise]) {
