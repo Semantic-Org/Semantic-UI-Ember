@@ -139,16 +139,23 @@ module.exports = {
       }
     },
     {
+      name: 'ember-alpha',
+      allowedToFail: true,
+      bower: {
+        dependencies: {
+          "ember": "alpha",
+          "ember-data": "components/ember-data#release",
+        },
+        resolutions: {
+          "ember": "alpha"
+        }
+      }
+    },
+    {
       "name": "semantic-2.1.8",
       "bower": {
         "dependencies": {
-          "ember": "components/ember#release",
-          "ember-data": "components/ember-data#release",
           "semantic-ui": "2.1.8"
-        },
-        "resolutions": {
-          "ember": "release",
-          "ember-data": "release"
         }
       }
     },
@@ -156,13 +163,7 @@ module.exports = {
       "name": "semantic-2.2.2",
       "bower": {
         "dependencies": {
-          "ember": "components/ember#release",
-          "ember-data": "components/ember-data#release",
           "semantic-ui": "2.2.2"
-        },
-        "resolutions": {
-          "ember": "release",
-          "ember-data": "release"
         }
       }
     },
@@ -170,13 +171,7 @@ module.exports = {
       "name": "semantic-latest",
       "bower": {
         "dependencies": {
-          "ember": "components/ember#release",
-          "ember-data": "components/ember-data#release",
           "semantic-ui": "latest"
-        },
-        "resolutions": {
-          "ember": "release",
-          "ember-data": "release"
         }
       }
     }
