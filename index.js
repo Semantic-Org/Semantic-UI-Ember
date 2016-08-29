@@ -34,8 +34,6 @@ module.exports = {
         development: 'bower_components/semantic-ui/dist/semantic.js',
         production: 'bower_components/semantic-ui/dist/semantic.min.js'
       });
-    } else {
-
     }
 
     if (getWithDefault(options['images'], defaults['images'])) {
