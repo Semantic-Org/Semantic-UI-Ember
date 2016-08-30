@@ -2,51 +2,57 @@
 'use strict';
 
 var defaults = {
-  css: true,
-  javascript: true,
-  fonts: true,
-  images: true
-};
-
-var getWithDefault = function(property, default_property) {
-  if (property === null || property === undefined) {
-    return default_property;
+  imports: {
+    css: true,
+    javascript: true,
+    fonts: true,
+    images: true,
+  },
+  paths: {
+    theme: 'default',
+    source: 'bower_components/semantic-ui/dist',
   }
-
-  return property;
 };
+
+var generation = require('./utils/generation');
 
 module.exports = {
   name: 'semantic-ui-ember',
 
   included: function (app) {
     var options = (app && app.options['SemanticUI']) || {};
+    var path = generation.default('paths', 'source', [options, defaults]);
+    var theme = generation.default('paths', 'theme', [options, defaults]);
+    var css = generation.default('imports', 'css', [options, defaults]);
+    var javascript = generation.default('imports', 'javascript', [options, defaults]);
+    var fonts = generation.default('imports', 'fonts', [options, defaults]);
+    var images = generation.default('imports', 'images', [options, defaults]);
 
-    if (getWithDefault(options['css'], defaults['css'])) {
+    if (css) {
       app.import({
-        development: 'bower_components/semantic-ui/dist/semantic.css',
-        production: 'bower_components/semantic-ui/dist/semantic.min.css'
+        development: generation.format(path, 'semantic.css'),
+        production: generation.format(path, 'semantic.min.css')
       });
     }
 
-    if (getWithDefault(options['javascript'], defaults['javascript'])) {
+    if (javascript) {
       app.import({
-        development: 'bower_components/semantic-ui/dist/semantic.js',
-        production: 'bower_components/semantic-ui/dist/semantic.min.js'
+        development: generation.format(path, 'semantic.js'),
+        production: generation.format(path, 'semantic.min.js')
       });
     }
 
-    if (getWithDefault(options['images'], defaults['images'])) {
-      var imageOptions = { destDir: 'assets/themes/default/assets/images' };
-      app.import('bower_components/semantic-ui/dist/themes/default/assets/images/flags.png', imageOptions);
+    if (images) {
+      var imageOptions = { destDir: generation.format(path, theme, 'assets/images')};
+      app.import(generation.format(path, 'themes', theme, 'assets/images/flags.png'), imageOptions);
     }
 
-    if (getWithDefault(options['fonts'], defaults['fonts'])) {
+    if (fonts) {
       var fontExtensions = ['.eot','.otf','.svg','.ttf','.woff','.woff2'];
-      var fontOptions = { destDir: 'assets/themes/default/assets/fonts' };
+      var fontOptions = { destDir: 'assets/fonts' };
       for (var i = fontExtensions.length - 1; i >= 0; i--) {
-        app.import('bower_components/semantic-ui/dist/themes/default/assets/fonts/icons'+fontExtensions[i], fontOptions);
-      };
+        app.import(generation.format(path, 'themes', theme, 'assets/fonts/icons')+fontExtensions[i], fontOptions);
+      }
     }
   }
 };
