@@ -64,7 +64,8 @@
   ],
   "dependencies": {
     "ember-cli-babel": "^5.1.6",
-    "ember-promise-tools": "1.0.0"
+    "ember-promise-tools": "1.0.0",
+    "ember-runtime-enumerable-includes-polyfill": "^1.0.1"
   },
   "ember-addon": {
     "configPath": "tests/dummy/config",
