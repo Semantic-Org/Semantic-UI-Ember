@@ -20,6 +20,7 @@ var defaults = function() {
     paths: {
       'source': 'bower_components/semantic-ui/dist',
       'theme': 'default',
+      'fonts': 'assets/fonts',
     }
   };
 };
@@ -38,6 +39,11 @@ test('use the user option path of the theme if in the options', function (t) {
   t.equal(generate.default('paths', 'theme', [{'paths': {'theme': ''}}, defaults()]), '');
   t.equal(generate.default('paths', 'theme', [{'paths': {'theme': null}}, defaults()]), null);
   t.equal(generate.default('paths', 'theme', [{'paths': {}}, defaults()]), 'default');
+});
+
+test('can change the font destination directory', function (t) {
+  t.plan(1);
+  t.equal(generate.default('paths', 'fonts', [{'paths': {'fonts': 'assets/themes/material/assets/fonts/'}}, defaults()]), 'assets/themes/material/assets/fonts/');
 });
 
 test('use new default location of imports', function (t) {

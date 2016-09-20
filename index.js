@@ -11,6 +11,7 @@ var defaults = {
   paths: {
     theme: 'default',
     source: 'bower_components/semantic-ui/dist',
+    fonts: 'assets/fonts',
   }
 };
 
@@ -49,7 +50,8 @@ module.exports = {
 
     if (fonts) {
       var fontExtensions = ['.eot','.otf','.svg','.ttf','.woff','.woff2'];
-      var fontOptions = { destDir: 'assets/fonts' };
+      var fontDestinationDir = generation.default('paths', 'fonts', [options, defaults]);
+      var fontOptions = { destDir: fontDestinationDir };
       for (var i = fontExtensions.length - 1; i >= 0; i--) {
         app.import(generation.format(path, 'themes', theme, 'assets/fonts/icons')+fontExtensions[i], fontOptions);
       }
