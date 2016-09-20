@@ -3,7 +3,7 @@
 
 function isObject(obj) {
     if (obj === null) { return false; }
-    return Object.keys(obj).length === 0 && obj.constructor === Object;
+    return Object.keys(obj).length >= 0 && obj.constructor === Object;
 }
 
 function isObjectWithKeys(obj) {

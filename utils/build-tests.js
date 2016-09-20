@@ -50,6 +50,11 @@ test('use new location of imports', function (t) {
   t.equal(generate.default('imports', 'fonts', [{'imports': {'fonts': false}}, defaults()]), false);
 });
 
+test('use new location of imports if undefined in user options', function (t) {
+  t.plan(1);
+  t.equal(generate.default('imports', 'javascript', [{'imports': {'fonts': false}}, defaults()]), true);
+});
+
 test('use old default location of imports', function (t) {
   t.plan(1);
   t.equal(generate.default('imports', 'fonts', [oldDefaults, defaults()]), false);
