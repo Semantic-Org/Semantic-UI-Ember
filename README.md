@@ -25,7 +25,7 @@ Run the library's blueprint to pull in its Bower dependencies. This only needs t
 ember generate semantic-ui-ember
 ```
 
-## Documenation
+## Documentation
 
 ### [Detailed documentation on using Semantic-UI-Ember](http://Semantic-Org.github.io/Semantic-UI-Ember).
 
