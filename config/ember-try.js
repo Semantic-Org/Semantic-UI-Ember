@@ -104,7 +104,8 @@ module.exports = {
       "bower": {
         "dependencies": {
           "ember": "components/ember#release",
-          "ember-data": "components/ember-data#release"
+          "ember-data": "components/ember-data#release",
+          "jquery": "<3"
         },
         "resolutions": {
           "ember": "release",
