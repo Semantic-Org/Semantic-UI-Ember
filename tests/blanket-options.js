@@ -8,7 +8,7 @@ var options = {
   enableCoverage: true,
   cliOptions: {
     reporters: ['lcov'],
-    autostart: true
+    autostart: false
   }
 };
 if (typeof exports === 'undefined') {

@@ -191,7 +191,7 @@ blockquote .author {
   width: 100%;
 }
 
-#example > .full.height {
+#example .full.height {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -202,7 +202,7 @@ blockquote .author {
   height: 100%;
   width: 100%;
 }
-#example:not(.site) > .full.height {
+#example:not(.site) .full.height {
   background-color: #FFFFFF;
 }
 
