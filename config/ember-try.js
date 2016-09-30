@@ -100,6 +100,24 @@ module.exports = {
       }
     },
     {
+      "name": "ember-2.7",
+      "bower": {
+        "dependencies": {
+          "ember": "~2.7.0",
+          "ember-data": "~2.7.0"
+        }
+      }
+    },
+    {
+      "name": "ember-2.8",
+      "bower": {
+        "dependencies": {
+          "ember": "~2.8.0",
+          "ember-data": "~2.8.0"
+        }
+      }
+    },
+    {
       "name": "ember-release",
       "bower": {
         "dependencies": {
@@ -165,6 +183,22 @@ module.exports = {
       "bower": {
         "dependencies": {
           "semantic-ui": "2.2.2"
+        }
+      }
+    },
+    {
+      "name": "semantic-2.2.3",
+      "bower": {
+        "dependencies": {
+          "semantic-ui": "2.2.3"
+        }
+      }
+    },
+    {
+      "name": "semantic-2.2.4",
+      "bower": {
+        "dependencies": {
+          "semantic-ui": "2.2.4"
         }
       }
     },
