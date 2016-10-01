@@ -199,7 +199,7 @@ Semantic.BaseMixin = Ember.Mixin.create({
       if (!moduleGlobal.settings.hasOwnProperty(key)) {
         if (!this.get('_ignorableAttrs').includes(key) && !this.get('_ignorableAttrs').includes(Ember.String.camelize(key))) {
           // TODO: Add better ember keys here
-          Ember.Logger.debug(`You passed in the property '${key}', but a setting doesn't exist on the Semantic UI module: ${moduleName}`);
+          // Ember.Logger.debug(`You passed in the property '${key}', but a setting doesn't exist on the Semantic UI module: ${moduleName}`);
         }
         continue;
       }
