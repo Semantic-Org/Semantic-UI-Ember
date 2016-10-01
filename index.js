@@ -1,59 +1,67 @@
 /* jshint node: true */
 'use strict';
 
+var path = require('path');
+
 var defaults = {
-  imports: {
+  import: {
     css: true,
     javascript: true,
-    fonts: true,
     images: true,
+    fonts: true
   },
-  paths: {
-    theme: 'default',
-    source: 'bower_components/semantic-ui/dist',
-    fonts: 'assets/fonts',
+  source: {
+    css: 'bower_components/semantic-ui/dist',
+    javascript: 'bower_components/semantic-ui/dist',
+    images: 'bower_components/semantic-ui/dist/themes/default/assets/images',
+    fonts: 'bower_components/semantic-ui/dist/themes/default/assets/fonts'
+  },
+  destination: {
+    images: 'assets/themes/default/assets/images',
+    fonts: 'assets/themes/default/assets/fonts'
   }
 };
 
-var generation = require('./utils/generation');
+var getDefault = require('./lib/utils/get-default');
 
 module.exports = {
   name: 'semantic-ui-ember',
 
   included: function (app) {
     var options = (app && app.options['SemanticUI']) || {};
-    var path = generation.default('paths', 'source', [options, defaults]);
-    var theme = generation.default('paths', 'theme', [options, defaults]);
-    var css = generation.default('imports', 'css', [options, defaults]);
-    var javascript = generation.default('imports', 'javascript', [options, defaults]);
-    var fonts = generation.default('imports', 'fonts', [options, defaults]);
-    var images = generation.default('imports', 'images', [options, defaults]);
 
-    if (css) {
+    var importCss = getDefault('import', 'css', [options, defaults]);
+    if (importCss) {
+      var sourceCss = getDefault('source', 'css', [options, defaults]);
       app.import({
-        development: generation.format(path, 'semantic.css'),
-        production: generation.format(path, 'semantic.min.css')
+        development: path.join(sourceCss, 'semantic.css'),
+        production: path.join(sourceCss, 'semantic.min.css')
       });
     }
 
-    if (javascript) {
+    var importJavascript = getDefault('import', 'javascript', [options, defaults]);
+    if (importJavascript) {
+      var sourceJavascript = getDefault('source', 'javascript', [options, defaults]);
       app.import({
-        development: generation.format(path, 'semantic.js'),
-        production: generation.format(path, 'semantic.min.js')
+        development: path.join(sourceJavascript, 'semantic.js'),
+        production: path.join(sourceJavascript, 'semantic.min.js')
       });
     }
 
-    if (images) {
-      var imageOptions = { destDir: generation.format(path, theme, 'assets/images')};
-      app.import(generation.format(path, 'themes', theme, 'assets/images/flags.png'), imageOptions);
+    var importImages = getDefault('import', 'images', [options, defaults]);
+    if (importImages) {
+      var sourceImage = getDefault('source', 'images', [options, defaults]);
+      var imageOptions = { destDir: getDefault('destination', 'images', [options, defaults]) };
+      app.import(path.join(sourceImage, 'flags.png'), imageOptions);
     }
 
-    if (fonts) {
+    var importFonts = getDefault('import', 'fonts', [options, defaults]);
+    if (importFonts) {
       var fontExtensions = ['.eot','.otf','.svg','.ttf','.woff','.woff2'];
-      var fontDestinationDir = generation.default('paths', 'fonts', [options, defaults]);
-      var fontOptions = { destDir: fontDestinationDir };
+      var sourceFont = getDefault('source', 'fonts', [options, defaults]);
+      var fontOptions = { destDir: getDefault('destination', 'fonts', [options, defaults]) };
       for (var i = fontExtensions.length - 1; i >= 0; i--) {
-        app.import(generation.format(path, 'themes', theme, 'assets/fonts/icons')+fontExtensions[i], fontOptions);
+        app.import(path.join(sourceFont, 'icons' + fontExtensions[i]), fontOptions);
       }
     }
   }

@@ -7,11 +7,6 @@ module.exports = function(defaults) {
     // Add options here
     babel: {
       includePolyfill: false
-    },
-    SemanticUI: {
-      paths: {
-        fonts: 'assets/themes/default/assets/fonts',
-      }
     }
   });
 
