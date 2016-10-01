@@ -14,7 +14,7 @@ var CheckboxMixin = Ember.Mixin.create(Base, {
       // Checkbox and radio both have an implementation for this
       settings.onChange = this.get('_onChange');
     }
-    if (this.get('readonly') != null) {
+    if (this.attrs.hasOwnProperty('readonly') || this.get('readonly') != null) {
       this.$().toggleClass('read-only', this.get('readonly'));
     }
   },

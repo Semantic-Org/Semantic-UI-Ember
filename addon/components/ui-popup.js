@@ -6,7 +6,14 @@ export default Ember.Component.extend(Base, {
 
   didInitSemantic() {
     this._super(...arguments);
-    this.get('_settableAttrs').addObjects(['content', 'title', 'html']);
+    let possibleAttrs = ['content', 'title', 'html'];
+    for (let i = 0; i < possibleAttrs.length; i++) {
+      let possibleAttr = possibleAttrs[i];
+      if (this.attrs.hasOwnProperty(possibleAttr) || this.get(possibleAttr) != null) {
+        this.get('_settableAttrs').addObject(possibleAttr);
+      }
+    }
+    this.get('_settableAttrs').removeObject('position');
   },
 
   setSemanticAttr(attrName, attrValue) {
