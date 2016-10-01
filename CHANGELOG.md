@@ -2,6 +2,25 @@
 All notable changes to this project will be documented in this file. The project adhere's to Semantic Versioning. See Versioning for more information.
 
 ## [2.0.0-beta.1]
+### Added
+  - Allowing better configuration for [customization](http://semantic-org.github.io/Semantic-UI-Ember/#/modules/usage) https://github.com/Semantic-Org/Semantic-UI-Ember/pull/141
+
+### Fixed
+  - Popup: only update attributes passed in
+  - Popup: unwrap html safe values
+  - Popup: don't update position
+  - Base Mixin: added attribute bindings for autofocus, tabindex, title
+  - Base Mixin: upwrap html safe values
+  - Base Mixin: fix contains deprecation https://github.com/Semantic-Org/Semantic-UI-Ember/pull/143
+
+#### Internal Changed
+  - Updating Ember, Ember Data, and Ember CLI to 2.8
+  - Updating multiple dependencies to latest version
+  - Adding additional ember try versions
+  - Moved promise tools to external addon
+  - Fixed build https://github.com/Semantic-Org/Semantic-UI-Ember/pull/151
+
+## [2.0.0-beta.0]
 ### Changed
   - Base mixin has been updated with expendable methods to hook into
   - Base mixin now uses this.attrs to properly bind to passed in parameters
