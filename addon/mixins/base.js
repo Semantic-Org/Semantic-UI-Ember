@@ -135,7 +135,7 @@ Semantic.BaseMixin = Ember.Mixin.create({
   },
 
   setSemanticAttr(attrName, attrValue) {
-    return this.execute(`set ${attrName}`, attrValue);
+    return this.execute(`set ${attrName}`, this._unwrapHTMLSafe(attrValue));
   },
 
   areAttrValuesEqual(attrName, attrValue, moduleValue) {
@@ -218,6 +218,11 @@ Semantic.BaseMixin = Ember.Mixin.create({
       if (typeof value === 'function') {
         custom[key] = Ember.run.bind(this, this._updateFunctionWithParameters(key, value));
       }
+      if (typeof value === 'object') {
+        if (Ember.String.isHTMLSafe(value)) {
+          custom[key] = this._unwrapHTMLSafe(value);
+        }
+      }
     }
 
     return custom;
@@ -247,6 +252,8 @@ Semantic.BaseMixin = Ember.Mixin.create({
       case "boolean":
       case "number":
         return value.toString();
+      case "object":
+        return this._unwrapHTMLSafe(value);
       default:
         // Don't convert to string, otherwise it would be "[Object]"
         return value;
@@ -259,6 +266,13 @@ Semantic.BaseMixin = Ember.Mixin.create({
       this.get('_bindableAttrs').addObject(attrName);
     }
   },
+
+  _unwrapHTMLSafe(value) {
+    if (Ember.String.isHTMLSafe(value)) {
+      return value.toString();
+    }
+    return value;
+  }
 });
 
 export default Semantic.BaseMixin;

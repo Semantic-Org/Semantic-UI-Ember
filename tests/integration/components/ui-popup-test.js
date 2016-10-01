@@ -1,3 +1,4 @@
+import Ember from 'ember';
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 
@@ -125,6 +126,31 @@ test('changing class doesnt throw error', function(assert) {
     assert.equal(popup.text(), 'something');
 
     assert.ok(this.$('div').attr('class').includes('other style'));
+    done();
+  }, 500);
+});
+
+test('popup unwraps safe string', function(assert) {
+  assert.expect(2);
+
+  this.set('html', Ember.String.htmlSafe('<b>Awesome</b>'));
+
+  this.render(hbs`
+    {{#ui-popup html=html}}
+      <div class="ui icon button">
+        <i class="add icon"></i>
+      </div>
+    {{/ui-popup}}
+  `);
+
+  this.$('div').popup('show');
+
+  let done = assert.async();
+
+  setTimeout(() => {
+    assert.equal(window.$('.ui.popup').length, 1);
+    let popup = window.$('.ui.popup');
+    assert.equal(popup.html(), '<b>Awesome</b>');
     done();
   }, 500);
 });

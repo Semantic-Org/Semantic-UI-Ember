@@ -18,21 +18,22 @@ export default Ember.Component.extend(Base, {
 
   setSemanticAttr(attrName, attrValue) {
     if (attrName === 'content' || attrName === 'title' || attrName === 'html') {
-      let response = this.execute('setting', attrName, attrValue);
+      let value = this._unwrapHTMLSafe(attrValue);
+      let response = this.execute('setting', attrName, value);
       if (this.execute('is visible')) {
         let html;
         if (attrName === 'html') {
-          html = attrValue;
+          html = value;
         } else {
           let text;
           if (attrName === 'content')  {
             text = {
               title: this.get('title'),
-              content: attrValue
+              content: value
             };
           } else {
             text = {
-              title: attrValue,
+              title: value,
               content: this.get('content')
             };
           }
