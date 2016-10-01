@@ -199,6 +199,32 @@
   </div>
 
   <h2 class="ui dividing header">
+    Configuration
+  </h2>
+
+  <p> One can configure the bundled resources from Semantic UI by setting options in the <i>ember-cli-build.js</i> file.</p>
+
+    {{#ui-annotation showing=true type="javascript"}}
+var app = new EmberApp(defaults, {
+  // Add options here
+  SemanticUI: {
+    fonts: false,
+    images: false
+  }
+});
+    {{/ui-annotation}}
+
+    <p> The default configuration is to include all resources. </p>
+
+    {{#ui-annotation showing=true type="javascript"}}
+css: true,
+javascript: true,
+fonts: true,
+images: true
+    {{/ui-annotation}}
+
+
+  <h2 class="ui dividing header">
     Bugs and Fixes
   </h2>
 
