@@ -2,7 +2,7 @@ import Ember from 'ember';
 import Semantic from '../semantic';
 
 const EMBER_ATTRS = ['class', 'classNameBindings', 'classNames', 'tagName'];
-const HTML_ATTRS = ['id', 'name', 'readonly', 'tabindex'];
+const HTML_ATTRS = ['id', 'name', 'readonly', 'autofocus', 'tabindex', 'title'];
 const CUSTOM_ATTRS = ['onElement'];
 
 Semantic.BaseMixin = Ember.Mixin.create({
@@ -11,6 +11,12 @@ Semantic.BaseMixin = Ember.Mixin.create({
   _bindableAttrs: null,
   _settableAttrs: null,
   _ignorableAttrs: null,
+
+  attributeBindings: [
+    'autofocus',
+    'tabindex',
+    'title'
+  ],
 
   /// EMBER HOOKS
   init() {
