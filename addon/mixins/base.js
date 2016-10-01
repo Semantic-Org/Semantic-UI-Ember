@@ -220,7 +220,7 @@ Semantic.BaseMixin = Ember.Mixin.create({
         custom[key] = Ember.run.bind(this, this._updateFunctionWithParameters(key, value));
       }
       if (typeof value === 'object') {
-        if (Ember.String.isHTMLSafe(value)) {
+        if (isHTMLSafe(value)) {
           custom[key] = this._unwrapHTMLSafe(value);
         }
       }
