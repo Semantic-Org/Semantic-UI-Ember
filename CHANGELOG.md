@@ -1,6 +1,10 @@
 # Change Log
 All notable changes to this project will be documented in this file. The project adhere's to Semantic Versioning. See Versioning for more information.
 
+## [2.0.0-beta.2]
+### Changed
+  - Required is html safe as dependency
+
 ## [2.0.0-beta.1]
 ### Added
   - Allowing better configuration for [customization](http://semantic-org.github.io/Semantic-UI-Ember/#/modules/usage) https://github.com/Semantic-Org/Semantic-UI-Ember/pull/141
