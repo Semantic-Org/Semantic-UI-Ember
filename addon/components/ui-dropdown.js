@@ -57,7 +57,7 @@ export default Ember.Component.extend(Base, PromiseResolver, {
   actions: {
     mapping(object) {
       let guid = Ember.guidFor(object);
-      if (!this.get('objectMap').hasOwnProperty(guid)) {
+      if (!this._hasOwnProperty(this.get('objectMap'), guid)) {
         this.get('objectMap')[guid] = object;
       }
       Ember.run.scheduleOnce('afterRender', this, this._inspectSelected);
@@ -99,7 +99,7 @@ export default Ember.Component.extend(Base, PromiseResolver, {
   },
 
   _getObjectOrValue(value) {
-    if (this.get('objectMap').hasOwnProperty(value)) {
+    if (this._hasOwnProperty(this.get('objectMap'), value)) {
       return this.get('objectMap')[value];
     }
     if (Ember.isEmpty(value)) {

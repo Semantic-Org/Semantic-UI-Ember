@@ -197,7 +197,7 @@ Semantic.BaseMixin = Ember.Mixin.create({
     for (let key in this.get('attrs')) {
       let value = this._getAttrValue(key);
 
-      if (!moduleGlobal.settings.hasOwnProperty(key)) {
+      if (!this._hasOwnProperty(moduleGlobal.settings, key)) {
         if (!this.get('_ignorableAttrs').includes(key) && !this.get('_ignorableAttrs').includes(Ember.String.camelize(key))) {
           // TODO: Add better ember keys here
           // Ember.Logger.debug(`You passed in the property '${key}', but a setting doesn't exist on the Semantic UI module: ${moduleName}`);
@@ -273,6 +273,18 @@ Semantic.BaseMixin = Ember.Mixin.create({
       return value.toString();
     }
     return value;
+  },
+
+  _hasOwnProperty(object, property) {
+    if (object) {
+      if (object.hasOwnProperty && typeof object.hasOwnProperty === "function") {
+        return object.hasOwnProperty(property);
+      }
+      // Ember 2.9 returns an EmptyObject, which doesn't have hasOwnProperty
+      return Object.prototype.hasOwnProperty.call(object, property);
+    }
+
+    return false;
   }
 });
 
