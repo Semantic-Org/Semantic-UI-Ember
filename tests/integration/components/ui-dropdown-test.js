@@ -2,6 +2,7 @@ import Ember from 'ember';
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 import afterRender from 'dummy/tests/helpers/after-render';
+import wait from 'ember-test-helpers/wait';
 
 moduleForComponent('ui-dropdown', 'Integration | Component | ui dropdown', {
   integration: true
@@ -1003,9 +1004,11 @@ test('it renders from a mapper with a promise already completed', function(asser
 
   assert.equal(this.$('.item').length, 2, "Right number of items");
   return afterRender(deferred.promise).then(() => {
-    assert.equal(this.$('.item.active').length, 1, "Right number of items active");
-    assert.equal(this.$('.item.active').text(), 'Patrick Bateman');
-    assert.equal(count, 0, 'onChange should not have been called');
+    return wait().then(() => {
+      assert.equal(this.$('.item.active').length, 1, "Right number of items active");
+      assert.equal(this.$('.item.active').text(), 'Patrick Bateman');
+      assert.equal(count, 0, 'onChange should not have been called');
+    });
   });
 });
 
@@ -1049,16 +1052,20 @@ test('it renders from a mapper with a promise and select with a promise, select 
   deferredSelect.resolve('Patrick Bateman');
 
   return afterRender(deferredSelect.promise).then(() => {
-    assert.equal(this.$('.item.active').length, 0, "Right number of items active");
+    return wait().then(() => {
+      assert.equal(this.$('.item.active').length, 0, "Right number of items active");
 
-    let deferredValue = { id: 2, name: "Patrick Bateman" };
-    deferredMap.resolve(deferredValue);
+      let deferredValue = { id: 2, name: "Patrick Bateman" };
+      deferredMap.resolve(deferredValue);
 
-    return afterRender(deferredMap.promise);
+      return afterRender(deferredMap.promise);
+    });
   }).then(() => {
-    assert.equal(this.$('.item.active').length, 1, "Right number of items active");
-    assert.equal(this.$('.item.active').text(), 'Patrick Bateman');
-    assert.equal(count, 0, 'onChange should not have been called');
+    return wait().then(() => {
+      assert.equal(this.$('.item.active').length, 1, "Right number of items active");
+      assert.equal(this.$('.item.active').text(), 'Patrick Bateman');
+      assert.equal(count, 0, 'onChange should not have been called');
+    });
   });
 });
 
