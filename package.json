@@ -1,6 +1,6 @@
 {
   "name": "semantic-ui-ember",
-  "version": "2.0.0-beta.2",
+  "version": "2.0.0-beta.3",
   "title": "Semantic UI Ember",
   "description": "The Official Semantic UI Addon for Ember applications",
   "homepage": "http://www.semantic-ui.com",
@@ -28,7 +28,7 @@
     "url": "git://github.com/Semantic-Org/Semantic-UI-Ember.git"
   },
   "engines": {
-    "node": ">= 0.10.0"
+    "node": ">= 0.12.0"
   },
   "author": "",
   "license": "MIT",

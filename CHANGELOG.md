@@ -1,6 +1,11 @@
 # Change Log
 All notable changes to this project will be documented in this file. The project adhere's to Semantic Versioning. See Versioning for more information.
 
+## [2.0.0-beta.3]
+### Fixed
+  - hasOwnProperty now properly works for objects without prototype
+  - Updating tests for Glimmer 2
+
 ## [2.0.0-beta.2]
 ### Changed
   - Required is html safe as dependency
