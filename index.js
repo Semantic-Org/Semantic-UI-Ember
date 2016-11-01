@@ -28,7 +28,7 @@ module.exports = {
   name: 'semantic-ui-ember',
 
   included: function (app) {
-    var options = (app && app.options['SemanticUI']) || {};
+    var options = (app && app.project.config(app.env)['SemanticUI']) || {};
 
     var importCss = getDefault('import', 'css', [options, defaults]);
     if (importCss) {
