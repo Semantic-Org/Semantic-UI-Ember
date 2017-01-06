@@ -261,7 +261,7 @@ Semantic.BaseMixin = Ember.Mixin.create({
     }
   },
 
-  _swapAttrs(attrName) {
+  _setAttrBindable(attrName) {
     if (this.get('_settableAttrs').includes(attrName)) {
       this.get('_settableAttrs').removeObject(attrName);
       this.get('_bindableAttrs').addObject(attrName);

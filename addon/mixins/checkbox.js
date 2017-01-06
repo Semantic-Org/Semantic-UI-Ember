@@ -22,11 +22,21 @@ var CheckboxMixin = Ember.Mixin.create(Base, {
   didInitSemantic() {
     this._super(...arguments);
     // We need to fake that its bindable for checked and disabled
-    this._swapAttrs('checked');
-    this._swapAttrs('disabled');
-    this._swapAttrs('enabled');
+    this._setAttrBindable('checked');
+    this._setAttrBindable('disabled');
+    this._setAttrBindable('enabled');
     if (this.get('readonly') != null) {
       this.get('_settableAttrs').addObject('readonly');
+    }
+    // Init initial value set properties correctly
+    if (this.get('checked') != null) {
+      this.setSemanticAttr('checked', this.get('checked'));
+    }
+    if (this.get('disabled') != null) {
+      this.setSemanticAttr('disabled', this.get('disabled'));
+    }
+    if (this.get('enabled') != null) {
+      this.setSemanticAttr('enabled', this.get('enabled'));
     }
   },
 
