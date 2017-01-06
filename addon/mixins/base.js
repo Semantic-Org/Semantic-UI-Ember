@@ -171,7 +171,7 @@ Semantic.BaseMixin = Ember.Mixin.create({
     // if its a mutable object, get the actual value
     if (typeof value === 'object') {
       let objectKeys = Ember.A(Object.keys(value));
-      if (objectKeys.any((objectkey) => objectkey.indexOf('MUTABLE_CELL') === 0)) {
+      if (objectKeys.any((objectkey) => objectkey.indexOf('MUTABLE_CELL') >= 0)) {
         value = Ember.get(value, 'value');
       }
     }
