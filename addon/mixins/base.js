@@ -118,6 +118,11 @@ Semantic.BaseMixin = Ember.Mixin.create({
   },
 
   initSemanticModule() {
+    let owner = Ember.getOwner(this);
+    let fastboot = owner.lookup('service:fastboot');
+    if (fastboot && fastboot.get('isFastBoot')) {
+      return;
+    }
     let module = this.getSemanticModule();
     if (module) {
       module.call(this.getSemanticScope(), this._settings());
