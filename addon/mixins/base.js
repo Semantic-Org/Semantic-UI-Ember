@@ -1,6 +1,5 @@
 import Ember from 'ember';
 import Semantic from '../semantic';
-import isHTMLSafe from 'ember-string-ishtmlsafe-polyfill';
 
 const EMBER_ATTRS = ['class', 'classNameBindings', 'classNames', 'tagName'];
 const HTML_ATTRS = ['id', 'name', 'readonly', 'autofocus', 'tabindex', 'title'];
@@ -220,7 +219,7 @@ Semantic.BaseMixin = Ember.Mixin.create({
         custom[key] = Ember.run.bind(this, this._updateFunctionWithParameters(key, value));
       }
       if (typeof value === 'object') {
-        if (isHTMLSafe(value)) {
+        if (Ember.String.isHTMLSafe(value)) {
           custom[key] = this._unwrapHTMLSafe(value);
         }
       }
@@ -269,7 +268,7 @@ Semantic.BaseMixin = Ember.Mixin.create({
   },
 
   _unwrapHTMLSafe(value) {
-    if (isHTMLSafe(value)) {
+    if (Ember.String.isHTMLSafe(value)) {
       return value.toString();
     }
     return value;
