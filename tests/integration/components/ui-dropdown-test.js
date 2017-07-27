@@ -3,6 +3,7 @@ import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 import afterRender from 'dummy/tests/helpers/after-render';
 import wait from 'ember-test-helpers/wait';
+import $ from 'jquery';
 
 moduleForComponent('ui-dropdown', 'Integration | Component | ui dropdown', {
   integration: true
@@ -1121,5 +1122,3 @@ test('it renders from a mapper with a promise and select with a promise, mapper 
     assert.equal(count, 0, 'onChange should not have been called');
   });
 });
-
-

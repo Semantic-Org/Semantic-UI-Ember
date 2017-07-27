@@ -1,0 +1,7 @@
+**/*{.,-}min.js
+vendor
+public
+dist
+ember-cli-build.js
+testem.js
+config
