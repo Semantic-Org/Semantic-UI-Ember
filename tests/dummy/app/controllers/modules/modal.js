@@ -1,6 +1,8 @@
-/* global alert */
 import Ember from 'ember';
-import $ from 'jquery';
+
+const {
+  $,
+} = Ember;
 
 export default Ember.Controller.extend({
   actions: {

@@ -3,7 +3,10 @@ import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 import afterRender from 'dummy/tests/helpers/after-render';
 import wait from 'ember-test-helpers/wait';
-import $ from 'jquery';
+
+const {
+  $,
+} = Ember;
 
 moduleForComponent('ui-dropdown', 'Integration | Component | ui dropdown', {
   integration: true
