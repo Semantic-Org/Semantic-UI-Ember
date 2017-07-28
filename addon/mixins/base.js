@@ -113,7 +113,7 @@ Semantic.BaseMixin = Ember.Mixin.create({
     return window.$.fn[moduleName];
   },
 
-  willInitSemantic(settings) { // jshint ignore:line
+  willInitSemantic(settings) { // eslint-disable-line no-unused-vars
     // Use this method to modify the settings object on inherited components, before module initialization
   },
 

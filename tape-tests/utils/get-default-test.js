@@ -1,4 +1,4 @@
-/* jshint node: true */
+/* eslint-env node */
 var test = require('tape');
 var getDefault = require('../../lib/utils/get-default');
 
