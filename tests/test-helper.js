@@ -1,7 +1,6 @@
 import Ember from 'ember';
 import resolver from './helpers/resolver';
 
-
 const {
   $,
 } = Ember;
