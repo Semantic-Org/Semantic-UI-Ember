@@ -1,4 +1,4 @@
-/*jshint node:true*/
+/* eslint-env node */
 module.exports = {
   scenarios: [
     {
@@ -9,6 +9,11 @@ module.exports = {
         },
         resolutions: {
           'ember': 'lts-2-4'
+        }
+      },
+      npm: {
+        devDependencies: {
+          'ember-source': null
         }
       }
     },
@@ -21,6 +26,11 @@ module.exports = {
         resolutions: {
           'ember': 'lts-2-8'
         }
+      },
+      npm: {
+        devDependencies: {
+          'ember-source': null
+        }
       }
     },
     {
@@ -31,6 +41,11 @@ module.exports = {
         },
         resolutions: {
           'ember': 'release'
+        }
+      },
+      npm: {
+        devDependencies: {
+          'ember-source': null
         }
       }
     },
@@ -43,6 +58,11 @@ module.exports = {
         resolutions: {
           'ember': 'beta'
         }
+      },
+      npm: {
+        devDependencies: {
+          'ember-source': null
+        }
       }
     },
     {
@@ -54,29 +74,32 @@ module.exports = {
         resolutions: {
           'ember': 'canary'
         }
-      }
-    },
-    {
-      "name": "semantic-2.1.8",
-      "bower": {
-        "dependencies": {
-          "semantic-ui": "2.1.8"
+      },
+      npm: {
+        devDependencies: {
+          'ember-source': null
         }
       }
     },
     {
-      "name": "semantic-2.2.4",
-      "bower": {
-        "dependencies": {
-          "semantic-ui": "2.2.4"
+      name: 'ember-default',
+      npm: {
+        devDependencies: {}
+      }
+    },
+    {
+      name: 'semantic-2.2.4',
+      bower: {
+        dependencies: {
+          'semantic-ui': '2.2.4'
         }
       }
     },
     {
-      "name": "semantic-latest",
-      "bower": {
-        "dependencies": {
-          "semantic-ui": "latest"
+      name: 'semantic-latest',
+      bower: {
+        dependencies: {
+          'semantic-ui': 'latest'
         }
       }
     }

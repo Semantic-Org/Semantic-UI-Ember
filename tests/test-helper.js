@@ -1,3 +1,4 @@
+import $ from 'jquery';
 import resolver from './helpers/resolver';
 import {
   setResolver

@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import $ from 'jquery';
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 import afterRender from 'dummy/tests/helpers/after-render';
@@ -1121,5 +1122,3 @@ test('it renders from a mapper with a promise and select with a promise, mapper 
     assert.equal(count, 0, 'onChange should not have been called');
   });
 });
-
-
