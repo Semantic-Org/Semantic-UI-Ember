@@ -18,9 +18,6 @@ module.exports = function(defaults) {
     behave. You most likely want to be modifying `./index.js` or app's build file
   */
 
-  // Import Highlight.js
-  app.import(app.bowerDirectory + "/highlightjs/highlight.pack.min.js");
-
   app.import(app.bowerDirectory + "/highlightjs/styles/github-gist.css");
   app.import(app.bowerDirectory + "/highlightjs/styles/hybrid.css");
 
