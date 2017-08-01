@@ -7,7 +7,8 @@ module.exports = function(defaults) {
     // Add options here
     'ember-cli-babel': {
       includePolyfill: false
-    }
+    },
+    snippetSearchPaths: ['tests/dummy/app']
   });
 
   /*
