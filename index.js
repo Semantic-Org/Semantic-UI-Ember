@@ -24,6 +24,10 @@ var defaults = {
 
 var getDefault = require('./lib/utils/get-default');
 
+var Funnel = require('broccoli-funnel');
+var mergeTrees = require('broccoli-merge-trees');
+var map = require('broccoli-stew').map;
+
 module.exports = {
   name: 'semantic-ui-ember',
 
@@ -40,11 +44,11 @@ module.exports = {
     }
 
     var importJavascript = getDefault('import', 'javascript', [options, defaults]);
-    if (!process.env.EMBER_CLI_FASTBOOT && importJavascript) {
-      var sourceJavascript = getDefault('source', 'javascript', [options, defaults]);
+    if (importJavascript) {
+      this.sourceJavascript = getDefault('source', 'javascript', [options, defaults]);
       app.import({
-        development: path.join(sourceJavascript, 'semantic.js'),
-        production: path.join(sourceJavascript, 'semantic.min.js')
+        development: 'vendor/semantic.js',
+        production: 'vendor/semantic.min.js'
       });
     }
 
@@ -64,5 +68,28 @@ module.exports = {
         app.import(path.join(sourceFont, 'icons' + fontExtensions[i]), fontOptions);
       }
     }
+  },
+
+  treeForVendor: function(vendorTree) {
+    var trees = [];
+
+    if (vendorTree) {
+      trees.push(vendorTree);
+    }
+
+    var sourceJavascript = this.sourceJavascript;
+    if (sourceJavascript) {
+      var semanticJsTree =  new Funnel(sourceJavascript, {
+        srcDir: '/',
+        files: ['semantic.js', 'semantic.min.js']
+      });
+
+      semanticJsTree = map(semanticJsTree,
+          (content) => `if (typeof FastBoot === 'undefined') { ${content} }`);
+
+      trees.push(semanticJsTree);
+    }
+
+    return mergeTrees(trees);
   }
 };

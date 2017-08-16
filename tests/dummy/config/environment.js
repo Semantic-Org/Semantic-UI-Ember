@@ -7,7 +7,7 @@ module.exports = function(environment) {
     rootURL: '/',
     locationType: 'auto',
     fastboot: {
-      hostWhitelist: []
+      hostWhitelist: [/^localhost:\d+$/]
     },
     EmberENV: {
       FEATURES: {

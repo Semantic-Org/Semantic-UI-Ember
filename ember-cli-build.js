@@ -18,12 +18,10 @@ module.exports = function(defaults) {
   */
 
   // Import Highlight.js
-  if (!process.env.EMBER_CLI_FASTBOOT) {
-    app.import(app.bowerDirectory + "/highlightjs/highlight.pack.min.js");
+  app.import(app.bowerDirectory + "/highlightjs/highlight.pack.min.js");
 
-    app.import(app.bowerDirectory + "/highlightjs/styles/github-gist.css");
-    app.import(app.bowerDirectory + "/highlightjs/styles/hybrid.css");
-  }
+  app.import(app.bowerDirectory + "/highlightjs/styles/github-gist.css");
+  app.import(app.bowerDirectory + "/highlightjs/styles/hybrid.css");
 
 
   return app.toTree();
