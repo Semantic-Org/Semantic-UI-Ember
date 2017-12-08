@@ -98,6 +98,9 @@ Semantic.BaseMixin = Ember.Mixin.create({
   },
 
   getSemanticModule() {
+    if (this._isFastBoot()) {
+      return;
+    }
     let selector = this.getSemanticScope();
     if (selector != null) {
       let module = selector[this.getSemanticModuleName()];
@@ -109,6 +112,9 @@ Semantic.BaseMixin = Ember.Mixin.create({
   },
 
   getSemanticModuleGlobal() {
+    if (this._isFastBoot()) {
+      return;
+    }
     let moduleName = this.getSemanticModuleName();
     return window.$.fn[moduleName];
   },
@@ -118,9 +124,7 @@ Semantic.BaseMixin = Ember.Mixin.create({
   },
 
   initSemanticModule() {
-    let owner = Ember.getOwner(this);
-    let fastboot = owner.lookup('service:fastboot');
-    if (fastboot && fastboot.get('isFastBoot')) {
+    if (this._isFastBoot()) {
       return;
     }
     let module = this.getSemanticModule();
@@ -151,6 +155,9 @@ Semantic.BaseMixin = Ember.Mixin.create({
 
   // Semantic Helper Methods
   execute() {
+    if (this._isFastBoot()) {
+      return;
+    }
     let module = this.getSemanticModule();
     if (module) {
       return module.apply(this.getSemanticScope(), arguments);
@@ -289,6 +296,12 @@ Semantic.BaseMixin = Ember.Mixin.create({
     }
 
     return false;
+  },
+
+  _isFastBoot() {
+    let owner = Ember.getOwner(this);
+    let fastboot = owner.lookup('service:fastboot');
+    return fastboot && fastboot.get('isFastBoot');
   }
 });
 
