@@ -1,3 +1,7 @@
+# Maintainers Wanted
+
+The project is a wrapper over Semantic UI and should continue to work even if Semantic UI is updated, but we are looking for maintainers to take over handling issues and pull requests. If you are interested please open a ticket.
+
 [![Build Status](https://travis-ci.org/Semantic-Org/Semantic-UI-Ember.svg)](https://travis-ci.org/Semantic-Org/Semantic-UI-Ember)
 [![npm version](https://badge.fury.io/js/semantic-ui-ember.svg)](http://badge.fury.io/js/semantic-ui-ember)
 [![Code Climate](https://codeclimate.com/github/Semantic-Org/Semantic-UI-Ember/badges/gpa.svg)](https://codeclimate.com/github/Semantic-Org/Semantic-UI-Ember)
