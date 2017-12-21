@@ -1,3 +1,5 @@
+
+
 <div class="ui masthead vertical segment">
   <div class="ui container">
     <div class="introduction">
@@ -35,7 +37,8 @@
     as |showing setCopyCode|}}
 
     {{#ui-html showing=showing}}
-      <div class="ui button" {{action 'toggle' 'sub-sidebar'}}>
+      {{! BEGIN-SNIPPET sidebar.example }}
+      <div class="ui button" {{action "toggle" "sub-sidebar"}}>
         Toggle
       </div>
       <div class="ui pushable segment component context">
@@ -50,26 +53,10 @@
           </div>
         </div>
       </div>
+      {{! END-SNIPPET }}
     {{/ui-html}}
 
-    {{#ui-annotation showing=showing setCopyCode=setCopyCode}}
-<div class="ui button" onclick="\{{action 'toggle' 'sub-sidebar'}}">
-  Toggle
-</div>
-<div class="ui pushable segment component context">
-  \{{#ui-sidebar class="inverted menu left inline vertical" context=".component.context" id="sub-sidebar"}}
-    <a class="item">Item 1</a>
-    <a class="item">Item 2</a>
-    <a class="item">Item 3</a>
-  \{{/ui-sidebar}}
-  <div class="pusher">
-    <div class="ui basic segment" style="min-height: 300px;">
-      Sub Content Here
-    </div>
-  </div>
-</div>
-    {{/ui-annotation}}
-
+    {{ui-code-snippet showing=showing name="sidebar.example.hbs"}}
   {{/ui-example}}
 
 </div>

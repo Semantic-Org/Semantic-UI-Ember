@@ -7,7 +7,8 @@ module.exports = function(defaults) {
     // Add options here
     'ember-cli-babel': {
       includePolyfill: false
-    }
+    },
+    snippetSearchPaths: ['tests/dummy/app']
   });
 
   /*
@@ -16,9 +17,6 @@ module.exports = function(defaults) {
     This build file does *not* influence how the addon or the app using it
     behave. You most likely want to be modifying `./index.js` or app's build file
   */
-
-  // Import Highlight.js
-  app.import(app.bowerDirectory + "/highlightjs/highlight.pack.min.js");
 
   app.import(app.bowerDirectory + "/highlightjs/styles/github-gist.css");
   app.import(app.bowerDirectory + "/highlightjs/styles/hybrid.css");
