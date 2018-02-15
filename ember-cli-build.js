@@ -18,10 +18,10 @@ module.exports = function(defaults) {
   */
 
   // Import Highlight.js
-  app.import("node_modules/highlightjs/highlight.pack.min.js");
+  app.import(app.npmDirectory + "/highlightjs/highlight.pack.min.js");
 
-  app.import("node_modules/highlightjs/styles/github-gist.css");
-  app.import("node_modules/highlightjs/styles/hybrid.css");
+  app.import(app.npmDirectory + "/highlightjs/styles/github-gist.css");
+  app.import(app.npmDirectory + "/highlightjs/styles/hybrid.css");
 
 
   return app.toTree();
