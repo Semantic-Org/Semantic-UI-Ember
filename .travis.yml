@@ -27,14 +27,12 @@ before_install:
   - 'export DISPLAY=:99.0'
   - sh -e /etc/init.d/xvfb start
   - npm config set spin false
-  - npm install -g bower phantomjs-prebuilt
+  - npm install -g phantomjs-prebuilt
   - npm install -g codeclimate-test-reporter
-  - bower --version
   - phantomjs --version
 
 install:
   - npm install
-  - bower install
 
 script:
   # Usually, it's ok to finish the test scenario without reverting

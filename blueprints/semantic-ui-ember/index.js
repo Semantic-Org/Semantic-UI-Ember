@@ -2,7 +2,7 @@
 
 module.exports = {
   afterInstall: function () {
-    return this.addBowerPackageToProject('semantic-ui');
+    return this.addPackageToProject('semantic-ui');
   },
 
   normalizeEntityName: function () {}

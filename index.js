@@ -11,10 +11,10 @@ var defaults = {
     fonts: true
   },
   source: {
-    css: 'bower_components/semantic-ui/dist',
-    javascript: 'bower_components/semantic-ui/dist',
-    images: 'bower_components/semantic-ui/dist/themes/default/assets/images',
-    fonts: 'bower_components/semantic-ui/dist/themes/default/assets/fonts'
+    css: 'node_modules/semantic-ui/dist',
+    javascript: 'node_modules/semantic-ui/dist',
+    images: 'node_modules/semantic-ui/dist/themes/default/assets/images',
+    fonts: 'node_modules/semantic-ui/dist/themes/default/assets/fonts'
   },
   destination: {
     images: 'assets/themes/default/assets/images',

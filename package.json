@@ -36,7 +36,9 @@
     "ember-cli-babel": "6.6.0",
     "ember-promise-tools": "1.0.0",
     "ember-runtime-enumerable-includes-polyfill": "2.0.0",
-    "ember-string-ishtmlsafe-polyfill": "^2.0.0"
+    "ember-string-ishtmlsafe-polyfill": "^2.0.0",
+    "highlightjs": "^9.4.0",
+    "semantic-ui": "2.2.11"
   },
   "devDependencies": {
     "babel-plugin-transform-es2015-block-scoping": "^6.24.1",

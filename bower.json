@@ -1,7 +1,0 @@
-{
-  "name": "semantic-ui-ember",
-  "dependencies": {
-    "highlightjs": "^9.4.0",
-    "semantic-ui": "2.2.11"
-  }
-}
