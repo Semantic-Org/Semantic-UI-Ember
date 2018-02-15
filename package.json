@@ -38,7 +38,7 @@
     "ember-runtime-enumerable-includes-polyfill": "2.0.0",
     "ember-string-ishtmlsafe-polyfill": "^2.0.0",
     "highlightjs": "^9.4.0",
-    "semantic-ui": "2.2.11"
+    "semantic-ui": "2.2.14"
   },
   "devDependencies": {
     "babel-plugin-transform-es2015-block-scoping": "^6.24.1",
