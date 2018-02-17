@@ -16,7 +16,22 @@ This is the official Ember library for the Semantic-UI modules.
 
 # Installation
 
+## v2.1 and above
+
+Install this add-on through Ember CLI. We support Ember versions 2.x
+
+
+```
+ember install semantic-ui-ember
+```
+
+That's it.
+
+
+## v2.0 and below only
+
 Install this add-on through Ember CLI. We support Ember versions 1.13 latest - 2.X.
+_NOTE: Ember 2.x only **without** fastboot is supported_
 
 
 ```
