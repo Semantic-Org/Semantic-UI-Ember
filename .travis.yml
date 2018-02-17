@@ -11,11 +11,14 @@ cache:
     - $HOME/.cache # includes bowers cache
 
 env:
+  global:
+    - COVERAGE=true
+  matrix:
   # we recommend testing LTS's and latest stable release (bonus points to beta/canary)
-  - EMBER_TRY_SCENARIO=ember-lts-2.16
-  - EMBER_TRY_SCENARIO=ember-lts-2.18
-  - EMBER_TRY_SCENARIO=ember-latest
-  - EMBER_TRY_SCENARIO=ember-beta
+    - EMBER_TRY_SCENARIO=ember-lts-2.16
+    - EMBER_TRY_SCENARIO=ember-lts-2.18
+    - EMBER_TRY_SCENARIO=ember-latest
+    - EMBER_TRY_SCENARIO=ember-beta
 
 matrix:
   fast_finish: true
@@ -28,6 +31,7 @@ before_install:
   - sh -e /etc/init.d/xvfb start
   - npm config set spin false
   - npm install -g codeclimate-test-reporter
+  - npm install -g codecov
 
 install:
   - npm install -D
@@ -48,3 +52,4 @@ addons:
     repo_token: 05fd1578b53db2450402144ecf20105dc5ca6a99f44b41ebd6810bfadb4116c0
 after_script:
   - codeclimate-test-reporter < lcov.dat
+  - codecov
