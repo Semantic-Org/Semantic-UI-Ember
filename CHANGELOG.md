@@ -1,6 +1,10 @@
 # Change Log
 All notable changes to this project will be documented in this file. The project adhere's to Semantic Versioning. See Versioning for more information.
 
+## [2.1.0]
+ - Supports `ember-fastboot` for Ember 2.x
+ - Bower not required (hence no blueprint)
+
 ## [2.0.1]
 ### Changed
  - Updated Ember to 2.10 and dependencies
