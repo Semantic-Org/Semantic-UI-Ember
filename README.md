@@ -5,7 +5,7 @@
 [![Build Status](https://travis-ci.org/Semantic-Org/Semantic-UI-Ember.svg)](https://travis-ci.org/Semantic-Org/Semantic-UI-Ember)
 [![npm version](https://badge.fury.io/js/semantic-ui-ember.svg)](http://badge.fury.io/js/semantic-ui-ember)
 [![Code Climate](https://codeclimate.com/github/Semantic-Org/Semantic-UI-Ember/badges/gpa.svg)](https://codeclimate.com/github/Semantic-Org/Semantic-UI-Ember)
-[![Test Coverage](https://codeclimate.com/github/Semantic-Org/Semantic-UI-Ember/badges/coverage.svg)](https://codeclimate.com/github/Semantic-Org/Semantic-UI-Ember/coverage)
+[![Codecov](https://img.shields.io/codecov/c/github/Semantic-Org/Semantic-UI-Ember.svg)](https://codecov.io/gh/Semantic-Org/Semantic-UI-Ember)
 [![Dependency Status](https://david-dm.org/Semantic-Org/Semantic-UI-Ember.svg)](https://david-dm.org/Semantic-Org/Semantic-UI-Ember)
 
 This is the official Ember library for the Semantic-UI modules.
