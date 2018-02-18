@@ -10,31 +10,27 @@
 
 This is the official Ember library for the Semantic-UI modules.
 
-# Support
+### Support
+The NodeJS and EmberJS versions respective tags are _tested_ on. It might work with versions not listed as well 
 
-# v3.0 
+#### v3.0 
 
 ![](https://img.shields.io/badge/nodejs-6-brightgreen.svg)
 ![](https://img.shields.io/badge/nodejs-8-brightgreen.svg)
-
 ![](https://img.shields.io/badge/ember-2.16-orange.svg)
 ![](https://img.shields.io/badge/ember-2.18-orange.svg)
 ![](https://img.shields.io/badge/ember-3.0-orange.svg)
 ![](https://img.shields.io/badge/ember-3.1--beta-orange.svg)
-
 ![](https://img.shields.io/badge/ember--fastboot-1.0-4969B2.svg)
 
-# v2.1
+#### v2.1
 ![](https://img.shields.io/badge/nodejs-6-brightgreen.svg)
-
 ![](https://img.shields.io/badge/ember-2.16-orange.svg)
 ![](https://img.shields.io/badge/ember-2.18-orange.svg)
-
 ![](https://img.shields.io/badge/ember--fastboot-1.0-4969B2.svg)
 
-# v2.0
+#### v2.0
 ![](https://img.shields.io/badge/nodejs-6-brightgreen.svg)
-
 ![](https://img.shields.io/badge/ember-1.13-orange.svg)
 ![](https://img.shields.io/badge/ember-2.4-orange.svg)
 ![](https://img.shields.io/badge/ember-2.8-orange.svg)
@@ -44,7 +40,7 @@ This is the official Ember library for the Semantic-UI modules.
 
 ## v2.1 and above
 
-Install this add-on through Ember CLI. We support Ember versions 2.x  
+Install this add-on through Ember CLI. We support Ember versions 2.x and above 
 
 _NOTE: This is a `bower`-less install_
 
