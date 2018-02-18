@@ -796,10 +796,11 @@ test('The correct number of items get selected when array is modified', function
   assert.ok(this.$('.item[data-id=2]').hasClass('active'));
   assert.equal(this.get('selected').join(','), ['2'].join(','));
 
+  Ember.run.begin();
   this.set('selected', ['2', '4']);
   // Have to clear the queue to ensure that property change gets notified
   // Doesn't clear in time on tests occasionally
-  Ember.run.sync();
+  Ember.run.end();
 
   assert.ok(this.$('.item[data-id=4]').hasClass('active'));
   assert.equal(this.get('selected').join(','), ['2', '4'].join(','));
