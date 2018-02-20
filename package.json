@@ -65,6 +65,7 @@
     "ember-load-initializers": "1.0.0",
     "ember-resolver": "^4.5.0",
     "ember-source": "^3.0.0",
+    "ember-source-channel-url": "^1.0.1",
     "ember-try": "^0.2.23",
     "highlightjs": "^9.10.0",
     "loader.js": "^4.0.10",

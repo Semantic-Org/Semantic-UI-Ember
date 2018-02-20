@@ -17,15 +17,15 @@ env:
   # we recommend testing LTS's and latest stable release (bonus points to beta/canary)
     - EMBER_TRY_SCENARIO=ember-lts-2.16
     - EMBER_TRY_SCENARIO=ember-lts-2.18
-    - EMBER_TRY_SCENARIO=ember-3.0
-    - EMBER_TRY_SCENARIO=ember-latest
+    - EMBER_TRY_SCENARIO=ember-release
     - EMBER_TRY_SCENARIO=ember-beta
+    - EMBER_TRY_SCENARIO=ember-canary
 
 matrix:
   fast_finish: true
   allow_failures:
     - env: EMBER_TRY_SCENARIO=ember-beta
-    - env: EMBER_TRY_SCENARIO=ember-latest
+    - env: EMBER_TRY_SCENARIO=ember-canary
 
 before_install:
   - 'export DISPLAY=:99.0'
