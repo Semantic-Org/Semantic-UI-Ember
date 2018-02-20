@@ -29,6 +29,14 @@ var mergeTrees = require('broccoli-merge-trees');
 var map = require('broccoli-stew').map;
 
 module.exports = {
+  options: {
+    'babel': {
+      sourceMaps: 'both'
+    },
+    'ember-cli-babel': {
+      sourceMaps: 'both'
+    }
+  },
   name: 'semantic-ui-ember',
 
   included: function (app) {
