@@ -38,7 +38,16 @@ The NodeJS and EmberJS versions respective tags are _tested_ on. It might work w
 
 # Installation
 
-## v2.1 and above
+### v3 (beta)
+
+Install this through Ember CLI. We support Ember 2.12 LTS through 3.x 
+
+```
+ember install semantic-ui-ember@beta
+```
+
+
+### v2.1
 
 Install this add-on through Ember CLI. We support Ember versions 2.x and above 
 
@@ -51,7 +60,7 @@ ember install semantic-ui-ember
 That's it.
 
 
-## v2.0 and below only
+### v2.0 and below only
 
 Install this add-on through Ember CLI. We support Ember versions 1.13 latest - 2.X.  
 
