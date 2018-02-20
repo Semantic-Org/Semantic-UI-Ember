@@ -1,9 +1,9 @@
 import Ember from 'ember';
 import Checkbox from '../mixins/checkbox';
-import isPromise from 'ember-promise-tools/utils/is-promise';
-import isFulfilled from 'ember-promise-tools/utils/is-fulfilled';
-import getPromiseContent from 'ember-promise-tools/utils/get-promise-content';
-import PromiseResolver from 'ember-promise-tools/mixins/promise-resolver';
+import isPromise from 'ember-promise-utils/utils/is-promise';
+import isFulfilled from 'ember-promise-utils/utils/is-fulfilled';
+import getPromiseContent from 'ember-promise-utils/utils/get-promise-content';
+import PromiseResolver from 'ember-promise-utils/mixins/promise-resolver';
 
 export default Ember.Component.extend(Checkbox, PromiseResolver, {
   type: 'radio',
