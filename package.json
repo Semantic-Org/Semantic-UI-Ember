@@ -11,6 +11,10 @@
   "homepage": "http://www.semantic-ui.com",
   "contributors": [
     {
+      "name": "Arnav Gupta",
+      "email": "dev@championswimmer.in"
+    },
+    {
       "name": "Nathan Palmer",
       "email": "nathan@nathanpalmer.com"
     },
@@ -53,13 +57,13 @@
     "ember-cli-fastboot": "^1.0.4",
     "ember-cli-github-pages": "0.1.2",
     "ember-cli-htmlbars": "2.0.2",
-    "ember-cli-htmlbars-inline-precompile": "0.4.3",
+    "ember-cli-htmlbars-inline-precompile": "^1.0.2",
     "ember-cli-inject-live-reload": "^1.4.1",
     "ember-cli-qunit": "^4.3.2",
     "ember-cli-shims": "^1.0.2",
     "ember-cli-sri": "^2.1.0",
     "ember-cli-uglify": "^2.0.0",
-    "ember-composable-helpers": "2.0.3",
+    "ember-composable-helpers": "^2.1.0",
     "ember-disable-prototype-extensions": "^1.1.0",
     "ember-export-application-global": "2.0.0",
     "ember-load-initializers": "1.0.0",
