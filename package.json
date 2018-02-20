@@ -34,7 +34,7 @@
   },
   "dependencies": {
     "ember-cli-babel": "^6.11.0",
-    "ember-promise-utils": "^0.1.0",
+    "ember-promise-utils": "^0.1.1",
     "ember-runtime-enumerable-includes-polyfill": "2.0.0",
     "semantic-ui-css": "^2.2.14"
   },
@@ -68,7 +68,7 @@
     "ember-try": "^0.2.23",
     "highlightjs": "^9.10.0",
     "loader.js": "^4.0.10",
-    "tape": "^4.6.0"
+    "tape": "^4.9.0"
   },
   "engines": {
     "node": ">= 4"
