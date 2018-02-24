@@ -1,5 +1,5 @@
 /* eslint-env node */
-import config from './config/environment'
+const config = require ('../../config/environment')()
 const EOL = require('os').EOL;
 
 module.exports = {
@@ -11,21 +11,22 @@ module.exports = {
   //     foo: options.entity.options.foo
   //   };
   // }
+  normalizeEntityName() {},
+  async afterInstall(options) {
+    await this.removePackageFromProject('semantic-ui-css')
+    await this.insertIntoFile(
+      'ember-cli-build.js',
+      `
+  app.import('vendor/semantic/semantic.css')
 
-  afterInstall(options) {
-    this.removePackageFromProject('semantic-ui-css')
-      .then(() => this.insertIntoFile(
-        'ember-cli-build.js',
-        `
-          app.import('vendor/semantic/semantic.css')
         `,
-        {
-          before: `return app.toTree();`
-        }
-      ))
-      .then(() => this.insertIntoFile(
-        'ember-cli-build.js',
-        `
+      {
+        before: `return app.toTree();`
+      }
+    )
+    await this.insertIntoFile(
+      'ember-cli-build.js',
+      `
     SemanticUI: {
       source: {
         css: 'vendor/semantic',
@@ -33,17 +34,16 @@ module.exports = {
       }
     }
     `,  {
-          after: `new EmberApp(defaults, {` + EOL
-        }
-      ))
-      .then(() => this.insertIntoFile(
-        '.gitignore',
-        `
+        after: `new EmberApp(defaults, {` + EOL
+      }
+    )
+    await this.insertIntoFile('.gitignore',
+      `
 /semantic/*
 !/semantic/src/site/*
 !/semantic/src/theme.config
         `
-      ))
-      .then(() => this.addPackageToProject('semantic-ui', config.SEMANTIC_UI_VERSION))
+    )
+    await this.addPackageToProject('semantic-ui', config.SEMANTIC_UI_VERSION)
   }
 };
