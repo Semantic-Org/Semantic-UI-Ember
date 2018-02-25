@@ -2,6 +2,7 @@
 'use strict';
 
 const path = require('path')
+const fs = require('fs')
 
 const defaults = {
   import: {
@@ -22,6 +23,15 @@ const defaults = {
   }
 }
 
+const custom = {
+  source: {
+    css: 'semantic/dist',
+    javascript: 'semantic/dist',
+    images: 'semantic/dist/themes/default/assets/images',
+    fonts: 'semantic/dist/themes/default/assets/fonts'
+  }
+}
+
 const getDefault = require('./lib/utils/get-default')
 
 const Funnel = require('broccoli-funnel')
@@ -29,18 +39,16 @@ const mergeTrees = require('broccoli-merge-trees')
 const map = require('broccoli-stew').map
 
 module.exports = {
-  options: {
-    'babel': {
-      sourceMaps: 'both'
-    },
-    'ember-cli-babel': {
-      sourceMaps: 'both'
-    }
-  },
   name: 'semantic-ui-ember',
 
   included: function (app) {
-    const options = (app && app.project.config(app.env)['SemanticUI']) || {}
+    const options = (app && app.project.config(app.env)['SemanticUI'])
+      || (app && app.project.config(app.env)['semantic-ui-ember'])
+      || {};
+
+    if (!fs.existsSync(defaults.source.css) && fs.existsSync(custom.source.css)) {
+      defaults.source = custom.source
+    }
 
     const importCss = getDefault('import', 'css', [options, defaults])
     if (importCss) {

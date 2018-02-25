@@ -8,7 +8,7 @@
       "themes": "src/themes/"
     },
     "output": {
-      "packaged": "../vendor/semantic",
+      "packaged": "dist/",
       "uncompressed": "dist/components/",
       "compressed": "dist/components/",
       "themes": "dist/themes/"

@@ -5,38 +5,11 @@ const EOL = require('os').EOL;
 module.exports = {
   description: 'Installs user-customisable version of semantic-ui',
 
-  // locals(options) {
-  //   // Return custom template variables here.
-  //   return {
-  //     foo: options.entity.options.foo
-  //   };
-  // }
   normalizeEntityName() {},
   async afterInstall(options) {
+    this.ui.write('Removing semantic-ui-css')
     await this.removePackageFromProject('semantic-ui-css')
-    await this.insertIntoFile(
-      'ember-cli-build.js',
-      `
-  app.import('vendor/semantic/semantic.css')
-
-        `,
-      {
-        before: `return app.toTree();`
-      }
-    )
-    await this.insertIntoFile(
-      'ember-cli-build.js',
-      `
-    SemanticUI: {
-      source: {
-        css: 'vendor/semantic',
-        javascript: 'vendor/semantic'
-      }
-    }
-    `,  {
-        after: `new EmberApp(defaults, {` + EOL
-      }
-    )
+    this.ui.write('Adding semantic-ui custom folder to .gitignore')
     await this.insertIntoFile('.gitignore',
       `
 /semantic/*
@@ -44,6 +17,7 @@ module.exports = {
 !/semantic/src/theme.config
         `
     )
+    this.ui.write('Installing semantic-ui')
     await this.addPackageToProject('semantic-ui', config.SEMANTIC_UI_VERSION)
   }
 };
