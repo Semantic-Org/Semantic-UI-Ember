@@ -47,26 +47,64 @@
 
   </div>
 
+  <h2 class="ui header">
+    Support
+  </h2>
+  <div>
+    <p>We support the following Ember versions</p>
+
+    <table class="ui celled table">
+      <thead>
+      <tr>
+        <th>Ember Version</th>
+        <th>Semantic-UI-Ember Version</th>
+      </tr>
+      </thead>
+      <tr>
+        <td>1.13 ~ 2.8</td>
+        <td>v2.0</td>
+      </tr>
+      <tr>
+        <td>2.12 LTS ~ 3.0</td>
+        <td>v2.1</td>
+      </tr>
+      <tr>
+        <td>2.18 LTS ~ 3.X latest</td>
+        <td>v3.0</td>
+      </tr>
+    </table>
+  </div>
+
   <h2 class="ui dividing header">
     Installation
   </h2>
 
   <div class="no example">
     <p>
-      Install this add-on through Ember CLI. We support Ember versions 1.13 latest - 2.X.
+      Install this add-on through Ember CLI
     </p>
 
     <p>
       From the command line run:
     </p>
 
+    <div class="ui label">v3.0</div>
     {{#ui-annotation showing=true type="bash"}}
       ember install semantic-ui-ember
     {{/ui-annotation}}
+    <div class="ui label">v2.1</div>
+    {{#ui-annotation showing=true type="bash"}}
+      ember install semantic-ui-ember@2.1
+    {{/ui-annotation}}
+    <div class="ui label">v2.0</div>
+    {{#ui-annotation showing=true type="bash"}}
+      ember install semantic-ui-ember@2.0
+    {{/ui-annotation}}
 
-    <p>
+    <div class="ui yellow message small">
+      For v2.0, we require bower. If you are on Ember CLI below v2.16, addon blueprints are not run by default
       Once installed, run the library's blueprint to pull in its Bower dependencies. This only needs to be done once.
-    </p>
+    </div>
 
     {{#ui-annotation showing=true type="bash"}}
       ember generate semantic-ui-ember
