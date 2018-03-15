@@ -84,19 +84,19 @@
 
     {{#ui-annotation showing=true}}
 \{{#ui-accordion as |execute|}}
-  <div class="title">
-    Semantic UI
-  </div>
-  <div class="content">
-    Be sure to check out <div class="ui button" onclick="\{{action (execute 'open' 1)}}">the example</div>
-  </div>
-  <div class="title">
-    Example
-  </div>
-  <div class="content">
-    This is a great example!
-  </div>
-\{{/ui-accordion}}
+        &lt;div class=&quot;title&quot;&gt;
+        Semantic UI
+        &lt;/div&gt;
+        &lt;div class=&quot;content&quot;&gt;
+        Be sure to check out &lt;div class=&quot;ui button&quot; onclick=&quot;\{{action (execute 'open' 1)}}&quot;&gt;the example&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;title&quot;&gt;
+        Example
+        &lt;/div&gt;
+        &lt;div class=&quot;content&quot;&gt;
+        This is a great example!
+        &lt;/div&gt;
+  \{{/ui-accordion}}
     {{/ui-annotation}}
 
     <p>
@@ -112,9 +112,13 @@
 
     {{#ui-annotation showing=true}}
 \{{#ui-checkbox label="Some Label" checked=checked onChange=(action (mut checked)) as |execute|}}
-    <div class="ui button" onclick="\{{action (execute 'set enabled')}}">Enable Checkbox (correct passed as one argument)</div>
+      &lt;div class=&quot;ui button&quot; onclick=&quot;\{{action (execute 'set enabled')}}&quot;&gt;Enable Checkbox (correct passed as one argument)&lt;/div&gt;
 \{{/ui-checkbox}}
     {{/ui-annotation}}
+    {{#ui-checkbox label="Some Label" checked=checked onChange=(action (mut checked)) as |execute|}}
+      <div class="ui button" onclick="{{action (execute 'set enabled')}}">Enable Checkbox (correct passed as one argument)</div>
+    {{/ui-checkbox}}
+
 
     <p>Refer to the usage section on Semantic UI's site for more information.</p>
 
