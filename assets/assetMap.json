@@ -1,0 +1,13 @@
+{
+  "assets": {
+    "assets/assetMap.json": "assets/assetMap.json",
+    "assets/dummy-fastboot.js": "assets/dummy-fastboot-8af7c10f53bf3cdc4e024e178ab7d5b4.js",
+    "assets/dummy.css": "assets/dummy-0c86f5481b509600c47bcc76b0fe5816.css",
+    "assets/dummy.js": "assets/dummy-5f827b191dc3a8ba85f836022dfe3180.js",
+    "assets/themes/default/assets/images/flags.png": "assets/themes/default/assets/images/flags-9c74e172f87984c48ddf5c8108cabe67.png",
+    "assets/vendor.css": "assets/vendor-6495c8afd06b689686f1fcdebfd768f4.css",
+    "assets/vendor.js": "assets/vendor-7ece3a006b3858a302d8ea84420ec5b5.js",
+    "jquery.cookie.min.js": "jquery.cookie.min-c9e9156311d70b4bb4d1b5a0650262c4.js"
+  },
+  "prepend": ""
+}
