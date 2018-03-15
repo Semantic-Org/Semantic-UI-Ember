@@ -84,20 +84,42 @@
 
     {{#ui-annotation showing=true}}
 \{{#ui-accordion as |execute|}}
-        &lt;div class=&quot;title&quot;&gt;
+      <div class="title">
         Semantic UI
-        &lt;/div&gt;
-        &lt;div class=&quot;content&quot;&gt;
-        Be sure to check out &lt;div class=&quot;ui button&quot; onclick=&quot;\{{action (execute 'open' 1)}}&quot;&gt;the example&lt;/div&gt;
-        &lt;/div&gt;
-        &lt;div class=&quot;title&quot;&gt;
+      </div>
+      <div class="content">
+        Be sure to check out <div class="ui button" onclick="\{{action execute 'open' 1}}">the example</div>
+      </div>
+      <div class="title">
         Example
-        &lt;/div&gt;
-        &lt;div class=&quot;content&quot;&gt;
+      </div>
+      <div class="content">
         This is a great example!
-        &lt;/div&gt;
+      </div>
   \{{/ui-accordion}}
     {{/ui-annotation}}
+
+    {{#ui-accordion as |execute|}}
+    <div class="title">
+      Semantic UI
+    </div>
+    <div class="content">
+      Be sure to check out <div class="ui button" {{action execute 'open' 1}}>the example</div>
+    </div>
+    <div class="title">
+      Example
+    </div>
+    <div class="content">
+      This is a great example!
+    </div>
+    {{/ui-accordion}}
+
+    <p>
+      <b>
+      Instead of <code>&lt;el onclick="\{{action ...}}"> &lt;/el&gt;</code> you can always write
+      <code>&lt;el \{{action ...}}> &lt;/el&gt;</code>
+      </b>
+    </p>
 
     <p>
       As you can see on the accordions behavior page, you can "open" another tab by passing in the index.
@@ -112,11 +134,11 @@
 
     {{#ui-annotation showing=true}}
 \{{#ui-checkbox label="Some Label" checked=checked onChange=(action (mut checked)) as |execute|}}
-      &lt;div class=&quot;ui button&quot; onclick=&quot;\{{action (execute 'set enabled')}}&quot;&gt;Enable Checkbox (correct passed as one argument)&lt;/div&gt;
+      <div class="ui button" onclick="\{{action execute 'set enabled'}}">Enable Checkbox (correct passed as one argument)</div>
 \{{/ui-checkbox}}
     {{/ui-annotation}}
     {{#ui-checkbox label="Some Label" checked=checked onChange=(action (mut checked)) as |execute|}}
-      <div class="ui button" onclick="{{action (execute 'set enabled')}}">Enable Checkbox (correct passed as one argument)</div>
+      <div class="ui button" onclick="{{action execute 'set enabled'}}">Enable Checkbox (correct passed as one argument)</div>
     {{/ui-checkbox}}
 
 
