@@ -185,15 +185,13 @@ export default UiModal.extend({
   </div>
 </div>
 <div class="actions">
-  <div class="two fluid ui inverted buttons">
-    <div class="ui red basic inverted button" onclick="\{{action 'no'}}">
-      <i class="remove icon"></i>
-      No
-    </div>
-    <div class="ui green basic inverted button" onclick="\{{action 'yes'}}">
-      <i class="checkmark icon"></i>
-      Yes
-    </div>
+  <div class="ui red basic button" onclick="\{{action 'no'}}">
+    <i class="remove icon"></i>
+    No
+  </div>
+  <div class="ui green basic button" onclick="\{{action 'yes'}}">
+    <i class="checkmark icon"></i>
+    Yes
   </div>
 </div>
   {{/ui-annotation}}
