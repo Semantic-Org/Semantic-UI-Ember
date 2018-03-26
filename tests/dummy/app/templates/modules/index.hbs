@@ -4,10 +4,10 @@
 
       <h1 class="ui header">
         Introduction Semantic-UI-Ember
-        <div class="sub header">
+        <span class="sub header">
           This is the official Ember library for the Semantic-UI modules.
           The code was original built for <a href="http://www.crowdox.com" target="_blank">CrowdOx</a> and other projects that we were building for clients.
-        </div>
+        </span>
       </h1>
 
     </div>
@@ -47,26 +47,66 @@
 
   </div>
 
+  <h2 class="ui header">
+    Support
+  </h2>
+  <div>
+    <p>We support the following Ember versions</p>
+
+    <table class="ui celled table">
+      <thead>
+      <tr>
+        <th>Ember Version</th>
+        <th>Semantic-UI-Ember Version</th>
+      </tr>
+      </thead>
+      <tr>
+        <td>1.13 ~ 2.8</td>
+        <td>v2.0</td>
+      </tr>
+      <tr>
+        <td>2.12 LTS ~ 3.0</td>
+        <td>v2.1</td>
+      </tr>
+      <tr>
+        <td>2.18 LTS ~ 3.X latest</td>
+        <td>v3.0</td>
+      </tr>
+    </table>
+  </div>
+
   <h2 class="ui dividing header">
     Installation
   </h2>
 
   <div class="no example">
     <p>
-      Install this add-on through Ember CLI. We support Ember versions 1.13 latest - 2.X.
+      Install this add-on through Ember CLI
     </p>
 
     <p>
       From the command line run:
     </p>
 
+    <div class="ui label">v3.0</div>
     {{#ui-annotation showing=true type="bash"}}
       ember install semantic-ui-ember
     {{/ui-annotation}}
+    <div class="ui label">v2.1</div>
+    {{#ui-annotation showing=true type="bash"}}
+      ember install semantic-ui-ember@2.1
+    {{/ui-annotation}}
+    <div class="ui label">v2.0</div>
+    {{#ui-annotation showing=true type="bash"}}
+      ember install semantic-ui-ember@2.0
+    {{/ui-annotation}}
 
-    <p>
+    <div class="ui yellow message small">
+      v2.1 and above do not need bower dependencies, and hence no blueprints are necessary to run.
+      <br><br>
+      For v2.0, we require bower. If you are on Ember CLI <i>below v2.16</i>, addon blueprints are not run by default
       Once installed, run the library's blueprint to pull in its Bower dependencies. This only needs to be done once.
-    </p>
+    </div>
 
     {{#ui-annotation showing=true type="bash"}}
       ember generate semantic-ui-ember
@@ -89,6 +129,28 @@
       If you're upgrading from Semantic-UI-Ember 1.0, there are some minor changes you will need to be aware of in upgrading.
       Please review the upgrade changes {{#link-to 'modules.upgrading' class='item'}}here{{/link-to}}.
     </p>
+
+  </div>
+
+  <h2 class="ui dividing header">
+    Using Custom Semantic UI Theme
+  </h2>
+
+  <div class="no example">
+    <p>
+      Run the following blueprint. This will remove <code>semantic-ui-css</code>, which is prebuilt
+      default semantic-ui, and install <code>semantic-ui-less</code> that can be customized as per your
+      needs
+    </p>
+
+    {{#ui-annotation showing=true}}
+      ember generate semantic-ui-custom
+    {{/ui-annotation}}
+
+    <p>
+      You'll find further details in {{#link-to 'modules.usage' class='item'}}Usage{{/link-to}} section.
+    </p>
+
 
   </div>
 

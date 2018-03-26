@@ -1,4 +1,4 @@
-/* jshint node:true */
+/* eslint-env node */
 
 var runCommand = require('ember-addon-genie/lib/utils/run-command');
 

@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import $ from 'jquery';
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 import afterRender from 'dummy/tests/helpers/after-render';
@@ -795,10 +796,11 @@ test('The correct number of items get selected when array is modified', function
   assert.ok(this.$('.item[data-id=2]').hasClass('active'));
   assert.equal(this.get('selected').join(','), ['2'].join(','));
 
+  Ember.run.begin();
   this.set('selected', ['2', '4']);
   // Have to clear the queue to ensure that property change gets notified
   // Doesn't clear in time on tests occasionally
-  Ember.run.sync();
+  Ember.run.end();
 
   assert.ok(this.$('.item[data-id=4]').hasClass('active'));
   assert.equal(this.get('selected').join(','), ['2', '4'].join(','));
@@ -1121,5 +1123,3 @@ test('it renders from a mapper with a promise and select with a promise, mapper 
     assert.equal(count, 0, 'onChange should not have been called');
   });
 });
-
-

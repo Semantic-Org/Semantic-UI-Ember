@@ -1,11 +1,11 @@
-/*jshint node:true*/
-/* global require, module */
-var EmberAddon = require('ember-cli/lib/broccoli/ember-addon');
+/* eslint-env node */
+
+const EmberAddon = require('ember-cli/lib/broccoli/ember-addon');
 
 module.exports = function(defaults) {
-  var app = new EmberAddon(defaults, {
+  const app = new EmberAddon(defaults, {
     // Add options here
-    babel: {
+    'ember-cli-babel': {
       includePolyfill: false
     }
   });
@@ -18,10 +18,10 @@ module.exports = function(defaults) {
   */
 
   // Import Highlight.js
-  app.import(app.bowerDirectory + "/highlightjs/highlight.pack.min.js");
+  app.import("node_modules/highlightjs/highlight.pack.min.js");
 
-  app.import(app.bowerDirectory + "/highlightjs/styles/github-gist.css");
-  app.import(app.bowerDirectory + "/highlightjs/styles/hybrid.css");
+  app.import("node_modules/highlightjs/styles/github-gist.css");
+  app.import("node_modules/highlightjs/styles/hybrid.css");
 
 
   return app.toTree();

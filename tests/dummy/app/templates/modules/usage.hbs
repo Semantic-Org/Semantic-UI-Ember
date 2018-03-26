@@ -84,20 +84,42 @@
 
     {{#ui-annotation showing=true}}
 \{{#ui-accordion as |execute|}}
-  <div class="title">
-    Semantic UI
-  </div>
-  <div class="content">
-    Be sure to check out <div class="ui button" onclick="\{{action (execute 'open' 1)}}">the example</div>
-  </div>
-  <div class="title">
-    Example
-  </div>
-  <div class="content">
-    This is a great example!
-  </div>
-\{{/ui-accordion}}
+      <div class="title">
+        Semantic UI
+      </div>
+      <div class="content">
+        Be sure to check out <div class="ui button" onclick="\{{action execute 'open' 1}}">the example</div>
+      </div>
+      <div class="title">
+        Example
+      </div>
+      <div class="content">
+        This is a great example!
+      </div>
+  \{{/ui-accordion}}
     {{/ui-annotation}}
+
+    {{#ui-accordion as |execute|}}
+    <div class="title">
+      Semantic UI
+    </div>
+    <div class="content">
+      Be sure to check out <div class="ui button" {{action execute 'open' 1}}>the example</div>
+    </div>
+    <div class="title">
+      Example
+    </div>
+    <div class="content">
+      This is a great example!
+    </div>
+    {{/ui-accordion}}
+
+    <p>
+      <b>
+      Instead of <code>&lt;el onclick="\{{action ...}}"> &lt;/el&gt;</code> you can always write
+      <code>&lt;el \{{action ...}}> &lt;/el&gt;</code>
+      </b>
+    </p>
 
     <p>
       As you can see on the accordions behavior page, you can "open" another tab by passing in the index.
@@ -112,9 +134,13 @@
 
     {{#ui-annotation showing=true}}
 \{{#ui-checkbox label="Some Label" checked=checked onChange=(action (mut checked)) as |execute|}}
-    <div class="ui button" onclick="\{{action (execute 'set enabled')}}">Enable Checkbox (correct passed as one argument)</div>
+      <div class="ui button" onclick="\{{action execute 'set enabled'}}">Enable Checkbox (correct passed as one argument)</div>
 \{{/ui-checkbox}}
     {{/ui-annotation}}
+    {{#ui-checkbox label="Some Label" checked=checked onChange=(action (mut checked)) as |execute|}}
+      <div class="ui button" onclick="{{action execute 'set enabled'}}">Enable Checkbox (correct passed as one argument)</div>
+    {{/ui-checkbox}}
+
 
     <p>Refer to the usage section on Semantic UI's site for more information.</p>
 
@@ -233,10 +259,10 @@ SemanticUI: {
   },
   // These settings allow you to specify the source of the Semantic files
   source: {
-    css: 'bower_components/semantic-ui/dist',
-    javascript: 'bower_components/semantic-ui/dist',
-    images: 'bower_components/semantic-ui/dist/themes/default/assets/images',
-    fonts: 'bower_components/semantic-ui/dist/themes/default/assets/fonts'
+    css: 'node_modules/semantic-ui-css',
+    javascript: 'node_modules/semantic-ui-css',
+    images: 'node_modules/semantic-ui-css/themes/default/assets/images',
+    fonts: 'node_modules/semantic-ui-css/themes/default/assets/fonts'
   },
   // These settings allow you to specify the destination of the Semantic files
   // This only applies to images and fonts, since those are assets

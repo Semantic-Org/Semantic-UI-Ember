@@ -9,6 +9,11 @@ var CheckboxMixin = Ember.Mixin.create(Base, {
   classNames: ['ui', 'checkbox'],
 
   willInitSemantic(settings) {
+    let owner = Ember.getOwner(this);
+    let fastboot = owner.lookup('service:fastboot');
+    if (fastboot && fastboot.get('isFastBoot')) {
+      return;
+    }
     this._super(...arguments);
     if (settings.onChange) {
       // Checkbox and radio both have an implementation for this

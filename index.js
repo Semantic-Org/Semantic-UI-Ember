@@ -1,9 +1,10 @@
-/* jshint node: true */
+/* eslint-env node */
 'use strict';
 
-var path = require('path');
+const path = require('path')
+const fs = require('fs')
 
-var defaults = {
+const defaults = {
   import: {
     css: true,
     javascript: true,
@@ -11,75 +12,105 @@ var defaults = {
     fonts: true
   },
   source: {
-    css: 'bower_components/semantic-ui/dist',
-    javascript: 'bower_components/semantic-ui/dist',
-    images: 'bower_components/semantic-ui/dist/themes/default/assets/images',
-    fonts: 'bower_components/semantic-ui/dist/themes/default/assets/fonts'
+    css: 'node_modules/semantic-ui-css',
+    javascript: 'node_modules/semantic-ui-css',
+    images: 'node_modules/semantic-ui-css/themes/default/assets/images',
+    fonts: 'node_modules/semantic-ui-css/themes/default/assets/fonts'
   },
   destination: {
     images: 'assets/themes/default/assets/images',
     fonts: 'assets/themes/default/assets/fonts'
   }
-};
+}
 
-var getDefault = require('./lib/utils/get-default');
+const custom = {
+  source: {
+    css: 'semantic/dist',
+    javascript: 'semantic/dist',
+    images: 'semantic/dist/themes/default/assets/images',
+    fonts: 'semantic/dist/themes/default/assets/fonts'
+  }
+}
+
+const getDefault = require('./lib/utils/get-default')
+
+const Funnel = require('broccoli-funnel')
+const mergeTrees = require('broccoli-merge-trees')
+const map = require('broccoli-stew').map
 
 module.exports = {
   name: 'semantic-ui-ember',
-
-  included: function () {
-    this._super.included.apply(this, arguments);
-
-    var app;
-
+  included: function (app) {
     // If the addon has the _findHost() method (in ember-cli >= 2.7.0), we'll just
-    // use that.
+    // use that. This helps support ember-engines, where we want to find 
+    // the 'parent' app
     if (typeof this._findHost === 'function') {
       app = this._findHost();
-    } else {
-      // Otherwise, we'll use this implementation borrowed from the _findHost()
-      // method in ember-cli.
-      var current = this;
-      do {
-        app = current.app || app;
-      } while (current.parent.parent && (current = current.parent));
+    }
+    const options = (app && app.project.config(app.env)['SemanticUI'])
+      || (app && app.project.config(app.env)['semantic-ui-ember'])
+      || {};
+
+    if (!fs.existsSync(defaults.source.css) && fs.existsSync(custom.source.css)) {
+      defaults.source = custom.source
     }
 
-    var options = (app && app.project.config(app.env)['SemanticUI']) || {};
-
-    var importCss = getDefault('import', 'css', [options, defaults]);
+    const importCss = getDefault('import', 'css', [options, defaults])
     if (importCss) {
-      var sourceCss = getDefault('source', 'css', [options, defaults]);
+      const sourceCss = getDefault('source', 'css', [options, defaults])
       app.import({
         development: path.join(sourceCss, 'semantic.css'),
         production: path.join(sourceCss, 'semantic.min.css')
       });
     }
 
-    var importJavascript = getDefault('import', 'javascript', [options, defaults]);
+    const importJavascript = getDefault('import', 'javascript', [options, defaults])
     if (importJavascript) {
-      var sourceJavascript = getDefault('source', 'javascript', [options, defaults]);
+      this.sourceJavascript = getDefault('source', 'javascript', [options, defaults]);
       app.import({
-        development: path.join(sourceJavascript, 'semantic.js'),
-        production: path.join(sourceJavascript, 'semantic.min.js')
+        development: 'vendor/semantic.js',
+        production: 'vendor/semantic.min.js'
       });
     }
 
-    var importImages = getDefault('import', 'images', [options, defaults]);
+    const importImages = getDefault('import', 'images', [options, defaults])
     if (importImages) {
-      var sourceImage = getDefault('source', 'images', [options, defaults]);
-      var imageOptions = { destDir: getDefault('destination', 'images', [options, defaults]) };
+      const sourceImage = getDefault('source', 'images', [options, defaults])
+      const imageOptions = {destDir: getDefault('destination', 'images', [options, defaults])}
       app.import(path.join(sourceImage, 'flags.png'), imageOptions);
     }
 
-    var importFonts = getDefault('import', 'fonts', [options, defaults]);
+    const importFonts = getDefault('import', 'fonts', [options, defaults])
     if (importFonts) {
-      var fontExtensions = ['.eot','.otf','.svg','.ttf','.woff','.woff2'];
-      var sourceFont = getDefault('source', 'fonts', [options, defaults]);
-      var fontOptions = { destDir: getDefault('destination', 'fonts', [options, defaults]) };
-      for (var i = fontExtensions.length - 1; i >= 0; i--) {
+      const fontExtensions = ['.eot', '.otf', '.svg', '.ttf', '.woff', '.woff2']
+      const sourceFont = getDefault('source', 'fonts', [options, defaults])
+      const fontOptions = {destDir: getDefault('destination', 'fonts', [options, defaults])}
+      for (let i = fontExtensions.length - 1; i >= 0; i--) {
         app.import(path.join(sourceFont, 'icons' + fontExtensions[i]), fontOptions);
       }
     }
+  },
+
+  treeForVendor: function(vendorTree) {
+    const trees = []
+
+    if (vendorTree) {
+      trees.push(vendorTree);
+    }
+
+    const sourceJavascript = this.sourceJavascript
+    if (sourceJavascript) {
+      let semanticJsTree = new Funnel(sourceJavascript, {
+        srcDir: '/',
+        files: ['semantic.js', 'semantic.min.js']
+      })
+
+      semanticJsTree = map(semanticJsTree,
+          (content) => `if (typeof FastBoot === 'undefined') { ${content} }`);
+
+      trees.push(semanticJsTree);
+    }
+
+    return mergeTrees(trees);
   }
 };

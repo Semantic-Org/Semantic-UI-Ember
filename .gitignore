@@ -15,3 +15,10 @@
 /libpeerconnection.log
 npm-debug.log*
 testem.log
+
+/.idea
+
+/semantic/*
+!/semantic/src/site/*
+!/semantic/src/theme.config
+        

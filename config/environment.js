@@ -1,6 +1,8 @@
-/*jshint node:true*/
+/* eslint-env node */
 'use strict';
 
-module.exports = function(/* environment, appConfig */) {
-  return { };
+module.exports = function(environment, appConfig) {
+  return {
+    SEMANTIC_UI_VERSION: '2.2'
+  };
 };

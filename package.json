@@ -1,6 +1,6 @@
 {
   "name": "semantic-ui-ember",
-  "version": "2.0.1",
+  "version": "3.0.0",
   "description": "The Official Semantic UI Addon for Ember applications",
   "keywords": [
     "ember-addon"
@@ -10,6 +10,10 @@
   "title": "Semantic UI Ember",
   "homepage": "http://www.semantic-ui.com",
   "contributors": [
+    {
+      "name": "Arnav Gupta",
+      "email": "dev@championswimmer.in"
+    },
     {
       "name": "Nathan Palmer",
       "email": "nathan@nathanpalmer.com"
@@ -30,42 +34,50 @@
   "scripts": {
     "build": "ember build",
     "start": "ember server",
-    "test": "ember try:each"
+    "test": "ember try:each",
+    "gh-pages": "ember build && ember github-pages:commit --message \"Deploy gh-pages from commit $(git rev-parse HEAD)\" && git push origin gh-pages:gh-pages -f"
   },
   "dependencies": {
-    "ember-cli-babel": "^5.1.7",
-    "ember-promise-tools": "1.0.0",
-    "ember-runtime-enumerable-includes-polyfill": "^1.0.1",
-    "ember-string-ishtmlsafe-polyfill": "^1.1.0"
+    "ember-cli-babel": "^6.11.0",
+    "ember-cli-htmlbars": "^2.0.3",
+    "ember-promise-utils": "^0.1.1",
+    "ember-runtime-enumerable-includes-polyfill": "2.0.0",
+    "semantic-ui-css": "^2.2.14"
   },
   "devDependencies": {
+    "babel-plugin-transform-es2015-block-scoping": "^6.24.1",
     "broccoli-asset-rev": "^2.4.5",
-    "ember-ajax": "^2.4.1",
-    "ember-cli": "2.10.0",
-    "ember-cli-app-version": "^2.0.0",
-    "ember-cli-clipboard": "0.4.1",
-    "ember-cli-dependency-checker": "^1.3.0",
-    "ember-cli-github-pages": "0.1.2",
-    "ember-cli-htmlbars": "^1.0.10",
-    "ember-cli-htmlbars-inline-precompile": "^0.3.3",
+    "broccoli-funnel": "^2.0.1",
+    "broccoli-merge-trees": "^3.0.0",
+    "broccoli-stew": "^1.5.0",
+    "ember-ajax": "3.0.0",
+    "ember-cli": "^3.0.0",
+    "ember-cli-clipboard": "^0.8.1",
+    "ember-cli-code-coverage": "^0.4.2",
+    "ember-cli-dependency-checker": "^2.1.0",
+    "ember-cli-eslint": "^4.2.0",
+    "ember-cli-fastboot": "^1.0.4",
+    "ember-cli-htmlbars": "2.0.2",
+    "ember-cli-htmlbars-inline-precompile": "^1.0.2",
     "ember-cli-inject-live-reload": "^1.4.1",
-    "ember-cli-jshint": "^2.0.1",
-    "ember-cli-qunit": "^3.0.2",
-    "ember-cli-release": "^0.2.9",
+    "ember-cli-qunit": "^4.3.2",
+    "ember-cli-shims": "^1.0.2",
     "ember-cli-sri": "^2.1.0",
-    "ember-cli-test-loader": "^1.1.0",
-    "ember-cli-uglify": "^1.2.0",
-    "ember-composable-helpers": "1.1.2",
-    "ember-data": "^2.10.0",
+    "ember-cli-uglify": "^2.0.0",
+    "ember-composable-helpers": "^2.1.0",
     "ember-disable-prototype-extensions": "^1.1.0",
-    "ember-export-application-global": "^1.0.5",
-    "ember-load-initializers": "^0.6.3",
-    "ember-resolver": "^2.0.3",
+    "ember-export-application-global": "2.0.0",
+    "ember-load-initializers": "1.0.0",
+    "ember-resolver": "^4.5.0",
+    "ember-source": "^3.0.0",
+    "ember-source-channel-url": "^1.0.1",
+    "ember-try": "^0.2.23",
+    "highlightjs": "^9.10.0",
     "loader.js": "^4.0.10",
-    "tape": "^4.6.0"
+    "tape": "^4.9.0"
   },
   "engines": {
-    "node": ">= 0.12.0"
+    "node": ">= 4"
   },
   "ember-addon": {
     "configPath": "tests/dummy/config",
