@@ -1,7 +1,9 @@
 import Ember from 'ember';
 import Base from '../mixins/base';
+import layout from '../templates/components/ui-rating';
 
 export default Ember.Component.extend(Base, {
+  layout,
   module: 'rating',
   classNames: ['ui', 'rating'],
   ignorableAttrs: ['rating'],

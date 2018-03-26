@@ -4,8 +4,10 @@ import isPromise from 'ember-promise-utils/utils/is-promise';
 import isFulfilled from 'ember-promise-utils/utils/is-fulfilled';
 import getPromiseContent from 'ember-promise-utils/utils/get-promise-content';
 import PromiseResolver from 'ember-promise-utils/mixins/promise-resolver';
+import layout from '../templates/components/ui-radio';
 
 export default Ember.Component.extend(Checkbox, PromiseResolver, {
+  layout,
   type: 'radio',
   classNames: ['radio'],
   ignorableAttrs: ['checked', 'label', 'disabled', 'value', 'current'],
