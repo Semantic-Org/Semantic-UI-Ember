@@ -40,8 +40,13 @@ const map = require('broccoli-stew').map
 
 module.exports = {
   name: 'semantic-ui-ember',
-
   included: function (app) {
+    // If the addon has the _findHost() method (in ember-cli >= 2.7.0), we'll just
+    // use that. This helps support ember-engines, where we want to find 
+    // the 'parent' app
+    if (typeof this._findHost === 'function') {
+      app = this._findHost();
+    }
     const options = (app && app.project.config(app.env)['SemanticUI'])
       || (app && app.project.config(app.env)['semantic-ui-ember'])
       || {};
