@@ -42,7 +42,7 @@ module.exports = {
   name: 'semantic-ui-ember',
   included: function (app) {
     // If the addon has the _findHost() method (in ember-cli >= 2.7.0), we'll just
-    // use that. This helps support ember-engines, where we want to find 
+    // use that. This helps support ember-engines, where we want to find
     // the 'parent' app
     if (typeof this._findHost === 'function') {
       app = this._findHost();
@@ -87,6 +87,8 @@ module.exports = {
       const fontOptions = {destDir: getDefault('destination', 'fonts', [options, defaults])}
       for (let i = fontExtensions.length - 1; i >= 0; i--) {
         app.import(path.join(sourceFont, 'icons' + fontExtensions[i]), fontOptions);
+        app.import(path.join(sourceFont, 'brand-icons' + fontExtensions[i]), fontOptions);
+        app.import(path.join(sourceFont, 'outline-icons' + fontExtensions[i]), fontOptions);
       }
     }
   },
