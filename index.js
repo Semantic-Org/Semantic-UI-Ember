@@ -3,6 +3,7 @@
 
 const path = require('path')
 const fs = require('fs')
+const walkSync = require('walk-sync')
 
 const defaults = {
   import: {
@@ -82,11 +83,12 @@ module.exports = {
 
     const importFonts = getDefault('import', 'fonts', [options, defaults])
     if (importFonts) {
-      const fontExtensions = ['.eot', '.otf', '.svg', '.ttf', '.woff', '.woff2']
       const sourceFont = getDefault('source', 'fonts', [options, defaults])
       const fontOptions = {destDir: getDefault('destination', 'fonts', [options, defaults])}
-      for (let i = fontExtensions.length - 1; i >= 0; i--) {
-        app.import(path.join(sourceFont, 'icons' + fontExtensions[i]), fontOptions);
+      var fontFiles = walkSync(sourceFont, { directories: false });
+      var font;
+      for(font of fontFiles) {
+        app.import(path.join(sourceFont, font), fontOptions);
       }
     }
   },
