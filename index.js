@@ -48,9 +48,7 @@ module.exports = {
     if (typeof this._findHost === 'function') {
       app = this._findHost();
     }
-    const options = (app && app.project.config(app.env)['SemanticUI'])
-      || (app && app.project.config(app.env)['semantic-ui-ember'])
-      || {};
+    const options = (app && app.options['SemanticUI']) || (app && app.options['semantic-ui-ember']) || {};
 
     if (!fs.existsSync(defaults.source.css) && fs.existsSync(custom.source.css)) {
       defaults.source = custom.source
