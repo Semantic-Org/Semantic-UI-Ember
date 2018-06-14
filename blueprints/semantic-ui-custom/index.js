@@ -8,25 +8,19 @@ module.exports = {
   normalizeEntityName() {
   },
   afterInstall(options) {
-    return this.ui.write('Removing semantic-ui-css').then(function () {
-
-      return this.removePackageFromProject('semantic-ui-css')
-
-    }).then(function () {
-
-      this.ui.write('Adding semantic-ui custom folder to .gitignore')
-
-      return this.insertIntoFile('.gitignore',
-        `
+    this.ui.writeLine('Removing semantic-ui-css')
+    return this.removePackageFromProject('semantic-ui-css')
+      .then(() => {
+        this.ui.writeLine('Adding semantic-ui custom folder to .gitignore')
+        return this.insertIntoFile('.gitignore', `
 /semantic/*
 !/semantic/src/site/*
 !/semantic/src/theme.config
-        `
+`
       )
+    }).then(() => {
 
-    }).then(function () {
-
-      this.ui.write('Installing semantic-ui')
+      this.ui.writeLine('Installing semantic-ui')
       return this.addPackageToProject('semantic-ui', config.SEMANTIC_UI_VERSION)
 
     })

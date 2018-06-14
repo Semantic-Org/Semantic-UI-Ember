@@ -3,6 +3,7 @@
 
 const path = require('path')
 const fs = require('fs')
+const walkSync = require('walk-sync')
 
 const defaults = {
   import: {
@@ -47,9 +48,7 @@ module.exports = {
     if (typeof this._findHost === 'function') {
       app = this._findHost();
     }
-    const options = (app && app.project.config(app.env)['SemanticUI'])
-      || (app && app.project.config(app.env)['semantic-ui-ember'])
-      || {};
+    const options = (app && app.options['SemanticUI']) || (app && app.options['semantic-ui-ember']) || {};
 
     if (!fs.existsSync(defaults.source.css) && fs.existsSync(custom.source.css)) {
       defaults.source = custom.source
@@ -82,13 +81,12 @@ module.exports = {
 
     const importFonts = getDefault('import', 'fonts', [options, defaults])
     if (importFonts) {
-      const fontExtensions = ['.eot', '.otf', '.svg', '.ttf', '.woff', '.woff2']
       const sourceFont = getDefault('source', 'fonts', [options, defaults])
       const fontOptions = {destDir: getDefault('destination', 'fonts', [options, defaults])}
-      for (let i = fontExtensions.length - 1; i >= 0; i--) {
-        app.import(path.join(sourceFont, 'icons' + fontExtensions[i]), fontOptions);
-        app.import(path.join(sourceFont, 'brand-icons' + fontExtensions[i]), fontOptions);
-        app.import(path.join(sourceFont, 'outline-icons' + fontExtensions[i]), fontOptions);
+      var fontFiles = walkSync(sourceFont, { directories: false });
+      var font;
+      for(font of fontFiles) {
+        app.import(path.join(sourceFont, font), fontOptions);
       }
     }
   },
