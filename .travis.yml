@@ -20,12 +20,14 @@ env:
     - EMBER_TRY_SCENARIO=ember-release
     - EMBER_TRY_SCENARIO=ember-beta
     - EMBER_TRY_SCENARIO=ember-canary
+    - EMBER_TRY_SCENARIO=fastboot-addon-tests
 
 matrix:
   fast_finish: true
   allow_failures:
     - env: EMBER_TRY_SCENARIO=ember-beta
     - env: EMBER_TRY_SCENARIO=ember-canary
+    - env: EMBER_TRY_SCENARIO=fastboot-addon-tests
 
 before_install:
   - 'export DISPLAY=:99.0'
