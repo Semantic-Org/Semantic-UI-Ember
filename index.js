@@ -48,7 +48,14 @@ module.exports = {
     if (typeof this._findHost === 'function') {
       app = this._findHost();
     }
-    const options = (app && app.options['SemanticUI']) || (app && app.options['semantic-ui-ember']) || {};
+    let options;
+    if (app && app.options['SemanticUI']) {
+      options = app.options['SemanticUI']
+    } else if (app && app.options['semantic-ui-ember']) {
+      options = app.options['semantic-ui-ember']
+    } else {
+      options = {}
+    }
 
     if (!fs.existsSync(defaults.source.css) && fs.existsSync(custom.source.css)) {
       defaults.source = custom.source

@@ -22,6 +22,12 @@ var defaults = function() {
   };
 };
 
+let customOptions = {
+  import: {
+    css: false
+  }
+}
+
 test('use the default path of the theme if not in the options', function (assert) {
   assert.plan(4);
   assert.equal(getDefault('paths', 'theme', [{}, defaults()]), 'default');
@@ -62,4 +68,9 @@ test('use new location of imports if undefined in user options', function (asser
 test('use old default location of imports', function (assert) {
   assert.plan(1);
   assert.equal(getDefault('imports', 'fonts', [oldDefaults, defaults()]), false);
+});
+
+test('user-defined options are read', function (assert) {
+  assert.plan(1);
+  assert.equal(getDefault('import', 'css', [customOptions]), false);
 });
