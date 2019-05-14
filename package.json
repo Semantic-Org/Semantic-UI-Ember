@@ -38,11 +38,13 @@
     "gh-pages": "ember build && ember github-pages:commit --message \"Deploy gh-pages from commit $(git rev-parse HEAD)\" && git push origin gh-pages:gh-pages -f"
   },
   "dependencies": {
-    "ember-cli-babel": "^6.11.0",
+    "ember-cli-babel": "^7.4.0",
     "ember-cli-htmlbars": "^2.0.3",
     "ember-promise-utils": "^0.1.1",
     "ember-runtime-enumerable-includes-polyfill": "2.0.0",
-    "semantic-ui-css": "^2.2.14"
+    "semantic-ui-css": "^2.2.14",
+    "@ember/jquery": "^0.6.0",
+    "@ember/optional-features": "^0.7.0"
   },
   "devDependencies": {
     "babel-plugin-transform-es2015-block-scoping": "^6.24.1",
@@ -69,7 +71,7 @@
     "ember-export-application-global": "2.0.0",
     "ember-load-initializers": "1.0.0",
     "ember-resolver": "^4.5.0",
-    "ember-source": "^3.0.0",
+    "ember-source": "~3.9.1",
     "ember-source-channel-url": "^1.0.1",
     "ember-try": "^0.2.23",
     "highlightjs": "^9.10.0",
