@@ -89,11 +89,8 @@ Semantic.BaseMixin = Ember.Mixin.create({
 
   getSemanticScope() {
     if (Ember.isPresent(this.get('onElement'))) {
-      return $(
-        this.element.getElementsByTagName(
-          this.get('onElement')
-        )[0]
-      );
+      const classNamesStr = this.get('onElement').replace(/\./g, ' ').trim();
+      return $(this.element.getElementsByClassName(classNamesStr)[0]);
     }
 
     return $(this.element);
