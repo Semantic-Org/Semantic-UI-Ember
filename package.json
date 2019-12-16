@@ -42,7 +42,7 @@
     "ember-cli-htmlbars": "^2.0.3",
     "ember-promise-utils": "^0.1.1",
     "ember-runtime-enumerable-includes-polyfill": "2.0.0",
-    "semantic-ui-css": "^2.2.14",
+    "semantic-ui-css": "^2.4.1",
     "@ember/jquery": "^0.6.0",
     "@ember/optional-features": "^0.7.0"
   },
