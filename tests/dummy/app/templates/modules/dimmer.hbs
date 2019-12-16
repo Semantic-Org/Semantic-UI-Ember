@@ -37,8 +37,8 @@
 
     {{#ui-html showing=showing}}
       {{#ui-dimmer onElement=".ui.segment" variation="inverted" duration=(hash show=1500) on="click" as |execute|}}
-        <div class="ui show button" {{action execute 'show'}}><i class="plus icon"></i></div>
-        <div class="ui hide button" {{action execute 'hide'}}><i class="minus icon"></i></div>
+        <div class="ui show icon button" {{action execute 'show'}}><i class="plus icon"></i></div>
+        <div class="ui hide icon button" {{action execute 'hide'}}><i class="minus icon"></i></div>
 
         <div class="ui segment">
           <!-- Dimmer Generated Automatically No Need to Include !-->
