@@ -1,4 +1,4 @@
-![Semantic](http://www.semantic-ui.com/images/logo.png)
+![Semantic](https://www.semantic-ui.com/images/logo.png)
 
 # Semantic-UI-Ember
 
