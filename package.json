@@ -44,7 +44,7 @@
     "ember-runtime-enumerable-includes-polyfill": "2.0.0",
     "semantic-ui-css": "^2.2.14",
     "@ember/jquery": "^0.6.0",
-    "@ember/optional-features": "^0.7.0"
+    "@ember/optional-features": "^1.3.0"
   },
   "devDependencies": {
     "babel-plugin-transform-es2015-block-scoping": "^6.24.1",
