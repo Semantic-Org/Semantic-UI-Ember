@@ -91,3 +91,24 @@ test('setting readonly ignores click', function(assert) {
   assert.equal(true, this.get('checked'));
   assert.equal(count, 1, 'onChange should have only been called once');
 });
+
+test('setting readonly to null allows click', function(assert) {
+  assert.expect(3);
+
+  let count = 0;
+  this.set('changed', (value) => {
+    this.set('checked', value);
+    count++;
+  });
+
+  this.set('checked', false);
+  this.set('readonly', null);
+  this.render(hbs`
+    {{ui-checkbox label="Make my profile visible" checked=checked readonly=readonly onChange=(action changed)}}
+  `);
+
+  assert.equal(this.$('.ui.checkbox').length, 1);
+  this.$('.ui.checkbox').click();
+  assert.equal(true, this.get('checked'));
+  assert.equal(count, 1, 'onChange should have only been called once');
+});
