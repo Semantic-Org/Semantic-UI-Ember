@@ -20,7 +20,7 @@ var CheckboxMixin = Ember.Mixin.create(Base, {
       settings.onChange = this.get('_onChange');
     }
     if (this._hasOwnProperty(this.attrs, 'readonly') || this.get('readonly') != null) {
-      this.$().toggleClass('read-only', this.get('readonly'));
+      this.$().toggleClass('read-only', Boolean(this.get('readonly')));
     }
   },
 
@@ -83,7 +83,7 @@ var CheckboxMixin = Ember.Mixin.create(Base, {
     // Handle readonly
     if (attrName === 'readonly') {
       // We need to add a class verses updating the property, since semantic is caching the value internall
-      return this.$().toggleClass('read-only', attrValue);
+      return this.$().toggleClass('read-only', Boolean(attrValue));
     }
     // Default
     return this._super(...arguments);
