@@ -216,6 +216,42 @@ test('setting readonly ignores click', function(assert) {
   assert.equal(count, 1, 'onChange should have been called only once');
 });
 
+test('setting readonly to null allows click', function(assert) {
+  assert.expect(4);
+
+  let count = 0;
+  this.set('changed', (value) => {
+    this.set('frequency', value);
+    count++;
+  });
+
+  this.set('checked', false);
+  this.set('readonly', null);
+  this.set('frequency', 'weekly');
+  this.render(hbs`
+    <div class="ui form">
+      <div class="grouped inline fields">
+        <div class="field">
+          {{ui-radio name="frequency" label="Once a week" value='weekly' current=frequency onChange=(action changed)}}
+        </div>
+        <div class="field">
+          {{ui-radio name="frequency" label="2-3 times a week" value='biweekly' current=frequency readonly=readonly onChange=(action changed)}}
+        </div>
+        <div class="field">
+          {{ui-radio name="frequency" label="Once a day" value='daily' current=frequency onChange=(action changed)}}
+        </div>
+      </div>
+    </div>
+  `);
+
+  assert.equal(this.$('.ui.radio').length, 3);
+  this.$('.ui.radio')[1].click();
+
+  assert.equal('biweekly', this.get('frequency'));
+  assert.ok(this.$(this.$('.ui.radio')[1]).hasClass('checked'));
+  assert.equal(count, 1, 'onChange should have been called only once');
+});
+
 test('setting binded value updates to current', function(assert) {
   assert.expect(7);
 
